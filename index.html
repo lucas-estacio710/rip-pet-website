@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RIP PET Santos - Cremação de Animais com Carinho, Transparência e Respeito</title>
+    <title>RIP PET - Cremação de animais com carinho, transparência e respeito</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./logo_rounded.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./logo_rounded.png">
+    <link rel="apple-touch-icon" href="./logo_rounded.png">
+
     <meta name="description" content="Cremação de animais em Santos e Baixada Santista. Atendimento 24h, remoção em até 1h, crematório próprio. Mais de 360 avaliações 5 estrelas no Google.">
     <meta name="keywords" content="cremação animais santos, crematório pet baixada santista, cremação cachorro gato, velório pet santos, cremação individual coletiva">
     
@@ -1448,6 +1454,56 @@
             transform: scale(1) translateY(0);
         }
 
+        /* Planos Preventivos - otimização mobile */
+        @media (max-width: 768px) {
+            /* Container principal dos planos preventivos */
+            .fade-in-scale:has(h2:contains("Preventivos")) {
+                margin: 2rem 0 1rem 0 !important;
+                padding: 1rem 0.5rem !important;
+            }
+
+            /* Card interno dos planos preventivos */
+            .fade-in-scale:has(h2:contains("Preventivos")) > div {
+                padding: 1rem 1.5rem !important;
+                max-width: calc(100vw - 1rem) !important;
+            }
+
+            /* Título dos planos preventivos */
+            .fade-in-scale:has(h2:contains("Preventivos")) h2 {
+                margin-bottom: 0.5rem !important;
+                font-size: clamp(1.5rem, 5vw, 2rem) !important;
+            }
+
+            /* Parágrafo principal */
+            .fade-in-scale:has(h2:contains("Preventivos")) > div > p {
+                margin-bottom: 1rem !important;
+                font-size: 1rem !important;
+                line-height: 1.4 !important;
+            }
+
+            /* Container interno com benefícios */
+            .fade-in-scale:has(h2:contains("Preventivos")) > div > div {
+                padding: 1rem !important;
+                margin: 0 !important;
+            }
+
+            /* Lista de benefícios */
+            .fade-in-scale:has(h2:contains("Preventivos")) ul {
+                margin: 1rem 0 !important;
+            }
+
+            /* Items da lista */
+            .fade-in-scale:has(h2:contains("Preventivos")) li {
+                margin-bottom: 0.5rem !important;
+            }
+
+            /* Box de destaque azul */
+            .fade-in-scale:has(h2:contains("Preventivos")) div[style*="background: rgba(59, 130, 246, 0.1)"] {
+                padding: 1rem !important;
+                margin: 1rem 0 0 0 !important;
+            }
+        }
+
     </style>
 
     <style>
@@ -2822,6 +2878,12 @@
                     50% { transform: rotate(15deg) translateX(-2px); }
                 }
 
+                /* Animação para indicativo de deslize */
+                @keyframes swipeHint {
+                    0%, 100% { transform: translateX(0); opacity: 0.7; }
+                    50% { transform: translateX(5px); opacity: 1; }
+                }
+
                 /* Responsive adjustments */
                 @media (max-width: 768px) {
                     #servicos::before,
@@ -2865,159 +2927,13 @@
                                 <span style="font-family: 'Nunito', sans-serif;">Cremação</span> <span class="shimmer-text-individual" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Individual</span>
                             </h2>
                             <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #55E6A6, transparent); margin: 1.5rem auto;"></div>
-                            <p style="margin: 0; font-size: 1.1rem; color: rgba(255, 255, 255, 0.7); line-height: 1.6; max-width: 500px; font-style: italic;">Uma despedida única, vivida com amor e presença em cada detalhe.</p>
+                            <p style="margin: 0 0 2rem 0; font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); line-height: 1.6; max-width: 600px;">O pet é cremado de forma individual, e as cinzas são entregues à família em uma linda urna. O procedimento de cremação é agendado e pode ser acompanhado pessoalmente, online ou por videochamada.</p>
+                            <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #55E6A6, #40d890); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(85, 230, 166, 0.3);">
+                                <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i>
+                                Falar no WhatsApp
+                            </a>
                         </div>
                     </div>
-                    
-                    <section class="services-section">
-                        <div class="carousel-track" id="carousel1">
-                            <article class="service-card">
-                                <div class="card-header">
-                                    <div class="card-gradient"></div>
-                                    <div class="card-icon">🤍</div>
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="modern-service-title">Básica</h3>
-                                    
-                                    <div class="modern-service-price">
-                                        <div class="price-pix">
-                                            <div class="price-cash">R$ 1.290</div>
-                                            <div class="price-method"><i class="fas fa-qrcode" style="margin-right: 0.5rem;"></i>À vista via Pix/Dinheiro</div>
-                                        </div>
-                                        
-                                        <div class="price-card">
-                                            <div class="card-payment-method">💳 Cartão em até 12x iguais</div>
-                                            <div class="installment-selector-row">
-                                                <div class="selector-label">Selecione o<br>parcelamento:</div>
-                                                <select class="installment-dropdown" onchange="calculateInstallment(this, 1340, 1390, 'individual-basic-installment', 'individual-basic-total', 'individual-basic-header', 'individual-basic-label', 'individual-basic-total-price')">
-                                                    <option value="1">1x</option>
-                                                    <option value="2">2x</option>
-                                                    <option value="3">3x</option>
-                                                    <option value="4">4x</option>
-                                                    <option value="5">5x</option>
-                                                    <option value="6" selected>6x</option>
-                                                    <option value="7">7x</option>
-                                                    <option value="8">8x</option>
-                                                    <option value="9">9x</option>
-                                                    <option value="10">10x</option>
-                                                    <option value="11">11x</option>
-                                                    <option value="12">12x</option>
-                                                </select>
-                                            </div>
-                                            <div class="installment-result">
-                                                <div><span id="individual-basic-label">parcelas de:</span> <span id="individual-basic-installment">R$ 223,33</span></div>
-                                                <div class="total-price">Total parcelado: <span id="individual-basic-total-price">R$ 1.340,00</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            
-                            <article class="service-card">
-                                <div class="card-header">
-                                    <div class="card-gradient"></div>
-                                    <div class="card-icon">💛</div>
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="modern-service-title">Memórias</h3>
-                                    
-                                    <div class="modern-service-price">
-                                        <div class="price-pix">
-                                            <div class="price-cash">R$ 1.390</div>
-                                            <div class="price-method"><i class="fas fa-qrcode" style="margin-right: 0.5rem;"></i>À vista via Pix/Dinheiro</div>
-                                        </div>
-                                        
-                                        <div class="price-card">
-                                            <div class="card-payment-method">💳 Cartão em até 12x iguais</div>
-                                            <div class="installment-selector-row">
-                                                <div class="selector-label">Selecione o<br>parcelamento:</div>
-                                                <select class="installment-dropdown" onchange="calculateInstallment(this, 1440, 1490, 'individual-memories-installment', 'individual-memories-total', 'individual-memories-header', 'individual-memories-label', 'individual-memories-total-price')">
-                                                    <option value="1">1x</option>
-                                                    <option value="2">2x</option>
-                                                    <option value="3">3x</option>
-                                                    <option value="4">4x</option>
-                                                    <option value="5">5x</option>
-                                                    <option value="6" selected>6x</option>
-                                                    <option value="7">7x</option>
-                                                    <option value="8">8x</option>
-                                                    <option value="9">9x</option>
-                                                    <option value="10">10x</option>
-                                                    <option value="11">11x</option>
-                                                    <option value="12">12x</option>
-                                                </select>
-                                            </div>
-                                            <div class="installment-result">
-                                                <div><span id="individual-memories-label">parcelas de:</span> <span id="individual-memories-installment">R$ 240,00</span></div>
-                                                <div class="total-price">Total parcelado: <span id="individual-memories-total-price">R$ 1.440,00</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            
-                            <article class="service-card">
-                                <div class="card-header">
-                                    <div class="card-gradient"></div>
-                                    <div class="card-icon">🌱</div>
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="modern-service-title">Ecológica</h3>
-                                    
-                                    <div class="modern-service-price">
-                                        <div class="price-pix">
-                                            <div class="price-cash">R$ 1.490</div>
-                                            <div class="price-method"><i class="fas fa-qrcode" style="margin-right: 0.5rem;"></i>À vista via Pix/Dinheiro</div>
-                                        </div>
-                                        
-                                        <div class="price-card">
-                                            <div class="card-payment-method">💳 Cartão em até 12x iguais</div>
-                                            <div class="installment-selector-row">
-                                                <div class="selector-label">Selecione o<br>parcelamento:</div>
-                                                <select class="installment-dropdown" onchange="calculateInstallment(this, 1540, 1590, 'individual-eco-installment', 'individual-eco-total', 'individual-eco-header', 'individual-eco-label', 'individual-eco-total-price')">
-                                                    <option value="1">1x</option>
-                                                    <option value="2">2x</option>
-                                                    <option value="3">3x</option>
-                                                    <option value="4">4x</option>
-                                                    <option value="5">5x</option>
-                                                    <option value="6" selected>6x</option>
-                                                    <option value="7">7x</option>
-                                                    <option value="8">8x</option>
-                                                    <option value="9">9x</option>
-                                                    <option value="10">10x</option>
-                                                    <option value="11">11x</option>
-                                                    <option value="12">12x</option>
-                                                </select>
-                                            </div>
-                                            <div class="installment-result">
-                                                <div><span id="individual-eco-label">parcelas de:</span> <span id="individual-eco-installment">R$ 256,67</span></div>
-                                                <div class="total-price">Total parcelado: <span id="individual-eco-total-price">R$ 1.540,00</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            
-                            <div class="cta-card" style="background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #1e40af 100%); border-radius: 2rem; padding: 2.5rem; min-height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 15px 35px rgba(14, 165, 233, 0.2);">
-                                <div style="font-size: 3.5rem; margin-bottom: 1.5rem; animation: float 3s ease-in-out infinite;">🌟</div>
-                                <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; color: white;">Mais Opções Disponíveis</h3>
-                                <p style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; line-height: 1.6;">Temos mais de 100 opções de urnas para eternizar, recordações personalizadas afetivas e serviços exclusivos.</p>
-                                <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: white; color: #1e40af; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
-                                    <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i>
-                                    Equipe de Plantão
-                                </a>
-                                <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; justify-content: center;">
-                                    <span style="background: rgba(255, 255, 255, 0.2); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">+100 Urnas</span>
-                                    <span style="background: rgba(255, 255, 255, 0.2); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">Recordações Personalizadas</span>
-                                    <span style="background: rgba(255, 255, 255, 0.2); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">Atendimento Imediato</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="scroll-hint">
-                            <span>Deslize para ver mais serviços</span>
-                            <span class="scroll-arrow">→</span>
-                        </div>
-                    </section>
 
                     <!-- CREMAÇÃO COLETIVA -->
                     <div class="fade-in-scale" style="text-align: center; margin: 1rem 0 0 0; padding: 1.5rem 1rem; overflow-x: hidden;">
@@ -3026,117 +2942,13 @@
                                 <span style="font-family: 'Nunito', sans-serif;">Cremação</span> <span class="shimmer-text-coletiva" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Coletiva</span>
                             </h2>
                             <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #E696FF, transparent); margin: 1.5rem auto;"></div>
-                            <p style="margin: 0; font-size: 1.1rem; color: rgba(255, 255, 255, 0.7); line-height: 1.6; max-width: 500px; font-style: italic;">Cuidado e dignidade em todo processo. Uma despedida com respeito ao amor compartilhado.</p>
+                            <p style="margin: 0 0 2rem 0; font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); line-height: 1.6; max-width: 600px;">São cremados três animais juntos e as cinzas são espalhadas em nosso jardim, uma área verde de 100 mil m², repleta de natureza. É gerado um certificado de cremação que atesta que o pet foi cremado conosco e teve uma despedida digna e respeitosa.</p>
+                            <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #E696FF, #d580ff); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(230, 150, 255, 0.3);">
+                                <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i>
+                                Falar no WhatsApp
+                            </a>
                         </div>
                     </div>
-                    
-                    <section class="services-section">
-                        <div class="carousel-track" id="carousel2">
-                            <article class="service-card">
-                                <div class="card-header">
-                                    <div class="card-gradient" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6);"></div>
-                                    <div class="card-icon">💜</div>
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="modern-service-title">Básica</h3>
-                                    
-                                    <div class="modern-service-price">
-                                        <div class="price-pix">
-                                            <div class="price-cash">R$ 890</div>
-                                            <div class="price-method"><i class="fas fa-qrcode" style="margin-right: 0.5rem;"></i>À vista via Pix/Dinheiro</div>
-                                        </div>
-                                        
-                                        <div class="price-card">
-                                            <div class="card-payment-method">💳 Cartão em até 12x iguais</div>
-                                            <div class="installment-selector-row">
-                                                <div class="selector-label">Selecione o<br>parcelamento:</div>
-                                                <select class="installment-dropdown" onchange="calculateInstallment(this, 940, 990, 'collective-basic-installment', 'collective-basic-total', 'collective-basic-header', 'collective-basic-label', 'collective-basic-total-price')">
-                                                    <option value="1">1x</option>
-                                                    <option value="2">2x</option>
-                                                    <option value="3">3x</option>
-                                                    <option value="4">4x</option>
-                                                    <option value="5">5x</option>
-                                                    <option value="6" selected>6x</option>
-                                                    <option value="7">7x</option>
-                                                    <option value="8">8x</option>
-                                                    <option value="9">9x</option>
-                                                    <option value="10">10x</option>
-                                                    <option value="11">11x</option>
-                                                    <option value="12">12x</option>
-                                                </select>
-                                            </div>
-                                            <div class="installment-result">
-                                                <div><span id="collective-basic-label">parcelas de:</span> <span id="collective-basic-installment">R$ 156,67</span></div>
-                                                <div class="total-price">Total parcelado: <span id="collective-basic-total-price">R$ 940,00</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            
-                            <article class="service-card">
-                                <div class="card-header">
-                                    <div class="card-gradient" style="background: linear-gradient(135deg, #ec4899, #be185d);"></div>
-                                    <div class="card-icon">💖</div>
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="modern-service-title">Memórias</h3>
-                                    
-                                    <div class="modern-service-price">
-                                        <div class="price-pix">
-                                            <div class="price-cash">R$ 990</div>
-                                            <div class="price-method"><i class="fas fa-qrcode" style="margin-right: 0.5rem;"></i>À vista via Pix/Dinheiro</div>
-                                        </div>
-                                        
-                                        <div class="price-card">
-                                            <div class="card-payment-method">💳 Cartão em até 12x iguais</div>
-                                            <div class="installment-selector-row">
-                                                <div class="selector-label">Selecione o<br>parcelamento:</div>
-                                                <select class="installment-dropdown" onchange="calculateInstallment(this, 1040, 1090, 'collective-memories-installment', 'collective-memories-total', 'collective-memories-header', 'collective-memories-label', 'collective-memories-total-price')">
-                                                    <option value="1">1x</option>
-                                                    <option value="2">2x</option>
-                                                    <option value="3">3x</option>
-                                                    <option value="4">4x</option>
-                                                    <option value="5">5x</option>
-                                                    <option value="6" selected>6x</option>
-                                                    <option value="7">7x</option>
-                                                    <option value="8">8x</option>
-                                                    <option value="9">9x</option>
-                                                    <option value="10">10x</option>
-                                                    <option value="11">11x</option>
-                                                    <option value="12">12x</option>
-                                                </select>
-                                            </div>
-                                            <div class="installment-result">
-                                                <div><span id="collective-memories-label">parcelas de:</span> <span id="collective-memories-installment">R$ 173,33</span></div>
-                                                <div class="total-price">Total parcelado: <span id="collective-memories-total-price">R$ 1.040,00</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            
-                            <div class="cta-card" style="background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #1e40af 100%); border-radius: 2rem; padding: 2.5rem; min-height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 15px 35px rgba(14, 165, 233, 0.2);">
-                                <div style="font-size: 3.5rem; margin-bottom: 1.5rem; animation: float 3s ease-in-out infinite;">🌟</div>
-                                <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; color: white;">Mais Opções Disponíveis</h3>
-                                <p style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; line-height: 1.6;">Temos mais opções de serviços e recordações personalizadas afetivas para honrar a memória do seu pet.</p>
-                                <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: white; color: #1e40af; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
-                                    <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i>
-                                    Equipe de Plantão
-                                </a>
-                                <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; justify-content: center;">
-                                    <span style="background: rgba(255, 255, 255, 0.2); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">Mais Serviços</span>
-                                    <span style="background: rgba(255, 255, 255, 0.2); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">Recordações Personalizadas</span>
-                                    <span style="background: rgba(255, 255, 255, 0.2); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">Atendimento Imediato</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="scroll-hint">
-                            <span>Deslize para ver mais opções</span>
-                            <span class="scroll-arrow">→</span>
-                        </div>
-                    </section>
                 </div>
 
                 <!-- PLANOS PREVENTIVOS -->
@@ -3296,37 +3108,128 @@
             <!-- Why Choose Us -->
             <div style="margin-top: 3rem; text-align: center;">
                 <h3 style="font-size: 1.8rem; margin-bottom: 2rem; color: var(--text-dark);">
-                    Por que escolher a rip pet?
+                    Por que escolher a R.I.P. Pet?
                 </h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem;">
-                    <div style="padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <i class="fas fa-building" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem;"></i>
-                        <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark);">Crematório Próprio</h4>
-                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">A RIP PET nasceu há <strong>12 anos</strong> com o objetivo de proporcionar dignidade e respeito aos pets, oferecendo suporte integral às famílias. Possuímos estrutura própria e licenciada, sem terceirização.</p>
-                    </div>
+
+                <!-- Desktop Grid (5 cards) -->
+                <div class="desktop-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem;">
                     <div style="padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
                         <i class="fas fa-video" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem;"></i>
-                        <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark);">Acompanhamento Visual</h4>
-                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Transparência total com vídeos em tempo real ou gravados de todo o processo. <strong>Você também pode ir presencialmente à nossa matriz</strong> e acompanhar pessoalmente - um diferencial exclusivo que oferecemos <strong>sem nenhuma cobrança adicional</strong>. Tenha a certeza de que seu pet está sendo tratado com máximo respeito.</p>
+                        <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold); position: relative;">
+                            <span style="position: absolute; top: -5px; right: 10px; background: var(--accent-gold); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 10px;">DESTAQUE</span>
+                            Acompanhamento Visual
+                        </h4>
+                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Oferecemos <strong>transparência completa</strong> através de <strong>vídeos em tempo real ou gravados</strong>, além da opção de <strong>acompanhar presencialmente</strong> — tudo <strong>sem custo adicional</strong>. É um dos nossos principais diferenciais para que você tenha <strong>total confiança</strong> em cada momento.<br><br>Se preferir não acompanhar, respeitamos completamente. Seu pet receberá o <strong>mesmo carinho e cuidado</strong> de sempre. Se mudar de ideia, ele estará preparado com dignidade para a despedida, pois nosso <strong>zelo independe de qualquer taxa adicional</strong>.</p>
+                    </div>
+                    <div style="padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <i class="fas fa-building" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem;"></i>
+                        <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Crematório Próprio</h4>
+                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">A RIP PET nasceu há <strong>12 anos</strong> com o objetivo de proporcionar <strong>dignidade e respeito</strong> aos pets, oferecendo <strong>suporte integral</strong> às famílias em todos os momentos. Contamos com <strong>estrutura própria</strong>, equipamentos de <strong>última geração</strong>, todos licenciados. Somos especializados e trabalhamos <strong>exclusivamente com cremação pet</strong>, o que garante <strong>segurança, transparência e controle total</strong> de cada etapa do processo — do acolhimento à entrega — sua família será atendida pela <strong>mesma equipe, sem qualquer tipo de terceirização</strong>.</p>
                     </div>
                     <div style="padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
                         <i class="fas fa-heart" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem;"></i>
-                        <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark);">Atendimento Humanizado</h4>
-                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Entendemos sua dor e oferecemos apoio psicológico, atendimento 24h e cuidado especial em cada detalhe. Nossa equipe é treinada para acolher famílias em momentos difíceis.</p>
+                        <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Atendimento Humanizado</h4>
+                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Compreendemos a dor da perda e oferecemos mais que um serviço: <strong>acolhimento genuíno</strong>. Nossa equipe é especializada em escutar, amparar e cuidar de cada detalhe com <strong>empatia</strong>, do primeiro contato à despedida.<br><br>Disponibilizamos <strong>atendimento 24 horas</strong>, <strong>apoio psicológico especializado</strong> e <strong>acompanhamento personalizado</strong>, sempre respeitando sua história. Cada família é acolhida com carinho, pois sabemos que despedir-se de quem amamos exige <strong>cuidado em cada gesto</strong>.</p>
                     </div>
                     <div style="padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <i class="fas fa-heart" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem;"></i>
-                        <h4 style="margin-bottom: 1rem; font-size: 1.3rem; color: var(--text-dark); font-family: 'Nunito', sans-serif;">Milhares de famílias atendidas</h4>
-                        <div style="display: flex; justify-content: center; gap: 0.3rem; margin-bottom: 1rem;">
-                            <i class="fas fa-star" style="font-size: 1.8rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
-                            <i class="fas fa-star" style="font-size: 1.8rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
-                            <i class="fas fa-star" style="font-size: 1.8rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
-                            <i class="fas fa-star" style="font-size: 1.8rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
-                            <i class="fas fa-star" style="font-size: 1.8rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
-                        </div>
-                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Com recomendações reais de tutores e médicos veterinários, somos o crematório de animais <strong>mais bem avaliado do Brasil</strong>.</p>
+                        <i class="fas fa-gift" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem;"></i>
+                        <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Homenagem Personalizada</h4>
+                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Cada história é única, por isso criamos <strong>homenagens que refletem o amor</strong> e a trajetória do seu pet. Desde <strong>cerimônias privativas</strong> até <strong>urninhas exclusivas</strong> e <strong>lembranças personalizadas</strong>, cada detalhe preserva <strong>memórias vivas e eternas</strong>.<br><br>Tudo é cuidadosamente pensado para <strong>eternizar quem fez parte da sua vida</strong>, transformando a despedida em um <strong>ato de amor e gratidão</strong>.</p>
+                    </div>
+                    <div style="padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <i class="fas fa-shipping-fast" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem;"></i>
+                        <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Entrega Ágil e Segura</h4>
+                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Sabemos que este é um momento delicado e estamos ao seu lado com <strong>eficiência e respeito</strong>. Nosso processo garante <strong>entrega rápida e segura</strong>, com <strong>rastreio e comunicação clara</strong> em cada etapa.<br><br>Do primeiro contato à despedida, tudo é conduzido com <strong>organização e responsabilidade</strong>, proporcionando <strong>tranquilidade e confiança total</strong> para sua família.</p>
                     </div>
                 </div>
+
+                <!-- Mobile Carousel -->
+                <div class="mobile-carousel" style="display: none; position: relative;">
+                    <!-- Indicativo de deslize -->
+                    <div style="text-align: center; margin-bottom: 1rem; color: var(--text-light); font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                        <i class="fas fa-hand-point-right" style="animation: swipeHint 2s ease-in-out infinite;"></i>
+                        <span>Deslize para ver outros diferenciais</span>
+                        <i class="fas fa-chevron-right" style="animation: swipeHint 2s ease-in-out infinite;"></i>
+                    </div>
+
+                    <div class="carousel-track" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 0.3rem; padding: 0.1rem; padding-bottom: 0.5rem; scrollbar-width: none; -ms-overflow-style: none;">
+                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
+                            <i class="fas fa-video" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
+                            <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold); position: relative;">
+                                <span style="position: absolute; top: -5px; right: 10px; background: var(--accent-gold); color: white; font-size: 0.6rem; padding: 2px 4px; border-radius: 8px;">DESTAQUE</span>
+                                Acompanhamento Visual
+                            </h4>
+                            <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Oferecemos <strong>transparência completa</strong> através de <strong>vídeos em tempo real ou gravados</strong>, além da opção de <strong>acompanhar presencialmente</strong> — tudo <strong>sem custo adicional</strong>. É um dos nossos principais diferenciais para que você tenha <strong>total confiança</strong> em cada momento.<br><br>Se preferir não acompanhar, respeitamos completamente. Seu pet receberá o <strong>mesmo carinho e cuidado</strong> de sempre. Se mudar de ideia, ele estará preparado com dignidade para a despedida, pois nosso <strong>zelo independe de qualquer taxa adicional</strong>.</p>
+                        </div>
+                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
+                            <i class="fas fa-building" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
+                            <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Crematório Próprio</h4>
+                            <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">A RIP PET nasceu há <strong>12 anos</strong> com o objetivo de proporcionar <strong>dignidade e respeito</strong> aos pets, oferecendo <strong>suporte integral</strong> às famílias em todos os momentos. Contamos com <strong>estrutura própria</strong>, equipamentos de <strong>última geração</strong>, todos licenciados. Somos especializados e trabalhamos <strong>exclusivamente com cremação pet</strong>, o que garante <strong>segurança, transparência e controle total</strong> de cada etapa do processo — do acolhimento à entrega — sua família será atendida pela <strong>mesma equipe, sem qualquer tipo de terceirização</strong>.</p>
+                        </div>
+                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
+                            <i class="fas fa-heart" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
+                            <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Atendimento Humanizado</h4>
+                            <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Compreendemos a dor da perda e oferecemos mais que um serviço: <strong>acolhimento genuíno</strong>. Nossa equipe é especializada em escutar, amparar e cuidar de cada detalhe com <strong>empatia</strong>, do primeiro contato à despedida.<br><br>Disponibilizamos <strong>atendimento 24 horas</strong>, <strong>apoio psicológico especializado</strong> e <strong>acompanhamento personalizado</strong>, sempre respeitando sua história. Cada família é acolhida com carinho, pois sabemos que despedir-se de quem amamos exige <strong>cuidado em cada gesto</strong>.</p>
+                        </div>
+                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
+                            <i class="fas fa-gift" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
+                            <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Homenagem Personalizada</h4>
+                            <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Cada história é única, por isso criamos <strong>homenagens que refletem o amor</strong> e a trajetória do seu pet. Desde <strong>cerimônias privativas</strong> até <strong>urninhas exclusivas</strong> e <strong>lembranças personalizadas</strong>, cada detalhe preserva <strong>memórias vivas e eternas</strong>.<br><br>Tudo é cuidadosamente pensado para <strong>eternizar quem fez parte da sua vida</strong>, transformando a despedida em um <strong>ato de amor e gratidão</strong>.</p>
+                        </div>
+                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
+                            <i class="fas fa-shipping-fast" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
+                            <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Entrega Ágil e Segura</h4>
+                            <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Sabemos que este é um momento delicado e estamos ao seu lado com <strong>eficiência e respeito</strong>. Nosso processo garante <strong>entrega rápida e segura</strong>, com <strong>rastreio e comunicação clara</strong> em cada etapa.<br><br>Do primeiro contato à despedida, tudo é conduzido com <strong>organização e responsabilidade</strong>, proporcionando <strong>tranquilidade e confiança total</strong> para sua família.</p>
+                        </div>
+                    </div>
+                    <!-- Carousel indicators -->
+                    <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem;">
+                        <div class="indicator-dot active" style="width: 8px; height: 8px; border-radius: 50%; background: #ccc; opacity: 0.5; cursor: pointer;"></div>
+                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #ccc; opacity: 0.5; cursor: pointer;"></div>
+                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #ccc; opacity: 0.5; cursor: pointer;"></div>
+                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #ccc; opacity: 0.5; cursor: pointer;"></div>
+                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #ccc; opacity: 0.5; cursor: pointer;"></div>
+                    </div>
+                </div>
+
+                <style>
+                    .carousel-track::-webkit-scrollbar {
+                        display: none;
+                    }
+
+                    .indicator-dot {
+                        transition: all 0.3s ease;
+                    }
+
+                    .indicator-dot.active {
+                        background: var(--accent-gold) !important;
+                        opacity: 1 !important;
+                        transform: scale(1.2);
+                    }
+
+                    @media (max-width: 768px) {
+                        .desktop-cards {
+                            display: none !important;
+                        }
+                        .mobile-carousel {
+                            display: block !important;
+                        }
+                    }
+                </style>
+            </div>
+
+            <!-- Families Served Section (Previously part of cards) -->
+            <div style="margin-top: 4rem; text-align: center; padding: 3rem 2rem; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);">
+                <i class="fas fa-users" style="font-size: 4rem; color: var(--accent-gold); margin-bottom: 1.5rem;"></i>
+                <h3 style="margin-bottom: 1rem; font-size: 2rem; color: var(--text-dark); font-family: 'Nunito', sans-serif;">Milhares de famílias atendidas</h3>
+                <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+                    <i class="fas fa-star" style="font-size: 2rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
+                    <i class="fas fa-star" style="font-size: 2rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
+                    <i class="fas fa-star" style="font-size: 2rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
+                    <i class="fas fa-star" style="font-size: 2rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
+                    <i class="fas fa-star" style="font-size: 2rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
+                </div>
+                <p style="color: var(--text-light); font-size: 1.2rem; line-height: 1.6; max-width: 600px; margin: 0 auto;">Com recomendações reais de tutores e médicos veterinários, somos o crematório de animais <strong>mais bem avaliado do Brasil</strong>.</p>
             </div>
         </div>
     </section>
@@ -3606,12 +3509,12 @@
                 <!-- FAQ Item 1 -->
                 <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid #e2e8f0; padding: 1.5rem 0;">
                     <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
-                        Quanto custa a cremação do meu pet?
+                        O que é a cremação de pets?
                         <i class="fas fa-chevron-down faq-icon" style="color: var(--primary-blue); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
                         <div itemprop="text" style="padding: 1rem 0; color: var(--text-light); line-height: 1.7;">
-                            <p>Nossos preços variam de <strong>R$ 990 (cremação coletiva)</strong> até <strong>R$ 1.490 (plano premium)</strong>. A cremação individual básica custa <strong>R$ 1.340</strong>. Todos os valores podem ser parcelados em até 12x sem juros. <a href="#servicos" style="color: var(--primary-blue); text-decoration: none;">Ver todos os planos →</a></p>
+                            <p>É o sistema mais moderno e ecologicamente correto utilizado no mundo para a destinação. Durante o processo, atinge a calcinação (cinzas) de qualquer matéria orgânica, reduzindo o volume em 97%. Assim, destrói e elimina todos os agentes patogênicos possíveis. As cinzas são inócuas e ricas em cálcio e fósforo.</p>
                         </div>
                     </div>
                 </div>
@@ -3619,12 +3522,12 @@
                 <!-- FAQ Item 2 -->
                 <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid #e2e8f0; padding: 1.5rem 0;">
                     <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
-                        Posso acompanhar a cremação do meu pet?
+                        Qual a diferença entre cremação individual e coletiva?
                         <i class="fas fa-chevron-down faq-icon" style="color: var(--primary-blue); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
                         <div itemprop="text" style="padding: 1rem 0; color: var(--text-light); line-height: 1.7;">
-                            <p><strong>Sim, você pode acompanhar todo o processo</strong>. Oferecemos cremação assistida onde você permanece presente durante toda a cerimônia. Também realizamos uma cerimônia de despedida personalizada antes da cremação. Nossa transparência total é o que nos diferencia de outros serviços.</p>
+                            <p>Na cremação individual, o pet é cremado sozinho, e suas cinzas são entregues à família em uma linda urna. Na cremação coletiva, três animais são cremados juntos, e as cinzas são espalhadas em nosso jardim, uma área verde de 100 mil m2, repleta de natureza. É gerado um certificado de cremação que atesta que o pet foi cremado conosco e teve uma despedida digna e respeitosa.</p>
                         </div>
                     </div>
                 </div>
@@ -3632,12 +3535,12 @@
                 <!-- FAQ Item 3 -->
                 <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid #e2e8f0; padding: 1.5rem 0;">
                     <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
-                        Quanto tempo demora para receber as cinzas?
+                        O que é o plano preventivo?
                         <i class="fas fa-chevron-down faq-icon" style="color: var(--primary-blue); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
                         <div itemprop="text" style="padding: 1rem 0; color: var(--text-light); line-height: 1.7;">
-                            <p>O processo de cremação leva cerca de <strong>2-3 horas</strong>. As cinzas ficam prontas no mesmo dia e são entregues em uma urna cinerária inclusa no serviço. <strong>Entregamos em seu endereço de forma agendada</strong>, respeitando seu momento de luto.</p>
+                            <p>Para minimizar a dor e trazer tranquilidade num momento difícil, criamos o plano preventivo, onde o tutor escolhe o serviço que melhor atende às suas necessidades e contrata para seu pet ainda em vida, obtendo benefícios como: Parcelar o valor, Tranquilidade de ser atendido a partir de 48h após a contratação, A certeza de que tomou a melhor decisão para dar um destino digno quando chegar a hora da despedida.</p>
                         </div>
                     </div>
                 </div>
@@ -3645,13 +3548,12 @@
                 <!-- FAQ Item 4 -->
                 <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid #e2e8f0; padding: 1.5rem 0;">
                     <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
-                        Qual a diferença entre cremação individual e coletiva?
+                        Como funciona a remoção 24 horas?
                         <i class="fas fa-chevron-down faq-icon" style="color: var(--primary-blue); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
                         <div itemprop="text" style="padding: 1rem 0; color: var(--text-light); line-height: 1.7;">
-                            <p><strong>Cremação Individual:</strong> Seu pet é cremado sozinho e você recebe as cinzas em urna personalizada.<br>
-                            <strong>Cremação Coletiva:</strong> Vários pets são cremados juntos e as cinzas são destinadas a um jardim memorial. Ambos os serviços incluem remoção 24h, certificado veterinário e cerimônia de despedida.</p>
+                            <p>Disponibilizamos uma equipe treinada e preparada para lidar com esse momento delicado, indo até o local para realizar o translado do pet em qualquer horário do dia ou da noite.</p>
                         </div>
                     </div>
                 </div>
@@ -3659,12 +3561,12 @@
                 <!-- FAQ Item 5 -->
                 <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid #e2e8f0; padding: 1.5rem 0;">
                     <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
-                        A remoção é realmente 24 horas?
+                        Posso acompanhar o processo?
                         <i class="fas fa-chevron-down faq-icon" style="color: var(--primary-blue); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
                         <div itemprop="text" style="padding: 1rem 0; color: var(--text-light); line-height: 1.7;">
-                            <p><strong>Sim, atendemos 24h todos os dias</strong>, inclusive finais de semana e feriados. Nossa equipe chega ao local em até <strong>1 hora após o chamado</strong>. Entendemos que a perda de um pet não espera horário comercial e estamos sempre prontos para ajudar sua família.</p>
+                            <p>Estamos sempre de portas abertas para recebê-los. De forma transparente, permitimos que acompanhem todo o procedimento, a fim de se despedir e ter a certeza de que seu pet foi acolhido, respeitado e recebeu todo o carinho que merecia em sua última homenagem.</p>
                         </div>
                     </div>
                 </div>
@@ -3672,12 +3574,12 @@
                 <!-- FAQ Item 6 -->
                 <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="padding: 1.5rem 0;">
                     <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
-                        Vocês atendem toda a Baixada Santista?
+                        Como funciona o velório pet?
                         <i class="fas fa-chevron-down faq-icon" style="color: var(--primary-blue); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
                         <div itemprop="text" style="padding: 1rem 0; color: var(--text-light); line-height: 1.7;">
-                            <p><strong>Sim, atendemos toda a região</strong>: Santos, São Vicente, Guarujá, Cubatão, Praia Grande, Mongaguá, Itanhaém, Peruíbe e Bertioga. <strong>Somos o crematório mais bem avaliado da Baixada Santista</strong> com mais de 360 avaliações 5 estrelas no Google.</p>
+                            <p>Independente do plano escolhido, preparamos o pet com respeito e carinho, deixando-o como um anjinho para que os tutores guardem uma lembrança desse último gesto de amor. Respeitosamente, adornamos o pet com flores em um ambiente tranquilo e sereno.</p>
                         </div>
                     </div>
                 </div>
