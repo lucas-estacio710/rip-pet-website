@@ -1428,6 +1428,26 @@
             }
         }
 
+        /* Popup animations */
+        .phone-popup-overlay, .whatsapp-popup-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .phone-popup-overlay.active, .whatsapp-popup-overlay.active {
+            opacity: 1;
+        }
+
+        .phone-popup, .whatsapp-popup {
+            transform: scale(0.7) translateY(-20px);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .phone-popup-overlay.active .phone-popup,
+        .whatsapp-popup-overlay.active .whatsapp-popup {
+            transform: scale(1) translateY(0);
+        }
+
     </style>
 
     <style>
@@ -1698,7 +1718,7 @@
     <header class="header" id="hero">
         <!-- Video Background -->
         <video class="video-background" autoplay muted loop playsinline>
-            <source src="Institucional_Movie_Rip_Pet2.mp4" type="video/mp4">
+            <source src="Institucional_Movie_Rip_Pet2_desk.mp4" type="video/mp4">
         </video>
         
         
@@ -1711,7 +1731,7 @@
                 <div class="word">Respeito</div>
             </div>
 
-            <h2 class="hero-subtitle" style="text-align: right; font-family: 'Nunito', sans-serif; margin-top: 10rem;">A vida inteira teve amor e cumplicidade.</h2>
+            <h2 class="hero-subtitle" style="text-align: right; font-family: 'Nunito', sans-serif; margin-top: 10rem;">A vida inteira, teve amor e cumplicidade.</h2>
             <p class="hero-description" style="text-align: left; margin-bottom: 2rem;">Permita que tenha um descanso em paz.</p>
             
             <div class="cta-buttons">
@@ -3126,12 +3146,9 @@
                             <span style="font-family: 'Nunito', sans-serif;">Planos</span> <span class="shimmer-text-preventivo" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Preventivos</span>
                         </h2>
                         <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #3b82f6, transparent); margin: 1.5rem auto;"></div>
-                        <p style="margin: 0 0 2rem 0; font-size: 1.1rem; color: rgba(255, 255, 255, 0.7); line-height: 1.6; max-width: 500px; font-style: italic;">Para quem deseja se preparar com carinho e tranquilidade</p>
+                        <p style="margin: 0 0 2rem 0; font-size: 1.1rem; color: rgba(255, 255, 255, 0.7); line-height: 1.6; max-width: 500px; font-style: italic;">Para quem deseja se preparar com carinho e tranquilidade, oferecemos as opções de planos preventivos. A compra é antecipada e traz vantagens importantes:</p>
 
                         <div style="text-align: left; max-width: 600px; margin: 0 auto; background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
-                            <p style="margin: 0 0 1.5rem 0; font-size: 1rem; color: rgba(255, 255, 255, 0.85); line-height: 1.6;">
-                                Oferecemos opções de planos preventivos que garantem o mesmo serviço completo, com todo o cuidado e respeito que seu anjinho merece — e ainda trazem vantagens importantes:
-                            </p>
 
                             <ul style="list-style: none; padding: 0; margin: 1.5rem 0;">
                                 <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; color: rgba(255, 255, 255, 0.9);">
@@ -3140,7 +3157,7 @@
                                 </li>
                                 <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; color: rgba(255, 255, 255, 0.9);">
                                     <span style="color: #3b82f6; margin-right: 0.75rem; font-size: 1.2rem; flex-shrink: 0;">✓</span>
-                                    <span>Desconto especial por antecipação</span>
+                                    <span>Desconto especial em relação ao acionamento no momento</span>
                                 </li>
                                 <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; color: rgba(255, 255, 255, 0.9);">
                                     <span style="color: #3b82f6; margin-right: 0.75rem; font-size: 1.2rem; flex-shrink: 0;">✓</span>
@@ -3150,7 +3167,7 @@
 
                             <div style="background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 0.75rem; border-left: 4px solid #3b82f6; margin: 1.5rem 0;">
                                 <p style="margin: 0 0 1rem 0; font-size: 0.95rem; color: rgba(255, 255, 255, 0.9); line-height: 1.6;">
-                                    <strong>Flexibilidade total:</strong> Nossos planos não são nominais aos pets, podendo ser utilizado para o que precisar primeiro, sendo vitalício até sua ativação.
+                                    <strong>Flexibilidade total:</strong> Nossos planos não são nominais aos pets, podendo ser utilizado para o pet que precisar primeiro, e são vitalícios até seu uso (não expiram).
                                 </p>
                                 <p style="margin: 0; font-size: 0.95rem; color: rgba(255, 255, 255, 0.9); line-height: 1.6;">
                                     <strong>Sem complicações:</strong> Sem taxa de manutenção, sem anuidade, com o mesmo carinho que você precisa e merece.
@@ -3257,7 +3274,7 @@
             </div>
             
             <!-- Institutional Video -->
-            <div style="margin-top: 3rem; position: relative; width: 100%; height: 50vh; overflow: hidden; border-radius: 20px; box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);">
+            <div style="margin-top: 3rem; position: relative; width: 100%; max-width: 500px; margin-left: auto; margin-right: auto; aspect-ratio: 11/14; overflow: hidden; border-radius: 20px; box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);">
                 <video
                     style="width: 100%; height: 100%; object-fit: cover; object-position: center;"
                     autoplay
@@ -3265,7 +3282,7 @@
                     loop
                     playsinline
                     preload="auto">
-                    <source src="Institucional_Movie_Rip_Pet.mp4" type="video/mp4">
+                    <source src="transparencia.mp4" type="video/mp4">
                     Seu navegador não suporta vídeos HTML5.
                 </video>
 
@@ -3279,7 +3296,7 @@
             <!-- Why Choose Us -->
             <div style="margin-top: 3rem; text-align: center;">
                 <h3 style="font-size: 1.8rem; margin-bottom: 2rem; color: var(--text-dark);">
-                    Por Que Escolher a RIP PET?
+                    Por que escolher a rip pet?
                 </h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem;">
                     <div style="padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
@@ -3930,26 +3947,38 @@
             document.body.style.overflow = '';
         }
 
-        // Phone Popup Functions
+        // Phone Popup Functions with smooth animation
         function openPhonePopup() {
-            document.getElementById('phonePopupOverlay').style.display = 'flex';
+            const overlay = document.getElementById('phonePopupOverlay');
+            overlay.style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            setTimeout(() => overlay.classList.add('active'), 10);
         }
 
         function closePhonePopup() {
-            document.getElementById('phonePopupOverlay').style.display = 'none';
-            document.body.style.overflow = '';
+            const overlay = document.getElementById('phonePopupOverlay');
+            overlay.classList.remove('active');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
         }
 
-        // WhatsApp Popup Functions
+        // WhatsApp Popup Functions with smooth animation
         function openWhatsAppPopup() {
-            document.getElementById('whatsappPopupOverlay').style.display = 'flex';
+            const overlay = document.getElementById('whatsappPopupOverlay');
+            overlay.style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            setTimeout(() => overlay.classList.add('active'), 10);
         }
 
         function closeWhatsAppPopup() {
-            document.getElementById('whatsappPopupOverlay').style.display = 'none';
-            document.body.style.overflow = '';
+            const overlay = document.getElementById('whatsappPopupOverlay');
+            overlay.classList.remove('active');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
         }
 
         document.addEventListener('DOMContentLoaded', function() {
