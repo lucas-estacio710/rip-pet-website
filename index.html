@@ -10,23 +10,22 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Autography:wght@400&family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap&subset=latin" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Font fallback for mobile -->
+    <!-- Local Autography Font -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Autography:wght@400&display=swap');
-
-        /* Font fallback stack */
-        .font-autography {
-            font-family: 'Autography', 'Dancing Script', 'Brush Script MT', cursive, serif;
+        /* Local Autography font with commercial license */
+        @font-face {
+            font-family: 'Autography';
+            src: url('./fonts/Autography.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
         }
 
-        /* Force font loading */
-        @font-face {
-            font-family: 'Autography-Fallback';
-            src: url('https://fonts.gstatic.com/s/autography/v7/Q4YYuHfT7rYgNAvww7ZcwA.woff2') format('woff2');
-            font-display: swap;
-            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        /* Font fallback stack for better compatibility */
+        .font-autography {
+            font-family: 'Autography', 'Dancing Script', 'Brush Script MT', cursive, serif;
         }
     </style>
 
@@ -214,6 +213,12 @@
             font-weight: 500;
             letter-spacing: 0.5px;
             margin-left: -0.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .phone-24h-text:hover {
+            color: var(--accent-gold);
         }
 
         .phone-btn {
@@ -320,7 +325,7 @@
             right: -100%;
             width: 300px;
             height: 100vh;
-            background: linear-gradient(135deg, rgba(5, 47, 95, 0.98) 0%, rgba(16, 33, 62, 0.98) 100%);
+            background: linear-gradient(135deg, rgba(5, 47, 95, 0.75) 0%, rgba(16, 33, 62, 0.75) 100%);
             backdrop-filter: blur(20px);
             border-left: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
@@ -449,8 +454,8 @@
             z-index: 10000;
         }
 
-        .word:nth-child(1) { 
-            animation-delay: 0s; 
+        .word:nth-child(1) {
+            animation-delay: 0s;
         }
         .word:nth-child(2) { 
             animation-delay: 5s; 
@@ -460,12 +465,12 @@
         }
 
         @keyframes memoryAppear {
-            0%, 66.66% { 
+            0%, 66.66% {
                 opacity: 0;
                 filter: blur(5px);
                 transform: scale(1.1);
             }
-            70% { 
+            70% {
                 opacity: 1;
                 filter: blur(0);
                 transform: scale(1);
@@ -738,6 +743,10 @@
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.8s ease;
+        }
+
+        #servicos {
+            padding-bottom: 0.5rem;
         }
 
         .section.visible {
@@ -1097,45 +1106,6 @@
             line-height: 1.8;
         }
 
-        /* Testimonials Section */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .testimonial-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        .testimonial-rating {
-            display: flex;
-            gap: 0.25rem;
-            margin-bottom: 1rem;
-            justify-content: center;
-        }
-
-        .star {
-            color: var(--accent-gold);
-            font-size: 1.2rem;
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            color: var(--text-light);
-            text-align: center;
-        }
-
-        .testimonial-author {
-            font-weight: 600;
-            text-align: center;
-        }
 
         /* CTA Section */
         .cta-section {
@@ -1242,8 +1212,21 @@
                 right: 0.5rem;
             }
 
+            .nav-container {
+                padding: 0 1rem;
+                gap: 1rem;
+            }
+
+            .nav-contact {
+                margin-right: -0.5rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
             .word {
-                font-size: 3.5rem;
+                font-size: 4rem;
             }
             
             .animated-words {
@@ -1255,11 +1238,11 @@
             }
 
             .hero-subtitle {
-                font-size: 1.2rem;
+                font-size: 1.7rem;
             }
 
             .hero-description {
-                font-size: 1rem;
+                font-size: 1.4rem;
             }
 
             .section-title {
@@ -1431,11 +1414,18 @@
         
         @media (max-width: 768px) {
             .harmonized-title {
-                font-size: clamp(2.5rem, 7vw, 3.5rem);
-                padding: 1.5rem 0.5rem;
-                margin: 2rem auto;
+                display: block;
+                width: 100vw;
+                margin-left: calc(-50vw + 50%);
+                margin-right: calc(-50vw + 50%);
+                padding: 0 1rem;
+                box-sizing: border-box;
+                text-align: center;
+                white-space: nowrap;
+                font-size: clamp(1.5rem, 8vw, 3rem);
+                margin-top: 1rem;
+                margin-bottom: 1rem;
             }
-            
         }
 
     </style>
@@ -1486,10 +1476,25 @@
         .stagger-item:nth-child(8) { transition-delay: 0.8s; }
         .stagger-item:nth-child(9) { transition-delay: 0.9s; }
 
+        /* Estilos base para serviços inclusos */
+        .services-includes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
         /* Grid responsivo para serviços inclusos */
         @media (max-width: 768px) {
             .services-includes {
-                grid-template-columns: 1fr !important;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                max-width: none;
+                margin: 0;
+                padding: 0 1rem;
+                text-align: left;
             }
         }
 
@@ -1649,7 +1654,7 @@
             <ul class="nav-links">
                 <li><a href="#servicos">Serviços</a></li>
                 <li><a href="#etapas">Processos</a></li>
-                <li><a href="#avaliacoes">Sobre Nós</a></li>
+                <li><a href="#etapas">Sobre Nós</a></li>
             </ul>
             <div class="nav-contact">
                 <div class="phone-container">
@@ -1677,9 +1682,11 @@
         <button class="mobile-close" id="mobileClose">
             <i class="fas fa-times"></i>
         </button>
+        <div style="margin-top: 4rem;"></div>
+        <a href="#hero">Início</a>
         <a href="#servicos">Serviços</a>
         <a href="#etapas">Processos</a>
-        <a href="#avaliacoes">Sobre Nós</a>
+        <a href="#processo">Sobre Nós</a>
         <div style="margin-top: 2rem;">
             <a href="tel:+5513999999999" style="background: var(--accent-gold); color: #052F5F; padding: 1rem 2rem; border-radius: 30px; font-weight: 600;">
                 <i class="fas fa-phone"></i> Ligar Agora
@@ -1688,7 +1695,7 @@
     </div>
 
     <!-- Header with Video Background -->
-    <header class="header">
+    <header class="header" id="hero">
         <!-- Video Background -->
         <video class="video-background" autoplay muted loop playsinline>
             <source src="Institucional_Movie_Rip_Pet2.mp4" type="video/mp4">
@@ -1699,28 +1706,110 @@
             <h1 style="position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; overflow: hidden;">Cremação de animais em Santos</h1>
 
             <div class="animated-words">
-                <div class="word">Carinho</div>
                 <div class="word">Transparência</div>
+                <div class="word">Carinho</div>
                 <div class="word">Respeito</div>
             </div>
 
-            <h2 class="hero-subtitle" style="text-align: right; font-family: 'Nunito', sans-serif;">A vida inteira, ele te deu amor e cumplicidade.</h2>
-            <p class="hero-description" style="text-align: left; margin-bottom: 3rem;">Permita que ele tenha um descanso digno.</p>
+            <h2 class="hero-subtitle" style="text-align: right; font-family: 'Nunito', sans-serif; margin-top: 10rem;">A vida inteira teve amor e cumplicidade.</h2>
+            <p class="hero-description" style="text-align: left; margin-bottom: 2rem;">Permita que tenha um descanso em paz.</p>
             
             <div class="cta-buttons">
-                <a href="#servicos" class="btn-primary">
-                    <i class="fas fa-heart"></i> Conhecer Serviços
-                </a>
-                <a href="#historias" class="btn-secondary">
-                    <i class="fas fa-book-open"></i> Histórias Reais
+                <a href="javascript:void(0)" onclick="openWhatsAppPopup()" class="btn-primary" style="background: white; color: #25D366; border: 2px solid #25D366; transition: all 0.3s ease;" onmouseover="this.style.background='#25D366'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='#25D366';">
+                    <i class="fab fa-whatsapp" style="font-size: 1.8em; margin-right: 0.5rem;"></i> Atendimento Agora
                 </a>
             </div>
         </div>
         
-        <div class="scroll-indicator">
+        <div class="scroll-indicator" style="display: flex; flex-direction: column; align-items: center;">
+            <span style="font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-bottom: 0.5rem;">Saiba mais</span>
             <i class="fas fa-chevron-down"></i>
         </div>
     </header>
+
+    <!-- Phone Popup -->
+    <div class="phone-popup-overlay" id="phonePopupOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
+        <div class="phone-popup" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); border-radius: 20px; padding: 2.5rem; max-width: 700px; width: 95%; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative;">
+            <button class="phone-popup-close" id="phonePopupClose" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; font-size: 1.3rem; color: white; cursor: pointer; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='scale(1)';">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <h3 style="text-align: center; color: white; margin-bottom: 0.5rem; font-size: 1.4rem; font-weight: 600; font-family: 'Poppins', sans-serif;">Atendimento Telefone 24h</h3>
+            <p style="text-align: center; color: #ccc; margin-bottom: 2rem; font-size: 0.9rem; font-family: 'Nunito', sans-serif;">Escolha sua região</p>
+
+            <div class="phone-list">
+                <!-- Grid container para todas as unidades - 2 colunas -->
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem;">
+                    <!-- Matriz em destaque - primeira posição -->
+                    <a href="tel:+551297996543" class="region-compose" style="background: linear-gradient(135deg, #B9E28C, #a8d16f); color: #052F5F; padding: 1rem; border-radius: 10px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 2px solid #B9E28C; text-decoration: none; box-shadow: 0 8px 20px rgba(185, 226, 140, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 30px rgba(185, 226, 140, 0.4)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
+                        <div class="region-content">
+                            <h4 style="margin: 0 0 0.2rem 0; color: #052F5F; font-size: 0.95rem; font-weight: 700; font-family: 'Poppins', sans-serif;">Matriz e Vale do Paraíba</h4>
+                            <p style="margin: 0; color: #052F5F; font-size: 0.85rem; text-align: left; font-family: 'Nunito', sans-serif; font-weight: 600;">(12) 99799-6543</p>
+                        </div>
+                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.3rem; background: linear-gradient(135deg, #1e40af, #1e3a8a); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
+                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #052F5F; transition: all 0.3s ease;"></div>
+                    </a>
+
+                    <a href="tel:+5511991603041" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
+                        <div class="region-content">
+                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">São Paulo e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(11) 99160-3041</p>
+                        </div>
+                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
+                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
+                    </a>
+
+                    <a href="tel:+5513998068262" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
+                        <div class="region-content">
+                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Santos e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(13) 99806-8262</p>
+                        </div>
+                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
+                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
+                    </a>
+
+                    <a href="tel:+5519999161977" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
+                        <div class="region-content">
+                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Campinas e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(19) 99916-1977</p>
+                        </div>
+                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
+                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
+                    </a>
+
+                    <a href="tel:+5524998379825" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
+                        <div class="region-content">
+                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Resende e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(24) 99837-9825</p>
+                        </div>
+                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
+                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
+                    </a>
+
+                    <a href="tel:+553599042223" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
+                        <div class="region-content">
+                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Pouso Alegre e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(35) 99904-2223</p>
+                        </div>
+                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
+                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CSS para responsividade -->
+            <style>
+                @media (max-width: 600px) {
+                    .phone-popup {
+                        max-width: 400px !important;
+                    }
+                    .phone-list > div[style*="repeat(2, 1fr)"] {
+                        grid-template-columns: 1fr !important;
+                    }
+                }
+            </style>
+        </div>
+    </div>
 
     <!-- Services Section -->
         <!-- Services Section -->
@@ -1735,9 +1824,9 @@
                         </p>
 
                         <div class="fade-in-up" style="text-align: center; margin: 2rem 0;">
-                            <h2 style="position: relative; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive, serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 400; color: white; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">...sempre inclusos</h2>
+                            <h2 style="position: relative; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive, serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 400; color: white; margin: 0;">...sempre inclusos:</h2>
                         </div>
-                        <div class="services-includes stagger-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem;">
+                        <div class="services-includes stagger-container">
                             <div class="stagger-item">
                                 <span style="font-size: 1.5rem;">🚗</span>
                                 <div class="service-content">
@@ -1753,7 +1842,7 @@
                                 <span style="font-size: 1.5rem;">🌼</span>
                                 <div class="service-content">
                                     <div class="service-title">Cerimônia de Despedida</div>
-                                    <div class="service-description">agendada e privativa</div>
+                                    <div class="service-description">agendada na unidade e privativa</div>
                                 </div>
                                 <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
                                     <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
@@ -2142,46 +2231,11 @@
                         margin-left: 2rem !important;
                     }
 
-                    /* Layout responsivo para serviços inclusos */
-                    @media (max-width: 768px) {
-                        .services-includes {
-                            grid-template-columns: 1fr !important;
-                            gap: 1.5rem !important;
-                            text-align: left !important;
-                            max-width: 100% !important;
-                            padding: 0 1rem;
-                        }
-
-                        .services-includes > div {
-                            justify-self: stretch !important;
-                            width: 100% !important;
-                            justify-content: space-between !important;
-                            align-items: flex-start !important;
-                        }
-
-                        .services-includes > div > div:first-child {
-                            flex: 1 !important;
-                        }
-
-                        .services-includes > div > div:first-child > span {
-                            font-size: 1.25rem !important;
-                        }
-
-                        .services-include-check {
-                            margin-left: 0 !important;
-                            margin-right: 0 !important;
-                            flex-shrink: 0 !important;
-                        }
-                    }
+                    /* Layout responsivo para serviços inclusos - CORRIGIDO */
 
                     @media (max-width: 480px) {
                         .services-includes {
-                            grid-template-columns: 1fr !important;
-                            gap: 0.75rem !important;
-                        }
-
-                        .services-include-check {
-                            margin-left: 1rem !important;
+                            gap: 0.75rem;
                         }
                     }
                     
@@ -2779,7 +2833,7 @@
         </section>
 
                 <!-- Título dos Tipos de Cremação -->
-                <div class="fade-in-up" style="text-align: center; margin: 4rem 0 2rem 0;">
+                <div class="fade-in-up" style="text-align: center; margin: 2rem 0 2rem 0;">
                     <h2 style="font-family: 'Nunito', sans-serif; font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; color: white; margin: 0;">Conheça os tipos de Cremação</h2>
                 </div>
 
@@ -2927,7 +2981,7 @@
                                 <div style="font-size: 3.5rem; margin-bottom: 1.5rem; animation: float 3s ease-in-out infinite;">🌟</div>
                                 <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; color: white;">Mais Opções Disponíveis</h3>
                                 <p style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; line-height: 1.6;">Temos mais de 100 opções de urnas para eternizar, recordações personalizadas afetivas e serviços exclusivos.</p>
-                                <a href="https://wa.me/5513999999999?text=Olá! Gostaria de conhecer todas as opções de cremação individual, urnas e recordações personalizadas." onclick="openWhatsApp('outros')" style="display: inline-flex; align-items: center; background: white; color: #1e40af; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+                                <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: white; color: #1e40af; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
                                     <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i>
                                     Equipe de Plantão
                                 </a>
@@ -3046,7 +3100,7 @@
                                 <div style="font-size: 3.5rem; margin-bottom: 1.5rem; animation: float 3s ease-in-out infinite;">🌟</div>
                                 <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; color: white;">Mais Opções Disponíveis</h3>
                                 <p style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; line-height: 1.6;">Temos mais opções de serviços e recordações personalizadas afetivas para honrar a memória do seu pet.</p>
-                                <a href="https://wa.me/5513999999999?text=Olá! Gostaria de conhecer todas as opções de cremação coletiva e recordações personalizadas disponíveis." onclick="openWhatsApp('outros')" style="display: inline-flex; align-items: center; background: white; color: #1e40af; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+                                <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: white; color: #1e40af; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
                                     <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i>
                                     Equipe de Plantão
                                 </a>
@@ -3103,8 +3157,8 @@
                                 </p>
                             </div>
 
-                            <div style="text-align: center; margin-top: 2rem;">
-                                <a href="https://wa.me/5513999999999?text=Olá! Tenho interesse nos Planos Preventivos. Gostaria de mais informações sobre valores e condições." style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);">
+                            <div style="text-align: center; margin-top: 2rem; position: relative; z-index: 1;">
+                                <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); position: relative;">
                                     <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i>
                                     Saiba Mais sobre os Planos
                                 </a>
@@ -3372,324 +3426,137 @@
         <div class="container">
             <div class="section-header" style="text-align: center; margin-bottom: 80px;">
                 <h2 class="harmonized-title">Etapas com <span class="highlight-elegant">Respeito</span></h2>
-                <p class="section-subtitle-elegant">Clique nos títulos para expandir e acompanhar cada etapa desta jornada de despedida</p>
+                <p class="section-subtitle-elegant">Conheça cada etapa desta jornada de despedida com carinho e respeito</p>
             </div>
 
-            <div class="interactive-timeline">
-                <!-- Step 1: Acolhimento -->
-                <div class="step-card" data-step="1">
-                    <div class="step-header-sticky">
-                        <div class="step-number">01</div>
-                        <h3 class="step-title-main">🤝 Acolhimento e Orientação</h3>
-                    </div>
-                    <div class="step-content-expandable">
-                        <div class="step-image" style="background-image: url('images/etapa1-acolhimento.jpg');"></div>
-                        <div class="step-text">
-                            <p>Recebemos você e seu pet com todo cuidado e respeito. Nossa equipe oferece orientação completa sobre nossos serviços, esclarece dúvidas e apresenta as opções disponíveis, sempre respeitando suas necessidades e desejos.</p>
-                            <div class="step-highlight">Atendimento personalizado e sem pressa</div>
-                        </div>
-                    </div>
+            <div class="steps-container">
+                <div class="step-item">
+                    <h3 class="step-title"><i class="fas fa-phone-alt"></i> Acionamento</h3>
+                    <div class="step-image" style="background-image: url('images/etapa1-acolhimento.jpg');"></div>
+                    <p class="step-description">Entre em contato conosco e nossa equipe oferece orientação completa sobre nossos serviços, esclarece dúvidas e apresenta as opções disponíveis.</p>
+                    <div class="step-highlight">Atendimento 24h disponível</div>
                 </div>
 
-                <!-- Step 2: Documentação -->
-                <div class="step-card" data-step="2">
-                    <div class="step-header-sticky">
-                        <div class="step-number">02</div>
-                        <h3 class="step-title-main">📋 Documentação e Preparação</h3>
-                    </div>
-                    <div class="step-content-expandable">
-                        <div class="step-image" style="background-image: url('images/etapa2-documentacao.jpg');"></div>
-                        <div class="step-text">
-                            <p>Cuidamos de toda a documentação necessária e preparamos seu pet com carinho especial. Oferecemos um momento para despedida, permitindo que você se despeça em paz e no seu tempo.</p>
-                            <div class="step-highlight">Tempo necessário para despedida tranquila</div>
-                        </div>
-                    </div>
+                <div class="step-item">
+                    <h3 class="step-title"><i class="fas fa-heart"></i> Acolhimento</h3>
+                    <div class="step-image" style="background-image: url('images/etapa2-documentacao.jpg');"></div>
+                    <p class="step-description">Recebemos você e seu pet com todo cuidado e respeito. Cuidamos de toda documentação e oferecemos um momento para despedida tranquila.</p>
+                    <div class="step-highlight">Tempo necessário para despedida</div>
                 </div>
 
-                <!-- Step 3: Cremação -->
-                <div class="step-card" data-step="3">
-                    <div class="step-header-sticky">
-                        <div class="step-number">03</div>
-                        <h3 class="step-title-main">🕊️ Cremação Individual</h3>
-                    </div>
-                    <div class="step-content-expandable">
-                        <div class="step-image" style="background-image: url('images/etapa3-cremacao.jpg');"></div>
-                        <div class="step-text">
-                            <p>Realizamos a cremação individual em equipamentos modernos e seguros, garantindo que as cinzas sejam exclusivamente do seu pet. Todo o processo é conduzido com máximo respeito e dignidade.</p>
-                            <div class="step-highlight">Processo realizado com total cuidado</div>
-                        </div>
-                    </div>
+                <div class="step-item">
+                    <h3 class="step-title"><i class="fas fa-dove"></i> Velório e Cremação</h3>
+                    <div class="step-image" style="background-image: url('images/etapa3-cremacao.jpg');"></div>
+                    <p class="step-description">Realizamos a cremação individual em equipamentos modernos e seguros, garantindo que as cinzas sejam exclusivamente do seu pet.</p>
+                    <div class="step-highlight">Processo com total dignidade</div>
                 </div>
 
-                <!-- Step 4: Entrega -->
-                <div class="step-card" data-step="4">
-                    <div class="step-header-sticky">
-                        <div class="step-number">04</div>
-                        <h3 class="step-title-main">💙 Entrega e Memória</h3>
-                    </div>
-                    <div class="step-content-expandable">
-                        <div class="step-image" style="background-image: url('images/etapa4-entrega.jpg');"></div>
-                        <div class="step-text">
-                            <p>Entregamos as cinzas em uma urna especial, acompanhada de certificado e, se desejado, uma lembrança personalizada. Oferecemos suporte contínuo e orientação sobre formas de honrar a memória do seu pet.</p>
-                            <div class="step-highlight">Acompanhamento e apoio sempre que precisar</div>
-                        </div>
-                    </div>
+                <div class="step-item">
+                    <h3 class="step-title"><i class="fas fa-home"></i> Entrega</h3>
+                    <div class="step-image" style="background-image: url('images/etapa4-entrega.jpg');"></div>
+                    <p class="step-description">Entregamos as cinzas em uma urna especial, com certificado e lembrança personalizada. Oferecemos suporte contínuo sempre que precisar.</p>
+                    <div class="step-highlight">Acompanhamento completo</div>
                 </div>
             </div>
 
-            <!-- Care Note -->
-            <div class="care-note" style="background: rgba(185, 226, 140, 0.15); border: 1px solid rgba(185, 226, 140, 0.4); border-radius: 20px; padding: 40px; margin-top: 60px; text-align: center;">
-                <span class="care-note-icon" style="font-size: 2.5rem; margin-bottom: 15px; display: block;">🌈</span>
-                <p class="care-note-text" style="color: var(--text-light); font-style: italic; line-height: 1.7; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
-                    "Compreendemos que cada despedida é única. Nossa missão é oferecer conforto,
-                    dignidade e paz durante este momento delicado, honrando o amor especial
-                    que vocês compartilharam."
-                </p>
-            </div>
         </div>
 
         <style>
-            /* Interactive Timeline Styles */
-            .interactive-timeline {
-                position: relative;
+            /* Simple Steps Timeline Styles */
+            .steps-container {
                 max-width: 1000px;
                 margin: 0 auto;
                 padding: 2rem 0;
             }
 
-            .step-card {
-                position: relative;
-                margin-bottom: 2rem;
-                background: rgba(255, 255, 255, 0.95);
-                border-radius: 1rem;
-                overflow: hidden;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-                backdrop-filter: blur(10px);
-                transition: all 0.3s ease;
+            .step-item {
+                margin-bottom: 4rem;
+                border: 2px solid var(--primary-blue);
+                border-radius: 1.5rem;
+                padding: 2rem;
             }
 
-            .step-header-sticky {
-                position: sticky;
-                top: 80px;
-                background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-                color: white;
-                padding: 1.5rem 2rem;
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                z-index: 10;
-                cursor: pointer;
-                transition: all 0.3s ease;
+            .step-item:last-child {
+                margin-bottom: 0;
             }
 
-            .step-header-sticky:hover {
-                background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue) 100%);
-                transform: translateY(-2px);
-            }
-
-            .step-number {
-                background: rgba(255, 255, 255, 0.2);
-                width: 3rem;
-                height: 3rem;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: 700;
-                font-size: 1.2rem;
-            }
-
-            .step-title-main {
-                font-size: 1.4rem;
+            .step-title {
+                font-size: 2rem;
                 font-weight: 600;
-                margin: 0;
+                margin: 0 0 1.5rem 0;
                 font-family: 'Nunito', sans-serif;
-            }
-
-            .step-content-expandable {
-                max-height: 500px;
-                overflow: hidden;
-                transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
-                background: white;
-                padding: 2rem;
-            }
-
-            .step-card.expanded .step-content-expandable {
-                max-height: 500px;
-                padding: 2rem;
-            }
-
-            .step-card:not(.expanded) .step-content-expandable {
-                max-height: 0;
-                padding: 0 2rem;
+                color: var(--text-dark);
+                text-align: center;
             }
 
             .step-image {
                 width: 100%;
-                height: 200px;
+                height: 300px;
                 background-size: cover;
                 background-position: center;
-                border-radius: 0.5rem;
+                border-radius: 1rem;
                 margin-bottom: 1.5rem;
                 background-color: #f8f9fa;
                 background-image: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
             }
 
-            .step-text p {
+            .step-description {
                 color: var(--text-light);
                 line-height: 1.8;
                 font-size: 1.1rem;
-                margin-bottom: 1rem;
+                margin: 0 0 1.5rem 0;
                 font-family: 'Poppins', sans-serif;
+                text-align: center;
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 1.5rem;
             }
 
             .step-highlight {
                 background: linear-gradient(135deg, rgba(185, 226, 140, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
-                padding: 0.8rem 1.2rem;
-                border-radius: 0.5rem;
-                font-size: 0.95rem;
+                padding: 1rem 2rem;
+                border-radius: 0.75rem;
+                font-size: 1rem;
                 font-weight: 500;
                 color: var(--text-dark);
-                border-left: 3px solid var(--accent-gold);
+                border-left: 4px solid var(--accent-gold);
                 font-style: italic;
-            }
-
-            /* Animation for step cards appearing on scroll */
-            .step-card {
-                opacity: 0;
-                transform: translateY(30px);
-                animation: fadeInUp 0.6s ease forwards;
-            }
-
-            .step-card:nth-child(1) { animation-delay: 0.1s; }
-            .step-card:nth-child(2) { animation-delay: 0.2s; }
-            .step-card:nth-child(3) { animation-delay: 0.3s; }
-            .step-card:nth-child(4) { animation-delay: 0.4s; }
-
-            @keyframes fadeInUp {
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+                text-align: center;
+                max-width: 600px;
+                margin: 0 auto;
             }
 
             /* Mobile responsive */
             @media (max-width: 768px) {
-                .step-header-sticky {
-                    position: relative;
-                    top: auto;
-                    padding: 1rem 1.5rem;
+                .steps-container {
+                    padding: 1rem;
                 }
 
-                .step-number {
-                    width: 2.5rem;
-                    height: 2.5rem;
-                    font-size: 1rem;
+                .step-item {
+                    margin-bottom: 3rem;
                 }
 
-                .step-title-main {
-                    font-size: 1.2rem;
-                }
-
-                .step-content-expandable {
-                    padding: 1.5rem;
-                }
-
-                .step-card.expanded .step-content-expandable {
-                    padding: 1.5rem;
-                }
-
-                .step-card:not(.expanded) .step-content-expandable {
-                    padding: 0 1.5rem;
+                .step-title {
+                    font-size: 1.5rem;
                 }
 
                 .step-image {
-                    height: 150px;
+                    height: 200px;
+                }
+
+                .step-description {
+                    font-size: 1rem;
+                }
+
+                .step-highlight {
+                    padding: 0.8rem 1.5rem;
+                    font-size: 0.9rem;
                 }
             }
         </style>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="section" id="avaliacoes" style="background: var(--background-light);">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="harmonized-title">
-                    <span id="reviews-count">360+</span> Avaliações <span class="highlight-elegant">5 Estrelas</span>
-                </h2>
-                <p class="section-subtitle-elegant">
-                    Somos o crematório de animais mais bem avaliado do Google na Baixada Santista.
-                    <span id="google-badge" style="display: inline-block; margin-left: 10px; opacity: 0; transition: opacity 0.3s ease;">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIyLjU2IDEyLjI1YzAtLjc4LS4wNy0xLjUzLS4yLTIuMjVIMTJ2NC4yNmg1LjkyYy0uMjYgMS4zNy0xLjA0IDIuNTMtMi4yMSAzLjMxdjIuNzdoMy41N2MyLjA4LTEuOTIgMy4yOC00Ljc0IDMuMjgtOC4wOXoiIGZpbGw9IiM0Mjg1RjQiLz4KPHBhdGggZD0iTTEyIDIzYzIuOTcgMCA1LjQ2LS45OCA3LjI4LTIuNjZsLTMuNTctMi43N2MtLjk4LjY2LTIuMjMgMS4wNi0zLjcxIDEuMDYtMi44NiAwLTUuMjktMS45My02LjE2LTQuNTNIMS45OXYyLjg2QzMuODEgMjAuMDkgNy43MyAyMyAxMiAyM3oiIGZpbGw9IiMzNEE4NTMiLz4KPHBhdGggZD0iTTUuODQgMTQuMDljLS4yMi0uNjYtLjM1LTEuMzYtLjM1LTIuMDlzLjEzLTEuNDMuMzUtMi4wOVY3LjA1SDF2Mi44NkMtLjY1IDEyLjY5IDEgMTYuMzEgMS45OSAxNi45MWw0LjA1LTIuODJ6IiBmaWxsPSIjRkJCQzA1Ii8+CjxwYXRoIGQ9Ik0xMiA1LjM4YzEuNjIgMCAzLjA2LjU2IDQuMjEgMS42NGwzLjE1LTMuMTVDMTcuNDUgMi4wOSAxNC45NyAxIDEyIDEgNy43MyAxIDMuODEgMy45MSAyIDcuMDVsNC4wNCAyLjgzYy44Ny0yLjYgMy4zLTQuNSA2LjE2LTQuNXoiIGZpbGw9IiNFQTQzMzUiLz4KPC9zdmc+" alt="Google" style="vertical-align: middle;">
-                        <span style="font-size: 0.8rem; color: var(--text-light); margin-left: 4px;">Avaliações ao vivo</span>
-                    </span>
-                </p>
-            </div>
-
-            <!-- Loading State -->
-            <div id="reviews-loading" style="text-align: center; margin: 2rem 0; opacity: 0; transition: opacity 0.3s ease;">
-                <div style="display: inline-block; width: 40px; height: 40px; border: 4px solid var(--background-light); border-top: 4px solid var(--primary-blue); border-radius: 50%; animation: spin 1s linear infinite;"></div>
-                <p style="margin-top: 1rem; color: var(--text-light);">Carregando avaliações mais recentes...</p>
-            </div>
-
-            <div class="testimonials-grid" id="testimonials-container">
-                <!-- Fallback Reviews (Static) -->
-                <div class="testimonial-card fallback-review">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                    </div>
-                    <p class="testimonial-text">"Atendimento excepcional em um momento tão difícil. A transparência e carinho fizeram toda a diferença. Recomendo de coração."</p>
-                    <div class="testimonial-author">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIyLjU2IDEyLjI1YzAtLjc4LS4wNy0xLjUzLS4yLTIuMjVIMTJ2NC4yNmg1LjkyYy0uMjYgMS4zNy0xLjA0IDIuNTMtMi4yMSAzLjMxdjIuNzdoMy41N2MyLjA4LTEuOTIgMy4yOC00Ljc0IDMuMjgtOC4wOXoiIGZpbGw9IiM0Mjg1RjQiLz4KPHBhdGggZD0iTTEyIDIzYzIuOTcgMCA1LjQ2LS45OCA3LjI4LTIuNjZsLTMuNTctMi43N2MtLjk4LjY2LTIuMjMgMS4wNi0zLjcxIDEuMDYtMi44NiAwLTUuMjktMS45My02LjE2LTQuNTNIMS45OXYyLjg2QzMuODEgMjAuMDkgNy43MyAyMyAxMiAyM3oiIGZpbGw9IiMzNEE4NTMiLz4KPHBhdGggZD0iTTUuODQgMTQuMDljLS4yMi0uNjYtLjM1LTEuMzYtLjM1LTIuMDlzLjEzLTEuNDMuMzUtMi4wOVY3LjA1SDF2Mi44NkMtLjY1IDEyLjY5IDEgMTYuMzEgMS45OSAxNi45MWw0LjA1LTIuODJ6IiBmaWxsPSIjRkJCQzA1Ii8+CjxwYXRoIGQ9Ik0xMiA1LjM4YzEuNjIgMCAzLjA2LjU2IDQuMjEgMS42NGwzLjE1LTMuMTVDMTcuNDUgMi4wOSAxNC45NyAxIDEyIDEgNy43MyAxIDMuODEgMy45MSAyIDcuMDVsNC4wNCAyLjgzYy44Ny0yLjYgMy4zLTQuNSA2LjE2LTQuNXoiIGZpbGw9IiNFQTQzMzUiLz4KPC9zdmc+" alt="Google" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 6px;">
-                        Maria Silva - Santos
-                    </div>
-                </div>
-
-                <div class="testimonial-card fallback-review">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                    </div>
-                    <p class="testimonial-text">"Poder acompanhar todo o processo me trouxe paz. Profissionais muito cuidadosos e respeitosos com nossa dor."</p>
-                    <div class="testimonial-author">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIyLjU2IDEyLjI1YzAtLjc4LS4wNy0xLjUzLS4yLTIuMjVIMTJ2NC4yNmg1LjkyYy0uMjYgMS4zNy0xLjA0IDIuNTMtMi4yMSAzLjMxdjIuNzdoMy41N2MyLjA4LTEuOTIgMy4yOC00Ljc0IDMuMjgtOC4wOXoiIGZpbGw9IiM0Mjg1RjQiLz4KPHBhdGggZD0iTTEyIDIzYzIuOTcgMCA1LjQ2LS45OCA3LjI4LTIuNjZsLTMuNTctMi43N2MtLjk4LjY2LTIuMjMgMS4wNi0zLjcxIDEuMDYtMi44NiAwLTUuMjktMS45My02LjE2LTQuNTNIMS45OXYyLjg2QzMuODEgMjAuMDkgNy43MyAyMyAxMiAyM3oiIGZpbGw9IiMzNEE4NTMiLz4KPHBhdGggZD0iTTUuODQgMTQuMDktLjIyLS42Ni0uMzUtMS4zNi0uMzUtMi4wOXMuMTMtMS40My4zNS0yLjA5VjcuMDVIMS45OXYyLjg2QzEgMTIuNjkgMS45OSAxNi4zMSAxLjk5IDE2LjkxbDQuMDUtMi44MnoiIGZpbGw9IiNGQkJDMDUiLz4KPHBhdGggZD0iTTEyIDUuMzhjMS42MiAwIDMuMDYuNTYgNC4yMSAxLjY0bDMuMTUtMy4xNUMxNy40NSAyLjA5IDE0Ljk3IDEgMTIgMSA3LjczIDEgMy44MSAzLjkxIDIgNy4wNWw0LjA0IDIuODNjLjg3LTIuNiAzLjMtNC41IDYuMTYtNC41eiIgZmlsbD0iI0VBNDMzNSIvPgo8L3N2Zz4=" alt="Google" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 6px;">
-                        João Santos - Guarujá
-                    </div>
-                </div>
-
-                <div class="testimonial-card fallback-review">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                        <i class="fas fa-star star"></i>
-                    </div>
-                    <p class="testimonial-text">"Chegaram em menos de 1 hora quando precisei. O velório foi muito bonito e me ajudou no processo de despedida."</p>
-                    <div class="testimonial-author">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIyLjU2IDEyLjI1YzAtLjc4LS4wNy0xLjUzLS4yLTIuMjVIMTJ2NC4yNmg1LjkyYy0uMjYgMS4zNy0xLjA0IDIuNTMtMi4yMSAzLjMxdjIuNzdoMy41N2MyLjA4LTEuOTIgMy4yOC00Ljc0IDMuMjgtOC4wOXoiIGZpbGw9IiM0Mjg1RjQiLz4KPHBhdGggZD0iTTEyIDIzYzIuOTcgMCA1LjQ2LS45OCA3LjI4LTIuNjZsLTMuNTctMi43N2MtLjk4LjY2LTIuMjMgMS4wNi0zLjcxIDEuMDYtMi44NiAwLTUuMjktMS45My02LjE2LTQuNTNIMS45OXYyLjg2QzMuODEgMjAuMDkgNy43MyAyMyAxMiAyM3oiIGZpbGw9IiMzNEE4NTMiLz4KPHBhdGggZD0iTTUuODQgMTQuMDktLjIyLS42Ni0uMzUtMS4zNi0uMzUtMi4wOXMuMTMtMS40My4zNS0yLjA5VjcuMDVIMS45OXYyLjg2QzEgMTIuNjkgMS45OSAxNi4zMSAxLjk5IDE2LjkxbDQuMDUtMi44MnoiIGZpbGw9IiNGQkJDMDUiLz4KPHBhdGggZD0iTTEyIDUuMzhjMS42MiAwIDMuMDYuNTYgNC4yMSAxLjY0bDMuMTUtMy4xNUMxNy40NSAyLjA5IDE0Ljk3IDEgMTIgMSA3LjczIDEgMy44MSAzLjkxIDIgNy4wNWw0LjA0IDIuODNjLjg3LTIuNiAzLjMtNC41IDYuMTYtNC41eiIgZmlsbD0iI0VBNDMzNSIvPgo8L3N2Zz4=" alt="Google" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 6px;">
-                        Ana Costa - São Vicente
-                    </div>
-                </div>
-            </div>
-
-            <!-- View More Reviews Button -->
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="https://www.google.com/maps/place/RIP+PET" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; background: var(--primary-blue); color: white; padding: 1rem 2rem; border-radius: 30px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIyLjU2IDEyLjI1YzAtLjc4LS4wNy0xLjUzLS4yLTIuMjVIMTJ2NC4yNmg1LjkyYy0uMjYgMS4zNy0xLjA0IDIuNTMtMi4yMSAzLjMxdjIuNzdoMy41N2MyLjA4LTEuOTIgMy4yOC00Ljc0IDMuMjgtOC4wOXoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xMiAyM2MyLjk3IDAgNS40Ni0uOTggNy4yOC0yLjY2bC0zLjU3LTIuNzdjLS45OC42Ni0yLjIzIDEuMDYtMy43MSAxLjA2LTIuODYgMC01LjI5LTEuOTMtNi4xNi00LjUzSDF2Mi44NkMzLj81IDIwLjA5IDcuNzMgMjMgMTIgMjN6IiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNS44NCAxNC4wOWMtLjIyLS42Ni0uMzUtMS4zNi0uMzUtMi4wOXMuMTMtMS40My4zNS0yLjA5VjcuMDVIMXYyLjg2Qy0uNjUgMTIuNjkgMSAxNi4zMSAxLjk5IDE2LjkxbDQuMDUtMi44MnoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xMiA1LjM4YzEuNjIgMCAzLjA2LjU2IDQuMjEgMS42NGwzLjE1LTMuMTVDMTcuNDUgMi4wOSAxNC45NyAxIDEyIDEgNy43MyAxIDMuODEgMy45MSAyIDcuMDVsNC4wNCAyLjgzYy44Ny0yLjYgMy4zLTQuNSA2LjE2LTQuNXoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==" alt="Google" style="margin-right: 8px;">
-                    Ver todas as avaliações no Google
-                    <i class="fas fa-external-link-alt" style="margin-left: 8px; font-size: 0.9rem;"></i>
-                </a>
-            </div>
-        </div>
-    </section>
 
     <!-- CTA Section -->
     <section class="section cta-section">
@@ -3699,7 +3566,7 @@
                 <p class="cta-subtitle">Estamos disponíveis 24 horas para atendê-lo neste momento difícil. Chegamos em até 1 hora.</p>
                 
                 <div class="contact-options">
-                    <a href="https://wa.me/5513999999999?text=Olá, preciso de ajuda com cremação do meu pet" class="whatsapp-btn">
+                    <a href="javascript:void(0)" onclick="openWhatsAppPopup()" class="whatsapp-btn">
                         <i class="fab fa-whatsapp"></i> WhatsApp 24h
                     </a>
                     <a href="tel:+5513999999999" class="btn-primary">
@@ -3803,7 +3670,7 @@
             <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--background-light); border-radius: 20px;">
                 <h3 style="color: var(--text-dark); margin-bottom: 1rem;">Ainda tem dúvidas?</h3>
                 <p style="color: var(--text-light); margin-bottom: 2rem;">Nossa equipe está disponível 24h para esclarecer todas as suas questões</p>
-                <a href="tel:+5513999999999" onclick="openWhatsApp('outros')" style="display: inline-flex; align-items: center; background: var(--accent-gold); color: var(--text-dark); padding: 1rem 2rem; border-radius: 30px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);">
+                <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: var(--accent-gold); color: var(--text-dark); padding: 1rem 2rem; border-radius: 30px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);">
                     <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i>
                     Fale Conosco Agora
                 </a>
@@ -3824,7 +3691,7 @@
                 <div class="footer-section">
                     <h3>Contato</h3>
                     <a href="tel:+5513999999999">(13) 99999-9999</a>
-                    <a href="https://wa.me/5513999999999">WhatsApp 24h</a>
+                    <a href="javascript:void(0)" onclick="openWhatsAppPopup()">WhatsApp 24h</a>
                     <p>Santos e Região</p>
                 </div>
                 
@@ -3849,8 +3716,92 @@
         </div>
     </footer>
 
+    <!-- WhatsApp Popup -->
+    <div class="whatsapp-popup-overlay" id="whatsappPopupOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
+        <div class="whatsapp-popup" style="background: linear-gradient(135deg, #128C7E 0%, #075E54 50%, #25D366 100%); border-radius: 20px; padding: 2.5rem; max-width: 700px; width: 95%; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative;">
+            <button class="whatsapp-popup-close" id="whatsappPopupClose" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; font-size: 1.3rem; color: white; cursor: pointer; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='scale(1)';">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <h3 style="text-align: center; color: white; margin-bottom: 0.5rem; font-size: 1.4rem; font-weight: 600; font-family: 'Poppins', sans-serif;">Atendimento WhatsApp 24h</h3>
+            <p style="text-align: center; color: #ccc; margin-bottom: 2rem; font-size: 0.9rem; font-family: 'Nunito', sans-serif;">Escolha sua região</p>
+
+            <div class="whatsapp-list">
+                <!-- Grid container para todas as unidades - 2 colunas -->
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem;">
+                    <!-- Matriz em destaque - primeira posição -->
+                    <a href="https://wa.me/551297996543?text=Olá! Preciso de informações sobre cremação para meu pet. Sou da região do Vale do Paraíba." class="region-compose" style="background: linear-gradient(135deg, #25D366, #20B358); color: white; padding: 1rem; border-radius: 10px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 2px solid #25D366; text-decoration: none; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 30px rgba(37, 211, 102, 0.4)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
+                        <div class="region-content">
+                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.95rem; font-weight: 700; font-family: 'Poppins', sans-serif;">Matriz e Vale do Paraíba</h4>
+                            <p style="margin: 0; color: rgba(255,255,255,0.9); font-size: 0.85rem; text-align: left; font-family: 'Nunito', sans-serif; font-weight: 600;">(12) 99799-6543</p>
+                        </div>
+                        <i class="fab fa-whatsapp whatsapp-icon" style="font-size: 1.8rem; color: white; transition: all 0.3s ease;"></i>
+                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: white; transition: all 0.3s ease;"></div>
+                    </a>
+
+                    <a href="https://wa.me/5511991603041?text=Olá! Preciso de informações sobre cremação para meu pet. Sou da região de São Paulo." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
+                        <div class="region-content">
+                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">São Paulo e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(11) 99160-3041</p>
+                        </div>
+                        <i class="fab fa-whatsapp whatsapp-icon" style="font-size: 1.8rem; color: white; transition: all 0.3s ease;"></i>
+                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #25D366; transition: all 0.3s ease;"></div>
+                    </a>
+
+                    <a href="https://wa.me/5513998068262?text=Olá! Preciso de informações sobre cremação para meu pet. Sou da região de Santos." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
+                        <div class="region-content">
+                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Santos e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(13) 99806-8262</p>
+                        </div>
+                        <i class="fab fa-whatsapp whatsapp-icon" style="font-size: 1.8rem; color: white; transition: all 0.3s ease;"></i>
+                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #25D366; transition: all 0.3s ease;"></div>
+                    </a>
+
+                    <a href="https://wa.me/5519999161977?text=Olá! Preciso de informações sobre cremação para meu pet. Sou da região de Campinas." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
+                        <div class="region-content">
+                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Campinas e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(19) 99916-1977</p>
+                        </div>
+                        <i class="fab fa-whatsapp whatsapp-icon" style="font-size: 1.8rem; color: white; transition: all 0.3s ease;"></i>
+                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #25D366; transition: all 0.3s ease;"></div>
+                    </a>
+
+                    <a href="https://wa.me/5524998379825?text=Olá! Preciso de informações sobre cremação para meu pet. Sou da região de Resende." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
+                        <div class="region-content">
+                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Resende e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(24) 99837-9825</p>
+                        </div>
+                        <i class="fab fa-whatsapp whatsapp-icon" style="font-size: 1.8rem; color: white; transition: all 0.3s ease;"></i>
+                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #25D366; transition: all 0.3s ease;"></div>
+                    </a>
+
+                    <a href="https://wa.me/553599042223?text=Olá! Preciso de informações sobre cremação para meu pet. Sou da região de Pouso Alegre." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
+                        <div class="region-content">
+                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Pouso Alegre e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(35) 99904-2223</p>
+                        </div>
+                        <i class="fab fa-whatsapp whatsapp-icon" style="font-size: 1.8rem; color: white; transition: all 0.3s ease;"></i>
+                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #25D366; transition: all 0.3s ease;"></div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CSS para responsividade -->
+            <style>
+                @media (max-width: 600px) {
+                    .whatsapp-popup {
+                        max-width: 400px !important;
+                    }
+                    .whatsapp-list > div[style*="repeat(2, 1fr)"] {
+                        grid-template-columns: 1fr !important;
+                    }
+                }
+            </style>
+        </div>
+    </div>
+
     <!-- Fixed WhatsApp Button -->
-    <a href="https://wa.me/5513999999999?text=Olá, preciso de informações sobre cremação" class="fixed-whatsapp" title="WhatsApp 24h">
+    <a href="javascript:void(0)" onclick="openWhatsAppPopup()" class="fixed-whatsapp" title="WhatsApp 24h">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -3979,14 +3930,47 @@
             document.body.style.overflow = '';
         }
 
+        // Phone Popup Functions
+        function openPhonePopup() {
+            document.getElementById('phonePopupOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePhonePopup() {
+            document.getElementById('phonePopupOverlay').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // WhatsApp Popup Functions
+        function openWhatsAppPopup() {
+            document.getElementById('whatsappPopupOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeWhatsAppPopup() {
+            document.getElementById('whatsappPopupOverlay').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.getElementById('hamburger');
             const overlay = document.getElementById('mobileOverlay');
+            const mobileClose = document.getElementById('mobileClose');
             const mobileLinks = document.querySelectorAll('#mobileNav a');
+
+            // Phone popup elements
+            const phonePopupOverlay = document.getElementById('phonePopupOverlay');
+            const phonePopupClose = document.getElementById('phonePopupClose');
+            const phoneButtons = document.querySelectorAll('.phone-btn, .phone-24h-text, a[href^="tel:+5513999999999"]');
 
             // Hamburger click handler
             if (hamburger) {
                 hamburger.addEventListener('click', toggleMobileMenu);
+            }
+
+            // Close button click handler
+            if (mobileClose) {
+                mobileClose.addEventListener('click', closeMobileMenu);
             }
 
             // Overlay click handler
@@ -3998,6 +3982,44 @@
             mobileLinks.forEach(link => {
                 link.addEventListener('click', closeMobileMenu);
             });
+
+            // Phone popup event listeners
+            phoneButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openPhonePopup();
+                });
+            });
+
+            // Close phone popup
+            if (phonePopupClose) {
+                phonePopupClose.addEventListener('click', closePhonePopup);
+            }
+
+            if (phonePopupOverlay) {
+                phonePopupOverlay.addEventListener('click', function(e) {
+                    if (e.target === phonePopupOverlay) {
+                        closePhonePopup();
+                    }
+                });
+            }
+
+            // WhatsApp popup elements
+            const whatsappPopupOverlay = document.getElementById('whatsappPopupOverlay');
+            const whatsappPopupClose = document.getElementById('whatsappPopupClose');
+
+            // Close WhatsApp popup
+            if (whatsappPopupClose) {
+                whatsappPopupClose.addEventListener('click', closeWhatsAppPopup);
+            }
+
+            if (whatsappPopupOverlay) {
+                whatsappPopupOverlay.addEventListener('click', function(e) {
+                    if (e.target === whatsappPopupOverlay) {
+                        closeWhatsAppPopup();
+                    }
+                });
+            }
         });
 
         // Google Analytics Event Tracking (implement as needed)
@@ -4035,13 +4057,6 @@
                 const processSection = document.getElementById('processo');
                 if (servicesSection && processSection) {
                     servicesSection.parentNode.insertBefore(servicesSection, processSection);
-                }
-            } else if (variation === 'emotional') {
-                // Move testimonials higher up
-                const avaliacoesSection = document.getElementById('avaliacoes');
-                const servicosSection = document.getElementById('servicos');
-                if (avaliacoesSection && servicosSection) {
-                    servicosSection.parentNode.insertBefore(avaliacoesSection, servicosSection);
                 }
             }
         }
@@ -4176,9 +4191,10 @@
         fbq('track', 'PageView');
     </script>
 
-    <!-- Google Places API for Reviews -->
+    <!-- Reviews functionality removed -->
     <script>
-        class GoogleReviewsManager {
+        // GoogleReviewsManager removed since testimonials section was removed
+        // class GoogleReviewsManager {
             constructor() {
                 /*
                  * 🚀 GOOGLE PLACES API (NEW) - CONFIGURAÇÃO
@@ -4473,13 +4489,8 @@
             }
         }
 
-        // Inicializar o sistema de reviews quando a página carregar
+        // Inicializar funcionalidades quando a página carregar
         document.addEventListener('DOMContentLoaded', () => {
-            // Pequeno delay para melhor UX
-            setTimeout(() => {
-                new GoogleReviewsManager();
-            }, 1000);
-
             // Scroll reveal para imagens das etapas
             initScrollReveal();
         });
