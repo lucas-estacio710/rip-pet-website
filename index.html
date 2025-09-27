@@ -208,26 +208,14 @@
         }
 
         .phone-container {
-            display: flex;
-            align-items: center;
-            gap: 0;
-        }
-
-        .phone-24h-text {
-            font-size: 0.75rem;
-            color: #fca5a5;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            margin-left: -0.4rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .phone-24h-text:hover {
-            color: var(--accent-gold);
+            position: relative;
+            display: inline-block;
         }
 
         .phone-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
             background: none;
             border: none;
             color: white;
@@ -238,13 +226,34 @@
             text-decoration: none;
         }
 
+        .phone-btn::after {
+            content: "24h";
+            position: absolute;
+            right: -4px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            color: #fca5a5;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        /* Ajuste para desktop - menos sobreposição */
+        @media (min-width: 1024px) {
+            .phone-btn::after {
+                right: -6px !important;
+            }
+        }
+
+        .phone-btn:hover::after {
+            color: var(--accent-gold);
+        }
+
         .phone-btn:hover {
             color: var(--accent-gold);
             transform: scale(1.1);
-        }
-
-        .phone-btn:hover + .phone-24h-text {
-            color: var(--accent-gold);
         }
 
         .mobile-menu {
@@ -285,8 +294,8 @@
         .hamburger span {
             display: block;
             position: absolute;
-            height: 2px;
-            width: 100%;
+            height: 2px !important;
+            width: 24px !important;
             background: white;
             border-radius: 2px;
             opacity: 1;
@@ -512,6 +521,7 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 6rem;
             opacity: 0;
             animation: fadeInUp 1s ease 3s forwards;
         }
@@ -1216,6 +1226,7 @@
                 top: 0.5rem;
                 left: 0.5rem;
                 right: 0.5rem;
+                padding: 0.8rem 0;
             }
 
             .nav-container {
@@ -1227,9 +1238,153 @@
                 margin-right: -0.5rem;
             }
 
-            .container {
-                padding: 0 1rem;
+
+            .logo img {
+                height: 50px;
             }
+        }
+
+        /* Extra small screens (375px and below) */
+        @media (max-width: 375px) {
+            .navigation {
+                top: 0.3rem;
+                left: 0.3rem;
+                right: 0.3rem;
+                padding: 0.6rem 0;
+            }
+
+            .nav-container {
+                padding: 0 0.8rem;
+                gap: 0.8rem;
+            }
+
+            .phone-container {
+                white-space: nowrap !important;
+                gap: 0 !important;
+            }
+
+
+            .logo img {
+                height: 45px;
+            }
+
+            .phone-btn {
+                width: 45px !important;
+                height: 45px !important;
+                font-size: 1.1rem !important;
+            }
+
+            .phone-btn::after {
+                font-size: 0.65rem !important;
+                right: -2px !important;
+            }
+
+            .hamburger {
+                width: 45px !important;
+                height: 45px !important;
+            }
+
+            .hamburger span {
+                width: 20px !important;
+                height: 2px !important;
+            }
+        }
+
+        /* Very small screens (360px and below) */
+        @media (max-width: 360px) {
+            .navigation {
+                padding: 0.5rem 0;
+            }
+
+            .nav-container {
+                padding: 0 0.6rem;
+                gap: 0.6rem;
+            }
+
+            .logo img {
+                height: 42px;
+            }
+
+            .phone-btn {
+                width: 42px !important;
+                height: 42px !important;
+                font-size: 1rem !important;
+            }
+
+            .hamburger {
+                width: 42px !important;
+                height: 42px !important;
+            }
+        }
+
+        /* Medium small screens (between 376px and 430px) */
+        @media (min-width: 376px) and (max-width: 430px) {
+            .navigation {
+                padding: 0.8rem 0 !important;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+                gap: 1rem;
+            }
+
+            .phone-container {
+                white-space: nowrap !important;
+                gap: 0 !important;
+            }
+
+
+            .logo img {
+                height: 48px !important;
+            }
+
+            .phone-btn, .hamburger {
+                width: 48px !important;
+                height: 48px !important;
+                font-size: 1.2rem !important;
+            }
+
+            .phone-btn::after {
+                font-size: 0.7rem !important;
+                right: -3px !important;
+            }
+
+            .hamburger span {
+                width: 22px !important;
+                height: 2.5px !important;
+            }
+        }
+
+        /* Alternative responsive approach using viewport units for very small screens */
+        @media (max-width: 375px) {
+            .logo img {
+                height: calc(40px + 2vw);
+                max-height: 55px;
+                min-height: 35px;
+            }
+
+            .navigation {
+                padding: calc(0.4rem + 0.5vw) 0;
+            }
+
+            .nav-container {
+                padding: 0 calc(0.5rem + 1vw);
+                gap: calc(0.5rem + 1vw);
+            }
+
+            .phone-btn, .hamburger {
+                width: calc(38px + 1.5vw) !important;
+                height: calc(38px + 1.5vw) !important;
+                max-width: 50px !important;
+                max-height: 50px !important;
+                min-width: 40px !important;
+                min-height: 40px !important;
+            }
+        }
+
+        .container {
+            padding: 0 1rem;
+        }
 
             .word {
                 font-size: 4rem;
@@ -1237,18 +1392,20 @@
             
             .animated-words {
                 margin-top: 120px;
+                margin-bottom: 1rem;
             }
-            
+
             .logo img {
                 height: 50px;
             }
 
             .hero-subtitle {
-                font-size: 1.7rem;
+                font-size: 1.5rem;
+                margin-top: 2rem !important;
             }
 
             .hero-description {
-                font-size: 1.4rem;
+                font-size: 1.2rem;
             }
 
             .section-title {
@@ -1258,6 +1415,7 @@
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
+                margin-bottom: 4rem !important;
             }
 
             .contact-options {
@@ -1283,27 +1441,78 @@
 
         /* Fixed WhatsApp Button */
         .fixed-whatsapp {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1000;
-            background: #25d366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            text-decoration: none;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
+            position: fixed !important;
+            bottom: 2rem !important;
+            right: 2rem !important;
+            z-index: 1001 !important;
+            background: #25d366 !important;
+            color: white !important;
+            width: 60px !important;
+            height: 60px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 1.5rem !important;
+            text-decoration: none !important;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4) !important;
+            transition: all 0.3s ease !important;
+            animation: pulse 2s infinite !important;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
         .fixed-whatsapp:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) !important;
+        }
+
+        /* Responsive WhatsApp button */
+        @media (max-width: 768px) {
+            .fixed-whatsapp {
+                width: 55px !important;
+                height: 55px !important;
+                bottom: 1.5rem !important;
+                right: 1.5rem !important;
+                font-size: 1.3rem !important;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .fixed-whatsapp {
+                width: 50px !important;
+                height: 50px !important;
+                bottom: 1rem !important;
+                right: 1rem !important;
+                font-size: 1.2rem !important;
+            }
+
+            .animated-words {
+                margin-bottom: 0.5rem !important;
+            }
+
+            .hero-subtitle {
+                margin-top: 1rem !important;
+                font-size: 1.3rem !important;
+            }
+
+            .hero-description {
+                font-size: 1.1rem !important;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .animated-words {
+                margin-bottom: 0.3rem !important;
+            }
+
+            .hero-subtitle {
+                margin-top: 0.5rem !important;
+                font-size: 1.1rem !important;
+            }
+
+            .hero-description {
+                font-size: 1rem !important;
+            }
         }
 
         @keyframes pulse {
@@ -1454,6 +1663,21 @@
             transform: scale(1) translateY(0);
         }
 
+        /* Planos Preventivos - otimização de espaço */
+        .benefits-container {
+            padding: 2rem 1rem !important;
+        }
+
+        .benefits-list {
+            margin: 1.5rem 0 !important;
+        }
+
+        .flexibility-box {
+            margin-left: -1rem !important;
+            margin-right: -1rem !important;
+            border-radius: 0.75rem 0 0 0.75rem !important;
+        }
+
         /* Planos Preventivos - otimização mobile */
         @media (max-width: 768px) {
             /* Container principal dos planos preventivos */
@@ -1497,10 +1721,21 @@
                 margin-bottom: 0.5rem !important;
             }
 
+            /* Container dos benefícios */
+            .benefits-container {
+                padding: 1.5rem 0.8rem !important;
+            }
+
+            /* Lista de benefícios */
+            .benefits-list {
+                margin: 1rem 0 !important;
+            }
+
             /* Box de destaque azul */
-            .fade-in-scale:has(h2:contains("Preventivos")) div[style*="background: rgba(59, 130, 246, 0.1)"] {
+            .flexibility-box {
                 padding: 1rem !important;
-                margin: 1rem 0 0 0 !important;
+                margin: 1rem -0.8rem 0 -0.8rem !important;
+                border-radius: 0 !important;
             }
         }
 
@@ -1734,10 +1969,9 @@
             </ul>
             <div class="nav-contact">
                 <div class="phone-container">
-                    <a href="tel:+551299799654" class="phone-btn">
+                    <a href="tel:+5512997996543" class="phone-btn">
                         <i class="fas fa-phone"></i>
                     </a>
-                    <span class="phone-24h-text">24h</span>
                 </div>
                 <button class="mobile-menu" id="mobileMenu">
                     <div class="hamburger" id="hamburger">
@@ -1805,31 +2039,31 @@
 
     <!-- Phone Popup -->
     <div class="phone-popup-overlay" id="phonePopupOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
-        <div class="phone-popup" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); border-radius: 20px; padding: 2.5rem; max-width: 700px; width: 95%; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative;">
+        <div class="phone-popup" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); border-radius: 20px; padding: 2rem; max-width: 600px; width: 90%; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative;">
             <button class="phone-popup-close" id="phonePopupClose" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; font-size: 1.3rem; color: white; cursor: pointer; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='scale(1)';">
                 <i class="fas fa-times"></i>
             </button>
 
             <h3 style="text-align: center; color: white; margin-bottom: 0.5rem; font-size: 1.4rem; font-weight: 600; font-family: 'Poppins', sans-serif;">Atendimento Telefone 24h</h3>
-            <p style="text-align: center; color: #ccc; margin-bottom: 2rem; font-size: 0.9rem; font-family: 'Nunito', sans-serif;">Escolha sua região</p>
+            <p style="text-align: center; color: #ccc; margin-bottom: 2rem; font-size: 0.9rem; font-family: 'Nunito', sans-serif; line-height: 1.2;">Escolha sua região</p>
 
             <div class="phone-list">
                 <!-- Grid container para todas as unidades - 2 colunas -->
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem;">
                     <!-- Matriz em destaque - primeira posição -->
-                    <a href="tel:+551297996543" class="region-compose" style="background: linear-gradient(135deg, #B9E28C, #a8d16f); color: #052F5F; padding: 1rem; border-radius: 10px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 2px solid #B9E28C; text-decoration: none; box-shadow: 0 8px 20px rgba(185, 226, 140, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 30px rgba(185, 226, 140, 0.4)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
+                    <a href="tel:+5512997996543" class="region-compose" style="background: linear-gradient(135deg, #B9E28C, #a8d16f); color: #052F5F; padding: 1rem; border-radius: 10px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 2px solid #B9E28C; text-decoration: none; box-shadow: 0 8px 20px rgba(185, 226, 140, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 30px rgba(185, 226, 140, 0.4)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
                         <div class="region-content">
-                            <h4 style="margin: 0 0 0.2rem 0; color: #052F5F; font-size: 0.95rem; font-weight: 700; font-family: 'Poppins', sans-serif;">Matriz e Vale do Paraíba</h4>
-                            <p style="margin: 0; color: #052F5F; font-size: 0.85rem; text-align: left; font-family: 'Nunito', sans-serif; font-weight: 600;">(12) 99799-6543</p>
+                            <h4 style="margin: 0; color: #052F5F; font-size: 1.1rem; font-weight: 700; font-family: 'Poppins', sans-serif; line-height: 1.2;">Matriz e Vale do Paraíba</h4>
+                            <p style="margin: 0; color: #052F5F; font-size: 1rem; text-align: left; font-family: 'Nunito', sans-serif; font-weight: 600; line-height: 1.2;">(12) 99799-6543</p>
                         </div>
                         <i class="fas fa-phone phone-icon-blue" style="font-size: 1.3rem; background: linear-gradient(135deg, #1e40af, #1e3a8a); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #052F5F; transition: all 0.3s ease;"></div>
                     </a>
 
-                    <a href="tel:+5535999042223" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
+                    <a href="tel:+5511991603041" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
                         <div class="region-content">
-                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Pouso Alegre e Região</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(35) 99904-2223</p>
+                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">São Paulo e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(11) 99160-3041</p>
                         </div>
                         <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
@@ -1837,8 +2071,8 @@
 
                     <a href="tel:+5513998068262" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
                         <div class="region-content">
-                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Santos e Região</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(13) 99806-8262</p>
+                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Santos e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(13) 99806-8262</p>
                         </div>
                         <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
@@ -1846,8 +2080,8 @@
 
                     <a href="tel:+5519999161977" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
                         <div class="region-content">
-                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Campinas e Região</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(19) 99916-1977</p>
+                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Campinas e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(19) 99916-1977</p>
                         </div>
                         <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
@@ -1855,8 +2089,8 @@
 
                     <a href="tel:+5524998379825" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
                         <div class="region-content">
-                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Resende e Região</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(24) 99837-9825</p>
+                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Resende e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(24) 99837-9825</p>
                         </div>
                         <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
@@ -1864,8 +2098,8 @@
 
                     <a href="tel:+553599042223" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
                         <div class="region-content">
-                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Pouso Alegre e Região</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(35) 99904-2223</p>
+                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Pouso Alegre e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(35) 99904-2223</p>
                         </div>
                         <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
@@ -1896,7 +2130,7 @@
                     <h2 class="harmonized-title" style="color: white; margin-bottom: 1.5rem; font-weight: 400;">Serviços com <span class="highlight-elegant" style="background: linear-gradient(135deg, #B9E28C 0%, #10b981 50%, #059669 100%); background-clip: text; -webkit-background-clip: text; color: transparent;">Carinho</span></h2>
                     <div class="services-intro">
                         <p class="section-subtitle-elegant" style="margin-bottom: 1rem; font-size: 1.2rem; color: rgba(255, 255, 255, 0.9); padding: 0 1.5rem;">
-                            <span style="font-family: 'Nunito', sans-serif;">Tudo é pensado nos mínimos detalhes. Oferecemos o melhor Serviço Funerário Pet para proporcionar amor e respeito até o último carinho.</span>
+                            <span style="font-family: 'Nunito', sans-serif; line-height: 1.2;">Tudo é pensado nos mínimos detalhes. Oferecemos o melhor Serviço Funerário Pet para proporcionar amor e respeito até o último carinho.</span>
                         </p>
 
                         <div class="fade-in-up" style="text-align: center; margin: 2rem 0;">
@@ -2884,6 +3118,346 @@
                     50% { transform: translateX(5px); opacity: 1; }
                 }
 
+                /* Otimização de popups - Layout compacto sem scroll */
+
+                /* Animação da setinha indicativa */
+                @keyframes floatUpDown {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-10px); }
+                }
+
+                /* Estilos do carrossel de avaliações */
+                .reviews-carousel::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .review-card-carousel {
+                    min-width: 380px;
+                    max-width: 380px;
+                    background: white;
+                    border-radius: 20px;
+                    padding: 2rem;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+                    transition: all 0.3s ease;
+                    border: 1px solid #f1f5f9;
+                    position: relative;
+                    overflow: hidden;
+                    scroll-snap-align: start;
+                    height: 420px;
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .review-card-carousel::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 4px;
+                    background: linear-gradient(90deg, var(--primary-blue), var(--accent-gold));
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+
+                .review-card-carousel:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+                }
+
+                .review-card-carousel:hover::before {
+                    opacity: 1;
+                }
+
+                .review-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+                }
+
+                .unit-badge {
+                    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    border-radius: 25px;
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                }
+
+                .stars {
+                    color: #ffd700;
+                    font-size: 1.1rem;
+                    text-shadow: 0 1px 2px rgba(255, 215, 0, 0.3);
+                }
+
+                .review-content {
+                    flex: 1;
+                    margin-bottom: 1rem;
+                }
+
+                .review-text {
+                    color: #475569;
+                    line-height: 1.6;
+                    font-size: 0.95rem;
+                    font-style: italic;
+                    position: relative;
+                    padding-left: 1.2rem;
+                }
+
+                .text-full {
+                    font-size: 0.85rem;
+                    line-height: 1.5;
+                    display: none;
+                }
+
+                .text-preview {
+                    display: inline;
+                }
+
+                /* Estilos do popup de review */
+                .review-popup-overlay {
+                    opacity: 0;
+                    transition: all 0.3s ease;
+                }
+
+                .review-popup-overlay.active {
+                    opacity: 1;
+                }
+
+                .review-popup {
+                    transform: scale(0.8) translateY(20px);
+                    transition: all 0.3s ease;
+                }
+
+                .review-popup-overlay.active .review-popup {
+                    transform: scale(1) translateY(0);
+                }
+
+                .review-popup-close:hover {
+                    background: #f1f5f9;
+                    color: var(--primary-blue);
+                    transform: scale(1.1);
+                }
+
+                .review-popup-text::before {
+                    content: '"';
+                    position: absolute;
+                    left: 0;
+                    top: -5px;
+                    font-size: 2rem;
+                    color: var(--accent-gold);
+                    font-family: serif;
+                    line-height: 1;
+                }
+
+                .review-popup-text::after {
+                    content: '"';
+                    color: var(--accent-gold);
+                    font-size: 1.5rem;
+                    font-family: serif;
+                    margin-left: 5px;
+                }
+
+                @media (max-width: 768px) {
+                    .review-popup {
+                        padding: 1.5rem;
+                        margin: 10px;
+                    }
+
+                    .review-popup-text {
+                        font-size: 0.95rem;
+                        padding-left: 1.2rem;
+                    }
+                }
+
+                .review-text::before {
+                    content: '"';
+                    position: absolute;
+                    left: 0;
+                    top: -3px;
+                    font-size: 1.5rem;
+                    color: var(--accent-gold);
+                    font-family: serif;
+                    line-height: 1;
+                }
+
+                .expand-btn {
+                    background: none;
+                    border: none;
+                    color: var(--accent-gold);
+                    font-weight: 600;
+                    cursor: pointer;
+                    font-size: 0.9rem;
+                    padding: 0;
+                    margin-left: 0.5rem;
+                    transition: color 0.3s ease;
+                }
+
+                .expand-btn:hover {
+                    color: var(--primary-blue);
+                }
+
+                .review-author {
+                    color: var(--primary-blue);
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                    text-align: right;
+                    border-top: 1px solid #f1f5f9;
+                    padding-top: 1rem;
+                    margin-top: auto;
+                }
+
+                .carousel-btn:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                }
+
+                /* Responsivo para mobile */
+                @media (max-width: 768px) {
+                    .review-card-carousel {
+                        min-width: 320px;
+                        max-width: 320px;
+                        padding: 1.5rem;
+                        height: 400px;
+                    }
+
+                    .review-header {
+                        flex-direction: column;
+                        gap: 0.8rem;
+                        align-items: flex-start;
+                        margin-bottom: 1rem;
+                    }
+
+                    .unit-badge {
+                        font-size: 0.8rem;
+                        padding: 0.4rem 0.8rem;
+                    }
+
+                    .carousel-controls {
+                        display: none;
+                    }
+                }
+                @media (max-width: 768px) {
+                    .phone-popup, .whatsapp-popup {
+                        padding: 1.2rem !important;
+                        margin: 0.8rem !important;
+                        max-width: none !important;
+                        width: calc(100% - 1.6rem) !important;
+                        max-height: 90vh !important;
+                        overflow: visible !important;
+                    }
+
+                    .phone-popup h3, .whatsapp-popup h3 {
+                        font-size: 1.4rem !important;
+                        margin-bottom: 0.3rem !important;
+                    }
+
+                    .phone-popup p, .whatsapp-popup p {
+                        font-size: 1rem !important;
+                        margin-bottom: 1rem !important;
+                    }
+
+                    .phone-popup .region-compose, .whatsapp-popup .region-compose {
+                        padding: 1rem !important;
+                        min-height: 60px !important;
+                        margin-bottom: 0.6rem !important;
+                    }
+
+                    .phone-popup .region-content h4, .whatsapp-popup .region-content h4 {
+                        font-size: 1.1rem !important;
+                        margin-bottom: 0.2rem !important;
+                        line-height: 1.2 !important;
+                    }
+
+                    .phone-popup .region-content p, .whatsapp-popup .region-content p {
+                        font-size: 1rem !important;
+                        margin: 0 !important;
+                        line-height: 1.2 !important;
+                    }
+
+                    .phone-popup div[style*="grid-template-columns"],
+                    .whatsapp-popup div[style*="grid-template-columns"] {
+                        gap: 0.6rem !important;
+                    }
+
+                    .phone-popup-close, .whatsapp-popup-close {
+                        top: 12px !important;
+                        right: 12px !important;
+                        width: 32px !important;
+                        height: 32px !important;
+                        font-size: 1.2rem !important;
+                    }
+                }
+
+                @media (max-width: 430px) {
+                    .phone-popup, .whatsapp-popup {
+                        padding: 1rem !important;
+                        margin: 0.5rem !important;
+                        width: calc(100% - 1rem) !important;
+                        border-radius: 15px !important;
+                    }
+
+                    .phone-popup h3, .whatsapp-popup h3 {
+                        font-size: 1.3rem !important;
+                    }
+
+                    .phone-popup .region-compose, .whatsapp-popup .region-compose {
+                        padding: 0.9rem !important;
+                        min-height: 55px !important;
+                        border-radius: 8px !important;
+                    }
+
+                    .phone-popup .region-content h4, .whatsapp-popup .region-content h4 {
+                        font-size: 1rem !important;
+                    }
+
+                    .phone-popup .region-content p, .whatsapp-popup .region-content p {
+                        font-size: 0.95rem !important;
+                    }
+
+                    .phone-popup div[style*="grid-template-columns"],
+                    .whatsapp-popup div[style*="grid-template-columns"] {
+                        grid-template-columns: 1fr !important;
+                    }
+
+                    .phone-popup-close, .whatsapp-popup-close {
+                        top: 8px !important;
+                        right: 8px !important;
+                        width: 30px !important;
+                        height: 30px !important;
+                        font-size: 1.1rem !important;
+                    }
+                }
+
+                @media (max-width: 375px) {
+                    .phone-popup, .whatsapp-popup {
+                        padding: 0.8rem !important;
+                        width: calc(100% - 0.8rem) !important;
+                        margin: 0.4rem !important;
+                    }
+
+                    .phone-popup .region-compose, .whatsapp-popup .region-compose {
+                        padding: 0.8rem !important;
+                        min-height: 50px !important;
+                        min-width: auto !important;
+                        width: 100% !important;
+                    }
+
+                    .phone-popup .region-content h4, .whatsapp-popup .region-content h4 {
+                        font-size: 0.95rem !important;
+                    }
+
+                    .phone-popup .region-content p, .whatsapp-popup .region-content p {
+                        font-size: 0.9rem !important;
+                    }
+
+                    .phone-popup div[style*="grid-template-columns"],
+                    .whatsapp-popup div[style*="grid-template-columns"] {
+                        gap: 0.5rem !important;
+                    }
+                }
+
                 /* Responsive adjustments */
                 @media (max-width: 768px) {
                     #servicos::before,
@@ -2924,7 +3498,7 @@
                     <div class="fade-in-scale" style="text-align: center; margin: 1rem 0 0 0; padding: 1.5rem 1rem; overflow-x: hidden;">
                         <div style="display: inline-block; position: relative; padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 6vw, 3rem); background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid #55E6A6; border-radius: 1rem; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); max-width: calc(100vw - 2rem); box-sizing: border-box;">
                             <h2 style="margin: 0 0 1rem 0; font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 300; letter-spacing: 2px; color: rgba(255, 255, 255, 0.9); white-space: nowrap;">
-                                <span style="font-family: 'Nunito', sans-serif;">Cremação</span> <span class="shimmer-text-individual" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Individual</span>
+                                <span style="font-family: 'Nunito', sans-serif; line-height: 1.2;">Cremação</span> <span class="shimmer-text-individual" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Individual</span>
                             </h2>
                             <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #55E6A6, transparent); margin: 1.5rem auto;"></div>
                             <p style="margin: 0 0 2rem 0; font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); line-height: 1.6; max-width: 600px;">O pet é cremado de forma individual, e as cinzas são entregues à família em uma linda urna. O procedimento de cremação é agendado e pode ser acompanhado pessoalmente, online ou por videochamada.</p>
@@ -2939,7 +3513,7 @@
                     <div class="fade-in-scale" style="text-align: center; margin: 1rem 0 0 0; padding: 1.5rem 1rem; overflow-x: hidden;">
                         <div style="display: inline-block; position: relative; padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 6vw, 3rem); background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid #E696FF; border-radius: 1rem; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); max-width: calc(100vw - 2rem); box-sizing: border-box;">
                             <h2 style="margin: 0 0 1rem 0; font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 300; letter-spacing: 2px; color: rgba(255, 255, 255, 0.9); white-space: nowrap;">
-                                <span style="font-family: 'Nunito', sans-serif;">Cremação</span> <span class="shimmer-text-coletiva" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Coletiva</span>
+                                <span style="font-family: 'Nunito', sans-serif; line-height: 1.2;">Cremação</span> <span class="shimmer-text-coletiva" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Coletiva</span>
                             </h2>
                             <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #E696FF, transparent); margin: 1.5rem auto;"></div>
                             <p style="margin: 0 0 2rem 0; font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); line-height: 1.6; max-width: 600px;">São cremados três animais juntos e as cinzas são espalhadas em nosso jardim, uma área verde de 100 mil m², repleta de natureza. É gerado um certificado de cremação que atesta que o pet foi cremado conosco e teve uma despedida digna e respeitosa.</p>
@@ -2953,16 +3527,16 @@
 
                 <!-- PLANOS PREVENTIVOS -->
                 <div class="fade-in-scale" style="text-align: center; margin: 4rem 0 2rem 0; padding: 1.5rem 1rem; overflow-x: hidden;">
-                    <div style="display: inline-block; position: relative; padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 6vw, 3rem); background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid #3b82f6; border-radius: 1rem; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); max-width: calc(100vw - 2rem); box-sizing: border-box;">
+                    <div style="display: inline-block; position: relative; padding: clamp(1.5rem, 4vw, 2.5rem) clamp(0.1rem, 2vw, 0.6rem); background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid #3b82f6; border-radius: 1rem; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); max-width: calc(100vw - 2rem); box-sizing: border-box;">
                         <h2 style="margin: 0 0 1rem 0; font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 300; letter-spacing: 2px; color: rgba(255, 255, 255, 0.9); white-space: nowrap;">
-                            <span style="font-family: 'Nunito', sans-serif;">Planos</span> <span class="shimmer-text-preventivo" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Preventivos</span>
+                            <span style="font-family: 'Nunito', sans-serif; line-height: 1.2;">Planos</span> <span class="shimmer-text-preventivo" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Preventivos</span>
                         </h2>
                         <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #3b82f6, transparent); margin: 1.5rem auto;"></div>
                         <p style="margin: 0 0 2rem 0; font-size: 1.1rem; color: rgba(255, 255, 255, 0.7); line-height: 1.6; max-width: 500px; font-style: italic;">Para quem deseja se preparar com carinho e tranquilidade, oferecemos as opções de planos preventivos. A compra é antecipada e traz vantagens importantes:</p>
 
-                        <div style="text-align: left; max-width: 600px; margin: 0 auto; background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+                        <div class="benefits-container" style="text-align: left; max-width: 600px; margin: 0 auto; background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
 
-                            <ul style="list-style: none; padding: 0; margin: 1.5rem 0;">
+                            <ul class="benefits-list" style="list-style: none; padding: 0; margin: 1.5rem 0;">
                                 <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; color: rgba(255, 255, 255, 0.9);">
                                     <span style="color: #3b82f6; margin-right: 0.75rem; font-size: 1.2rem; flex-shrink: 0;">✓</span>
                                     <span>Planejamento financeiro mais leve</span>
@@ -2977,7 +3551,7 @@
                                 </li>
                             </ul>
 
-                            <div style="background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 0.75rem; border-left: 4px solid #3b82f6; margin: 1.5rem 0;">
+                            <div class="flexibility-box" style="background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 0.75rem; border-left: 4px solid #3b82f6; margin: 1.5rem 0;">
                                 <p style="margin: 0 0 1rem 0; font-size: 0.95rem; color: rgba(255, 255, 255, 0.9); line-height: 1.6;">
                                     <strong>Flexibilidade total:</strong> Nossos planos não são nominais aos pets, podendo ser utilizado para o pet que precisar primeiro, e são vitalícios até seu uso (não expiram).
                                 </p>
@@ -3026,18 +3600,33 @@
                         }
                     }
                     
-                    const carousels = document.querySelectorAll('.carousel-track');
-                    const allIndicators = document.querySelectorAll('.indicator-dot');
-                    
-                    carousels.forEach((carousel, carouselIndex) => {
+                    // Inicializar carrossel quando a página carregar
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const carousels = document.querySelectorAll('.carousel-track');
+                        const allIndicators = document.querySelectorAll('.indicator-dot');
+
+                        carousels.forEach((carousel, carouselIndex) => {
                         const indicators = carousel.parentElement.querySelectorAll('.indicator-dot');
                         let currentIndex = 0;
                         
                         function updateIndicators() {
                             const scrollLeft = carousel.scrollLeft;
-                            const cardWidth = carousel.children[0].offsetWidth + 16;
-                            const newIndex = Math.round(scrollLeft / cardWidth);
-                            
+                            const carouselWidth = carousel.offsetWidth;
+                            const centerPosition = scrollLeft + carouselWidth / 2;
+
+                            let newIndex = 0;
+                            let minDistance = Infinity;
+
+                            Array.from(carousel.children).forEach((card, index) => {
+                                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                                const distance = Math.abs(centerPosition - cardCenter);
+
+                                if (distance < minDistance) {
+                                    minDistance = distance;
+                                    newIndex = index;
+                                }
+                            });
+
                             if (newIndex !== currentIndex) {
                                 currentIndex = newIndex;
                                 indicators.forEach((dot, index) => {
@@ -3054,9 +3643,14 @@
                         
                         indicators.forEach((dot, index) => {
                             dot.addEventListener('click', () => {
-                                const cardWidth = carousel.children[0].offsetWidth + 16;
+                                const targetCard = carousel.children[index];
+                                const cardLeft = targetCard.offsetLeft;
+                                const cardWidth = targetCard.offsetWidth;
+                                const carouselWidth = carousel.offsetWidth;
+                                const scrollPosition = cardLeft - (carouselWidth - cardWidth) / 2;
+
                                 carousel.scrollTo({
-                                    left: index * cardWidth,
+                                    left: Math.max(0, scrollPosition),
                                     behavior: 'smooth'
                                 });
                             });
@@ -3073,6 +3667,17 @@
                             }, 100);
                         }, { passive: true });
                     });
+
+                    // Forçar atualização inicial dos indicadores
+                    setTimeout(() => {
+                        carousels.forEach(carousel => {
+                            const indicators = carousel.parentElement.querySelectorAll('.indicator-dot');
+                            if (indicators.length > 0) {
+                                indicators[0].classList.add('active');
+                            }
+                        });
+                    }, 100);
+                });
                 </script>
             </div>
         </section>
@@ -3082,7 +3687,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="harmonized-title"><span class="highlight-elegant">Transparência</span> na Essência</h2>
-                <p class="section-subtitle-elegant">Mais do que um serviço, um propósito com ética, empatia e a dignidade. Permaneça com seu anjinho do início até o ultimo carinho</p>
+                <p class="section-subtitle-elegant">Mais do que um serviço, um propósito com ética, empatia e dignidade. Permaneça com seu anjinho do início até o último carinho</p>
             </div>
             
             <!-- Institutional Video -->
@@ -3100,7 +3705,7 @@
 
                 <!-- Video Title Overlay -->
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0, 0, 0, 0.8)); padding: 2rem; color: white;">
-                    <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; font-weight: 700; font-family: 'Nunito', sans-serif;">Nosso compromisso com a Transparência</h3>
+                    <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; font-weight: 700; font-family: 'Nunito', sans-serif; line-height: 1.2;">Nosso compromisso com a Transparência</h3>
                     <p style="margin: 0; opacity: 0.9; font-size: 1rem;">Tenha certeza que seu pet será cremado conforme sua escolha</p>
                 </div>
             </div>
@@ -3117,14 +3722,14 @@
                         <i class="fas fa-video" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem;"></i>
                         <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold); position: relative;">
                             <span style="position: absolute; top: -5px; right: 10px; background: var(--accent-gold); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 10px;">DESTAQUE</span>
-                            Acompanhamento Visual
+                            Acompanhamento
                         </h4>
-                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Oferecemos <strong>transparência completa</strong> através de <strong>vídeos em tempo real ou gravados</strong>, além da opção de <strong>acompanhar presencialmente</strong> — tudo <strong>sem custo adicional</strong>. É um dos nossos principais diferenciais para que você tenha <strong>total confiança</strong> em cada momento.<br><br>Se preferir não acompanhar, respeitamos completamente. Seu pet receberá o <strong>mesmo carinho e cuidado</strong> de sempre. Se mudar de ideia, ele estará preparado com dignidade para a despedida, pois nosso <strong>zelo independe de qualquer taxa adicional</strong>.</p>
+                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Oferecemos <strong>transparência completa</strong> através de <strong>vídeos em tempo real ou gravados</strong>, além da opção de <strong>acompanhar presencialmente</strong> — tudo <strong>sem custo adicional</strong>. É um dos nossos principais diferenciais para que você tenha <strong>total confiança</strong> em cada momento.<br><br>Se inicialmente preferir não acompanhar, respeitamos sua decisão. Seu pet receberá o <strong>mesmo carinho e cuidado</strong>. E se mudar de ideia durante o processo, não tem problema, ele estará preparado com todo amor para a despedida. Nosso <strong>zelo nunca depende de taxa adicional</strong>.</p>
                     </div>
                     <div style="padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
                         <i class="fas fa-building" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem;"></i>
                         <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Crematório Próprio</h4>
-                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">A RIP PET nasceu há <strong>12 anos</strong> com o objetivo de proporcionar <strong>dignidade e respeito</strong> aos pets, oferecendo <strong>suporte integral</strong> às famílias em todos os momentos. Contamos com <strong>estrutura própria</strong>, equipamentos de <strong>última geração</strong>, todos licenciados. Somos especializados e trabalhamos <strong>exclusivamente com cremação pet</strong>, o que garante <strong>segurança, transparência e controle total</strong> de cada etapa do processo — do acolhimento à entrega — sua família será atendida pela <strong>mesma equipe, sem qualquer tipo de terceirização</strong>.</p>
+                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">A RIP PET nasceu há <strong>12 anos</strong> com o objetivo de proporcionar <strong>dignidade e respeito</strong> aos pets, oferecendo <strong>suporte integral</strong> às famílias em todos os momentos.<br><br>Contamos com <strong>estrutura própria</strong>, equipamentos de <strong>última geração</strong>, todos licenciados. Somos especializados e trabalhamos <strong>exclusivamente com cremação pet</strong>, o que garante <strong>segurança, transparência e controle total</strong> de cada etapa do processo — do acolhimento à entrega — sua família será atendida pela <strong>mesma equipe, sem qualquer tipo de terceirização</strong>.</p>
                     </div>
                     <div style="padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
                         <i class="fas fa-heart" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem;"></i>
@@ -3157,14 +3762,14 @@
                             <i class="fas fa-video" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
                             <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold); position: relative;">
                                 <span style="position: absolute; top: -5px; right: 10px; background: var(--accent-gold); color: white; font-size: 0.6rem; padding: 2px 4px; border-radius: 8px;">DESTAQUE</span>
-                                Acompanhamento Visual
+                                Acompanhamento
                             </h4>
-                            <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Oferecemos <strong>transparência completa</strong> através de <strong>vídeos em tempo real ou gravados</strong>, além da opção de <strong>acompanhar presencialmente</strong> — tudo <strong>sem custo adicional</strong>. É um dos nossos principais diferenciais para que você tenha <strong>total confiança</strong> em cada momento.<br><br>Se preferir não acompanhar, respeitamos completamente. Seu pet receberá o <strong>mesmo carinho e cuidado</strong> de sempre. Se mudar de ideia, ele estará preparado com dignidade para a despedida, pois nosso <strong>zelo independe de qualquer taxa adicional</strong>.</p>
+                            <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Oferecemos <strong>transparência completa</strong> através de <strong>vídeos em tempo real ou gravados</strong>, além da opção de <strong>acompanhar presencialmente</strong> — tudo <strong>sem custo adicional</strong>. É um dos nossos principais diferenciais para que você tenha <strong>total confiança</strong> em cada momento.<br><br>Se inicialmente preferir não acompanhar, respeitamos sua decisão. Seu pet receberá o <strong>mesmo carinho e cuidado</strong>. E se mudar de ideia durante o processo, não tem problema, ele estará preparado com todo amor para a despedida. Nosso <strong>zelo nunca depende de taxa adicional</strong>.</p>
                         </div>
                         <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
                             <i class="fas fa-building" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
                             <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Crematório Próprio</h4>
-                            <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">A RIP PET nasceu há <strong>12 anos</strong> com o objetivo de proporcionar <strong>dignidade e respeito</strong> aos pets, oferecendo <strong>suporte integral</strong> às famílias em todos os momentos. Contamos com <strong>estrutura própria</strong>, equipamentos de <strong>última geração</strong>, todos licenciados. Somos especializados e trabalhamos <strong>exclusivamente com cremação pet</strong>, o que garante <strong>segurança, transparência e controle total</strong> de cada etapa do processo — do acolhimento à entrega — sua família será atendida pela <strong>mesma equipe, sem qualquer tipo de terceirização</strong>.</p>
+                            <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">A RIP PET nasceu há <strong>12 anos</strong> com o objetivo de proporcionar <strong>dignidade e respeito</strong> aos pets, oferecendo <strong>suporte integral</strong> às famílias em todos os momentos.<br><br>Contamos com <strong>estrutura própria</strong>, equipamentos de <strong>última geração</strong>, todos licenciados. Somos especializados e trabalhamos <strong>exclusivamente com cremação pet</strong>, o que garante <strong>segurança, transparência e controle total</strong> de cada etapa do processo — do acolhimento à entrega — sua família será atendida pela <strong>mesma equipe, sem qualquer tipo de terceirização</strong>.</p>
                         </div>
                         <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
                             <i class="fas fa-heart" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
@@ -3177,18 +3782,18 @@
                             <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Cada história é única, por isso criamos <strong>homenagens que refletem o amor</strong> e a trajetória do seu pet. Desde <strong>cerimônias privativas</strong> até <strong>urninhas exclusivas</strong> e <strong>lembranças personalizadas</strong>, cada detalhe preserva <strong>memórias vivas e eternas</strong>.<br><br>Tudo é cuidadosamente pensado para <strong>eternizar quem fez parte da sua vida</strong>, transformando a despedida em um <strong>ato de amor e gratidão</strong>.</p>
                         </div>
                         <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
-                            <i class="fas fa-shipping-fast" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
-                            <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Entrega Ágil e Segura</h4>
-                            <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Sabemos que este é um momento delicado e estamos ao seu lado com <strong>eficiência e respeito</strong>. Nosso processo garante <strong>entrega rápida e segura</strong>, com <strong>rastreio e comunicação clara</strong> em cada etapa.<br><br>Do primeiro contato à despedida, tudo é conduzido com <strong>organização e responsabilidade</strong>, proporcionando <strong>tranquilidade e confiança total</strong> para sua família.</p>
+                            <i class="fas fa-comments" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
+                            <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Comunicação Ativa</h4>
+                            <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Sabemos que este é um momento de muitas dúvidas e ansiedade, por isso mantemos você <strong>informado a cada passo</strong>. Nossa equipe se comunica de forma <strong>clara e carinhosa</strong>, explicando cada etapa e respondendo todas as suas questões com <strong>paciência e empatia</strong>.<br><br>Desde o primeiro contato até a entrega final, você nunca ficará no escuro. Nossa <strong>comunicação constante e transparente</strong> é o que traz paz de espírito para sua família em um momento tão delicado.</p>
                         </div>
                     </div>
                     <!-- Carousel indicators -->
                     <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem;">
-                        <div class="indicator-dot active" style="width: 8px; height: 8px; border-radius: 50%; background: #ccc; opacity: 0.5; cursor: pointer;"></div>
-                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #ccc; opacity: 0.5; cursor: pointer;"></div>
-                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #ccc; opacity: 0.5; cursor: pointer;"></div>
-                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #ccc; opacity: 0.5; cursor: pointer;"></div>
-                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #ccc; opacity: 0.5; cursor: pointer;"></div>
+                        <div class="indicator-dot active" style="width: 8px; height: 8px; border-radius: 50%; cursor: pointer;"></div>
+                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; cursor: pointer;"></div>
+                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; cursor: pointer;"></div>
+                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; cursor: pointer;"></div>
+                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; cursor: pointer;"></div>
                     </div>
                 </div>
 
@@ -3198,6 +3803,8 @@
                     }
 
                     .indicator-dot {
+                        background: #cbd5e1 !important;
+                        opacity: 0.5 !important;
                         transition: all 0.3s ease;
                     }
 
@@ -3218,10 +3825,15 @@
                 </style>
             </div>
 
-            <!-- Families Served Section (Previously part of cards) -->
-            <div style="margin-top: 4rem; text-align: center; padding: 3rem 2rem; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);">
+        </div>
+    </section>
+
+    <!-- Families Served Section -->
+    <section class="section" style="background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%); position: relative; overflow: hidden; padding: 80px 0;">
+        <div class="container" style="position: relative; z-index: 2;">
+            <div style="text-align: center; padding: 3rem 2rem; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
                 <i class="fas fa-users" style="font-size: 4rem; color: var(--accent-gold); margin-bottom: 1.5rem;"></i>
-                <h3 style="margin-bottom: 1rem; font-size: 2rem; color: var(--text-dark); font-family: 'Nunito', sans-serif;">Milhares de famílias atendidas</h3>
+                <h3 style="margin-bottom: 1rem; font-size: 2rem; color: white; font-family: 'Nunito', sans-serif; line-height: 1.2;">Milhares de famílias atendidas</h3>
                 <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem;">
                     <i class="fas fa-star" style="font-size: 2rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
                     <i class="fas fa-star" style="font-size: 2rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
@@ -3229,7 +3841,293 @@
                     <i class="fas fa-star" style="font-size: 2rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
                     <i class="fas fa-star" style="font-size: 2rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
                 </div>
-                <p style="color: var(--text-light); font-size: 1.2rem; line-height: 1.6; max-width: 600px; margin: 0 auto;">Com recomendações reais de tutores e médicos veterinários, somos o crematório de animais <strong>mais bem avaliado do Brasil</strong>.</p>
+                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; line-height: 1.6; max-width: 600px; margin: 0 auto;">Com recomendações reais de tutores e médicos veterinários, somos o crematório de animais <strong>mais bem avaliado do Brasil</strong>.</p>
+
+                <!-- Indicador de avaliações -->
+                <div class="reviews-indicator" style="margin-top: 2rem; display: flex; flex-direction: column; align-items: center; animation: floatUpDown 3s ease-in-out infinite;">
+                    <div style="color: var(--accent-gold); font-size: 2rem; margin-bottom: 0.5rem;">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <p style="color: white; font-weight: 600; font-size: 1rem; text-align: center;">Veja avaliações reais abaixo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avaliações dos Tutores -->
+    <section class="section" style="background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%); padding: 80px 0; position: relative; overflow: hidden;">
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+                <h2 class="harmonized-title" style="color: white;">Avaliações dos <span class="highlight-elegant">Tutores</span></h2>
+                <p class="section-subtitle-elegant" style="color: rgba(255, 255, 255, 0.8);">Depoimentos reais de famílias que confiaram em nosso cuidado</p>
+            </div>
+
+            <!-- Carrossel de Avaliações -->
+            <div class="reviews-carousel-container" style="position: relative; max-width: 1200px; margin: 0 auto;">
+                <div class="reviews-carousel" id="reviewsCarousel" style="display: flex; gap: 2rem; overflow-x: auto; scroll-behavior: smooth; padding: 1rem 0; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none;">
+
+                    <!-- Card 1 - Pindamonhangaba - Melissa -->
+                    <div class="review-card-carousel">
+                        <div class="review-header">
+                            <div class="unit-badge">🏢 Pindamonhangaba</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">
+                                <span class="text-preview">Há algumas semanas, minha filhota Bee descansou… Neste momento tão difícil e delicado da minha vida, contratei o serviço de cremação aqui na R.I.P. Pet. Só tenho a agradecer a cada um de vocês por todo o cuidado e carinho...</span>
+                                <span class="text-full" style="display: none;">Há algumas semanas, minha filhota Bee descansou… Neste momento tão difícil e delicado da minha vida, contratei o serviço de cremação aqui na R.I.P. Pet. Só tenho a agradecer a cada um de vocês por todo o cuidado e carinho que tiveram comigo e com meu marido. Pudemos nos despedir de uma maneira tão especial, num lugar que nos transmitiu paz e acolhimento. Gratidão a cada um de vocês por terem nos cuidado com tanto carinho e profissionalismo em um dos piores momentos de nossas vidas. Gratidão!</span>
+                                <button class="expand-btn" onclick="expandReview(this)">...exibir tudo</button>
+                            </p>
+                        </div>
+                        <div class="review-author">
+                            <strong>Melissa Brandão</strong> • Ago/2025
+                        </div>
+                    </div>
+
+                    <!-- Card 2 - Pindamonhangaba - Aline Regina -->
+                    <div class="review-card-carousel">
+                        <div class="review-header">
+                            <div class="unit-badge">🏢 Pindamonhangaba</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">
+                                <span class="text-preview">A R.I.P. Pet foi a empresa responsável pela despedida e cremação dos meus dois peludos: o Téo, em abril de 2023, e a Duda, agora em janeiro de 2025. Todo o serviço é extremamente cuidadoso e respeitoso...</span>
+                                <span class="text-full" style="display: none;">A R.I.P. Pet foi a empresa responsável pela despedida e cremação dos meus dois peludos: o Téo, em abril de 2023, e a Duda, agora em janeiro de 2025. Todo o serviço é extremamente cuidadoso e respeitoso, o que torna o processo um pouco menos dolorido para os tutores, pois nos sentimos acolhidos. Recomendo muito e, certamente, no futuro, se necessário, faremos com eles novamente.</span>
+                                <button class="expand-btn" onclick="expandReview(this)">...exibir tudo</button>
+                            </p>
+                        </div>
+                        <div class="review-author">
+                            <strong>Aline Regina de Fátima Machado Ferreira</strong> • Jan/2025
+                        </div>
+                    </div>
+
+                    <!-- Card 3 - São José dos Campos - Paula -->
+                    <div class="review-card-carousel">
+                        <div class="review-header">
+                            <div class="unit-badge">🏢 São José dos Campos</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">
+                                <span class="text-preview">No momento de dor, a R.I.P. Pet estava lá. Fizeram tudo pelo meu gatinho Ozzy e nos trataram com tanto amor, carinho e respeito! O Ozzy merecia uma despedida digna...</span>
+                                <span class="text-full" style="display: none;">No momento de dor, a R.I.P. Pet estava lá. Fizeram tudo pelo meu gatinho Ozzy e nos trataram com tanto amor, carinho e respeito! O Ozzy merecia uma despedida digna, e a R.I.P. Pet fez um trabalho valioso. Agradeço a toda equipe por todo o carinho e apoio. Vocês da R.I.P. Pet são a melhor empresa de funerária e cremação de animais do Brasil. Minha eterna gratidão! Obrigada por tudo e pelo cuidado que tiveram com o Ozzy!</span>
+                                <button class="expand-btn" onclick="expandReview(this)">...exibir tudo</button>
+                            </p>
+                        </div>
+                        <div class="review-author">
+                            <strong>Paula Roberta</strong> • Abr/2025
+                        </div>
+                    </div>
+
+                    <!-- Card 4 - São José dos Campos - Luciano -->
+                    <div class="review-card-carousel">
+                        <div class="review-header">
+                            <div class="unit-badge">🏢 São José dos Campos</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">
+                                <span class="text-preview">Acabamos de fazer a despedida da nossa Mabel, em São José dos Campos. Desde o início, fomos muito bem atendidos e nos explicaram todo o processo...</span>
+                                <span class="text-full" style="display: none;">Acabamos de fazer a despedida da nossa Mabel, em São José dos Campos. Desde o início, fomos muito bem atendidos e nos explicaram todo o processo. Só posso agradecer a toda equipe e parabenizá-los pela organização, limpeza e tranquilidade que tivemos junto a ela. Um trabalho feito com preocupação com o bem-estar dos tutores em um momento extremamente delicado, cheio de angústia e tristeza. Gratidão.</span>
+                                <button class="expand-btn" onclick="expandReview(this)">...exibir tudo</button>
+                            </p>
+                        </div>
+                        <div class="review-author">
+                            <strong>Luciano Lopes</strong> • Ago/2025
+                        </div>
+                    </div>
+
+                    <!-- Card 5 - São Paulo - Sean -->
+                    <div class="review-card-carousel">
+                        <div class="review-header">
+                            <div class="unit-badge">🏢 São Paulo</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">
+                                <span class="text-preview">Desde o primeiro momento, pouco após o falecimento do nosso Vakinha, a R.I.P. Pet fez um trabalho extremamente humanizado e atencioso, cuidando de todos os detalhes...</span>
+                                <span class="text-full" style="display: none;">Desde o primeiro momento, pouco após o falecimento do nosso Vakinha, a R.I.P. Pet fez um trabalho extremamente humanizado e atencioso, cuidando de todos os detalhes para minimizar esse momento de tristeza. Muito obrigado ao Gabriel por toda a atenção, e também ao profissional que veio buscar o Vakinha em casa e o fez com carinho e respeito. Agradeço ao pessoal da cremação, que preparou a cerimônia, filmou e nos enviou, demonstrando que nosso menino foi tratado com respeito, carinho e dignidade em todas as etapas. Hoje retirei a urninha com as cinzas e os demais acessórios e fui igualmente bem tratado. Recomendo a todos que recorram à R.I.P. Pet nesse momento, pois eles ajudam — e muito — a tornar esse fardo mais leve. Parabéns a todos e muito obrigado 🫂</span>
+                                <button class="expand-btn" onclick="expandReview(this)">...exibir tudo</button>
+                            </p>
+                        </div>
+                        <div class="review-author">
+                            <strong>Sean Csiszar</strong> • Ago/2025
+                        </div>
+                    </div>
+
+                    <!-- Card 6 - São Paulo - Vanessa -->
+                    <div class="review-card-carousel">
+                        <div class="review-header">
+                            <div class="unit-badge">🏢 São Paulo</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">
+                                <span class="text-preview">Perder dois filhos de quatro patas em apenas nove dias foi uma das dores mais difíceis da minha vida. A equipe foi impecável do início ao fim...</span>
+                                <span class="text-full" style="display: none;">Perder dois filhos de quatro patas em apenas nove dias foi uma das dores mais difíceis da minha vida. A equipe foi impecável do início ao fim, tratando meus pequenos com todo o respeito e dignidade que merecem, e me acolhendo com empatia e carinho. Tornaram um momento de dor em uma despedida mais leve. É reconfortante saber que, mesmo em um momento tão difícil, existam pessoas e uma empresa que compreendem o amor que temos pelos nossos animais. Sou imensamente grata.</span>
+                                <button class="expand-btn" onclick="expandReview(this)">...exibir tudo</button>
+                            </p>
+                        </div>
+                        <div class="review-author">
+                            <strong>Vanessa Tralci</strong> • Ago/2025
+                        </div>
+                    </div>
+
+                    <!-- Card 7 - Santos - Evilânia -->
+                    <div class="review-card-carousel">
+                        <div class="review-header">
+                            <div class="unit-badge">🏢 Santos</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">
+                                <span class="text-preview">Em memória do meu Theozinho 💛 Quero expressar minha mais profunda gratidão à R.I.P. Pet por terem sido verdadeiros anjos em um dos momentos mais difíceis da minha vida...</span>
+                                <span class="text-full" style="display: none;">Em memória do meu Theozinho 💛 Quero expressar minha mais profunda gratidão à R.I.P. Pet por terem sido verdadeiros anjos em um dos momentos mais difíceis da minha vida: a partida do meu Theozinho, meu gatinho Maine Coon. Desde o primeiro contato até o último detalhe do funeral e da cremação, fui acolhida com uma delicadeza que palavras não conseguem traduzir. O atendimento é simplesmente impecável, feito por pessoas que não apenas trabalham com animais, mas entendem profundamente a dor de quem perde um filho de quatro patas. A sensibilidade, o carinho e o respeito com que trataram o Theozinho e a mim me ajudaram a atravessar esse luto com mais serenidade. Eles foram fundamentais para que eu não passasse por esse momento sozinha. Cada gesto, cada palavra, cada detalhe… tudo feito com tanto amor, empatia e dignidade. R.I.P. Pet, vocês são luz. Obrigada por acolherem meu coração em pedaços com tanto cuidado. Obrigada por honrarem a vida do meu pequeno com tanta humanidade. Que o trabalho de vocês siga sendo essa ponte de amor entre os nossos bichinhos e a eternidade. 🌟</span>
+                                <button class="expand-btn" onclick="expandReview(this)">...exibir tudo</button>
+                            </p>
+                        </div>
+                        <div class="review-author">
+                            <strong>Evilânia Alves</strong> • Jul/2025
+                        </div>
+                    </div>
+
+                    <!-- Card 8 - Santos - Neide -->
+                    <div class="review-card-carousel">
+                        <div class="review-header">
+                            <div class="unit-badge">🏢 Santos</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">
+                                <span class="text-preview">No momento difícil da passagem da minha gata Feliz, a R.I.P. Pet foi uma luz na minha dor. Fomos acolhidos pelo profissional Rafael, em Santos...</span>
+                                <span class="text-full" style="display: none;">No momento difícil da passagem da minha gata Feliz, a R.I.P. Pet foi uma luz na minha dor. Fomos acolhidos pelo profissional Rafael, em Santos, cujas palavras trouxeram conforto a toda a família. A gravação mostrou o jardim onde as cinzas seriam colocadas, o potinho com um pouco do seu pelo e a última visão, com todo carinho, da minha filha de quatro patas. Feliz foi e me fez muito feliz por 13 anos. Que São Francisco de Assis olhe por ela e por todos os animais do mundo espiritual e físico. Vou te amar para sempre! Grata!</span>
+                                <button class="expand-btn" onclick="expandReview(this)">...exibir tudo</button>
+                            </p>
+                        </div>
+                        <div class="review-author">
+                            <strong>Neide Paz</strong> • Ago/2025
+                        </div>
+                    </div>
+
+                    <!-- Card 9 - Campinas - Rebeca -->
+                    <div class="review-card-carousel">
+                        <div class="review-header">
+                            <div class="unit-badge">🏢 Campinas</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">
+                                <span class="text-preview">Quero agradecer à R.I.P. Pet Crematório de Animais Campinas pelo excelente serviço prestado. Meu Beethovinho faleceu no dia 06/07/2025...</span>
+                                <span class="text-full" style="display: none;">Quero agradecer à R.I.P. Pet Crematório de Animais Campinas pelo excelente serviço prestado. Meu Beethovinho faleceu no dia 06/07/2025 e, ainda abalada pela sua partida, fui muito bem atendida. Hoje, meu Beethoven virou não só uma lembrança querida, mas também uma estrela. Em sua partida, houve muito respeito e dignidade, e fui amparada e acolhida durante toda essa fase da despedida. Hoje (31/07) recebo seu certificado, que levarei para sempre como símbolo do respeito que ele teve durante sua cremação. Muito obrigada a todo o pessoal do R.I.P. Pet Crematório. Indico para todos que perderem seus animaizinhos, que são membros da família. Indico com o maior prazer: super educados e prestativos. Muito obrigada!</span>
+                                <button class="expand-btn" onclick="expandReview(this)">...exibir tudo</button>
+                            </p>
+                        </div>
+                        <div class="review-author">
+                            <strong>Rebeca Toledo</strong> • Jul/2025
+                        </div>
+                    </div>
+
+                    <!-- Card 10 - Campinas - Gabi -->
+                    <div class="review-card-carousel">
+                        <div class="review-header">
+                            <div class="unit-badge">🏢 Campinas</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">
+                                <span class="text-preview">Não tenho palavras para agradecer o trabalho da R.I.P. Pet! O destino final da Nina sempre foi uma preocupação para mim, afinal não existem muitas opções dignas...</span>
+                                <span class="text-full" style="display: none;">Não tenho palavras para agradecer o trabalho da R.I.P. Pet! O destino final da Nina sempre foi uma preocupação para mim, afinal não existem muitas opções dignas para os animaizinhos que amamos. A R.I.P. Pet foi muito além do que imaginávamos: levaram minha menina com todo respeito, cuidado e amor — assim como cuidei dela por 12 anos! Meu coração está em paz por ter garantido um final digno e respeitoso para ela.</span>
+                                <button class="expand-btn" onclick="expandReview(this)">...exibir tudo</button>
+                            </p>
+                        </div>
+                        <div class="review-author">
+                            <strong>Gabi Alore</strong> • Mai/2025
+                        </div>
+                    </div>
+
+                    <!-- Card 11 - Resende - Vivi -->
+                    <div class="review-card-carousel">
+                        <div class="review-header">
+                            <div class="unit-badge">🏢 Resende</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">
+                                <span class="text-preview">Ágeis e com um atendimento excepcional. Desde a contratação, em que tiraram todas as minhas dúvidas, até o triste e inevitável dia...</span>
+                                <span class="text-full" style="display: none;">Ágeis e com um atendimento excepcional. Desde a contratação, em que tiraram todas as minhas dúvidas, até o triste e inevitável dia em que precisei contatá-los para o recolhimento do corpo, foram rápidos e, em todo momento, mostraram respeito e carinho com meu momento. No dia da cremação, que acompanhei online, senti-me acolhida e amparada. Recomendo e tenho eterna gratidão! 🙏🏾</span>
+                                <button class="expand-btn" onclick="expandReview(this)">...exibir tudo</button>
+                            </p>
+                        </div>
+                        <div class="review-author">
+                            <strong>Vivi Valim</strong> • Ago/2025
+                        </div>
+                    </div>
+
+                    <!-- Card 12 - Resende - Aline -->
+                    <div class="review-card-carousel">
+                        <div class="review-header">
+                            <div class="unit-badge">🏢 Resende</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">
+                                <span class="text-preview">Perdemos o nosso Jake e a R.I.P. Pet fez um trabalho excepcional para a minha família. É uma empresa com uma sensibilidade imensa e muito cuidado...</span>
+                                <span class="text-full" style="display: none;">Perdemos o nosso Jake e a R.I.P. Pet fez um trabalho excepcional para a minha família. É uma empresa com uma sensibilidade imensa e muito cuidado. As cerimônias foram lindas e, após a cremação — que acompanhamos em Pindamonhangaba —, a urna foi entregue horas depois na nossa casa. Conseguimos sentir paz e estamos aceitando melhor a partida do nosso amorzinho. Muita gratidão por tudo! Vocês fizeram esse momento doloroso ser um pouco mais fácil.</span>
+                                <button class="expand-btn" onclick="expandReview(this)">...exibir tudo</button>
+                            </p>
+                        </div>
+                        <div class="review-author">
+                            <strong>Aline Araujo</strong> • Set/2022
+                        </div>
+                    </div>
+
+                    <!-- Card 13 - Pouso Alegre - Damaris -->
+                    <div class="review-card-carousel">
+                        <div class="review-header">
+                            <div class="unit-badge">🏢 Pouso Alegre</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">
+                                <span class="text-preview">Gostaria de agradecer imensamente à equipe da R.I.P. Pet pelo serviço prestado com tanta qualidade, empatia e respeito em um momento tão difícil...</span>
+                                <span class="text-full" style="display: none;">Gostaria de agradecer imensamente à equipe da R.I.P. Pet pelo serviço prestado com tanta qualidade, empatia e respeito em um momento tão difícil para nós. 🙏🏼 Embora não fosse uma situação que desejássemos vivenciar, vocês tornaram essa despedida mais leve e acolhedora. A pontualidade, a agilidade nas respostas, o carinho e a transparência em cada etapa do atendimento fizeram toda a diferença e demonstraram o profissionalismo e a sensibilidade da equipe. De coração, meu muito obrigada por todo o cuidado e dedicação.</span>
+                                <button class="expand-btn" onclick="expandReview(this)">...exibir tudo</button>
+                            </p>
+                        </div>
+                        <div class="review-author">
+                            <strong>Damaris Martins</strong> • Ago/2025
+                        </div>
+                    </div>
+
+                    <!-- Card 14 - Pouso Alegre - Igor -->
+                    <div class="review-card-carousel">
+                        <div class="review-header">
+                            <div class="unit-badge">🏢 Pouso Alegre</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="review-content">
+                            <p class="review-text">
+                                <span class="text-preview">Minha pequenina viveu apenas 17 curtos anos (poderiam ser mais alguns), mas uma doença não permitiu. Sem encontrar um local ou serviço adequado...</span>
+                                <span class="text-full" style="display: none;">Minha pequenina viveu apenas 17 curtos anos (poderiam ser mais alguns), mas uma doença não permitiu. Sem encontrar um local ou serviço adequado para o tratamento final em minha cidade, encontrei por meio do Google o ótimo serviço, atendimento e consideração da R.I.P. Pet, que nos ajudaram e atenderam rapidamente com toda a tranquilidade necessária para realizar uma despedida à altura da nossa preciosa. Para quem realmente tem amor e respeito pelo(s) seu(s) companheiro(s) felino(s) ou canino(s), recomendo altamente esta empresa e todo o seu serviço. Agora minha linda está em casa.</span>
+                                <button class="expand-btn" onclick="expandReview(this)">...exibir tudo</button>
+                            </p>
+                        </div>
+                        <div class="review-author">
+                            <strong>Igor K. K.</strong> • Mar/2025
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controles do carrossel -->
+                <div class="carousel-controls" style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem;">
+                    <button class="carousel-btn prev-btn" onclick="scrollCarousel('left')" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); color: white; border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.75rem 1.5rem; border-radius: 30px; cursor: pointer; transition: all 0.3s ease;">
+                        <i class="fas fa-chevron-left"></i> Anterior
+                    </button>
+                    <button class="carousel-btn next-btn" onclick="scrollCarousel('right')" style="background: var(--accent-gold); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 30px; cursor: pointer; transition: all 0.3s ease;">
+                        Próximo <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -3353,21 +4251,21 @@
                 <div class="step-item">
                     <h3 class="step-title"><i class="fas fa-phone-alt"></i> Acionamento</h3>
                     <div class="step-image" style="background-image: url('images/etapa1-acolhimento.jpg');"></div>
-                    <p class="step-description">O primeiro passo é nos procurar. Nossa equipe está sempre pronta para acolher sua ligação com carinho e compreensão, oferecendo orientação clara e suporte emocional desde o primeiro contato.</p>
+                    <p class="step-description">O primeiro passo é nos procurar. Nossa equipe está sempre pronta para acolher seu contato com atenção e compreensão ao momento, oferecendo orientações claras e suporte emocional desde o início.</p>
                     <div class="step-highlight">Sempre ao seu lado, 24 horas</div>
                 </div>
 
                 <div class="step-item">
                     <h3 class="step-title"><i class="fas fa-heart"></i> Acolhimento</h3>
                     <div class="step-image" style="background-image: url('images/etapa2-documentacao.jpg');"></div>
-                    <p class="step-description">Aqui, você e seu companheiro são recebidos com o maior carinho. Criamos um ambiente de paz e serenidade, onde o tempo para a despedida é respeitado e cada gesto é feito com amor e dignidade.</p>
+                    <p class="step-description">Seu pet e sua família serão acolhidos com o maior carinho. Criamos uma zona segura de paz e serenidade, onde o tempo para a despedida é respeitado e cada gesto é feito com amor e dignidade.</p>
                     <div class="step-highlight">Seu tempo, nosso respeito</div>
                 </div>
 
                 <div class="step-item">
                     <h3 class="step-title"><i class="fas fa-dove"></i> Velório e Cremação</h3>
                     <div class="step-image" style="background-image: url('images/etapa3-cremacao.jpg');"></div>
-                    <p class="step-description">Em um ritual de respeito e reverência, preparamos seu pet como um anjinho e realizamos a cremação com toda segurança e transparência, honrando cada momento desta última homenagem de acordo com o plano escolhido.</p>
+                    <p class="step-description">Em um ritual de respeito e reverência, preparamos seu pet como um anjinho e realizamos a cremação com toda segurança e transparência, honrando cada momento desta última homenagem de acordo com suas escolhas.</p>
                     <div class="step-highlight">Última homenagem com amor</div>
                 </div>
 
@@ -3394,6 +4292,22 @@
                 border: 2px solid var(--primary-blue);
                 border-radius: 1.5rem;
                 padding: 2rem;
+                opacity: 1;
+                filter: blur(0px);
+                transform: translateY(0);
+                transition: all 1s ease;
+            }
+
+            .step-item.blur-effect {
+                opacity: 0;
+                filter: blur(10px);
+                transform: translateY(30px);
+            }
+
+            .step-item.visible {
+                opacity: 1;
+                filter: blur(0px);
+                transform: translateY(0);
             }
 
             .step-item:last-child {
@@ -3478,91 +4392,76 @@
     </section>
 
 
-    <!-- CTA Section -->
-    <section class="section cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title">Fale Conosco Agora</h2>
-                <p class="cta-subtitle">Nossa equipe está disponível 24h para esclarecer todas as suas questões</p>
-
-                <div class="contact-options">
-                    <a href="javascript:void(0)" onclick="openWhatsAppPopup()" class="whatsapp-btn">
-                        <i class="fab fa-whatsapp"></i> WhatsApp 24h
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- FAQ Section -->
-    <section class="section" id="faq" style="background: white; padding: 80px 0;">
-        <div class="container">
+    <section class="section" id="faq" style="background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%); padding: 80px 0; position: relative; overflow: hidden;">
+        <div class="container" style="position: relative; z-index: 2;">
             <div class="section-header">
-                <h2 class="harmonized-title">Perguntas <span class="highlight-elegant">Frequentes</span></h2>
-                <p class="section-subtitle-elegant">Esclarecemos suas principais dúvidas sobre nossos serviços de cremação</p>
+                <h2 class="harmonized-title" style="color: white;">Perguntas <span class="highlight-elegant">Frequentes</span></h2>
+                <p class="section-subtitle-elegant" style="color: rgba(255, 255, 255, 0.8);">Esclarecemos suas principais dúvidas sobre nossos serviços de cremação</p>
             </div>
 
-            <div class="faq-container" style="max-width: 800px; margin: 3rem auto 0;">
+            <div class="faq-container" style="max-width: 800px; margin: 3rem auto 0; background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
                 <!-- FAQ Item 1 -->
-                <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid #e2e8f0; padding: 1.5rem 0;">
-                    <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
+                <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem 0;">
+                    <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
                         O que é a cremação de pets?
-                        <i class="fas fa-chevron-down faq-icon" style="color: var(--primary-blue); transition: transform 0.3s ease;"></i>
+                        <i class="fas fa-chevron-down faq-icon" style="color: var(--accent-gold); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
-                        <div itemprop="text" style="padding: 1rem 0; color: var(--text-light); line-height: 1.7;">
+                        <div itemprop="text" style="padding: 1rem 0; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">
                             <p>É o sistema mais moderno e ecologicamente correto utilizado no mundo para a destinação. Durante o processo, atinge a calcinação (cinzas) de qualquer matéria orgânica, reduzindo o volume em 97%. Assim, destrói e elimina todos os agentes patogênicos possíveis. As cinzas são inócuas e ricas em cálcio e fósforo.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- FAQ Item 2 -->
-                <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid #e2e8f0; padding: 1.5rem 0;">
-                    <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
+                <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem 0;">
+                    <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
                         Qual a diferença entre cremação individual e coletiva?
-                        <i class="fas fa-chevron-down faq-icon" style="color: var(--primary-blue); transition: transform 0.3s ease;"></i>
+                        <i class="fas fa-chevron-down faq-icon" style="color: var(--accent-gold); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
-                        <div itemprop="text" style="padding: 1rem 0; color: var(--text-light); line-height: 1.7;">
+                        <div itemprop="text" style="padding: 1rem 0; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">
                             <p>Na cremação individual, o pet é cremado sozinho, e suas cinzas são entregues à família em uma linda urna. Na cremação coletiva, três animais são cremados juntos, e as cinzas são espalhadas em nosso jardim, uma área verde de 100 mil m2, repleta de natureza. É gerado um certificado de cremação que atesta que o pet foi cremado conosco e teve uma despedida digna e respeitosa.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- FAQ Item 3 -->
-                <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid #e2e8f0; padding: 1.5rem 0;">
-                    <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
+                <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem 0;">
+                    <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
                         O que é o plano preventivo?
-                        <i class="fas fa-chevron-down faq-icon" style="color: var(--primary-blue); transition: transform 0.3s ease;"></i>
+                        <i class="fas fa-chevron-down faq-icon" style="color: var(--accent-gold); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
-                        <div itemprop="text" style="padding: 1rem 0; color: var(--text-light); line-height: 1.7;">
+                        <div itemprop="text" style="padding: 1rem 0; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">
                             <p>Para minimizar a dor e trazer tranquilidade num momento difícil, criamos o plano preventivo, onde o tutor escolhe o serviço que melhor atende às suas necessidades e contrata para seu pet ainda em vida, obtendo benefícios como: Parcelar o valor, Tranquilidade de ser atendido a partir de 48h após a contratação, A certeza de que tomou a melhor decisão para dar um destino digno quando chegar a hora da despedida.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- FAQ Item 4 -->
-                <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid #e2e8f0; padding: 1.5rem 0;">
-                    <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
+                <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem 0;">
+                    <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
                         Como funciona a remoção 24 horas?
-                        <i class="fas fa-chevron-down faq-icon" style="color: var(--primary-blue); transition: transform 0.3s ease;"></i>
+                        <i class="fas fa-chevron-down faq-icon" style="color: var(--accent-gold); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
-                        <div itemprop="text" style="padding: 1rem 0; color: var(--text-light); line-height: 1.7;">
+                        <div itemprop="text" style="padding: 1rem 0; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">
                             <p>Disponibilizamos uma equipe treinada e preparada para lidar com esse momento delicado, indo até o local para realizar o translado do pet em qualquer horário do dia ou da noite.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- FAQ Item 5 -->
-                <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid #e2e8f0; padding: 1.5rem 0;">
-                    <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
+                <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem 0;">
+                    <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
                         Posso acompanhar o processo?
-                        <i class="fas fa-chevron-down faq-icon" style="color: var(--primary-blue); transition: transform 0.3s ease;"></i>
+                        <i class="fas fa-chevron-down faq-icon" style="color: var(--accent-gold); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
-                        <div itemprop="text" style="padding: 1rem 0; color: var(--text-light); line-height: 1.7;">
+                        <div itemprop="text" style="padding: 1rem 0; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">
                             <p>Estamos sempre de portas abertas para recebê-los. De forma transparente, permitimos que acompanhem todo o procedimento, a fim de se despedir e ter a certeza de que seu pet foi acolhido, respeitado e recebeu todo o carinho que merecia em sua última homenagem.</p>
                         </div>
                     </div>
@@ -3570,136 +4469,159 @@
 
                 <!-- FAQ Item 6 -->
                 <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="padding: 1.5rem 0;">
-                    <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
+                    <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
                         Como funciona o velório pet?
-                        <i class="fas fa-chevron-down faq-icon" style="color: var(--primary-blue); transition: transform 0.3s ease;"></i>
+                        <i class="fas fa-chevron-down faq-icon" style="color: var(--accent-gold); transition: transform 0.3s ease;"></i>
                     </button>
                     <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
-                        <div itemprop="text" style="padding: 1rem 0; color: var(--text-light); line-height: 1.7;">
+                        <div itemprop="text" style="padding: 1rem 0; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">
                             <p>Independente do plano escolhido, preparamos o pet com respeito e carinho, deixando-o como um anjinho para que os tutores guardem uma lembrança desse último gesto de amor. Respeitosamente, adornamos o pet com flores em um ambiente tranquilo e sereno.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- CTA after FAQ -->
-            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--background-light); border-radius: 20px;">
-                <h3 style="color: var(--text-dark); margin-bottom: 1rem;">Precisa de Ajuda Agora?</h3>
-                <p style="color: var(--text-light); margin-bottom: 2rem;">Estamos disponíveis 24 horas para atendê-lo neste momento difícil. Chegamos em até 1 hora.</p>
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: var(--accent-gold); color: var(--text-dark); padding: 1rem 2rem; border-radius: 30px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);">
-                        <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i>
-                        WhatsApp 24h
-                    </a>
-                    <a href="tel:+551299799654" style="display: inline-flex; align-items: center; background: var(--primary-blue); color: white; padding: 1rem 2rem; border-radius: 30px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);">
-                        <i class="fas fa-phone" style="margin-right: 8px; font-size: 1.2rem;"></i>
-                        Ligar Agora
+        </div>
+    </section>
+
+    <!-- CTA Section (movido para depois do FAQ) -->
+    <section class="section cta-section" style="background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%); padding: 80px 0; position: relative; overflow: hidden;">
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="cta-content" style="text-align: center; padding: 3rem 2rem; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <h2 class="cta-title" style="color: white; font-size: 2.5rem; margin-bottom: 1rem; font-family: 'Nunito', sans-serif;">Fale Conosco Agora</h2>
+                <p class="cta-subtitle" style="color: rgba(255, 255, 255, 0.8); font-size: 1.2rem; margin-bottom: 2rem;">Nossa equipe está disponível 24h para esclarecer todas as suas questões</p>
+
+                <div class="contact-options">
+                    <a href="javascript:void(0)" onclick="openWhatsAppPopup()" class="whatsapp-btn" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #25D366, #20B358); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); font-size: 1.1rem;">
+                        <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i> WhatsApp 24h
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
+
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>RIP PET</h3>
-                    <p>Cremação de animais com carinho, transparência e respeito.</p>
-                    <p>Atendimento 24 horas.</p>
+    <footer class="footer" style="background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%); padding: 60px 0 20px; position: relative; overflow: hidden;">
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="footer-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                <div class="footer-section" style="color: white;">
+                    <h3 style="color: var(--accent-gold); margin-bottom: 1rem; font-size: 1.5rem;">RIP PET</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6; margin-bottom: 0.5rem;">Cremação de animais com carinho, transparência e respeito.</p>
+                    <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">Atendimento 24 horas.</p>
                 </div>
-                
-                <div class="footer-section">
-                    <h3>Contato</h3>
-                    <a href="javascript:void(0)" onclick="openWhatsAppPopup()">WhatsApp 24h</a>
-                    <p>Todas as Regiões</p>
+
+                <div class="footer-section" style="color: white;">
+                    <h3 style="color: var(--accent-gold); margin-bottom: 1rem; font-size: 1.5rem;">Contato</h3>
+                    <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; margin-bottom: 0.5rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-gold)'" onmouseout="this.style.color='rgba(255, 255, 255, 0.8)'">WhatsApp 24h</a>
+                    <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">Todas as Regiões</p>
                 </div>
-                
-                <div class="footer-section">
-                    <h3>Serviços</h3>
-                    <a href="#servicos">Cremação Individual</a>
-                    <a href="#servicos">Cremação Coletiva</a>
-                    <a href="#etapas">Nossos Processos</a>
+
+                <div class="footer-section" style="color: white;">
+                    <h3 style="color: var(--accent-gold); margin-bottom: 1rem; font-size: 1.5rem;">Serviços</h3>
+                    <a href="#servicos" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; margin-bottom: 0.5rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-gold)'" onmouseout="this.style.color='rgba(255, 255, 255, 0.8)'">Cremação Individual</a>
+                    <a href="#servicos" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; margin-bottom: 0.5rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-gold)'" onmouseout="this.style.color='rgba(255, 255, 255, 0.8)'">Cremação Coletiva</a>
+                    <a href="#etapas" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; margin-bottom: 0.5rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-gold)'" onmouseout="this.style.color='rgba(255, 255, 255, 0.8)'">Nossos Processos</a>
                 </div>
-                
-                <div class="footer-section">
-                    <h3>Matriz</h3>
-                    <p>RIP PET Pindamonhangaba</p>
-                    <p>Crematório Próprio</p>
-                    <p>Licenciado e Certificado</p>
+
+                <div class="footer-section" style="color: white;">
+                    <h3 style="color: var(--accent-gold); margin-bottom: 1rem; font-size: 1.5rem;">Matriz</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6; margin-bottom: 0.5rem;">RIP PET Pindamonhangaba</p>
+                    <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6; margin-bottom: 0.5rem;">Crematório Próprio</p>
+                    <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">Licenciado e Certificado</p>
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 RIP PET. Todos os direitos reservados.</p>
+
+            <div class="footer-bottom" style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem; text-align: center;">
+                <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem;">&copy; 2025 RIP PET. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Review Popup -->
+    <div class="review-popup-overlay" id="reviewPopupOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 10000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); padding: 20px;">
+        <div class="review-popup" style="background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border-radius: 20px; padding: 2.5rem; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative; border: 1px solid rgba(255, 255, 255, 0.2);">
+            <button class="review-popup-close" id="reviewPopupClose" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; color: #666; cursor: pointer; padding: 0.5rem; border-radius: 50%; transition: all 0.3s ease; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="review-popup-content">
+                <div class="review-popup-header" style="margin-bottom: 1.5rem; border-bottom: 2px solid var(--accent-gold); padding-bottom: 1rem;">
+                    <div class="review-popup-unit" id="reviewPopupUnit" style="background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); color: white; padding: 0.5rem 1rem; border-radius: 25px; display: inline-block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">🏢 Unidade</div>
+                    <div class="review-popup-stars" style="color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 0.5rem;">★★★★★</div>
+                    <div class="review-popup-author" id="reviewPopupAuthor" style="color: var(--primary-blue); font-weight: 600; font-size: 1.1rem;">Nome do Autor</div>
+                </div>
+
+                <div class="review-popup-text" id="reviewPopupText" style="color: #475569; line-height: 1.7; font-size: 1rem; text-align: justify; font-style: italic; position: relative; padding-left: 1.5rem;">
+                    Texto completo da avaliação aqui...
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- WhatsApp Popup -->
     <div class="whatsapp-popup-overlay" id="whatsappPopupOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
-        <div class="whatsapp-popup" style="background: linear-gradient(135deg, #128C7E 0%, #075E54 50%, #25D366 100%); border-radius: 20px; padding: 2.5rem; max-width: 700px; width: 95%; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative;">
+        <div class="whatsapp-popup" style="background: linear-gradient(135deg, #128C7E 0%, #075E54 50%, #25D366 100%); border-radius: 20px; padding: 2rem; max-width: 600px; width: 90%; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative;">
             <button class="whatsapp-popup-close" id="whatsappPopupClose" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; font-size: 1.3rem; color: white; cursor: pointer; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='scale(1)';">
                 <i class="fas fa-times"></i>
             </button>
 
             <h3 style="text-align: center; color: white; margin-bottom: 0.5rem; font-size: 1.4rem; font-weight: 600; font-family: 'Poppins', sans-serif;">Atendimento WhatsApp 24h</h3>
-            <p style="text-align: center; color: #ccc; margin-bottom: 2rem; font-size: 0.9rem; font-family: 'Nunito', sans-serif;">Escolha sua região</p>
+            <p style="text-align: center; color: #ccc; margin-bottom: 2rem; font-size: 0.9rem; font-family: 'Nunito', sans-serif; line-height: 1.2;">Escolha sua região</p>
 
             <div class="whatsapp-list">
                 <!-- Grid container para todas as unidades - 2 colunas -->
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem;">
                     <!-- Matriz em destaque - primeira posição -->
-                    <a href="https://wa.me/+551297996543?text=Olá! Preciso de informações sobre cremação para meu pet. Sou da região do Vale do Paraíba." class="region-compose" style="background: linear-gradient(135deg, #25D366, #20B358); color: white; padding: 1rem; border-radius: 10px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 2px solid #25D366; text-decoration: none; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 30px rgba(37, 211, 102, 0.4)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
+                    <a href="https://wa.me/5512997996543?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." class="region-compose" style="background: linear-gradient(135deg, #25D366, #20B358); color: white; padding: 1rem; border-radius: 10px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 2px solid #25D366; text-decoration: none; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 30px rgba(37, 211, 102, 0.4)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
                         <div class="region-content">
-                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.95rem; font-weight: 700; font-family: 'Poppins', sans-serif;">Matriz e Vale do Paraíba</h4>
-                            <p style="margin: 0; color: rgba(255,255,255,0.9); font-size: 0.85rem; text-align: left; font-family: 'Nunito', sans-serif; font-weight: 600;">(12) 99799-6543</p>
+                            <h4 style="margin: 0; color: white; font-size: 1.1rem; font-weight: 700; font-family: 'Poppins', sans-serif; line-height: 1.2;">Matriz e Vale do Paraíba</h4>
+                            <p style="margin: 0; color: rgba(255,255,255,0.9); font-size: 1rem; text-align: left; font-family: 'Nunito', sans-serif; font-weight: 600; line-height: 1.2;">(12) 99799-6543</p>
                         </div>
                         <i class="fab fa-whatsapp whatsapp-icon" style="font-size: 1.8rem; color: white; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: white; transition: all 0.3s ease;"></div>
                     </a>
 
-                    <a href="https://wa.me/5535999042223?text=Olá! Preciso de informações sobre cremação para meu pet. Sou da região de Pouso Alegre." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
+                    <a href="https://wa.me/5511991603041?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
                         <div class="region-content">
-                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Pouso Alegre e Região</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(35) 99904-2223</p>
+                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">São Paulo e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(11) 99160-3041</p>
                         </div>
                         <i class="fab fa-whatsapp whatsapp-icon" style="font-size: 1.8rem; color: white; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #25D366; transition: all 0.3s ease;"></div>
                     </a>
 
-                    <a href="https://wa.me/5513998068262?text=Olá! Preciso de informações sobre cremação para meu pet. Sou da região de Santos." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
+                    <a href="https://wa.me/5513998068262?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
                         <div class="region-content">
-                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Santos e Região</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(13) 99806-8262</p>
+                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Santos e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(13) 99806-8262</p>
                         </div>
                         <i class="fab fa-whatsapp whatsapp-icon" style="font-size: 1.8rem; color: white; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #25D366; transition: all 0.3s ease;"></div>
                     </a>
 
-                    <a href="https://wa.me/5519999161977?text=Olá! Preciso de informações sobre cremação para meu pet. Sou da região de Campinas." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
+                    <a href="https://wa.me/5519999161977?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
                         <div class="region-content">
-                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Campinas e Região</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(19) 99916-1977</p>
+                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Campinas e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(19) 99916-1977</p>
                         </div>
                         <i class="fab fa-whatsapp whatsapp-icon" style="font-size: 1.8rem; color: white; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #25D366; transition: all 0.3s ease;"></div>
                     </a>
 
-                    <a href="https://wa.me/5524998379825?text=Olá! Preciso de informações sobre cremação para meu pet. Sou da região de Resende." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
+                    <a href="https://wa.me/5524998379825?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
                         <div class="region-content">
-                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Resende e Região</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(24) 99837-9825</p>
+                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Resende e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(24) 99837-9825</p>
                         </div>
                         <i class="fab fa-whatsapp whatsapp-icon" style="font-size: 1.8rem; color: white; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #25D366; transition: all 0.3s ease;"></div>
                     </a>
 
-                    <a href="https://wa.me/553599042223?text=Olá! Preciso de informações sobre cremação para meu pet. Sou da região de Pouso Alegre." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
+                    <a href="https://wa.me/553599042223?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
                         <div class="region-content">
-                            <h4 style="margin: 0 0 0.2rem 0; color: white; font-size: 0.9rem; font-weight: 500; font-family: 'Poppins', sans-serif;">Pouso Alegre e Região</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.8rem; text-align: left; font-family: 'Nunito', sans-serif;">(35) 99904-2223</p>
+                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Pouso Alegre e Região</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(35) 99904-2223</p>
                         </div>
                         <i class="fab fa-whatsapp whatsapp-icon" style="font-size: 1.8rem; color: white; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #25D366; transition: all 0.3s ease;"></div>
@@ -3722,7 +4644,7 @@
     </div>
 
     <!-- Fixed WhatsApp Button -->
-    <a href="javascript:void(0)" onclick="openWhatsAppPopup()" class="fixed-whatsapp" title="WhatsApp 24h">
+    <a href="javascript:void(0)" onclick="openWhatsAppPopup()" class="fixed-whatsapp" title="WhatsApp 24h" style="position: fixed !important; bottom: 2rem !important; right: 2rem !important; z-index: 9999 !important; background: #25d366 !important; color: white !important; width: 60px !important; height: 60px !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 1.5rem !important; text-decoration: none !important; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4) !important; opacity: 1 !important; visibility: visible !important;">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -3733,6 +4655,18 @@
             setTimeout(() => {
                 loadingScreen.classList.add('hidden');
             }, 1000);
+
+            // Ensure WhatsApp button is visible
+            setTimeout(() => {
+                const whatsappBtn = document.querySelector('.fixed-whatsapp');
+                if (whatsappBtn) {
+                    whatsappBtn.style.display = 'flex !important';
+                    whatsappBtn.style.opacity = '1 !important';
+                    whatsappBtn.style.visibility = 'visible !important';
+                    whatsappBtn.style.zIndex = '9999 !important';
+                    console.log('WhatsApp button forced visible');
+                }
+            }, 1500);
         });
 
         // Scroll Animations
@@ -4451,21 +5385,100 @@
             document.querySelectorAll('.reveal-on-scroll').forEach(img => {
                 observer.observe(img);
             });
+
+            // Observer para efeito de blur nas etapas
+            const blurObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 300);
+                        blurObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            // Observar todos os step-items
+            document.querySelectorAll('.step-item').forEach(item => {
+                blurObserver.observe(item);
+            });
         }
 
-        // Adicionar funcionalidade para mostrar mais reviews
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('.show-more-reviews')) {
-                const hiddenReviews = document.querySelectorAll('.hidden-review');
-                hiddenReviews.forEach((review, index) => {
-                    setTimeout(() => {
-                        review.style.opacity = '1';
-                        review.style.transform = 'translateY(0)';
-                        review.classList.remove('hidden-review');
-                    }, index * 100);
-                });
-                e.target.closest('.show-more-reviews').style.display = 'none';
+        // Funções do carrossel de avaliações
+        function scrollCarousel(direction) {
+            const carousel = document.getElementById('reviewsCarousel');
+            const cardWidth = 380 + 32; // width + gap
+            const scrollAmount = direction === 'left' ? -cardWidth : cardWidth;
+
+            carousel.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        // Função para abrir popup com review completo
+        function expandReview(button) {
+            const card = button.closest('.review-card-carousel');
+            const unitBadge = card.querySelector('.unit-badge').textContent;
+            const authorElement = card.querySelector('.review-author');
+            const authorName = authorElement.querySelector('strong').textContent;
+            const authorDate = authorElement.textContent.split('•')[1]?.trim() || '';
+            const fullText = card.querySelector('.text-full').textContent;
+
+            // Preencher dados no popup
+            document.getElementById('reviewPopupUnit').textContent = unitBadge;
+            document.getElementById('reviewPopupAuthor').textContent = `${authorName} • ${authorDate}`;
+            document.getElementById('reviewPopupText').textContent = fullText;
+
+            // Mostrar popup
+            openReviewPopup();
+        }
+
+        // Funções do popup de review
+        function openReviewPopup() {
+            const overlay = document.getElementById('reviewPopupOverlay');
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => overlay.classList.add('active'), 10);
+        }
+
+        function closeReviewPopup() {
+            const overlay = document.getElementById('reviewPopupOverlay');
+            overlay.classList.remove('active');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Event listeners do popup de review
+        document.addEventListener('DOMContentLoaded', function() {
+            const reviewPopupOverlay = document.getElementById('reviewPopupOverlay');
+            const reviewPopupClose = document.getElementById('reviewPopupClose');
+
+            // Fechar popup ao clicar no X
+            if (reviewPopupClose) {
+                reviewPopupClose.addEventListener('click', closeReviewPopup);
             }
+
+            // Fechar popup ao clicar no overlay
+            if (reviewPopupOverlay) {
+                reviewPopupOverlay.addEventListener('click', function(e) {
+                    if (e.target === reviewPopupOverlay) {
+                        closeReviewPopup();
+                    }
+                });
+            }
+
+            // Fechar popup com ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeReviewPopup();
+                }
+            });
         });
     </script>
 
