@@ -3308,6 +3308,34 @@
                     margin-top: auto;
                 }
 
+                .carousel-controls {
+                    display: flex;
+                    justify-content: center;
+                    gap: 1rem;
+                    margin-top: 2rem;
+                }
+
+                .carousel-btn {
+                    padding: 0.75rem 1.5rem;
+                    border-radius: 30px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    border: none;
+                    font-weight: 600;
+                }
+
+                .prev-btn {
+                    background: rgba(255, 255, 255, 0.1);
+                    backdrop-filter: blur(10px);
+                    color: white;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                }
+
+                .next-btn {
+                    background: var(--accent-gold);
+                    color: white;
+                }
+
                 .carousel-btn:hover {
                     transform: translateY(-2px);
                     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -4120,11 +4148,11 @@
                 </div>
 
                 <!-- Controles do carrossel -->
-                <div class="carousel-controls" style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem;">
-                    <button class="carousel-btn prev-btn" onclick="scrollCarousel('left')" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); color: white; border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.75rem 1.5rem; border-radius: 30px; cursor: pointer; transition: all 0.3s ease;">
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev-btn" onclick="scrollCarousel('left')">
                         <i class="fas fa-chevron-left"></i> Anterior
                     </button>
-                    <button class="carousel-btn next-btn" onclick="scrollCarousel('right')" style="background: var(--accent-gold); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 30px; cursor: pointer; transition: all 0.3s ease;">
+                    <button class="carousel-btn next-btn" onclick="scrollCarousel('right')">
                         Próximo <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
@@ -5421,25 +5449,38 @@
 
         // Função para abrir popup com review completo
         function expandReview(button) {
-            const card = button.closest('.review-card-carousel');
-            const unitBadge = card.querySelector('.unit-badge').textContent;
-            const authorElement = card.querySelector('.review-author');
-            const authorName = authorElement.querySelector('strong').textContent;
-            const authorDate = authorElement.textContent.split('•')[1]?.trim() || '';
-            const fullText = card.querySelector('.text-full').textContent;
+            try {
+                const card = button.closest('.review-card-carousel');
+                if (!card) return;
 
-            // Preencher dados no popup
-            document.getElementById('reviewPopupUnit').textContent = unitBadge;
-            document.getElementById('reviewPopupAuthor').textContent = `${authorName} • ${authorDate}`;
-            document.getElementById('reviewPopupText').textContent = fullText;
+                const unitBadge = card.querySelector('.unit-badge')?.textContent || 'Unidade';
+                const authorElement = card.querySelector('.review-author');
+                const authorName = authorElement?.querySelector('strong')?.textContent || 'Autor';
+                const authorDate = authorElement?.textContent.split('•')[1]?.trim() || '';
+                const fullTextElement = card.querySelector('.text-full');
+                const fullText = fullTextElement?.textContent || 'Texto não encontrado';
 
-            // Mostrar popup
-            openReviewPopup();
+                // Preencher dados no popup
+                const unitEl = document.getElementById('reviewPopupUnit');
+                const authorEl = document.getElementById('reviewPopupAuthor');
+                const textEl = document.getElementById('reviewPopupText');
+
+                if (unitEl) unitEl.textContent = unitBadge;
+                if (authorEl) authorEl.textContent = `${authorName} • ${authorDate}`;
+                if (textEl) textEl.textContent = fullText;
+
+                // Mostrar popup
+                openReviewPopup();
+            } catch (error) {
+                console.error('Erro no expandReview:', error);
+            }
         }
 
         // Funções do popup de review
         function openReviewPopup() {
             const overlay = document.getElementById('reviewPopupOverlay');
+            if (!overlay) return;
+
             overlay.style.display = 'flex';
             document.body.style.overflow = 'hidden';
             setTimeout(() => overlay.classList.add('active'), 10);
@@ -5447,6 +5488,8 @@
 
         function closeReviewPopup() {
             const overlay = document.getElementById('reviewPopupOverlay');
+            if (!overlay) return;
+
             overlay.classList.remove('active');
             setTimeout(() => {
                 overlay.style.display = 'none';
