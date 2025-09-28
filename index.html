@@ -4301,28 +4301,28 @@
 
             <div class="steps-container">
                 <div class="step-item">
-                    <h3 class="step-title"><i class="fas fa-phone-alt"></i> Acionamento</h3>
+                    <h3 class="step-title"><span class="step-number">1</span><i class="fas fa-phone-alt"></i> Acionamento</h3>
                     <div class="step-image" style="background-image: url('images/etapa1-acolhimento.jpg');"></div>
                     <p class="step-description">O primeiro passo é nos procurar. Nossa equipe está sempre pronta para acolher seu contato com atenção e compreensão ao momento, oferecendo orientações claras e suporte emocional desde o início.</p>
                     <div class="step-highlight">Sempre ao seu lado, 24 horas</div>
                 </div>
 
                 <div class="step-item">
-                    <h3 class="step-title"><i class="fas fa-heart"></i> Acolhimento</h3>
+                    <h3 class="step-title"><span class="step-number">2</span><i class="fas fa-heart"></i> Acolhimento</h3>
                     <div class="step-image" style="background-image: url('images/etapa2-documentacao.jpg');"></div>
                     <p class="step-description">Seu pet e sua família serão acolhidos com o maior carinho. Criamos uma zona segura de paz e serenidade, onde o tempo para a despedida é respeitado e cada gesto é feito com amor e dignidade.</p>
                     <div class="step-highlight">Seu tempo, nosso respeito</div>
                 </div>
 
                 <div class="step-item">
-                    <h3 class="step-title"><i class="fas fa-dove"></i> Velório e Cremação</h3>
+                    <h3 class="step-title"><span class="step-number">3</span><i class="fas fa-dove"></i> Velório e Cremação</h3>
                     <div class="step-image" style="background-image: url('images/etapa3-cremacao.jpg');"></div>
                     <p class="step-description">Em um ritual de respeito e reverência, preparamos seu pet como um anjinho e realizamos a cremação com toda segurança e transparência, honrando cada momento desta última homenagem de acordo com suas escolhas.</p>
                     <div class="step-highlight">Última homenagem com amor</div>
                 </div>
 
                 <div class="step-item">
-                    <h3 class="step-title"><i class="fas fa-home"></i> Entrega</h3>
+                    <h3 class="step-title"><span class="step-number">4</span><i class="fas fa-home"></i> Entrega</h3>
                     <div class="step-image" style="background-image: url('images/etapa4-entrega.jpg');"></div>
                     <p class="step-description">O momento final é conduzido com todo carinho e respeito ao seu plano escolhido. Oferecemos certificados, lembranças personalizadas e memórias que eternizam o amor compartilhado. Nosso cuidado continua, pois entendemos que o amor não tem fim.</p>
                     <div class="step-highlight">Amor que transcende o tempo</div>
@@ -4373,6 +4373,26 @@
                 font-family: 'Nunito', sans-serif;
                 color: var(--text-dark);
                 text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .step-number {
+                background: linear-gradient(135deg, var(--primary-blue), var(--accent-gold));
+                color: white;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                font-weight: 700;
+                font-family: 'Poppins', sans-serif;
+                box-shadow: 0 4px 15px rgba(5, 47, 95, 0.3);
+                flex-shrink: 0;
             }
 
             .step-image {
