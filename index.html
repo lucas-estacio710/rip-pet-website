@@ -4332,22 +4332,64 @@
         </div>
 
         <style>
-            /* Simple Steps Timeline Styles */
+            /* Timeline Steps Styles */
             .steps-container {
                 max-width: 1000px;
                 margin: 0 auto;
                 padding: 2rem 0;
+                position: relative;
+            }
+
+            /* Linha conectora do timeline */
+            .steps-container::before {
+                content: '';
+                position: absolute;
+                left: 50%;
+                top: 80px;
+                bottom: 80px;
+                width: 4px;
+                background: linear-gradient(180deg, var(--primary-blue), var(--accent-gold));
+                transform: translateX(-50%);
+                border-radius: 2px;
+                box-shadow: 0 0 20px rgba(5, 47, 95, 0.3);
             }
 
             .step-item {
-                margin-bottom: 4rem;
+                margin-bottom: 6rem;
                 border: 2px solid var(--primary-blue);
                 border-radius: 1.5rem;
-                padding: 2rem;
+                padding: 2rem 2rem 2rem 4rem;
                 opacity: 1;
                 filter: blur(0px);
                 transform: translateY(0);
                 transition: all 1s ease;
+                position: relative;
+                background: white;
+                box-shadow: 0 10px 30px rgba(5, 47, 95, 0.1);
+            }
+
+            .step-item:nth-child(even) {
+                margin-left: auto;
+                padding: 2rem 4rem 2rem 2rem;
+            }
+
+            .step-item::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                width: 30px;
+                height: 4px;
+                background: linear-gradient(90deg, var(--primary-blue), var(--accent-gold));
+                transform: translateY(-50%);
+                border-radius: 2px;
+            }
+
+            .step-item:nth-child(odd)::before {
+                right: -32px;
+            }
+
+            .step-item:nth-child(even)::before {
+                left: -32px;
             }
 
             .step-item.blur-effect {
@@ -4367,32 +4409,47 @@
             }
 
             .step-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
                 font-weight: 600;
                 margin: 0 0 1.5rem 0;
                 font-family: 'Nunito', sans-serif;
                 color: var(--text-dark);
-                text-align: center;
                 display: flex;
                 align-items: center;
-                justify-content: center;
                 gap: 1rem;
+            }
+
+            .step-item:nth-child(even) .step-title {
+                flex-direction: row-reverse;
+                text-align: right;
             }
 
             .step-number {
                 background: linear-gradient(135deg, var(--primary-blue), var(--accent-gold));
                 color: white;
-                width: 50px;
-                height: 50px;
+                width: 60px;
+                height: 60px;
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 1.5rem;
+                font-size: 1.8rem;
                 font-weight: 700;
                 font-family: 'Poppins', sans-serif;
-                box-shadow: 0 4px 15px rgba(5, 47, 95, 0.3);
+                box-shadow: 0 8px 25px rgba(5, 47, 95, 0.4);
                 flex-shrink: 0;
+                position: absolute;
+                top: -30px;
+                z-index: 2;
+                border: 4px solid white;
+            }
+
+            .step-item:nth-child(odd) .step-number {
+                right: -62px;
+            }
+
+            .step-item:nth-child(even) .step-number {
+                left: -62px;
             }
 
             .step-image {
@@ -4433,18 +4490,43 @@
                 margin: 0 auto;
             }
 
-            /* Mobile responsive */
+            /* Mobile responsive - Timeline */
             @media (max-width: 768px) {
                 .steps-container {
                     padding: 1rem;
                 }
 
+                .steps-container::before {
+                    left: 30px;
+                    transform: none;
+                }
+
                 .step-item {
-                    margin-bottom: 3rem;
+                    margin-left: 60px !important;
+                    padding: 2rem 2rem 2rem 4rem !important;
+                    width: calc(100% - 60px);
+                    margin-bottom: 4rem;
+                }
+
+                .step-item::before {
+                    left: -32px !important;
+                    right: auto !important;
+                }
+
+                .step-number {
+                    left: -62px !important;
+                    right: auto !important;
                 }
 
                 .step-title {
+                    flex-direction: row !important;
+                    text-align: left !important;
                     font-size: 1.5rem;
+                }
+
+                .step-item:nth-child(even) .step-title {
+                    flex-direction: row !important;
+                    text-align: left !important;
                 }
 
                 .step-image {
