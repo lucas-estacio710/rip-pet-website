@@ -48,6 +48,39 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Modal Functions Script -->
+    <script>
+        // Sistema de modal para reviews - CARREGADO NO HEAD
+        function showReviewModal(button) {
+            const card = button.closest('.review-card-carousel');
+            if (!card) {
+                console.error('Card não encontrado');
+                return;
+            }
+
+            // Extrair dados do card
+            const unitBadge = card.querySelector('.unit-badge').textContent;
+            const authorElement = card.querySelector('.review-author');
+            const authorText = authorElement.textContent;
+            const fullText = card.querySelector('.text-full').textContent;
+
+            // Preencher modal
+            document.getElementById('modalUnit').textContent = unitBadge;
+            document.getElementById('modalAuthor').textContent = authorText.replace(' ★★★★★', '');
+            document.getElementById('modalText').textContent = fullText;
+
+            // Mostrar modal
+            document.getElementById('reviewModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Fechar modal
+        function closeReviewModal() {
+            document.getElementById('reviewModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    </script>
     
     <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -5432,32 +5465,6 @@
             });
         }
 
-        // Sistema de modal para reviews - NOVO E SIMPLES
-        function showReviewModal(button) {
-            const card = button.closest('.review-card-carousel');
-            if (!card) return;
-
-            // Extrair dados do card
-            const unitBadge = card.querySelector('.unit-badge').textContent;
-            const authorElement = card.querySelector('.review-author');
-            const authorText = authorElement.textContent;
-            const fullText = card.querySelector('.text-full').textContent;
-
-            // Preencher modal
-            document.getElementById('modalUnit').textContent = unitBadge;
-            document.getElementById('modalAuthor').textContent = authorText.replace(' ★★★★★', '');
-            document.getElementById('modalText').textContent = fullText;
-
-            // Mostrar modal
-            document.getElementById('reviewModal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Fechar modal
-        function closeReviewModal() {
-            document.getElementById('reviewModal').style.display = 'none';
-            document.body.style.overflow = '';
-        }
 
         // Event listeners para o modal
         document.addEventListener('DOMContentLoaded', function() {
