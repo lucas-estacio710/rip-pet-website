@@ -4591,9 +4591,9 @@
     </footer>
 
     <!-- Modal de Review -->
-    <div id="reviewModal" style="display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px);">
+    <div id="reviewModal" onclick="if(event.target === this) closeReviewModal()" style="display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px);">
         <div style="background-color: white; margin: 5% auto; padding: 30px; border-radius: 15px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
-            <span id="closeModal" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; line-height: 1; margin-top: -10px;">&times;</span>
+            <span id="closeModal" onclick="closeReviewModal()" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; line-height: 1; margin-top: -10px;">&times;</span>
 
             <div id="modalUnit" style="background: var(--primary-blue); color: white; padding: 8px 16px; border-radius: 20px; display: inline-block; font-size: 0.9rem; font-weight: 600; margin-bottom: 15px;">📍 Unidade</div>
 
@@ -5468,22 +5468,37 @@
 
         // Event listeners para o modal
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('Configurando event listeners do modal...');
+
             // Fechar ao clicar no X
-            document.getElementById('closeModal').onclick = closeReviewModal;
+            const closeBtn = document.getElementById('closeModal');
+            if (closeBtn) {
+                closeBtn.onclick = function() {
+                    console.log('Clicou no X para fechar');
+                    closeReviewModal();
+                };
+            }
 
             // Fechar ao clicar fora do modal
-            document.getElementById('reviewModal').onclick = function(event) {
-                if (event.target === this) {
-                    closeReviewModal();
-                }
-            };
+            const modal = document.getElementById('reviewModal');
+            if (modal) {
+                modal.onclick = function(event) {
+                    if (event.target === modal) {
+                        console.log('Clicou fora do modal para fechar');
+                        closeReviewModal();
+                    }
+                };
+            }
 
             // Fechar com ESC
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'Escape') {
+                    console.log('Pressionou ESC para fechar');
                     closeReviewModal();
                 }
             });
+
+            console.log('Event listeners configurados com sucesso!');
         });
     </script>
 
