@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos de Parallax - RIP PET</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Seção de título */
+        .header-demo {
+            height: 100vh;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-demo h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .header-demo p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* 1. Parallax Background Simples */
+        .parallax-simple {
+            height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1601758228041-f3b2795255f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .parallax-simple::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .parallax-simple .content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+        }
+
+        /* 2. Parallax Múltiplas Camadas */
+        .parallax-layers {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .layer {
+            position: absolute;
+            width: 100%;
+            height: 120%;
+            will-change: transform;
+        }
+
+        .layer-bg {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            z-index: 1;
+        }
+
+        .layer-mid {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,0 0,100 1000,80 1000,0"/></svg>');
+            z-index: 2;
+        }
+
+        .layer-front {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.2)"><circle cx="200" cy="50" r="30"/><circle cx="800" cy="30" r="20"/></svg>');
+            z-index: 3;
+        }
+
+        .parallax-layers .content {
+            position: relative;
+            z-index: 10;
+            color: white;
+            text-align: center;
+        }
+
+        /* 3. Parallax com Transformações */
+        .parallax-transform {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .transform-element {
+            position: absolute;
+            color: white;
+            font-size: 2rem;
+            will-change: transform;
+        }
+
+        .element-1 {
+            top: 20%;
+            left: 10%;
+            opacity: 0.7;
+        }
+
+        .element-2 {
+            top: 60%;
+            right: 10%;
+            opacity: 0.5;
+        }
+
+        .element-3 {
+            bottom: 20%;
+            left: 30%;
+            opacity: 0.6;
+        }
+
+        .parallax-transform .content {
+            color: white;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* 4. Parallax Elementos Flutuantes */
+        .parallax-float {
+            height: 100vh;
+            background: linear-gradient(135deg, #B9E28C, #a8d674);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .float-element {
+            position: absolute;
+            will-change: transform;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .float-1 {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 20%;
+        }
+
+        .float-2 {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            right: 30%;
+        }
+
+        .float-3 {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 60%;
+        }
+
+        .parallax-float .content {
+            color: white;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* 5. Parallax Invertido */
+        .parallax-inverted {
+            height: 100vh;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .inverted-element {
+            position: absolute;
+            color: white;
+            font-size: 4rem;
+            opacity: 0.3;
+            will-change: transform;
+        }
+
+        .inverted-1 {
+            top: 20%;
+            left: 10%;
+        }
+
+        .inverted-2 {
+            bottom: 20%;
+            right: 10%;
+        }
+
+        .parallax-inverted .content {
+            color: white;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* 6. Parallax com Fade */
+        .parallax-fade {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fade-element {
+            position: absolute;
+            color: white;
+            font-size: 3rem;
+            will-change: transform, opacity;
+            text-align: center;
+            width: 100%;
+        }
+
+        .fade-1 {
+            top: 20%;
+        }
+
+        .fade-2 {
+            bottom: 20%;
+        }
+
+        .parallax-fade .content {
+            color: white;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* 7. Parallax Mouse */
+        .parallax-mouse {
+            height: 100vh;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mouse-element {
+            position: absolute;
+            color: white;
+            font-size: 2rem;
+            will-change: transform;
+            transition: transform 0.1s ease-out;
+        }
+
+        .mouse-1 {
+            top: 30%;
+            left: 20%;
+        }
+
+        .mouse-2 {
+            top: 60%;
+            right: 20%;
+        }
+
+        .mouse-3 {
+            bottom: 30%;
+            left: 50%;
+        }
+
+        .parallax-mouse .content {
+            color: white;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* 8. Parallax com Threshold */
+        .parallax-threshold {
+            height: 100vh;
+            background: linear-gradient(135deg, #B9E28C, #a8d674);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .threshold-element {
+            position: absolute;
+            color: white;
+            font-size: 2rem;
+            will-change: transform;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.5s ease;
+        }
+
+        .threshold-element.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .threshold-1 {
+            top: 20%;
+            left: 20%;
+        }
+
+        .threshold-2 {
+            bottom: 20%;
+            right: 20%;
+        }
+
+        .parallax-threshold .content {
+            color: white;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* 9. Parallax com Cores */
+        .parallax-colors {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.1s ease;
+        }
+
+        .parallax-colors .content {
+            color: white;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Seções de conteúdo */
+        .content-section {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: white;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #1e40af;
+        }
+
+        .content-section p {
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-demo h1 {
+                font-size: 2rem;
+            }
+            
+            .transform-element,
+            .inverted-element {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header-demo">
+        <div>
+            <h1>🎬 Exemplos de Parallax</h1>
+            <p>Scroll para baixo e veja os diferentes efeitos</p>
+        </div>
+    </div>
+
+    <!-- 1. Parallax Background Simples -->
+    <div class="content-section">
+        <h2>1. Parallax Background Simples</h2>
+        <p>Background fixo que não se move com o scroll. Efeito clássico e sutil.</p>
+    </div>
+
+    <div class="parallax-simple">
+        <div class="content">
+            <h2>Background Fixo</h2>
+            <p>Imagem fica parada enquanto você faz scroll</p>
+        </div>
+    </div>
+
+    <!-- 2. Parallax Múltiplas Camadas -->
+    <div class="content-section">
+        <h2>2. Parallax Múltiplas Camadas</h2>
+        <p>Diferentes camadas se movem em velocidades distintas, criando profundidade 3D.</p>
+    </div>
+
+    <div class="parallax-layers">
+        <div class="layer layer-bg"></div>
+        <div class="layer layer-mid"></div>
+        <div class="layer layer-front"></div>
+        <div class="content">
+            <h2>Camadas em Profundidade</h2>
+            <p>Cada camada move numa velocidade diferente</p>
+        </div>
+    </div>
+
+    <!-- 3. Parallax com Transformações -->
+    <div class="content-section">
+        <h2>3. Parallax com Transformações</h2>
+        <p>Elementos rotacionam, escalam e se movem baseado no scroll.</p>
+    </div>
+
+    <div class="parallax-transform">
+        <div class="transform-element element-1">🌟</div>
+        <div class="transform-element element-2">💫</div>
+        <div class="transform-element element-3">✨</div>
+        <div class="content">
+            <h2>Transformações Dinâmicas</h2>
+            <p>Elementos rotacionam e escalam conforme scroll</p>
+        </div>
+    </div>
+
+    <!-- 4. Parallax Elementos Flutuantes -->
+    <div class="content-section">
+        <h2>4. Parallax Elementos Flutuantes</h2>
+        <p>Elementos flutuam suavemente em diferentes direções e velocidades.</p>
+    </div>
+
+    <div class="parallax-float">
+        <div class="float-element float-1"></div>
+        <div class="float-element float-2"></div>
+        <div class="float-element float-3"></div>
+        <div class="content">
+            <h2>Elementos Flutuantes</h2>
+            <p>Círculos flutuam em velocidades diferentes</p>
+        </div>
+    </div>
+
+    <!-- 5. Parallax Invertido -->
+    <div class="content-section">
+        <h2>5. Parallax Invertido</h2>
+        <p>Elementos se movem na direção oposta ao scroll, criando resistência visual.</p>
+    </div>
+
+    <div class="parallax-inverted">
+        <div class="inverted-element inverted-1">⬆️</div>
+        <div class="inverted-element inverted-2">⬆️</div>
+        <div class="content">
+            <h2>Movimento Invertido</h2>
+            <p>Elementos sobem quando você desce</p>
+        </div>
+    </div>
+
+    <!-- 6. Parallax com Fade -->
+    <div class="content-section">
+        <h2>6. Parallax com Fade</h2>
+        <p>Elementos aparecem e desaparecem gradualmente conforme o scroll.</p>
+    </div>
+
+    <div class="parallax-fade">
+        <div class="fade-element fade-1">Aparecendo...</div>
+        <div class="fade-element fade-2">Desaparecendo...</div>
+        <div class="content">
+            <h2>Fade In/Out</h2>
+            <p>Elementos fazem fade baseado na posição</p>
+        </div>
+    </div>
+
+    <!-- 7. Parallax Mouse -->
+    <div class="content-section">
+        <h2>7. Parallax Mouse</h2>
+        <p>Elementos seguem sutilmente o movimento do cursor.</p>
+    </div>
+
+    <div class="parallax-mouse">
+        <div class="mouse-element mouse-1">👁️</div>
+        <div class="mouse-element mouse-2">👁️</div>
+        <div class="mouse-element mouse-3">👁️</div>
+        <div class="content">
+            <h2>Seguindo o Mouse</h2>
+            <p>Mova o cursor e os elementos reagem</p>
+        </div>
+    </div>
+
+    <!-- 8. Parallax com Threshold -->
+    <div class="content-section">
+        <h2>8. Parallax com Threshold</h2>
+        <p>Efeitos ativam apenas quando entram na viewport.</p>
+    </div>
+
+    <div class="parallax-threshold">
+        <div class="threshold-element threshold-1">🎯</div>
+        <div class="threshold-element threshold-2">🎯</div>
+        <div class="content">
+            <h2>Ativação por Threshold</h2>
+            <p>Elementos aparecem quando entram na tela</p>
+        </div>
+    </div>
+
+    <!-- 9. Parallax com Cores -->
+    <div class="content-section">
+        <h2>9. Parallax com Cores</h2>
+        <p>Background muda de cor suavemente conforme o scroll.</p>
+    </div>
+
+    <div class="parallax-colors">
+        <div class="content">
+            <h2>Mudança de Cores</h2>
+            <p>Background interpola cores no scroll</p>
+        </div>
+    </div>
+
+    <!-- Final -->
+    <div class="content-section">
+        <h2>🎉 Fim dos Exemplos</h2>
+        <p>Qual efeito mais te chamou atenção para o site da RIP PET?</p>
+    </div>
+
+    <script>
+        // Throttle function para performance
+        function throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            }
+        }
+
+        // 2. Parallax Múltiplas Camadas
+        function updateLayersParallax() {
+            const layers = document.querySelector('.parallax-layers');
+            if (!layers) return;
+            
+            const rect = layers.getBoundingClientRect();
+            const scrollProgress = Math.max(0, Math.min(1, -rect.top / window.innerHeight));
+            
+            const layerBg = layers.querySelector('.layer-bg');
+            const layerMid = layers.querySelector('.layer-mid');
+            const layerFront = layers.querySelector('.layer-front');
+            
+            if (layerBg) layerBg.style.transform = `translateY(${scrollProgress * 50}px)`;
+            if (layerMid) layerMid.style.transform = `translateY(${scrollProgress * 100}px)`;
+            if (layerFront) layerFront.style.transform = `translateY(${scrollProgress * 150}px)`;
+        }
+
+        // 3. Parallax com Transformações
+        function updateTransformParallax() {
+            const container = document.querySelector('.parallax-transform');
+            if (!container) return;
+            
+            const rect = container.getBoundingClientRect();
+            const scrollProgress = Math.max(0, Math.min(1, -rect.top / window.innerHeight));
+            
+            const elements = container.querySelectorAll('.transform-element');
+            elements.forEach((element, index) => {
+                const rotation = scrollProgress * 360 * (index + 1) * 0.5;
+                const scale = 1 + scrollProgress * 0.5;
+                const translateY = scrollProgress * 100 * (index + 1);
+                
+                element.style.transform = `translateY(${translateY}px) rotate(${rotation}deg) scale(${scale})`;
+            });
+        }
+
+        // 4. Parallax Elementos Flutuantes
+        function updateFloatParallax() {
+            const container = document.querySelector('.parallax-float');
+            if (!container) return;
+            
+            const rect = container.getBoundingClientRect();
+            const scrollProgress = Math.max(0, Math.min(1, -rect.top / window.innerHeight));
+            
+            const elements = container.querySelectorAll('.float-element');
+            elements.forEach((element, index) => {
+                const translateY = Math.sin(scrollProgress * Math.PI * 2 + index) * 50;
+                const translateX = Math.cos(scrollProgress * Math.PI * 1.5 + index) * 30;
+                
+                element.style.transform = `translate(${translateX}px, ${translateY}px)`;
+            });
+        }
+
+        // 5. Parallax Invertido
+        function updateInvertedParallax() {
+            const container = document.querySelector('.parallax-inverted');
+            if (!container) return;
+            
+            const rect = container.getBoundingClientRect();
+            const scrollProgress = Math.max(0, Math.min(1, -rect.top / window.innerHeight));
+            
+            const elements = container.querySelectorAll('.inverted-element');
+            elements.forEach((element, index) => {
+                const translateY = -scrollProgress * 200 * (index + 1);
+                element.style.transform = `translateY(${translateY}px)`;
+            });
+        }
+
+        // 6. Parallax com Fade
+        function updateFadeParallax() {
+            const container = document.querySelector('.parallax-fade');
+            if (!container) return;
+            
+            const rect = container.getBoundingClientRect();
+            const scrollProgress = Math.max(0, Math.min(1, -rect.top / window.innerHeight));
+            
+            const fade1 = container.querySelector('.fade-1');
+            const fade2 = container.querySelector('.fade-2');
+            
+            if (fade1) {
+                fade1.style.opacity = scrollProgress;
+                fade1.style.transform = `translateY(${(1 - scrollProgress) * 100}px)`;
+            }
+            
+            if (fade2) {
+                fade2.style.opacity = 1 - scrollProgress;
+                fade2.style.transform = `translateY(${scrollProgress * -100}px)`;
+            }
+        }
+
+        // 7. Parallax Mouse
+        let mouseX = 0, mouseY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function updateMouseParallax() {
+            const container = document.querySelector('.parallax-mouse');
+            if (!container) return;
+            
+            const rect = container.getBoundingClientRect();
+            if (rect.top > window.innerHeight || rect.bottom < 0) return;
+            
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const elements = container.querySelectorAll('.mouse-element');
+            elements.forEach((element, index) => {
+                const multiplier = (index + 1) * 0.1;
+                const translateX = (mouseX - centerX) * multiplier;
+                const translateY = (mouseY - centerY) * multiplier;
+                
+                element.style.transform = `translate(${translateX}px, ${translateY}px)`;
+            });
+        }
+
+        // 8. Parallax com Threshold
+        function updateThresholdParallax() {
+            const container = document.querySelector('.parallax-threshold');
+            if (!container) return;
+            
+            const rect = container.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
+            
+            const elements = container.querySelectorAll('.threshold-element');
+            elements.forEach(element => {
+                element.classList.toggle('active', isVisible);
+            });
+        }
+
+        // 9. Parallax com Cores
+        function updateColorsParallax() {
+            const container = document.querySelector('.parallax-colors');
+            if (!container) return;
+            
+            const rect = container.getBoundingClientRect();
+            const scrollProgress = Math.max(0, Math.min(1, -rect.top / window.innerHeight));
+            
+            // Interpolar entre duas cores
+            const color1 = [30, 64, 175]; // azul
+            const color2 = [185, 226, 140]; // verde
+            
+            const r = Math.round(color1[0] + (color2[0] - color1[0]) * scrollProgress);
+            const g = Math.round(color1[1] + (color2[1] - color1[1]) * scrollProgress);
+            const b = Math.round(color1[2] + (color2[2] - color1[2]) * scrollProgress);
+            
+            container.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        }
+
+        // Função principal de atualização
+        function updateAllParallax() {
+            updateLayersParallax();
+            updateTransformParallax();
+            updateFloatParallax();
+            updateInvertedParallax();
+            updateFadeParallax();
+            updateMouseParallax();
+            updateThresholdParallax();
+            updateColorsParallax();
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', throttle(updateAllParallax, 16));
+        window.addEventListener('mousemove', throttle(updateMouseParallax, 16));
+        window.addEventListener('resize', updateAllParallax);
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', updateAllParallax);
+    </script>
+</body>
+</html>

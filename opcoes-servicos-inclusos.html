@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Opções - Serviços Inclusos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%);
+            color: white;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .option {
+            max-width: 1200px;
+            margin: 0 auto 4rem auto;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .option h2 {
+            margin-bottom: 1rem;
+            color: #B9E28C;
+            font-size: 1.2rem;
+        }
+
+        /* OPÇÃO 1 - Cards Flutuantes */
+        .option1 .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem 0;
+        }
+
+        .option1 .service-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .option1 .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .option1 .service-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .option1 .service-emoji {
+            font-size: 2rem;
+        }
+
+        .option1 .service-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .option1 .service-description {
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-left: 3rem;
+        }
+
+        .option1 .verified-check {
+            margin-left: auto;
+        }
+
+        /* OPÇÃO 2 - Lista Compacta com Divisores */
+        .option2 .services-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .option2 .service-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .option2 .service-item:last-child {
+            border-bottom: none;
+        }
+
+        .option2 .service-content {
+            flex: 1;
+        }
+
+        .option2 .service-title {
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .option2 .service-description {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        /* OPÇÃO 3 - Grid Responsivo 2 Colunas */
+        .option3 .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .option3 .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option3 .service-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 0.5rem;
+            border-left: 3px solid #B9E28C;
+            position: relative;
+        }
+
+        .option3 .service-content {
+            flex: 1;
+            padding-right: 2rem;
+        }
+
+        .option3 .service-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 0.25rem;
+        }
+
+        .option3 .service-description {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        .option3 .instagram-check-fixed {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        /* OPÇÃO 4 - Tabs/Acordeon Vertical */
+        .option4 .services-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .option4 .service-tab {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .option4 .service-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .option4 .service-header:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .option4 .service-title {
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95);
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .option4 .service-description {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            font-style: italic;
+            padding: 0 1.5rem 1rem 4.5rem;
+        }
+
+        /* OPÇÃO 5 - Timeline Horizontal */
+        .option5 .services-timeline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+
+        .option5 .service-item {
+            flex: 1;
+            min-width: 200px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 1rem;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            position: relative;
+            border-top: 3px solid #B9E28C;
+        }
+
+        .option5 .service-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .option5 .service-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .option5 .service-description {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        /* Check Instagram comum */
+        .instagram-check {
+            width: 16px;
+            height: 16px;
+        }
+
+        .instagram-check circle {
+            fill: #1DA1F2;
+        }
+
+        .instagram-check path {
+            stroke: white;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    </style>
+</head>
+<body>
+    <div class="option option1">
+        <h2>Opção 1 - Cards Flutuantes com Hover</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-header">
+                    <span class="service-emoji">🚗</span>
+                    <span class="service-title">Remoção 24h</span>
+                    <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <p class="service-description">onde estiver, todos os dias</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-header">
+                    <span class="service-emoji">🌼</span>
+                    <span class="service-title">Cerimônia de Despedida</span>
+                    <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <p class="service-description">agendada e privativa</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-header">
+                    <span class="service-emoji">✨</span>
+                    <span class="service-title">Cremação Assistida e Homenagem</span>
+                    <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <p class="service-description">no melhor horário, de forma delicada</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-header">
+                    <span class="service-emoji">📄</span>
+                    <span class="service-title">Certificado de Cremação</span>
+                    <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <p class="service-description">assinada por veterinário responsável</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-header">
+                    <span class="service-emoji">⚱️</span>
+                    <span class="service-title">Urna</span>
+                    <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <p class="service-description">inclusa na cremação individual</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-header">
+                    <span class="service-emoji">🐾</span>
+                    <span class="service-title">Recordação Afetiva</span>
+                    <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <p class="service-description">única e exclusiva</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="option option2">
+        <h2>Opção 2 - Lista Compacta com Divisores</h2>
+        <div class="services-list">
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">🚗</span>
+                <div class="service-content">
+                    <div class="service-title">
+                        Remoção 24h
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="service-description">onde estiver, todos os dias</div>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">🌼</span>
+                <div class="service-content">
+                    <div class="service-title">
+                        Cerimônia de Despedida
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="service-description">agendada e privativa</div>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">✨</span>
+                <div class="service-content">
+                    <div class="service-title">
+                        Cremação Assistida e Homenagem
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="service-description">no melhor horário, de forma delicada</div>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">📄</span>
+                <div class="service-content">
+                    <div class="service-title">
+                        Certificado de Cremação
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="service-description">assinada por veterinário responsável</div>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">⚱️</span>
+                <div class="service-content">
+                    <div class="service-title">
+                        Urna
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="service-description">inclusa na cremação individual</div>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">🐾</span>
+                <div class="service-content">
+                    <div class="service-title">
+                        Recordação Afetiva
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="service-description">única e exclusiva</div>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">🏡</span>
+                <div class="service-content">
+                    <div class="service-title">
+                        Entrega em seu endereço
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="service-description">em mãos, de forma agendada</div>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">💳</span>
+                <div class="service-content">
+                    <div class="service-title">
+                        Parcelamento facilitado
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="service-description">à vista com desconto ou em até 12x sem juros</div>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">🤝</span>
+                <div class="service-content">
+                    <div class="service-title">
+                        Apoio Psicológico
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="service-description">receba todo amparo necessário</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="option option3">
+        <h2>Opção 3 - Grid Responsivo 2 Colunas (Check Fixo à Direita)</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">🚗</span>
+                <div class="service-content">
+                    <div class="service-title">Remoção 24h</div>
+                    <div class="service-description">onde estiver, todos os dias</div>
+                </div>
+                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">🌼</span>
+                <div class="service-content">
+                    <div class="service-title">Cerimônia de Despedida</div>
+                    <div class="service-description">agendada e privativa</div>
+                </div>
+                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">✨</span>
+                <div class="service-content">
+                    <div class="service-title">Cremação Assistida e Homenagem</div>
+                    <div class="service-description">no melhor horário, de forma delicada</div>
+                </div>
+                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">📄</span>
+                <div class="service-content">
+                    <div class="service-title">Certificado de Cremação</div>
+                    <div class="service-description">assinada por veterinário responsável</div>
+                </div>
+                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">⚱️</span>
+                <div class="service-content">
+                    <div class="service-title">Urna</div>
+                    <div class="service-description">inclusa na cremação individual</div>
+                </div>
+                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">🐾</span>
+                <div class="service-content">
+                    <div class="service-title">Recordação Afetiva</div>
+                    <div class="service-description">única e exclusiva</div>
+                </div>
+                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">🏡</span>
+                <div class="service-content">
+                    <div class="service-title">Entrega em seu endereço</div>
+                    <div class="service-description">em mãos, de forma agendada</div>
+                </div>
+                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">💳</span>
+                <div class="service-content">
+                    <div class="service-title">Parcelamento facilitado</div>
+                    <div class="service-description">à vista com desconto ou em até 12x sem juros</div>
+                </div>
+                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="service-item">
+                <span style="font-size: 1.5rem;">🤝</span>
+                <div class="service-content">
+                    <div class="service-title">Apoio Psicológico</div>
+                    <div class="service-description">receba todo amparo necessário</div>
+                </div>
+                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="option option4">
+        <h2>Opção 4 - Tabs/Acordeon Vertical</h2>
+        <div class="services-accordion">
+            <div class="service-tab">
+                <div class="service-header">
+                    <span style="font-size: 1.5rem;">🚗</span>
+                    <div class="service-title">
+                        Remoção 24h
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="service-description">onde estiver, todos os dias</div>
+            </div>
+
+            <div class="service-tab">
+                <div class="service-header">
+                    <span style="font-size: 1.5rem;">🌼</span>
+                    <div class="service-title">
+                        Cerimônia de Despedida
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="service-description">agendada e privativa</div>
+            </div>
+
+            <div class="service-tab">
+                <div class="service-header">
+                    <span style="font-size: 1.5rem;">✨</span>
+                    <div class="service-title">
+                        Cremação Assistida e Homenagem
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="service-description">no melhor horário, de forma delicada</div>
+            </div>
+
+            <div class="service-tab">
+                <div class="service-header">
+                    <span style="font-size: 1.5rem;">📄</span>
+                    <div class="service-title">
+                        Certificado de Cremação
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="service-description">assinada por veterinário responsável</div>
+            </div>
+
+            <div class="service-tab">
+                <div class="service-header">
+                    <span style="font-size: 1.5rem;">⚱️</span>
+                    <div class="service-title">
+                        Urna
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="service-description">inclusa na cremação individual</div>
+            </div>
+
+            <div class="service-tab">
+                <div class="service-header">
+                    <span style="font-size: 1.5rem;">🐾</span>
+                    <div class="service-title">
+                        Recordação Afetiva
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="service-description">única e exclusiva</div>
+            </div>
+
+            <div class="service-tab">
+                <div class="service-header">
+                    <span style="font-size: 1.5rem;">🏡</span>
+                    <div class="service-title">
+                        Entrega em seu endereço
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="service-description">em mãos, de forma agendada</div>
+            </div>
+
+            <div class="service-tab">
+                <div class="service-header">
+                    <span style="font-size: 1.5rem;">💳</span>
+                    <div class="service-title">
+                        Parcelamento facilitado
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="service-description">à vista com desconto ou em até 12x sem juros</div>
+            </div>
+
+            <div class="service-tab">
+                <div class="service-header">
+                    <span style="font-size: 1.5rem;">🤝</span>
+                    <div class="service-title">
+                        Apoio Psicológico
+                        <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="service-description">receba todo amparo necessário</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="option option5">
+        <h2>Opção 5 - Timeline Horizontal com Cards</h2>
+        <div class="services-timeline">
+            <div class="service-item">
+                <span class="service-emoji">🚗</span>
+                <div class="service-title">
+                    Remoção 24h
+                    <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <p class="service-description">onde estiver, todos os dias</p>
+            </div>
+
+            <div class="service-item">
+                <span class="service-emoji">🌼</span>
+                <div class="service-title">
+                    Cerimônia de Despedida
+                    <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <p class="service-description">agendada e privativa</p>
+            </div>
+
+            <div class="service-item">
+                <span class="service-emoji">✨</span>
+                <div class="service-title">
+                    Cremação Assistida
+                    <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <p class="service-description">horário delicado</p>
+            </div>
+
+            <div class="service-item">
+                <span class="service-emoji">📄</span>
+                <div class="service-title">
+                    Certificado
+                    <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <p class="service-description">por veterinário</p>
+            </div>
+
+            <div class="service-item">
+                <span class="service-emoji">⚱️</span>
+                <div class="service-title">
+                    Urna Inclusa
+                    <svg class="instagram-check" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <p class="service-description">cremação individual</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Abrir no navegador
+        console.log("5 Opções de Design para Serviços Inclusos");
+    </script>
+</body>
+</html>

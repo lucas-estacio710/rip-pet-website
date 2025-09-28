@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opções de Popup - Telefone 24h</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #052F5F;
+            padding: 2rem;
+            color: white;
+        }
+
+        .popup-option {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .popup-title {
+            color: #B9E28C;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Opção 1 - Cards Elegantes */
+        .popup-1 {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 400px;
+            margin: 0 auto;
+            color: #052F5F;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .popup-1 h3 {
+            color: #052F5F;
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .popup-1 p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .popup-1 .region-card {
+            background: linear-gradient(135deg, #052F5F, #1e40af);
+            color: white;
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .popup-1 .region-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(5, 47, 95, 0.3);
+        }
+
+        .popup-1 .region-info h4 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .popup-1 .region-info p {
+            margin: 0;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .popup-1 .phone-icon {
+            font-size: 1.5rem;
+            color: #B9E28C;
+        }
+
+        /* Opção 2 - Minimal e Clean */
+        .popup-2 {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 350px;
+            margin: 0 auto;
+            color: #052F5F;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .popup-2 h3 {
+            color: #052F5F;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .popup-2 .subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .popup-2 .region-item {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 1rem 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .popup-2 .region-item:last-child {
+            border-bottom: none;
+        }
+
+        .popup-2 .region-item:hover {
+            color: #052F5F;
+            padding-left: 1rem;
+            background: rgba(185, 226, 140, 0.1);
+            margin: 0 -1rem;
+            padding-right: 1rem;
+        }
+
+        /* Opção 3 - Estilo WhatsApp */
+        .popup-3 {
+            background: white;
+            border-radius: 18px;
+            padding: 0;
+            max-width: 380px;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .popup-3 .header {
+            background: #25D366;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .popup-3 .header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .popup-3 .header p {
+            margin: 0.5rem 0 0;
+            opacity: 0.9;
+            font-size: 0.85rem;
+        }
+
+        .popup-3 .region-list {
+            padding: 1rem;
+        }
+
+        .popup-3 .region-bubble {
+            background: #f0f0f0;
+            border-radius: 18px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .popup-3 .region-bubble:hover {
+            background: #25D366;
+            color: white;
+            transform: scale(1.02);
+        }
+
+        /* Opção 4 - Dark Mode Premium */
+        .popup-4 {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 24px;
+            padding: 2.5rem;
+            max-width: 420px;
+            margin: 0 auto;
+            color: white;
+            border: 1px solid rgba(185, 226, 140, 0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .popup-4 h3 {
+            color: #B9E28C;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .popup-4 p {
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        .popup-4 .region-premium {
+            background: rgba(185, 226, 140, 0.1);
+            border: 1px solid rgba(185, 226, 140, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .popup-4 .region-premium:hover {
+            background: rgba(185, 226, 140, 0.2);
+            border-color: #B9E28C;
+            transform: translateY(-2px);
+        }
+
+        .popup-4 .region-premium::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: #B9E28C;
+            transition: all 0.3s ease;
+        }
+
+        /* Opção 5 - Cards Compactos */
+        .popup-5 {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 320px;
+            margin: 0 auto;
+            color: #052F5F;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        .popup-5 h3 {
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: #052F5F;
+        }
+
+        .popup-5 .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .popup-5 .regions-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+        }
+
+        .popup-5 .region-compact {
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .popup-5 .region-compact:hover {
+            background: linear-gradient(45deg, #B9E28C, #a8d16f);
+            color: white;
+            border-left-color: #052F5F;
+            transform: scale(1.03);
+        }
+
+        /* Opção 6 - Lista Moderna */
+        .popup-6 {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 360px;
+            margin: 0 auto;
+            color: #052F5F;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-top: 5px solid #B9E28C;
+        }
+
+        .popup-6 h3 {
+            color: #052F5F;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .popup-6 p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .popup-6 .region-modern {
+            display: flex;
+            align-items: center;
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .popup-6 .region-modern:hover {
+            background: #052F5F;
+            color: white;
+            border-color: #052F5F;
+            transform: translateX(8px);
+        }
+
+        .popup-6 .region-icon {
+            width: 40px;
+            height: 40px;
+            background: #B9E28C;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: #052F5F;
+        }
+
+        .popup-6 .region-modern:hover .region-icon {
+            background: white;
+        }
+
+        /* Opção 7 - Estilo iOS */
+        .popup-7 {
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 2rem;
+            max-width: 340px;
+            margin: 0 auto;
+            color: #052F5F;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+
+        .popup-7 h3 {
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .popup-7 .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .popup-7 .region-ios {
+            background: rgba(0,122,255,0.1);
+            border-radius: 14px;
+            padding: 1.2rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .popup-7 .region-ios:hover {
+            background: #007AFF;
+            color: white;
+            transform: scale(0.98);
+        }
+
+        /* Opção 8 - Gradiente Moderno */
+        .popup-8 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 24px;
+            padding: 2.5rem;
+            max-width: 400px;
+            margin: 0 auto;
+            color: white;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        .popup-8 h3 {
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .popup-8 p {
+            text-align: center;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .popup-8 .region-gradient {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .popup-8 .region-gradient:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Opção 9 - Minimalista Japonês */
+        .popup-9 {
+            background: white;
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            max-width: 320px;
+            margin: 0 auto;
+            color: #333;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            border: 1px solid #f0f0f0;
+        }
+
+        .popup-9 h3 {
+            font-weight: 300;
+            font-size: 1.4rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: #052F5F;
+        }
+
+        .popup-9 .subtitle {
+            text-align: center;
+            font-weight: 300;
+            color: #666;
+            margin-bottom: 2.5rem;
+            font-size: 0.9rem;
+        }
+
+        .popup-9 .region-zen {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #f5f5f5;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .popup-9 .region-zen:last-child {
+            border-bottom: none;
+        }
+
+        .popup-9 .region-zen:hover {
+            color: #052F5F;
+            background: rgba(185, 226, 140, 0.1);
+            margin: 0 -2rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        /* Opção 10 - Compose Personalizado */
+        .popup-10 {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 400px;
+            margin: 0 auto;
+            color: #fff;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+
+        .popup-10 h3 {
+            text-align: center;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .popup-10 p {
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .popup-10 .region-compose {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .popup-10 .region-compose::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: #B9E28C;
+            transition: all 0.3s ease;
+        }
+
+        .popup-10 .region-compose:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border-color: rgba(185, 226, 140, 0.3);
+        }
+
+        .popup-10 .region-compose:hover::before {
+            width: 6px;
+            background: #a8d16f;
+        }
+
+        .popup-10 .region-content h4 {
+            margin: 0 0 0.3rem 0;
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .popup-10 .region-content p {
+            margin: 0;
+            color: #ccc;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        .popup-10 .phone-icon-red {
+            font-size: 1.5rem;
+            color: #ff4757;
+            transition: all 0.3s ease;
+        }
+
+        .popup-10 .region-compose:hover .phone-icon-red {
+            color: #ff3742;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: #B9E28C; margin-bottom: 3rem;">10 Opções de Popup - Telefone 24h</h1>
+
+    <!-- Opção 1 - Cards Elegantes -->
+    <div class="popup-option">
+        <h2 class="popup-title">Opção 1 - Cards Elegantes</h2>
+        <div class="popup-1">
+            <h3>Atendimento pelo telefone 24h</h3>
+            <p>Escolha sua região:</p>
+
+            <div class="region-card">
+                <div class="region-info">
+                    <h4>Santos e Baixada Santista</h4>
+                    <p>(13) 99160-3041</p>
+                </div>
+                <i class="fas fa-phone phone-icon"></i>
+            </div>
+
+            <div class="region-card">
+                <div class="region-info">
+                    <h4>São Paulo e Região</h4>
+                    <p>(11) 99160-3041</p>
+                </div>
+                <i class="fas fa-phone phone-icon"></i>
+            </div>
+
+            <div class="region-card">
+                <div class="region-info">
+                    <h4>Pouso Alegre e Região</h4>
+                    <p>(35) 99904-2223</p>
+                </div>
+                <i class="fas fa-phone phone-icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Opção 2 - Minimal e Clean -->
+    <div class="popup-option">
+        <h2 class="popup-title">Opção 2 - Minimal e Clean</h2>
+        <div class="popup-2">
+            <h3>Atendimento pelo telefone 24h</h3>
+            <p class="subtitle">Escolha sua região:</p>
+
+            <div class="region-item">
+                <strong>Santos e Baixada Santista</strong><br>
+                <span style="color: #666;">(13) 99160-3041</span>
+            </div>
+
+            <div class="region-item">
+                <strong>São Paulo e Região</strong><br>
+                <span style="color: #666;">(11) 99160-3041</span>
+            </div>
+
+            <div class="region-item">
+                <strong>Pouso Alegre e Região</strong><br>
+                <span style="color: #666;">(35) 99904-2223</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Opção 3 - Estilo WhatsApp -->
+    <div class="popup-option">
+        <h2 class="popup-title">Opção 3 - Estilo WhatsApp</h2>
+        <div class="popup-3">
+            <div class="header">
+                <h3>Atendimento pelo telefone 24h</h3>
+                <p>Escolha sua região:</p>
+            </div>
+            <div class="region-list">
+                <div class="region-bubble">
+                    <span><strong>Santos e Baixada Santista</strong><br>(13) 99160-3041</span>
+                    <i class="fas fa-phone"></i>
+                </div>
+
+                <div class="region-bubble">
+                    <span><strong>São Paulo e Região</strong><br>(11) 99160-3041</span>
+                    <i class="fas fa-phone"></i>
+                </div>
+
+                <div class="region-bubble">
+                    <span><strong>Pouso Alegre e Região</strong><br>(35) 99904-2223</span>
+                    <i class="fas fa-phone"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Opção 4 - Dark Mode Premium -->
+    <div class="popup-option">
+        <h2 class="popup-title">Opção 4 - Dark Mode Premium</h2>
+        <div class="popup-4">
+            <h3>Atendimento pelo telefone 24h</h3>
+            <p>Escolha sua região:</p>
+
+            <div class="region-premium">
+                <h4 style="margin: 0 0 0.5rem 0; color: #B9E28C;">Santos e Baixada Santista</h4>
+                <p style="margin: 0; color: #ccc;">(13) 99160-3041</p>
+            </div>
+
+            <div class="region-premium">
+                <h4 style="margin: 0 0 0.5rem 0; color: #B9E28C;">São Paulo e Região</h4>
+                <p style="margin: 0; color: #ccc;">(11) 99160-3041</p>
+            </div>
+
+            <div class="region-premium">
+                <h4 style="margin: 0 0 0.5rem 0; color: #B9E28C;">Pouso Alegre e Região</h4>
+                <p style="margin: 0; color: #ccc;">(35) 99904-2223</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Opção 5 - Cards Compactos -->
+    <div class="popup-option">
+        <h2 class="popup-title">Opção 5 - Cards Compactos</h2>
+        <div class="popup-5">
+            <h3>Atendimento pelo telefone 24h</h3>
+            <p class="subtitle">Escolha sua região:</p>
+
+            <div class="regions-grid">
+                <div class="region-compact">
+                    <strong>Santos e Baixada Santista</strong><br>
+                    <span style="font-size: 0.9rem; color: #666;">(13) 99160-3041</span>
+                </div>
+
+                <div class="region-compact">
+                    <strong>São Paulo e Região</strong><br>
+                    <span style="font-size: 0.9rem; color: #666;">(11) 99160-3041</span>
+                </div>
+
+                <div class="region-compact">
+                    <strong>Pouso Alegre e Região</strong><br>
+                    <span style="font-size: 0.9rem; color: #666;">(35) 99904-2223</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Opção 6 - Lista Moderna -->
+    <div class="popup-option">
+        <h2 class="popup-title">Opção 6 - Lista Moderna</h2>
+        <div class="popup-6">
+            <h3>Atendimento pelo telefone 24h</h3>
+            <p>Escolha sua região:</p>
+
+            <div class="region-modern">
+                <div class="region-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                    <strong>Santos e Baixada Santista</strong><br>
+                    <span style="font-size: 0.9rem; color: #666;">(13) 99160-3041</span>
+                </div>
+            </div>
+
+            <div class="region-modern">
+                <div class="region-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                    <strong>São Paulo e Região</strong><br>
+                    <span style="font-size: 0.9rem; color: #666;">(11) 99160-3041</span>
+                </div>
+            </div>
+
+            <div class="region-modern">
+                <div class="region-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                    <strong>Pouso Alegre e Região</strong><br>
+                    <span style="font-size: 0.9rem; color: #666;">(35) 99904-2223</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Opção 7 - Estilo iOS -->
+    <div class="popup-option">
+        <h2 class="popup-title">Opção 7 - Estilo iOS</h2>
+        <div class="popup-7">
+            <h3>Atendimento pelo telefone 24h</h3>
+            <p class="subtitle">Escolha sua região:</p>
+
+            <div class="region-ios">
+                Santos e Baixada Santista<br>
+                <strong>(13) 99160-3041</strong>
+            </div>
+
+            <div class="region-ios">
+                São Paulo e Região<br>
+                <strong>(11) 99160-3041</strong>
+            </div>
+
+            <div class="region-ios">
+                Pouso Alegre e Região<br>
+                <strong>(35) 99904-2223</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- Opção 8 - Gradiente Moderno -->
+    <div class="popup-option">
+        <h2 class="popup-title">Opção 8 - Gradiente Moderno</h2>
+        <div class="popup-8">
+            <h3>Atendimento pelo telefone 24h</h3>
+            <p>Escolha sua região:</p>
+
+            <div class="region-gradient">
+                <h4 style="margin: 0 0 0.5rem 0;">Santos e Baixada Santista</h4>
+                <p style="margin: 0; opacity: 0.9;">(13) 99160-3041</p>
+            </div>
+
+            <div class="region-gradient">
+                <h4 style="margin: 0 0 0.5rem 0;">São Paulo e Região</h4>
+                <p style="margin: 0; opacity: 0.9;">(11) 99160-3041</p>
+            </div>
+
+            <div class="region-gradient">
+                <h4 style="margin: 0 0 0.5rem 0;">Pouso Alegre e Região</h4>
+                <p style="margin: 0; opacity: 0.9;">(35) 99904-2223</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Opção 9 - Minimalista Japonês -->
+    <div class="popup-option">
+        <h2 class="popup-title">Opção 9 - Minimalista Japonês</h2>
+        <div class="popup-9">
+            <h3>Atendimento pelo telefone 24h</h3>
+            <p class="subtitle">Escolha sua região:</p>
+
+            <div class="region-zen">
+                Santos e Baixada Santista<br>
+                <span style="color: #666; font-size: 0.9rem;">(13) 99160-3041</span>
+            </div>
+
+            <div class="region-zen">
+                São Paulo e Região<br>
+                <span style="color: #666; font-size: 0.9rem;">(11) 99160-3041</span>
+            </div>
+
+            <div class="region-zen">
+                Pouso Alegre e Região<br>
+                <span style="color: #666; font-size: 0.9rem;">(35) 99904-2223</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Opção 10 - Compose Personalizado -->
+    <div class="popup-option">
+        <h2 class="popup-title">Opção 10 - Compose Personalizado</h2>
+        <div class="popup-10">
+            <h3>Atendimento Telefone 24h</h3>
+            <p>Escolha sua região</p>
+
+            <div class="region-compose">
+                <div class="region-content">
+                    <h4>Santos e Baixada Santista</h4>
+                    <p>(13) 99160-3041</p>
+                </div>
+                <i class="fas fa-phone phone-icon-red"></i>
+            </div>
+
+            <div class="region-compose">
+                <div class="region-content">
+                    <h4>São Paulo e Região</h4>
+                    <p>(11) 99160-3041</p>
+                </div>
+                <i class="fas fa-phone phone-icon-red"></i>
+            </div>
+
+            <div class="region-compose">
+                <div class="region-content">
+                    <h4>Pouso Alegre e Região</h4>
+                    <p>(35) 99904-2223</p>
+                </div>
+                <i class="fas fa-phone phone-icon-red"></i>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
