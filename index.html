@@ -5130,7 +5130,7 @@
         }
 
         // Add scroll listener for video masking
-        window.addEventListener('scroll', throttle(controlVideoMasking, 16));
+        window.addEventListener('scroll', controlVideoMasking);
 
         // Video fallback for mobile
         document.addEventListener('DOMContentLoaded', function() {
