@@ -4358,7 +4358,7 @@
                 margin-bottom: 6rem;
                 border: 2px solid var(--primary-blue);
                 border-radius: 1.5rem;
-                padding: 2rem 2rem 2rem 4rem;
+                padding: 0;
                 opacity: 1;
                 filter: blur(0px);
                 transform: translateY(0);
@@ -4370,7 +4370,7 @@
 
             .step-item:nth-child(even) {
                 margin-left: auto;
-                padding: 2rem 4rem 2rem 2rem;
+                padding: 0;
             }
 
             .step-item::before {
@@ -4411,7 +4411,8 @@
             .step-title {
                 font-size: 1.8rem;
                 font-weight: 600;
-                margin: 0 0 1.5rem 0;
+                margin: 0;
+                padding: 2rem 2rem 1.5rem 2rem;
                 font-family: 'Nunito', sans-serif;
                 color: var(--text-dark);
                 display: flex;
@@ -4457,8 +4458,8 @@
                 height: 300px;
                 background-size: cover;
                 background-position: center;
-                border-radius: 1rem;
-                margin-bottom: 1.5rem;
+                border-radius: 0;
+                margin: 0;
                 background-color: #f8f9fa;
                 background-image: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
             }
@@ -4467,18 +4468,19 @@
                 color: var(--text-light);
                 line-height: 1.8;
                 font-size: 1.1rem;
-                margin: 0 0 1.5rem 0;
+                margin: 0;
+                padding: 1.5rem 2rem;
                 font-family: 'Poppins', sans-serif;
                 text-align: center;
                 max-width: 800px;
                 margin-left: auto;
                 margin-right: auto;
-                margin-bottom: 1.5rem;
             }
 
             .step-highlight {
                 background: linear-gradient(135deg, rgba(185, 226, 140, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
                 padding: 1rem 2rem;
+                margin: 0 2rem 2rem 2rem;
                 border-radius: 0.75rem;
                 font-size: 1rem;
                 font-weight: 500;
@@ -4487,7 +4489,9 @@
                 font-style: italic;
                 text-align: center;
                 max-width: 600px;
-                margin: 0 auto;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 2rem;
             }
 
             /* Mobile responsive - Timeline */
@@ -4503,7 +4507,7 @@
 
                 .step-item {
                     margin-left: 60px !important;
-                    padding: 2rem 2rem 2rem 4rem !important;
+                    padding: 0 !important;
                     width: calc(100% - 60px);
                     margin-bottom: 4rem;
                 }
