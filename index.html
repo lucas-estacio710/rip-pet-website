@@ -5563,13 +5563,29 @@
         // Funções do carrossel de avaliações
         function scrollCarousel(direction) {
             const carousel = document.getElementById('reviewsCarousel');
-            const cardWidth = 380 + 32; // width + gap
-            const scrollAmount = direction === 'left' ? -cardWidth : cardWidth;
+            if (!carousel) {
+                console.error('Carrossel não encontrado');
+                return;
+            }
+
+            console.log('Scroll carousel called with direction:', direction);
+
+            // Método mais robusto: scrollar baseado na largura do container visível
+            const containerWidth = carousel.offsetWidth;
+            const scrollAmount = direction === 'left' ? -containerWidth : containerWidth;
+
+            console.log('Container width:', containerWidth, 'Scroll amount:', scrollAmount);
+            console.log('Current scroll position:', carousel.scrollLeft);
 
             carousel.scrollBy({
                 left: scrollAmount,
                 behavior: 'smooth'
             });
+
+            // Log após tentar scrollar
+            setTimeout(() => {
+                console.log('New scroll position:', carousel.scrollLeft);
+            }, 100);
         }
 
 
