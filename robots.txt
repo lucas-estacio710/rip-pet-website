@@ -6,5 +6,24 @@ Disallow: /.git/
 Disallow: /.claude/
 Disallow: /*_backup*.html
 
+# Proteção contra páginas maliciosas comuns (invasões anteriores)
+Disallow: /cassino/
+Disallow: /casino/
+Disallow: /vulkan/
+Disallow: /jogos/
+Disallow: /keno/
+Disallow: /slots/
+Disallow: /wager/
+Disallow: /promocoes/
+Disallow: /bet/
+Disallow: /poker/
+Disallow: /gambling/
+Disallow: /games/
+Disallow: /bonus/
+Disallow: /pharma/
+Disallow: /pills/
+Disallow: /viagra/
+Disallow: /cialis/
+
 # Permitir acesso ao sitemap
 Sitemap: https://rippet.com.br/sitemap.xml
