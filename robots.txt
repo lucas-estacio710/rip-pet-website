@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Bloquear arquivos sensíveis ou desnecessários
+Disallow: /.git/
+Disallow: /.claude/
+Disallow: /*_backup*.html
+
+# Permitir acesso ao sitemap
+Sitemap: https://rippet.com.br/sitemap.xml
