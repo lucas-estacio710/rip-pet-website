@@ -3404,6 +3404,16 @@
                         display: none;
                     }
                 }
+
+                /* Garantir que os botões apareçam no desktop */
+                @media (min-width: 769px) {
+                    .carousel-controls {
+                        display: flex !important;
+                        justify-content: center;
+                        gap: 1rem;
+                        margin-top: 2rem;
+                    }
+                }
                 @media (max-width: 768px) {
                     .phone-popup, .whatsapp-popup {
                         padding: 1.2rem !important;
