@@ -1,0 +1,73 @@
+{
+  "redirects": [
+    {
+      "source": "/lp-campinas-a",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/lp-campinas-a/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/crematorio-de-animais-lp-sp",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/crematorio-de-animais-lp-sp/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/crematorio-de-animais-lp-campinas",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/crematorio-de-animais-lp-campinas/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/unidade-santos",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/unidade-santos/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/unidade-sp",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/unidade-sp/",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    }
+  ]
+}
