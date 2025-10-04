@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(git ls-tree:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "WebFetch(domain:www.rippet.com.br)",
+      "WebFetch(domain:rippet.com.br)"
     ],
     "deny": [],
     "ask": []

@@ -52,10 +52,28 @@
     },
     {
       "source": "/(.*)\\?p=.*",
-      "status": 410
+      "destination": "/410.html",
+      "permanent": false
     }
   ],
   "headers": [
+    {
+      "source": "/410.html",
+      "headers": [
+        {
+          "key": "X-Status",
+          "value": "410"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [
