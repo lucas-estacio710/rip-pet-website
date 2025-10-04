@@ -3400,8 +3400,22 @@
                         padding: 0.4rem 0.8rem;
                     }
 
+                }
+
+                /* CSS dos controles agora está centralizado abaixo */
+
+                /* Mostrar botões sempre, exceto no mobile */
+                .carousel-controls {
+                    display: flex !important;
+                    justify-content: center;
+                    gap: 1rem;
+                    margin-top: 2rem;
+                }
+
+                /* Ocultar apenas no mobile pequeno */
+                @media (max-width: 480px) {
                     .carousel-controls {
-                        display: none;
+                        display: none !important;
                     }
                 }
 
@@ -4180,6 +4194,56 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Script do Carousel -->
+                <script>
+                // Função do carrossel de avaliações - MOVIDA PARA CÁ!
+                function scrollCarousel(direction) {
+                    const carousel = document.getElementById('reviewsCarousel');
+                    if (!carousel) {
+                        console.error('Carrossel não encontrado');
+                        return;
+                    }
+
+                    console.log('Scroll carousel called with direction:', direction);
+
+                    // Pegar largura de um card individual
+                    const card = carousel.querySelector('.review-card-carousel');
+                    if (!card) {
+                        console.error('Card não encontrado');
+                        return;
+                    }
+
+                    const cardWidth = card.offsetWidth;
+                    const gap = 32; // 2rem gap
+                    const scrollAmount = direction === 'left' ? -((cardWidth + gap) * 2) : ((cardWidth + gap) * 2);
+
+                    console.log('Card width:', cardWidth, 'Scroll amount:', scrollAmount);
+                    console.log('Current scroll position:', carousel.scrollLeft);
+                    console.log('Max scroll width:', carousel.scrollWidth);
+
+                    // Força o scroll mesmo que já esteja no fim/início
+                    const currentScroll = carousel.scrollLeft;
+                    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+                    let newPosition;
+                    if (direction === 'left') {
+                        newPosition = Math.max(0, currentScroll + scrollAmount);
+                    } else {
+                        newPosition = Math.min(maxScroll, currentScroll + scrollAmount);
+                    }
+
+                    carousel.scrollTo({
+                        left: newPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Log após tentar scrollar
+                    setTimeout(() => {
+                        console.log('New scroll position:', carousel.scrollLeft);
+                    }, 300);
+                }
+                </script>
 
                 <!-- Controles do carrossel -->
                 <div class="carousel-controls">
@@ -5208,7 +5272,7 @@
         gtag('config', 'G-LS0H2KX8EF');
     </script>
 
-    <!-- Facebook Pixel (replace with your pixel ID) -->
+    <!-- Facebook Pixel (SUBSTITUA "YOUR_PIXEL_ID" pelo ID real da RIP PET) -->
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -5225,7 +5289,8 @@
     <!-- Reviews functionality removed -->
     <script>
         // GoogleReviewsManager removed since testimonials section was removed
-        // class GoogleReviewsManager {
+        /*
+        class GoogleReviewsManager {
             constructor() {
                 /*
                  * 🚀 GOOGLE PLACES API (NEW) - CONFIGURAÇÃO
@@ -5571,33 +5636,7 @@
             });
         }
 
-        // Funções do carrossel de avaliações
-        function scrollCarousel(direction) {
-            const carousel = document.getElementById('reviewsCarousel');
-            if (!carousel) {
-                console.error('Carrossel não encontrado');
-                return;
-            }
-
-            console.log('Scroll carousel called with direction:', direction);
-
-            // Método mais robusto: scrollar baseado na largura do container visível
-            const containerWidth = carousel.offsetWidth;
-            const scrollAmount = direction === 'left' ? -containerWidth : containerWidth;
-
-            console.log('Container width:', containerWidth, 'Scroll amount:', scrollAmount);
-            console.log('Current scroll position:', carousel.scrollLeft);
-
-            carousel.scrollBy({
-                left: scrollAmount,
-                behavior: 'smooth'
-            });
-
-            // Log após tentar scrollar
-            setTimeout(() => {
-                console.log('New scroll position:', carousel.scrollLeft);
-            }, 100);
-        }
+        // Função do carrossel já foi movida para antes dos botões HTML
 
 
 
@@ -5635,6 +5674,7 @@
 
             console.log('Event listeners configurados com sucesso!');
         });
+        */
     </script>
 
     <noscript>
