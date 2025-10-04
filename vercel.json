@@ -52,8 +52,7 @@
     },
     {
       "source": "/(.*)\\?p=.*",
-      "destination": "/",
-      "permanent": true
+      "status": 410
     }
   ],
   "headers": [
