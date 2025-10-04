@@ -49,6 +49,11 @@
       "source": "/unidade-sp/",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/(.*)\\?p=.*",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "headers": [
