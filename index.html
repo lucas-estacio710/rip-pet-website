@@ -5292,25 +5292,23 @@
         /*
         class GoogleReviewsManager {
             constructor() {
-                /**
-                 * 🚀 GOOGLE PLACES API (NEW) - CONFIGURAÇÃO
-                 *
-                 * Esta implementação usa a NOVA Places API (New) que é:
-                 * ✅ 50% mais barata que a API antiga
-                 * ✅ Mais rápida e eficiente
-                 * ✅ Melhor rate limiting
-                 * ✅ Future-proof (Google está descontinuando a antiga)
-                 *
-                 * SETUP NECESSÁRIO:
-                 * 1. Ir em: https://console.cloud.google.com/
-                 * 2. Ativar: "Places API (New)" (NÃO a antiga!)
-                 * 3. Gerar API Key com restrições de domínio
-                 * 4. Encontrar Place ID em: https://developers.google.com/maps/documentation/places/web-service/place-id
-                 *
-                 * CUSTOS (2025):
-                 * - Place Details (New): $0.017 por request
-                 * - Com cache de 5 dias, máximo ~6 requests/mês = ~$0.10/mês
-                 */
+                // 🚀 GOOGLE PLACES API (NEW) - CONFIGURAÇÃO
+                //
+                // Esta implementação usa a NOVA Places API (New) que é:
+                // ✅ 50% mais barata que a API antiga
+                // ✅ Mais rápida e eficiente
+                // ✅ Melhor rate limiting
+                // ✅ Future-proof (Google está descontinuando a antiga)
+                //
+                // SETUP NECESSÁRIO:
+                // 1. Ir em: https://console.cloud.google.com/
+                // 2. Ativar: "Places API (New)" (NÃO a antiga!)
+                // 3. Gerar API Key com restrições de domínio
+                // 4. Encontrar Place ID em: https://developers.google.com/maps/documentation/places/web-service/place-id
+                //
+                // CUSTOS (2025):
+                // - Place Details (New): $0.017 por request
+                // - Com cache de 5 dias, máximo ~6 requests/mês = ~$0.10/mês
                 this.apiKey = 'YOUR_GOOGLE_PLACES_API_KEY'; // Configure quando tiver backend
                 this.placeId = 'ChIJ49FP4Z4DzpQR_MmarU6ok8M'; // RIP Pet Santos
                 this.cacheKey = 'ripPetReviews';
