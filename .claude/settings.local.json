@@ -7,7 +7,11 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "WebFetch(domain:www.rippet.com.br)",
-      "WebFetch(domain:rippet.com.br)"
+      "WebFetch(domain:rippet.com.br)",
+      "Bash(cat:*)",
+      "Bash(python:*)",
+      "WebSearch",
+      "WebFetch(domain:testemonquei.rippet.com.br)"
     ],
     "deny": [],
     "ask": []
