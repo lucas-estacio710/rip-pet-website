@@ -51,6 +51,17 @@
       "permanent": true
     },
     {
+      "source": "/googleaa8bd69cb817205a.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "testemonquei.rippet.com.br"
+        }
+      ],
+      "destination": "/googleaa8bd69cb817205a.html",
+      "permanent": false
+    },
+    {
       "source": "/(.*)",
       "has": [
         {
