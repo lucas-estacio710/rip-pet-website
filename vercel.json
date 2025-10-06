@@ -49,6 +49,17 @@
       "source": "/unidade-sp/",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "testemonquei.rippet.com.br"
+        }
+      ],
+      "destination": "/testemonquei-410.html",
+      "permanent": false
     }
   ],
   "headers": [
