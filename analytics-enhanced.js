@@ -318,11 +318,14 @@ function trackWhatsAppPopup(action) {
 // ===== INICIALIZAÇÃO AUTOMÁTICA =====
 function initEnhancedAnalytics() {
     console.log('🚀 Iniciando Analytics Avançado RIP PET...');
+    console.log('📍 Document ready state:', document.readyState);
 
     // Aguardar DOM estar pronto
     if (document.readyState === 'loading') {
+        console.log('⏳ Aguardando DOMContentLoaded...');
         document.addEventListener('DOMContentLoaded', setupTracking);
     } else {
+        console.log('✅ DOM já pronto, iniciando setup...');
         setupTracking();
     }
 }
@@ -344,24 +347,36 @@ function setupTracking() {
     // 3. Iniciar tracking de tempo
     timeTracking.init();
 
-    // 4. Rastrear todos os links de WhatsApp
+    // 4. Rastrear todos os links de WhatsApp (apenas cliques REAIS de usuário)
     const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
     console.log(`🔗 Encontrados ${whatsappLinks.length} links de WhatsApp`);
     whatsappLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            console.log('👆 Clique detectado em WhatsApp');
+            // Proteção: só rastrear se foi clique real do usuário (não programático)
+            if (!e.isTrusted) {
+                console.warn('⚠️ Evento de WhatsApp não-confiável ignorado');
+                return;
+            }
+
+            console.log('👆 Clique REAL detectado em WhatsApp');
             trackWhatsAppClick(this);
-        });
+        }, { passive: true });
     });
 
-    // 5. Rastrear todos os links de telefone
+    // 5. Rastrear todos os links de telefone (apenas cliques REAIS de usuário)
     const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
     console.log(`📞 Encontrados ${phoneLinks.length} links de telefone`);
     phoneLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            console.log('👆 Clique detectado em telefone');
+            // Proteção: só rastrear se foi clique real do usuário (não programático)
+            if (!e.isTrusted) {
+                console.warn('⚠️ Evento de telefone não-confiável ignorado');
+                return;
+            }
+
+            console.log('👆 Clique REAL detectado em telefone');
             trackPhoneClick(this);
-        });
+        }, { passive: true });
     });
 
     // 6. Interceptar abertura do popup de WhatsApp
