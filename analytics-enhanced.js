@@ -61,8 +61,17 @@ function extractWhatsAppInfo(url) {
 
 // ===== TRACKING DE WHATSAPP GRANULAR =====
 function trackWhatsAppClick(element, context = {}) {
+    // Proteção contra chamadas acidentais
+    if (!element) {
+        console.warn('⚠️ trackWhatsAppClick chamado sem elemento válido');
+        return;
+    }
+
     const url = element.href || element.getAttribute('href');
-    if (!url) return;
+    if (!url || !url.includes('wa.me')) {
+        console.warn('⚠️ trackWhatsAppClick chamado em elemento que não é WhatsApp:', url);
+        return;
+    }
 
     const info = extractWhatsAppInfo(url);
     const section = context.section || detectCurrentSection(element);
@@ -80,7 +89,7 @@ function trackWhatsAppClick(element, context = {}) {
             value: 10 // Valor estimado do lead
         });
 
-        console.log('📊 WhatsApp Click:', {
+        console.log('📊 WhatsApp Click (User Action):', {
             unit: info.unit_label,
             section: section,
             phone: info.phone
@@ -90,7 +99,20 @@ function trackWhatsAppClick(element, context = {}) {
 
 // ===== TRACKING DE TELEFONE GRANULAR =====
 function trackPhoneClick(element, context = {}) {
+    // Proteção contra chamadas acidentais
+    if (!element || !element.href) {
+        console.warn('⚠️ trackPhoneClick chamado sem elemento válido');
+        return;
+    }
+
     const tel = element.href || element.getAttribute('href');
+
+    // Verificar se é realmente um link tel:
+    if (!tel.startsWith('tel:')) {
+        console.warn('⚠️ trackPhoneClick chamado em elemento que não é tel:', tel);
+        return;
+    }
+
     const phoneNumber = tel.replace('tel:', '').replace(/\D/g, '');
     const unit = ANALYTICS_CONFIG.units[phoneNumber] || { name: 'unknown', label: 'Desconhecido' };
     const section = context.section || detectCurrentSection(element);
@@ -106,7 +128,7 @@ function trackPhoneClick(element, context = {}) {
             value: 15 // Telefone tem valor maior que WhatsApp (mais comprometido)
         });
 
-        console.log('📞 Phone Click:', {
+        console.log('📞 Phone Click (User Action):', {
             unit: unit.label,
             section: section,
             phone: phoneNumber
@@ -306,6 +328,13 @@ function initEnhancedAnalytics() {
 }
 
 function setupTracking() {
+    // Evitar múltiplas inicializações
+    if (window._rippetAnalyticsInitialized) {
+        console.warn('⚠️ Analytics já inicializado, ignorando duplicata');
+        return;
+    }
+    window._rippetAnalyticsInitialized = true;
+
     // 1. Iniciar tracking de scroll
     scrollTracking.init();
 
@@ -316,15 +345,21 @@ function setupTracking() {
     timeTracking.init();
 
     // 4. Rastrear todos os links de WhatsApp
-    document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+    const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
+    console.log(`🔗 Encontrados ${whatsappLinks.length} links de WhatsApp`);
+    whatsappLinks.forEach(link => {
         link.addEventListener('click', function(e) {
+            console.log('👆 Clique detectado em WhatsApp');
             trackWhatsAppClick(this);
         });
     });
 
     // 5. Rastrear todos os links de telefone
-    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+    const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+    console.log(`📞 Encontrados ${phoneLinks.length} links de telefone`);
+    phoneLinks.forEach(link => {
         link.addEventListener('click', function(e) {
+            console.log('👆 Clique detectado em telefone');
             trackPhoneClick(this);
         });
     });
