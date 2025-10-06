@@ -59,7 +59,7 @@
         }
       ],
       "destination": "/testemonquei-410.html",
-      "permanent": false
+      "statusCode": 410
     }
   ],
   "headers": [
