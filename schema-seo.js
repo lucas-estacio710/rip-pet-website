@@ -27,19 +27,21 @@ const localBusinessSchemas = [
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "@id": "https://rippet.com.br/#pindamonhangaba",
-        "name": "RIP PET - Pindamonhangaba (Matriz)",
+        "name": "R.I.P PET Crematório de Animais Pindamonhangaba - 24h",
         "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
-        "description": "Cremação de animais com dignidade em Pindamonhangaba. Matriz com crematório próprio, atendimento 24h humanizado e total transparência.",
+        "description": "Serviços funerários para animais de estimação em Pindamonhangaba. Matriz com crematório próprio, atendimento 24h humanizado e total transparência.",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "Estrada Municipal Francisco Barros Abreu, Estr. Mun. José Benedito Marcondes Vieira, 800 - Goiabal",
             "addressLocality": "Pindamonhangaba",
             "addressRegion": "SP",
+            "postalCode": "12412-847",
             "addressCountry": "BR"
         },
         "geo": {
             "@type": "GeoCoordinates",
-            "latitude": -22.9236,
-            "longitude": -45.4614
+            "latitude": -22.9760647,
+            "longitude": -45.4157029
         },
         "telephone": "+55-12-99799-6543",
         "url": "https://rippet.com.br",
@@ -52,14 +54,15 @@ const localBusinessSchemas = [
         },
         "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "reviewCount": "500",
+            "ratingValue": "4.9",
+            "reviewCount": "90",
             "bestRating": "5",
             "worstRating": "1"
         },
         "sameAs": [
-            "https://www.instagram.com/rippet.oficial/",
-            "https://www.facebook.com/rippet.oficial"
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/",
+            "https://www.google.com/maps/place/R.I.P+PET+Cremat%C3%B3rio+de+Animais+Pindamonhangaba+-+24h/@-22.9760647,-45.4157029,17z/"
         ]
     },
     {
@@ -97,8 +100,8 @@ const localBusinessSchemas = [
             "worstRating": "1"
         },
         "sameAs": [
-            "https://www.instagram.com/rippet.oficial/",
-            "https://www.facebook.com/rippet.oficial"
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/"
         ]
     },
     {
@@ -433,8 +436,8 @@ const organizationSchema = {
         "availableLanguage": "Portuguese"
     },
     "sameAs": [
-        "https://www.instagram.com/rippet.oficial/",
-        "https://www.facebook.com/rippet.oficial"
+        "https://www.instagram.com/rippetcrematorio/",
+        "https://www.facebook.com/rippetcrematorio/"
     ]
 };
 
