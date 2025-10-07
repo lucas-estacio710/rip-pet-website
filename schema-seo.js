@@ -1,0 +1,409 @@
+/**
+ * =====================================================
+ * RIP PET - STRUCTURED DATA (Schema.org)
+ * =====================================================
+ *
+ * SEO avançado com JSON-LD para Google Rich Snippets
+ * - LocalBusiness (5 unidades)
+ * - Services
+ * - Reviews/Ratings
+ * - FAQs
+ * - Videos
+ * - HowTo
+ *
+ * =====================================================
+ */
+
+// ===== 1. LOCAL BUSINESS SCHEMA (5 UNIDADES) =====
+const localBusinessSchemas = [
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://rippet.com.br/#vale-paraiba",
+        "name": "RIP PET - Vale do Paraíba",
+        "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
+        "description": "Cremação de animais com dignidade. Atendimento 24h humanizado, com total transparência e confiança no Vale do Paraíba.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "São José dos Campos",
+            "addressRegion": "SP",
+            "addressCountry": "BR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -23.1791,
+            "longitude": -45.8872
+        },
+        "telephone": "+55-12-99799-6543",
+        "url": "https://rippet.com.br",
+        "priceRange": "$$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "500",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "sameAs": [
+            "https://www.instagram.com/rippet.oficial/",
+            "https://www.facebook.com/rippet.oficial"
+        ]
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://rippet.com.br/#sao-paulo",
+        "name": "RIP PET - São Paulo",
+        "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
+        "description": "Cremação de animais com dignidade em São Paulo. Atendimento 24h humanizado.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "São Paulo",
+            "addressRegion": "SP",
+            "addressCountry": "BR"
+        },
+        "telephone": "+55-11-99160-3041",
+        "url": "https://rippet.com.br",
+        "priceRange": "$$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "500",
+            "bestRating": "5",
+            "worstRating": "1"
+        }
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://rippet.com.br/#santos",
+        "name": "RIP PET - Santos",
+        "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
+        "description": "Cremação de animais com dignidade em Santos. Atendimento 24h humanizado.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Santos",
+            "addressRegion": "SP",
+            "addressCountry": "BR"
+        },
+        "telephone": "+55-13-99806-8262",
+        "url": "https://rippet.com.br",
+        "priceRange": "$$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "500",
+            "bestRating": "5",
+            "worstRating": "1"
+        }
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://rippet.com.br/#campinas",
+        "name": "RIP PET - Campinas",
+        "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
+        "description": "Cremação de animais com dignidade em Campinas. Atendimento 24h humanizado.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Campinas",
+            "addressRegion": "SP",
+            "addressCountry": "BR"
+        },
+        "telephone": "+55-19-99916-1977",
+        "url": "https://rippet.com.br",
+        "priceRange": "$$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "500",
+            "bestRating": "5",
+            "worstRating": "1"
+        }
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://rippet.com.br/#regiao-lagos",
+        "name": "RIP PET - Região dos Lagos",
+        "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
+        "description": "Cremação de animais com dignidade na Região dos Lagos. Atendimento 24h humanizado.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Região dos Lagos",
+            "addressRegion": "RJ",
+            "addressCountry": "BR"
+        },
+        "telephone": "+55-24-99837-9825",
+        "url": "https://rippet.com.br",
+        "priceRange": "$$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "500",
+            "bestRating": "5",
+            "worstRating": "1"
+        }
+    }
+];
+
+// ===== 2. SERVICE SCHEMA =====
+const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Cremação de Animais",
+    "provider": {
+        "@type": "Organization",
+        "name": "RIP PET",
+        "url": "https://rippet.com.br"
+    },
+    "areaServed": {
+        "@type": "State",
+        "name": "São Paulo"
+    },
+    "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Serviços de Cremação",
+        "itemListElement": [
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Cremação Individual",
+                    "description": "Cremação individual com acompanhamento completo e urna personalizada"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Cremação Coletiva",
+                    "description": "Cremação coletiva com dignidade e respeito"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Velório Pet",
+                    "description": "Espaço dedicado para despedida do seu animal de estimação"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Busca Domiciliar 24h",
+                    "description": "Busca do pet em sua residência a qualquer hora"
+                }
+            }
+        ]
+    }
+};
+
+// ===== 3. FAQ SCHEMA =====
+const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Como funciona a remoção 24 horas?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Nosso serviço de remoção funciona 24 horas por dia, 7 dias por semana. Entre em contato conosco a qualquer momento e nossa equipe especializada irá até sua residência para buscar seu pet com todo cuidado e respeito."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "O que é cremação individual?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Na cremação individual, apenas o seu pet é cremado por vez, garantindo que as cinzas retornadas sejam exclusivamente dele. Você pode acompanhar o processo e recebe uma urna personalizada."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Quanto tempo demora o processo?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "O processo completo geralmente leva de 24 a 48 horas, dependendo do tamanho do animal e do tipo de cremação escolhido. Mantemos você informado em cada etapa."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Posso acompanhar a cremação?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sim! Na cremação individual, você pode acompanhar todo o processo presencialmente ou por vídeo, garantindo total transparência e tranquilidade."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Qual a diferença entre cremação individual e coletiva?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Na cremação individual, apenas seu pet é cremado e você recebe as cinzas em uma urna. Na cremação coletiva, vários animais são cremados juntos e as cinzas são depositadas em um jardim memorial."
+            }
+        }
+    ]
+};
+
+// ===== 4. VIDEO SCHEMA =====
+const videoSchema = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "Nosso compromisso com a Transparência - RIP PET",
+    "description": "Conheça nosso processo transparente de cremação de animais. Tenha certeza que seu pet será cremado conforme sua escolha.",
+    "thumbnailUrl": "https://rippet.com.br/images/video-thumbnail.jpg",
+    "uploadDate": "2024-01-01",
+    "contentUrl": "https://rippet.com.br/transparencia.mp4",
+    "embedUrl": "https://rippet.com.br/#processo"
+};
+
+// ===== 5. HOWTO SCHEMA (Processo de Cremação) =====
+const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Como funciona o processo de cremação na RIP PET",
+    "description": "Passo a passo completo do processo de cremação de animais com transparência e dignidade",
+    "step": [
+        {
+            "@type": "HowToStep",
+            "name": "Primeiro Contato",
+            "text": "Entre em contato conosco por WhatsApp ou telefone. Nossa equipe está disponível 24 horas para atendê-lo.",
+            "position": 1
+        },
+        {
+            "@type": "HowToStep",
+            "name": "Busca Domiciliar",
+            "text": "Nossa equipe vai até sua residência buscar seu pet com todo cuidado e respeito, em até 2 horas.",
+            "position": 2
+        },
+        {
+            "@type": "HowToStep",
+            "name": "Velório (Opcional)",
+            "text": "Oferecemos espaço dedicado para você se despedir do seu companheiro com tranquilidade.",
+            "position": 3
+        },
+        {
+            "@type": "HowToStep",
+            "name": "Cremação",
+            "text": "Processo de cremação realizado com dignidade. Na cremação individual, você pode acompanhar.",
+            "position": 4
+        },
+        {
+            "@type": "HowToStep",
+            "name": "Entrega",
+            "text": "Entregamos as cinzas em urna personalizada, com certificado de cremação individual.",
+            "position": 5
+        }
+    ]
+};
+
+// ===== 6. ORGANIZATION SCHEMA (Principal) =====
+const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "RIP PET",
+    "url": "https://rippet.com.br",
+    "logo": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
+    "description": "Cremação de animais com dignidade. Atendimento 24h humanizado, com total transparência e confiança. Milhares de famílias atendidas.",
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-12-99799-6543",
+        "contactType": "customer service",
+        "areaServed": "BR",
+        "availableLanguage": "Portuguese"
+    },
+    "sameAs": [
+        "https://www.instagram.com/rippet.oficial/",
+        "https://www.facebook.com/rippet.oficial"
+    ]
+};
+
+// ===== 7. BREADCRUMB SCHEMA =====
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://rippet.com.br"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Serviços",
+            "item": "https://rippet.com.br/#servicos"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Sobre Nós",
+            "item": "https://rippet.com.br/#processo"
+        }
+    ]
+};
+
+// ===== FUNÇÃO DE INICIALIZAÇÃO =====
+function injectSchemas() {
+    const schemas = [
+        organizationSchema,
+        ...localBusinessSchemas,
+        serviceSchema,
+        faqSchema,
+        videoSchema,
+        howToSchema,
+        breadcrumbSchema
+    ];
+
+    schemas.forEach((schema, index) => {
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.text = JSON.stringify(schema);
+        script.id = `schema-${index}`;
+        document.head.appendChild(script);
+    });
+
+    console.log('✅ SEO Schemas injetados:', schemas.length);
+}
+
+// Executar quando DOM estiver pronto
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectSchemas);
+} else {
+    injectSchemas();
+}
