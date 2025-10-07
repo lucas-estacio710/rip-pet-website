@@ -4,7 +4,14 @@
  * =====================================================
  *
  * SEO avançado com JSON-LD para Google Rich Snippets
- * - LocalBusiness (5 unidades)
+ * - LocalBusiness (7 unidades)
+ *   • Pindamonhangaba (Matriz)
+ *   • Vale do Paraíba (São José dos Campos)
+ *   • São Paulo
+ *   • Santos
+ *   • Campinas
+ *   • Resende (RJ)
+ *   • Pouso Alegre (MG)
  * - Services
  * - Reviews/Ratings
  * - FAQs
@@ -14,15 +21,54 @@
  * =====================================================
  */
 
-// ===== 1. LOCAL BUSINESS SCHEMA (5 UNIDADES) =====
+// ===== 1. LOCAL BUSINESS SCHEMA (7 UNIDADES) =====
 const localBusinessSchemas = [
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://rippet.com.br/#pindamonhangaba",
+        "name": "RIP PET - Pindamonhangaba (Matriz)",
+        "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
+        "description": "Cremação de animais com dignidade em Pindamonhangaba. Matriz com crematório próprio, atendimento 24h humanizado e total transparência.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pindamonhangaba",
+            "addressRegion": "SP",
+            "addressCountry": "BR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -22.9236,
+            "longitude": -45.4614
+        },
+        "telephone": "+55-12-99799-6543",
+        "url": "https://rippet.com.br",
+        "priceRange": "$$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "500",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "sameAs": [
+            "https://www.instagram.com/rippet.oficial/",
+            "https://www.facebook.com/rippet.oficial"
+        ]
+    },
     {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "@id": "https://rippet.com.br/#vale-paraiba",
         "name": "RIP PET - Vale do Paraíba",
         "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
-        "description": "Cremação de animais com dignidade. Atendimento 24h humanizado, com total transparência e confiança no Vale do Paraíba.",
+        "description": "Cremação de animais com dignidade no Vale do Paraíba. Atendimento 24h humanizado em São José dos Campos e região, com total transparência.",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "São José dos Campos",
@@ -148,17 +194,57 @@ const localBusinessSchemas = [
     {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        "@id": "https://rippet.com.br/#regiao-lagos",
-        "name": "RIP PET - Região dos Lagos",
+        "@id": "https://rippet.com.br/#resende",
+        "name": "RIP PET - Resende",
         "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
-        "description": "Cremação de animais com dignidade na Região dos Lagos. Atendimento 24h humanizado.",
+        "description": "Cremação de animais com dignidade em Resende (RJ). Atendimento 24h humanizado.",
         "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Região dos Lagos",
+            "addressLocality": "Resende",
             "addressRegion": "RJ",
             "addressCountry": "BR"
         },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -22.4688,
+            "longitude": -44.4501
+        },
         "telephone": "+55-24-99837-9825",
+        "url": "https://rippet.com.br",
+        "priceRange": "$$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "500",
+            "bestRating": "5",
+            "worstRating": "1"
+        }
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://rippet.com.br/#pouso-alegre",
+        "name": "RIP PET - Pouso Alegre",
+        "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
+        "description": "Cremação de animais com dignidade em Pouso Alegre (MG). Atendimento 24h humanizado.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pouso Alegre",
+            "addressRegion": "MG",
+            "addressCountry": "BR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -22.2308,
+            "longitude": -45.9364
+        },
+        "telephone": "+55-35-99904-2223",
         "url": "https://rippet.com.br",
         "priceRange": "$$",
         "openingHoursSpecification": {
