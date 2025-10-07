@@ -138,14 +138,21 @@ const localBusinessSchemas = [
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "@id": "https://rippet.com.br/#santos",
-        "name": "RIP PET - Santos",
+        "name": "RIP Pet - Funeral e Crematório de Animais - Santos",
         "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
-        "description": "Cremação de animais com dignidade em Santos. Atendimento 24h humanizado.",
+        "description": "Crematório e serviços funerários para animais de estimação em Santos. Atendimento 24h humanizado com total transparência.",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "Av. Cel. Joaquim Montenegro, 334 - Ponta da Praia",
             "addressLocality": "Santos",
             "addressRegion": "SP",
+            "postalCode": "11035-002",
             "addressCountry": "BR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -23.9793001,
+            "longitude": -46.3028134
         },
         "telephone": "+55-13-99806-8262",
         "url": "https://rippet.com.br",
@@ -159,10 +166,15 @@ const localBusinessSchemas = [
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "5.0",
-            "reviewCount": "500",
+            "reviewCount": "371",
             "bestRating": "5",
             "worstRating": "1"
-        }
+        },
+        "sameAs": [
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/",
+            "https://www.google.com/maps/place/RIP+Pet+-+Funeral+e+Cremat%C3%B3rio+de+Animais+-+Santos/@-23.9793001,-46.3028134,17z/"
+        ]
     },
     {
         "@context": "https://schema.org",
