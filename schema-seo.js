@@ -69,19 +69,21 @@ const localBusinessSchemas = [
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "@id": "https://rippet.com.br/#vale-paraiba",
-        "name": "RIP PET - Vale do Paraíba",
+        "name": "R.I.P. Pet Crematório de Animais São José dos Campos - 24h",
         "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
-        "description": "Cremação de animais com dignidade no Vale do Paraíba. Atendimento 24h humanizado em São José dos Campos e região, com total transparência.",
+        "description": "Serviços funerários para animais de estimação em São José dos Campos e Vale do Paraíba. Atendimento 24h humanizado com total transparência.",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "Av. Dr. Ademar de Barros, 1257 - Vila Ema",
             "addressLocality": "São José dos Campos",
             "addressRegion": "SP",
+            "postalCode": "12245-010",
             "addressCountry": "BR"
         },
         "geo": {
             "@type": "GeoCoordinates",
-            "latitude": -23.1791,
-            "longitude": -45.8872
+            "latitude": -23.2034305,
+            "longitude": -45.8933872
         },
         "telephone": "+55-12-99799-6543",
         "url": "https://rippet.com.br",
@@ -95,13 +97,14 @@ const localBusinessSchemas = [
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "5.0",
-            "reviewCount": "500",
+            "reviewCount": "304",
             "bestRating": "5",
             "worstRating": "1"
         },
         "sameAs": [
             "https://www.instagram.com/rippetcrematorio/",
-            "https://www.facebook.com/rippetcrematorio/"
+            "https://www.facebook.com/rippetcrematorio/",
+            "https://www.google.com/maps/place/R.I.P.+Pet+Cremat%C3%B3rio+de+Animais+S%C3%A3o+Jos%C3%A9+dos+Campos+-+24h/@-23.2034305,-45.8933872,17z/"
         ]
     },
     {
@@ -191,14 +194,21 @@ const localBusinessSchemas = [
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "@id": "https://rippet.com.br/#campinas",
-        "name": "RIP PET - Campinas",
+        "name": "R.I.P. PET Crematório de Animais Campinas - 24h",
         "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
-        "description": "Cremação de animais com dignidade em Campinas. Atendimento 24h humanizado.",
+        "description": "Serviços funerários para animais de estimação em Campinas. Atendimento 24h humanizado com total transparência.",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "Av. Dr. Heitor Penteado, 841 - Parque Taquaral",
             "addressLocality": "Campinas",
             "addressRegion": "SP",
+            "postalCode": "13075-185",
             "addressCountry": "BR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -22.8743698,
+            "longitude": -47.0610401
         },
         "telephone": "+55-19-99916-1977",
         "url": "https://rippet.com.br",
@@ -212,28 +222,35 @@ const localBusinessSchemas = [
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "5.0",
-            "reviewCount": "500",
+            "reviewCount": "816",
             "bestRating": "5",
             "worstRating": "1"
-        }
+        },
+        "sameAs": [
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/",
+            "https://www.google.com/maps/place/R.I.P.+PET+Cremat%C3%B3rio+de+Animais+Campinas+-+24h/@-22.8743698,-47.0610401,17z/"
+        ]
     },
     {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "@id": "https://rippet.com.br/#resende",
-        "name": "RIP PET - Resende",
+        "name": "R.I.P. PET Crematório de animais",
         "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
-        "description": "Cremação de animais com dignidade em Resende (RJ). Atendimento 24h humanizado.",
+        "description": "Serviços funerários para animais de estimação em Resende (RJ). Atendimento 24h humanizado com total transparência.",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "R. Santa Teresinha, 168 - Paraíso",
             "addressLocality": "Resende",
             "addressRegion": "RJ",
+            "postalCode": "27535-200",
             "addressCountry": "BR"
         },
         "geo": {
             "@type": "GeoCoordinates",
-            "latitude": -22.4688,
-            "longitude": -44.4501
+            "latitude": -22.4526892,
+            "longitude": -44.4335443
         },
         "telephone": "+55-24-99837-9825",
         "url": "https://rippet.com.br",
@@ -247,28 +264,35 @@ const localBusinessSchemas = [
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "5.0",
-            "reviewCount": "500",
+            "reviewCount": "186",
             "bestRating": "5",
             "worstRating": "1"
-        }
+        },
+        "sameAs": [
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/",
+            "https://www.google.com/maps/place/R.I.P.+PET+Cremat%C3%B3rio+de+animais/@-22.4526892,-44.4335443,17z/"
+        ]
     },
     {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "@id": "https://rippet.com.br/#pouso-alegre",
-        "name": "RIP PET - Pouso Alegre",
+        "name": "R.I.P. Pet - Crematório de Animais",
         "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
-        "description": "Cremação de animais com dignidade em Pouso Alegre (MG). Atendimento 24h humanizado.",
+        "description": "Serviços funerários para animais de estimação em Pouso Alegre (MG). Atendimento 24h humanizado com total transparência.",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "R. Paulino Pereira da Silva, 69 - Saude",
             "addressLocality": "Pouso Alegre",
             "addressRegion": "MG",
+            "postalCode": "37551-110",
             "addressCountry": "BR"
         },
         "geo": {
             "@type": "GeoCoordinates",
-            "latitude": -22.2308,
-            "longitude": -45.9364
+            "latitude": -22.2250931,
+            "longitude": -45.939912
         },
         "telephone": "+55-35-99904-2223",
         "url": "https://rippet.com.br",
@@ -282,10 +306,15 @@ const localBusinessSchemas = [
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "5.0",
-            "reviewCount": "500",
+            "reviewCount": "35",
             "bestRating": "5",
             "worstRating": "1"
-        }
+        },
+        "sameAs": [
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/",
+            "https://www.google.com/maps/place/R.I.P.+Pet+-+Cremat%C3%B3rio+de+Animais/@-22.2250931,-45.939912,17z/"
+        ]
     }
 ];
 
