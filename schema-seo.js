@@ -108,14 +108,20 @@ const localBusinessSchemas = [
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "@id": "https://rippet.com.br/#sao-paulo",
-        "name": "RIP PET - São Paulo",
+        "name": "R.I.P. Pet Funeral e Crematório de Animais",
         "image": "https://rippet.com.br/rippet_logo_horizontal_fundo_claro.png",
-        "description": "Cremação de animais com dignidade em São Paulo. Atendimento 24h humanizado.",
+        "description": "Cemitério e crematório de animais de estimação em São Paulo. Atendimento 24h humanizado com total transparência.",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "R. Roque Friguglieti - Santa Cecilia",
             "addressLocality": "São Paulo",
             "addressRegion": "SP",
             "addressCountry": "BR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -23.5341326,
+            "longitude": -46.6577966
         },
         "telephone": "+55-11-99160-3041",
         "url": "https://rippet.com.br",
@@ -129,10 +135,15 @@ const localBusinessSchemas = [
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "5.0",
-            "reviewCount": "500",
+            "reviewCount": "1491",
             "bestRating": "5",
             "worstRating": "1"
-        }
+        },
+        "sameAs": [
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/",
+            "https://www.google.com/maps/place/R.I.P.+Pet+Funeral+e+Cremat%C3%B3rio+de+Animais/@-23.5341326,-46.6577966,17z/"
+        ]
     },
     {
         "@context": "https://schema.org",
