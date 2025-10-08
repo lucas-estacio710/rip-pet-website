@@ -1,3 +1,20 @@
+# Permitir bots de redes sociais (Open Graph, compartilhamento)
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+# Permitir todos os outros bots (Google, Bing, etc)
 User-agent: *
 Allow: /
 
