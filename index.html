@@ -2030,6 +2030,15 @@
         });
     </script>
 
+    <!-- Prevenir prompt de instalação PWA (manter manifest para SEO) -->
+    <script>
+        // Cancela o prompt de instalação automático do navegador
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            // Não salva o evento, efetivamente desabilitando instalação
+        });
+    </script>
+
     <!-- SEO: Structured Data (Schema.org) -->
     <script src="./schema-seo.js"></script>
 </head>
