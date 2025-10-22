@@ -4493,16 +4493,7 @@
 
             /* Linha conectora do timeline */
             .steps-container::before {
-                content: '';
-                position: absolute;
-                left: 50%;
-                top: 80px;
-                bottom: 80px;
-                width: 4px;
-                background: linear-gradient(180deg, var(--primary-blue), var(--accent-gold));
-                transform: translateX(-50%);
-                border-radius: 2px;
-                box-shadow: 0 0 20px rgba(5, 47, 95, 0.3);
+                display: none;
             }
 
             .step-item {
@@ -4654,8 +4645,7 @@
                 }
 
                 .steps-container::before {
-                    left: 30px;
-                    transform: none;
+                    display: none;
                 }
 
                 .step-item {
