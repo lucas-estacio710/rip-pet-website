@@ -4534,14 +4534,27 @@
 
             .step-item.blur-effect {
                 opacity: 0;
-                filter: blur(10px);
-                transform: translateY(30px);
+                transform: translateY(80px) scale(0.95);
             }
 
             .step-item.visible {
                 opacity: 1;
-                filter: blur(0px);
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
+            }
+
+            @keyframes smoothReveal {
+                0% {
+                    opacity: 0;
+                    transform: translateY(80px) scale(0.95);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+
+            .step-item.animate-in {
+                animation: smoothReveal 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
             }
 
             .step-item:last-child {
@@ -4647,9 +4660,15 @@
                     background: linear-gradient(180deg, var(--primary-blue), var(--accent-gold));
                     width: 3px;
                     height: 90%;
-                    left: 30px;
+                    left: 50%;
+                    transform: translateX(-50%);
                     top: 5%;
                     border-radius: 2px;
+                    z-index: 0;
+                }
+
+                .step-item {
+                    z-index: 1;
                 }
 
                 .step-item {
@@ -5703,19 +5722,25 @@
                 observer.observe(img);
             });
 
-            // Observer para efeito de blur nas etapas
+            // Observer para efeito suave de desenrolar nas etapas
             const blurObserver = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        // Adiciona a classe visible imediatamente quando entra na viewport
+                        // Remove blur-effect e adiciona animate-in para trigger da animação
                         entry.target.classList.remove('blur-effect');
-                        entry.target.classList.add('visible');
+                        entry.target.classList.add('animate-in');
+
+                        // Após animação, adiciona visible
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, 1200);
+
                         blurObserver.unobserve(entry.target);
                     }
                 });
             }, {
-                threshold: 0.15,
-                rootMargin: '0px 0px -100px 0px'
+                threshold: 0.1,
+                rootMargin: '0px 0px -80px 0px'
             });
 
             // Adicionar classe blur-effect inicialmente e observar todos os step-items
