@@ -93,6 +93,24 @@
     <meta name="twitter:image" content="https://rippet.com.br/images/og-image.jpg">
     <meta name="twitter:image:alt" content="RIP PET - Cremação de Animais com Dignidade">
 
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '768259331430020');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=768259331430020&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -5073,6 +5091,14 @@
 
         // Phone Popup Functions with smooth animation
         function openPhonePopup() {
+            // Track Meta Pixel Lead event
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: 'Phone Contact',
+                    content_category: 'Contact'
+                });
+            }
+
             const overlay = document.getElementById('phonePopupOverlay');
             overlay.style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -5090,6 +5116,14 @@
 
         // WhatsApp Popup Functions with smooth animation
         function openWhatsAppPopup() {
+            // Track Meta Pixel Lead event
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: 'WhatsApp Contact',
+                    content_category: 'Contact'
+                });
+            }
+
             const overlay = document.getElementById('whatsappPopupOverlay');
             overlay.style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -5736,10 +5770,23 @@
         */
     </script>
 
-    <noscript>
-        <img height="1" width="1" style="display:none"
-             src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/>
-    </noscript>
+    <!-- Meta Pixel - Track WhatsApp Direct Links -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track all direct WhatsApp links (wa.me)
+            const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
+            whatsappLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'Contact', {
+                            content_name: 'WhatsApp Direct Link',
+                            content_category: 'Contact'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 
     <!-- Vercel Web Analytics -->
     <script src="/_vercel/insights/script.js"></script>
