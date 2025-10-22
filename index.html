@@ -4642,7 +4642,14 @@
                 }
 
                 .steps-container::before {
-                    display: none;
+                    display: block;
+                    background-image: none;
+                    background: linear-gradient(180deg, var(--primary-blue), var(--accent-gold));
+                    width: 3px;
+                    height: 90%;
+                    left: 30px;
+                    top: 5%;
+                    border-radius: 2px;
                 }
 
                 .step-item {
@@ -5698,21 +5705,22 @@
 
             // Observer para efeito de blur nas etapas
             const blurObserver = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
+                entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.classList.add('visible');
-                        }, index * 300);
+                        // Adiciona a classe visible imediatamente quando entra na viewport
+                        entry.target.classList.remove('blur-effect');
+                        entry.target.classList.add('visible');
                         blurObserver.unobserve(entry.target);
                     }
                 });
             }, {
-                threshold: 0.2,
-                rootMargin: '0px 0px -50px 0px'
+                threshold: 0.15,
+                rootMargin: '0px 0px -100px 0px'
             });
 
-            // Observar todos os step-items
+            // Adicionar classe blur-effect inicialmente e observar todos os step-items
             document.querySelectorAll('.step-item').forEach(item => {
+                item.classList.add('blur-effect');
                 blurObserver.observe(item);
             });
         }
