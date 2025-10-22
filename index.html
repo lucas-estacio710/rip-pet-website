@@ -4517,22 +4517,7 @@
             }
 
             .step-item::before {
-                content: '';
-                position: absolute;
-                top: 50%;
-                width: 30px;
-                height: 4px;
-                background: linear-gradient(90deg, var(--primary-blue), var(--accent-gold));
-                transform: translateY(-50%);
-                border-radius: 2px;
-            }
-
-            .step-item:nth-child(odd)::before {
-                right: -32px;
-            }
-
-            .step-item:nth-child(even)::before {
-                left: -32px;
+                display: none;
             }
 
             .step-item.blur-effect {
@@ -4656,8 +4641,7 @@
                 }
 
                 .step-item::before {
-                    left: -32px !important;
-                    right: auto !important;
+                    display: none;
                 }
 
                 .step-number {
