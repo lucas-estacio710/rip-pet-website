@@ -4535,25 +4535,11 @@
 
             /* Linha conectora do timeline em S */
             .steps-container::before {
-                content: '';
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 2400' preserveAspectRatio='none'%3E%3Cpath d='M 400 100 Q 500 200 400 300 Q 300 400 400 500 Q 500 600 400 700 Q 300 800 400 900 Q 500 1000 400 1100 Q 300 1200 400 1300 Q 500 1400 400 1500 Q 300 1600 400 1700 Q 500 1800 400 1900 Q 300 2000 400 2100' stroke='%23052F5F' stroke-width='3' fill='none' opacity='0.3' stroke-linecap='round'/%3E%3C/svg%3E");
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: 100% 100%;
-                pointer-events: none;
-                z-index: 0;
-                opacity: 0;
-                transition: opacity 0.6s ease;
+                display: none;
             }
 
             .steps-container.line-visible::before {
-                opacity: 1;
-                animation: lineDescend 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+                display: none;
             }
 
             @keyframes lineDescend {
