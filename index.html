@@ -97,18 +97,49 @@
     <meta name="twitter:image" content="https://rippet.com.br/images/og-image.jpg">
     <meta name="twitter:image:alt" content="RIP PET - Cremação de Animais com Dignidade">
 
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code - Lazy Loaded -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
+    // Inicializa fila do Facebook Pixel sem carregar o script ainda
+    window.fbq = window.fbq || function() {
+        (window.fbq.q = window.fbq.q || []).push(arguments);
+    };
+    window._fbq = window.fbq;
+    window.fbq.push = window.fbq;
+    window.fbq.loaded = true;
+    window.fbq.version = '2.0';
+    window.fbq.queue = [];
+
+    // Adiciona eventos à fila
     fbq('init', '768259331430020');
     fbq('track', 'PageView');
+
+    // Função para carregar o Facebook Pixel sob demanda
+    function loadFacebookPixel() {
+        if (window.fbPixelLoaded) return;
+        window.fbPixelLoaded = true;
+
+        // Carrega o script fbevents.js
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+        document.head.appendChild(script);
+    }
+
+    // Carrega quando o usuário interage (scroll, mouse, touch) ou após 3s
+    const interactionEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
+    const loadOnInteraction = () => {
+        loadFacebookPixel();
+        interactionEvents.forEach(event =>
+            window.removeEventListener(event, loadOnInteraction)
+        );
+    };
+
+    interactionEvents.forEach(event =>
+        window.addEventListener(event, loadOnInteraction, { passive: true, once: true })
+    );
+
+    // Fallback: carrega após 3 segundos se não houver interação
+    setTimeout(loadFacebookPixel, 3000);
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=768259331430020&ev=PageView&noscript=1"
