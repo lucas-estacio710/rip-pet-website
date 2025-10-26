@@ -5710,13 +5710,40 @@
         });
     </script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-04KMEL26PC"></script>
+    <!-- Google tag (gtag.js) - Lazy Loaded -->
     <script>
+        // Inicializa dataLayer e gtag sem carregar o script ainda
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-04KMEL26PC');
+
+        // Função para carregar Google Analytics sob demanda
+        function loadGoogleAnalytics() {
+            if (window.gtagLoaded) return;
+            window.gtagLoaded = true;
+
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-04KMEL26PC';
+            document.head.appendChild(script);
+        }
+
+        // Carrega quando o usuário interage ou após 3s
+        const gtagInteractionEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
+        const loadGtagOnInteraction = () => {
+            loadGoogleAnalytics();
+            gtagInteractionEvents.forEach(event =>
+                window.removeEventListener(event, loadGtagOnInteraction)
+            );
+        };
+
+        gtagInteractionEvents.forEach(event =>
+            window.addEventListener(event, loadGtagOnInteraction, { passive: true, once: true })
+        );
+
+        // Fallback: carrega após 3 segundos
+        setTimeout(loadGoogleAnalytics, 3000);
     </script>
 
     <!-- RIP PET - Analytics Avançado -->
