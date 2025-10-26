@@ -24,7 +24,7 @@
 
     <!-- Preload Critical Resources -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
-    <link rel="preload" href="./fonts/Autography.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./fonts/Autography.woff2" as="font" type="font/woff2">
 
     <!-- Preconnect to External Domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -121,7 +121,6 @@
         function showReviewModal(button) {
             const card = button.closest('.review-card-carousel');
             if (!card) {
-                console.error('Card não encontrado');
                 return;
             }
 
@@ -1341,6 +1340,47 @@
             .logo img {
                 height: 50px;
             }
+
+            /* Remover background inline no mobile - usar ::before */
+            #servicos {
+                background: linear-gradient(to bottom right, #111320 0%, #0C325F 100%) !important;
+            }
+
+            /* Fundo linhas mobile por cima de tudo */
+            #servicos::before {
+                background-image: url('./images/fundo_linhas_mobile.png') !important;
+                z-index: 10 !important;
+            }
+
+            /* Layout mobile: empilhar imagem e texto */
+            .services-intro > div:first-child {
+                flex-direction: column !important;
+                text-align: center;
+            }
+
+            .services-intro > div:first-child img {
+                display: none !important; /* Esconde imagem desktop */
+            }
+
+            .services-intro > div:nth-child(2) {
+                display: block !important; /* Mostra imagem mobile */
+            }
+
+            /* Esconder imagem desktop */
+            .gato-fade-desktop {
+                display: none !important;
+            }
+
+            /* Mobile - mostrar imagem fixa de fundo */
+            .gato-fixed-bg-mobile {
+                display: block !important;
+            }
+
+            /* Mobile - overlay do box para criar efeito janela */
+            .families-box {
+                background: rgba(255, 255, 255, 0.08) !important;
+                backdrop-filter: blur(15px) !important;
+            }
         }
 
         /* Extra small screens (375px and below) */
@@ -1957,65 +1997,17 @@
             flex-shrink: 0;
         }
 
-        /* Efeito shimmer passando pelas letras */
+        /* Cores simples sem efeito shimmer */
         .shimmer-text-individual {
-            background: linear-gradient(
-                90deg,
-                #55E6A6 0%,
-                #55E6A6 40%,
-                #ffffff 50%,
-                #55E6A6 60%,
-                #55E6A6 100%
-            );
-            background-size: 300% 100%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            animation: shimmerMove 12s ease-in-out infinite;
+            color: #55E6A6;
         }
 
         .shimmer-text-coletiva {
-            background: linear-gradient(
-                90deg,
-                #E696FF 0%,
-                #E696FF 40%,
-                #ffffff 50%,
-                #E696FF 60%,
-                #E696FF 100%
-            );
-            background-size: 300% 100%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            animation: shimmerMove 12s ease-in-out infinite;
+            color: #D975FF;
         }
 
         .shimmer-text-preventivo {
-            background: linear-gradient(
-                90deg,
-                #3b82f6 0%,
-                #3b82f6 40%,
-                #ffffff 50%,
-                #3b82f6 60%,
-                #3b82f6 100%
-            );
-            background-size: 300% 100%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            animation: shimmerMove 12s ease-in-out infinite;
-        }
-
-        @keyframes shimmerMove {
-            0% {
-                background-position: 100% 0;
-            }
-            50% {
-                background-position: -100% 0;
-            }
-            100% {
-                background-position: -100% 0;
-            }
+            color: #3b82f6;
         }
     </style>
 
@@ -2238,7 +2230,7 @@
 
     <!-- Services Section -->
         <!-- Services Section -->
-        <section class="section" id="servicos" style="background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%); position: relative; overflow: hidden;">
+        <section class="section" id="servicos" style="background: linear-gradient(to bottom right, #111320 0%, #0C325F 100%); position: relative; overflow: hidden;">
 
             <div class="container" style="position: relative; z-index: 4;">
                 <div class="section-header fade-in-up">
@@ -2249,7 +2241,7 @@
                         </p>
 
                         <div class="fade-in-up" style="text-align: center; margin: 2rem 0;">
-                            <h2 style="position: relative; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive, serif; font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 400; color: white; margin: 0;">...sempre inclusos:</h2>
+                            <h2 style="position: relative; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive, serif; font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 400; color: white; margin: 0;">...e sempre inclusos:</h2>
                         </div>
                         <div class="services-includes stagger-container">
                             <div class="stagger-item">
@@ -3121,16 +3113,43 @@
 
             <!-- Decorative Background Elements -->
             <style>
-                /* Organic curved lines decorative elements */
-                #servicos::before,
-                #servicos::after {
+                /* Imagem de linhas por cima de tudo */
+                #servicos::before {
                     content: '';
                     position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-image: url('./images/fundo_linhas_desk.png');
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
                     pointer-events: none;
-                    z-index: 1;
+                    z-index: 10;
+                }
+
+                #servicos::after {
+                    display: none;
+                }
+
+                /* Mobile - trocar para imagem mobile */
+                @media (max-width: 768px) {
+                    #servicos::before {
+                        background-image: url('./images/fundo_linhas_mobile.png');
+                    }
+
+                    /* Mostrar imagem da veia no mobile */
+                    .gato-fade-desktop {
+                        display: none !important;
+                    }
+                    .gato-fade-mobile {
+                        display: block !important;
+                    }
                 }
 
                 /* Curved line 1 - diagonal flowing line */
+                /*
                 #servicos::before {
                     top: 15%;
                     left: -2%;
@@ -3146,8 +3165,10 @@
                     transform: rotate(-8deg);
                     animation: floatGentle1 20s ease-in-out infinite;
                 }
+                */
 
                 /* Curved line 2 - organic flowing line */
+                /*
                 #servicos::after {
                     bottom: 25%;
                     right: -3%;
@@ -3163,17 +3184,16 @@
                     transform: rotate(5deg);
                     animation: floatGentle2 18s ease-in-out infinite;
                 }
+                */
 
-                /* Additional accent lines within container */
-                .container::before,
-                .container::after {
-                    content: '';
-                    position: absolute;
-                    pointer-events: none;
-                    z-index: 1;
+                /* Additional accent lines within container - DESABILITADO */
+                #servicos .container::before,
+                #servicos .container::after {
+                    display: none;
                 }
 
                 /* Accent line 3 - subtle curved accent */
+                /*
                 .container::before {
                     top: 35%;
                     right: 5%;
@@ -3188,8 +3208,10 @@
                     transform: rotate(-15deg);
                     animation: floatGentle3 25s ease-in-out infinite;
                 }
+                */
 
                 /* Accent line 4 - small decorative line */
+                /*
                 .container::after {
                     bottom: 40%;
                     left: 8%;
@@ -3205,6 +3227,7 @@
                     transform: rotate(12deg);
                     animation: floatGentle4 22s ease-in-out infinite;
                 }
+                */
 
                 /* Subtle floating animations for lines */
                 @keyframes floatGentle1 {
@@ -3440,15 +3463,17 @@
                 }
 
                 .prev-btn {
-                    background: rgba(255, 255, 255, 0.1);
+                    background: rgba(255, 255, 255, 0.25);
                     backdrop-filter: blur(10px);
-                    color: white;
-                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    color: #111D13;
+                    border: 1px solid rgba(255, 255, 255, 0.4);
+                    font-weight: 700;
                 }
 
                 .next-btn {
                     background: var(--accent-gold);
-                    color: white;
+                    color: #111D13;
+                    font-weight: 700;
                 }
 
                 .carousel-btn:hover {
@@ -3655,21 +3680,28 @@
             </div>
         </section>
 
+    <!-- Tipos de Cremação Section -->
+    <section class="section" style="background: linear-gradient(135deg, #D8E8DB 0%, #86F2C6 100%); padding: 80px 0; position: relative; overflow: hidden;">
+        <div class="container" style="position: relative; z-index: 2;">
                 <!-- Título dos Tipos de Cremação -->
                 <div class="fade-in-up" style="text-align: center; margin: 2rem 0 2rem 0;">
-                    <h2 style="font-family: 'Nunito', sans-serif; font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 700; color: white; margin: 0;">Conheça os tipos de Cremação</h2>
+                    <h2 style="font-family: 'Nunito', sans-serif; font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 700; color: #111D13; margin: 0;">Conheça os tipos de Cremação</h2>
                 </div>
 
                 <div class="modern-services-container">
                     <!-- CREMAÇÃO INDIVIDUAL -->
                     <div class="fade-in-scale" style="text-align: center; margin: 1rem 0 0 0; padding: 1.5rem 1rem; overflow-x: hidden;">
-                        <div style="display: inline-block; position: relative; padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 4vw, 2rem); background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid #55E6A6; border-radius: 1rem; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); max-width: calc(100vw - 2rem); box-sizing: border-box;">
-                            <h2 style="margin: 0 0 0.75rem 0; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 300; letter-spacing: 2px; color: rgba(255, 255, 255, 0.9); white-space: nowrap;">
+                        <div style="display: inline-block; position: relative; padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 4vw, 2rem); padding-bottom: 2rem; background: rgba(255, 255, 255, 0.95); border: none; border-top: 3px solid #55E6A6; border-radius: 1rem; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); max-width: calc(100vw - 2rem); box-sizing: border-box; overflow: hidden;">
+
+                            <!-- Imagem de fundo na parte inferior -->
+                            <img src="images/cremacao_individual.jpg" alt="Cremação Individual" style="position: absolute; bottom: 0; left: 0; right: 0; width: 100%; height: auto; max-height: 50%; object-fit: cover; border-radius: 0 0 1rem 1rem; pointer-events: none; z-index: 0; mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 100%); -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 100%);">
+
+                            <h2 style="margin: 0 0 0.75rem 0; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 300; letter-spacing: 2px; color: #111D13; white-space: nowrap; position: relative; z-index: 1;">
                                 <span style="font-family: 'Nunito', sans-serif; line-height: 1.2;">Cremação</span> <span class="shimmer-text-individual" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Individual</span>
                             </h2>
-                            <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #55E6A6, transparent); margin: 1rem auto;"></div>
-                            <p style="margin: 0 0 1.5rem 0; font-size: 1rem; color: rgba(255, 255, 255, 0.8); line-height: 1.6; max-width: 600px;">O pet é cremado de forma individual, e as cinzinhas do pet são entregues acomodadas em uma urna. Optamos pela cremação completa, o que garante que as cinzinhas possam ser guardadas pelo tempo que for preciso - sem nenhuma alteração de aspecto - ou espalhadas em locais simbólicos, sem riscos ao meio-ambiente.</p>
-                            <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #55E6A6, #40d890); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(85, 230, 166, 0.3);">
+                            <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #55E6A6, transparent); margin: 1rem auto; position: relative; z-index: 1;"></div>
+                            <p style="margin: 0 0 1.5rem 0; font-size: 1rem; color: #111D13; line-height: 1.6; max-width: 600px; position: relative; z-index: 1;">O pet é cremado de forma individual, e as cinzinhas do pet são entregues acomodadas em uma urna. Optamos pela cremação completa, o que garante que as cinzinhas possam ser guardadas pelo tempo que for preciso - sem nenhuma alteração de aspecto - ou espalhadas em locais simbólicos, sem riscos ao meio-ambiente.</p>
+                            <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #55E6A6, #40d890); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(85, 230, 166, 0.3); position: relative; z-index: 1;">
                                 <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i>
                                 Falar no WhatsApp
                             </a>
@@ -3678,13 +3710,17 @@
 
                     <!-- CREMAÇÃO COLETIVA -->
                     <div class="fade-in-scale" style="text-align: center; margin: 1rem 0 0 0; padding: 1.5rem 1rem; overflow-x: hidden;">
-                        <div style="display: inline-block; position: relative; padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 4vw, 2rem); background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid #E696FF; border-radius: 1rem; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); max-width: calc(100vw - 2rem); box-sizing: border-box;">
-                            <h2 style="margin: 0 0 0.75rem 0; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 300; letter-spacing: 2px; color: rgba(255, 255, 255, 0.9); white-space: nowrap;">
+                        <div style="display: inline-block; position: relative; padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 4vw, 2rem); padding-bottom: 2rem; background: rgba(255, 255, 255, 0.95); border: none; border-top: 3px solid #D975FF; border-radius: 1rem; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); max-width: calc(100vw - 2rem); box-sizing: border-box; overflow: hidden;">
+
+                            <!-- Imagem de fundo na parte inferior -->
+                            <img src="images/cremacao_coletiva.jpg" alt="Cremação Coletiva" style="position: absolute; bottom: 0; left: 0; right: 0; width: 100%; height: auto; max-height: 50%; object-fit: cover; border-radius: 0 0 1rem 1rem; pointer-events: none; z-index: 0; mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 100%); -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 100%);">
+
+                            <h2 style="margin: 0 0 0.75rem 0; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 300; letter-spacing: 2px; color: #111D13; white-space: nowrap; position: relative; z-index: 1;">
                                 <span style="font-family: 'Nunito', sans-serif; line-height: 1.2;">Cremação</span> <span class="shimmer-text-coletiva" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Coletiva</span>
                             </h2>
-                            <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #E696FF, transparent); margin: 1rem auto;"></div>
-                            <p style="margin: 0 0 1.5rem 0; font-size: 1rem; color: rgba(255, 255, 255, 0.8); line-height: 1.6; max-width: 600px;">A cremação acontece com três animais no mesmo equipamento e as cinzinhas são espalhadas em nosso jardim, uma área verde de 100 mil m², repleta de natureza. Geramos o certificado de cremação que atesta que o pet foi cremado conosco e teve sua despedida digna e respeitosa.</p>
-                            <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #E696FF, #d580ff); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(230, 150, 255, 0.3);">
+                            <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #D975FF, transparent); margin: 1rem auto; position: relative; z-index: 1;"></div>
+                            <p style="margin: 0 0 1.5rem 0; font-size: 1rem; color: #111D13; line-height: 1.6; max-width: 600px; position: relative; z-index: 1;">A cremação acontece com três animais no mesmo equipamento e as cinzinhas são espalhadas em nosso jardim, uma área verde de 100 mil m², repleta de natureza. Geramos o certificado de cremação que atesta que o pet foi cremado conosco e teve sua despedida digna e respeitosa.</p>
+                            <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #D975FF, #C85EFF); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(217, 117, 255, 0.4); position: relative; z-index: 1;">
                                 <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i>
                                 Falar no WhatsApp
                             </a>
@@ -3694,45 +3730,49 @@
 
                 <!-- PLANOS PREVENTIVOS -->
                 <div class="fade-in-scale" style="text-align: center; margin: 4rem 0 2rem 0; padding: 1.5rem 1rem; overflow-x: hidden;">
-                    <div style="display: inline-block; position: relative; padding: clamp(1.5rem, 3vw, 2rem) clamp(0.1rem, 2vw, 0.6rem); background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-top: 3px solid #3b82f6; border-radius: 1rem; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); max-width: calc(100vw - 2rem); box-sizing: border-box;">
-                        <h2 style="margin: 0 0 0.75rem 0; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 300; letter-spacing: 2px; color: rgba(255, 255, 255, 0.9); white-space: nowrap;">
+                    <div style="display: inline-block; position: relative; padding: clamp(1.5rem, 3vw, 2rem) clamp(0.1rem, 2vw, 0.6rem); padding-bottom: 2rem; background: rgba(255, 255, 255, 0.95); border: none; border-top: 3px solid #3b82f6; border-radius: 1rem; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); max-width: calc(100vw - 2rem); box-sizing: border-box; overflow: hidden;">
+
+                        <!-- Imagem de fundo na parte inferior -->
+                        <img src="images/planos_preventivos.jpg" alt="Planos Preventivos" style="position: absolute; bottom: 0; left: 0; right: 0; width: 100%; height: auto; max-height: 50%; object-fit: cover; border-radius: 0 0 1rem 1rem; pointer-events: none; z-index: 0; mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 100%); -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 100%);">
+
+                        <h2 style="margin: 0 0 0.75rem 0; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 300; letter-spacing: 2px; color: #111D13; white-space: nowrap; position: relative; z-index: 1;">
                             <span style="font-family: 'Nunito', sans-serif; line-height: 1.2;">Planos</span> <span class="shimmer-text-preventivo" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Preventivos</span>
                         </h2>
-                        <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #3b82f6, transparent); margin: 1rem auto;"></div>
-                        <p style="margin: 0 0 1.5rem 0; font-size: 1rem; color: rgba(255, 255, 255, 0.7); line-height: 1.6; max-width: 500px; font-style: italic;">Para quem deseja se preparar com carinho e tranquilidade, oferecemos opções para contratação antecipada</p>
+                        <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #3b82f6, transparent); margin: 1rem auto; position: relative; z-index: 1;"></div>
+                        <p style="margin: 0 auto 1.5rem auto; font-size: 1rem; color: #555; line-height: 1.6; max-width: 500px; font-style: italic; text-align: center; position: relative; z-index: 1;">Para quem deseja se preparar com carinho e tranquilidade, oferecemos opções para contratação antecipada</p>
 
-                        <div class="benefits-container" style="text-align: left; max-width: 600px; margin: 0 auto; background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+                        <div class="benefits-container" style="text-align: left; max-width: 600px; margin: 0 auto; background: rgba(59, 130, 246, 0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(59, 130, 246, 0.1); position: relative; z-index: 1;">
 
                             <ul class="benefits-list" style="list-style: none; padding: 0; margin: 1.5rem 0;">
-                                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; color: rgba(255, 255, 255, 0.9);">
+                                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; color: #111D13;">
                                     <span style="color: #3b82f6; margin-right: 0.75rem; font-size: 1.2rem; flex-shrink: 0;">✓</span>
                                     <span>Planejamento financeiro mais leve</span>
                                 </li>
-                                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; color: rgba(255, 255, 255, 0.9);">
+                                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; color: #111D13;">
                                     <span style="color: #3b82f6; margin-right: 0.75rem; font-size: 1.2rem; flex-shrink: 0;">✓</span>
                                     <span>Desconto especial de antecipação</span>
                                 </li>
-                                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; color: rgba(255, 255, 255, 0.9);">
+                                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; color: #111D13;">
                                     <span style="color: #3b82f6; margin-right: 0.75rem; font-size: 1.2rem; flex-shrink: 0;">✓</span>
                                     <span>Carência de apenas 48h</span>
                                 </li>
                             </ul>
 
-                            <div class="flexibility-box" style="background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 0.75rem; border-left: 4px solid #3b82f6; margin: 1.5rem 0;">
-                                <p style="margin: 0 0 1rem 0; font-size: 0.95rem; color: rgba(255, 255, 255, 0.9); line-height: 1.6;">
-                                    <strong>Flexibilidade total:</strong> Pensando em tutores de mais de um pet, nosso contrato não é nominal. Pode ser utilizado para o pet que precisar primeiro, e são vitalícios até seu uso (não expiram).
+                            <div class="flexibility-box" style="background: rgba(59, 130, 246, 0.08); padding: 1.5rem; border-radius: 0.75rem; border-left: 4px solid #3b82f6; margin: 1.5rem 0;">
+                                <p style="margin: 0 0 1rem 0; font-size: 0.95rem; color: #111D13; line-height: 1.6;">
+                                    <strong>Flexibilidade total:</strong> Pensando em tutores de mais de um pet, nosso contrato não é nominal. Pode ser utilizado para o pet que precisar primeiro, e é vitalício até seu uso (não expira).
                                 </p>
-                                <p style="margin: 0; font-size: 0.95rem; color: rgba(255, 255, 255, 0.9); line-height: 1.6;">
+                                <p style="margin: 0; font-size: 0.95rem; color: #111D13; line-height: 1.6;">
                                     <strong>Sem complicações:</strong> Sem taxa de manutenção, sem anuidade, com o mesmo carinho que você precisa e merece.
                                 </p>
                             </div>
+                        </div>
 
-                            <div style="text-align: center; margin-top: 2rem; position: relative; z-index: 1;">
-                                <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); position: relative;">
-                                    <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i>
-                                    Saiba Mais sobre os Planos
-                                </a>
-                            </div>
+                        <div style="text-align: center; margin-top: 2rem; position: relative; z-index: 1;">
+                            <a href="javascript:void(0)" onclick="openWhatsAppPopup()" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); position: relative;">
+                                <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i>
+                                Saiba Mais sobre os Planos
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -3777,35 +3817,43 @@
                         let currentIndex = 0;
                         
                         function updateIndicators() {
-                            const scrollLeft = carousel.scrollLeft;
-                            const carouselWidth = carousel.offsetWidth;
-                            const centerPosition = scrollLeft + carouselWidth / 2;
+                            requestAnimationFrame(() => {
+                                const scrollLeft = carousel.scrollLeft;
+                                const carouselWidth = carousel.offsetWidth;
+                                const centerPosition = scrollLeft + carouselWidth / 2;
 
-                            let newIndex = 0;
-                            let minDistance = Infinity;
+                                let newIndex = 0;
+                                let minDistance = Infinity;
 
-                            Array.from(carousel.children).forEach((card, index) => {
-                                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-                                const distance = Math.abs(centerPosition - cardCenter);
+                                Array.from(carousel.children).forEach((card, index) => {
+                                    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                                    const distance = Math.abs(centerPosition - cardCenter);
 
-                                if (distance < minDistance) {
-                                    minDistance = distance;
-                                    newIndex = index;
+                                    if (distance < minDistance) {
+                                        minDistance = distance;
+                                        newIndex = index;
+                                    }
+                                });
+
+                                if (newIndex !== currentIndex) {
+                                    currentIndex = newIndex;
+                                    indicators.forEach((dot, index) => {
+                                        dot.classList.toggle('active', index === currentIndex);
+                                    });
                                 }
                             });
+                        }
 
-                            if (newIndex !== currentIndex) {
-                                currentIndex = newIndex;
-                                indicators.forEach((dot, index) => {
-                                    dot.classList.toggle('active', index === currentIndex);
+                        let scrollTimeout;
+                        let rafPending = false;
+                        carousel.addEventListener('scroll', () => {
+                            if (!rafPending) {
+                                rafPending = true;
+                                requestAnimationFrame(() => {
+                                    updateIndicators();
+                                    rafPending = false;
                                 });
                             }
-                        }
-                        
-                        let scrollTimeout;
-                        carousel.addEventListener('scroll', () => {
-                            clearTimeout(scrollTimeout);
-                            scrollTimeout = setTimeout(updateIndicators, 50);
                         });
                         
                         indicators.forEach((dot, index) => {
@@ -3896,7 +3944,7 @@
                     <div style="padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
                         <i class="fas fa-building" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem;"></i>
                         <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Crematório Próprio</h4>
-                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">A RIP PET nasceu há <strong>12 anos</strong> com o objetivo de proporcionar <strong>dignidade e respeito</strong> aos pets, oferecendo <strong>suporte integral</strong> às famílias em todos os momentos.<br><br>Contamos com <strong>estrutura própria e exclusiva</strong>, equipamentos de <strong>última geração</strong>, todos licenciados. Somos especializados e trabalhamos <strong>exclusivamente com cremação pet</strong>, o que garante <strong>segurança, transparência e controle total</strong> de cada etapa do processo — do acolhimento à entrega — sua família será atendida pela <strong>mesma equipe, sem qualquer tipo de terceirização</strong>.</p>
+                        <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">A RIP PET nasceu há <strong>12 anos</strong> com o objetivo de proporcionar <strong>dignidade e respeito</strong> aos pets, oferecendo <strong>suporte integral</strong> às famílias em todos os momentos.<br><br>Contamos com <strong>estrutura própria e exclusiva</strong>, equipamentos de <strong>última geração</strong>, todos licenciados. Somos especializados e trabalhamos <strong>exclusivamente com cremação pet</strong>, o que garante <strong>segurança, transparência e controle total</strong> de cada etapa do processo. Do acolhimento à entrega, sua família será atendida pela <strong>mesma equipe, sem qualquer tipo de terceirização</strong>.</p>
                     </div>
                     <div style="padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
                         <i class="fas fa-heart" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem;"></i>
@@ -3936,7 +3984,7 @@
                         <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
                             <i class="fas fa-building" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
                             <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Crematório Próprio</h4>
-                            <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">A RIP PET nasceu há <strong>12 anos</strong> com o objetivo de proporcionar <strong>dignidade e respeito</strong> aos pets, oferecendo <strong>suporte integral</strong> às famílias em todos os momentos.<br><br>Contamos com <strong>estrutura própria e exclusiva</strong>, equipamentos de <strong>última geração</strong>, todos licenciados. Somos especializados e trabalhamos <strong>exclusivamente com cremação pet</strong>, o que garante <strong>segurança, transparência e controle total</strong> de cada etapa do processo — do acolhimento à entrega — sua família será atendida pela <strong>mesma equipe, sem qualquer tipo de terceirização</strong>.</p>
+                            <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">A RIP PET nasceu há <strong>12 anos</strong> com o objetivo de proporcionar <strong>dignidade e respeito</strong> aos pets, oferecendo <strong>suporte integral</strong> às famílias em todos os momentos.<br><br>Contamos com <strong>estrutura própria e exclusiva</strong>, equipamentos de <strong>última geração</strong>, todos licenciados. Somos especializados e trabalhamos <strong>exclusivamente com cremação pet</strong>, o que garante <strong>segurança, transparência e controle total</strong> de cada etapa do processo. Do acolhimento à entrega, sua família será atendida pela <strong>mesma equipe, sem qualquer tipo de terceirização</strong>.</p>
                         </div>
                         <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
                             <i class="fas fa-heart" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
@@ -3994,24 +4042,33 @@
 
         </div>
     </section>
+    </section>
 
     <!-- Families Served Section -->
-    <section class="section" style="background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%); position: relative; overflow: hidden; padding: 80px 0;">
+    <section class="section families-section" style="background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%); position: relative; overflow: visible; padding: 80px 0;">
+
         <div class="container" style="position: relative; z-index: 2;">
-            <div style="text-align: center; padding: 3rem 2rem; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
-                <i class="fas fa-users" style="font-size: 4rem; color: var(--accent-gold); margin-bottom: 1.5rem;"></i>
-                <h3 style="margin-bottom: 1rem; font-size: 2rem; color: white; font-family: 'Nunito', sans-serif; line-height: 1.2;">Milhares de famílias atendidas</h3>
-                <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+            <div class="families-box" style="text-align: center; padding: 3rem 2rem; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden;">
+
+                <!-- Imagem do gato com fade - desktop -->
+                <img src="images/gato_dormindo.jpg" alt="Gato dormindo" class="gato-fade-desktop" style="position: absolute; left: 0; top: 0; height: 100%; width: auto; object-fit: cover; opacity: 0.8; mask-image: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.68) 65%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0.15) 90%, rgba(0,0,0,0) 100%); -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.68) 65%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0.15) 90%, rgba(0,0,0,0) 100%); pointer-events: none;">
+
+                <!-- Imagem do gato - mobile (revelada pelo box) -->
+                <img src="images/gato_dormindo.jpg" alt="Gato dormindo" class="gato-fade-mobile" style="position: absolute; left: 0; top: 0; height: 100%; width: auto; object-fit: cover; opacity: 0.8; mask-image: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.68) 65%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0.15) 90%, rgba(0,0,0,0) 100%); -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.68) 65%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0.15) 90%, rgba(0,0,0,0) 100%); pointer-events: none; display: none;">
+
+                <i class="fas fa-users" style="font-size: 4rem; color: var(--accent-gold); margin-bottom: 1.5rem; position: relative; z-index: 1;"></i>
+                <h3 style="margin-bottom: 1rem; font-size: 2rem; color: white; font-family: 'Nunito', sans-serif; line-height: 1.2; position: relative; z-index: 1;">Milhares de famílias atendidas</h3>
+                <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem; position: relative; z-index: 1;">
                     <i class="fas fa-star" style="font-size: 2rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
                     <i class="fas fa-star" style="font-size: 2rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
                     <i class="fas fa-star" style="font-size: 2rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
                     <i class="fas fa-star" style="font-size: 2rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
                     <i class="fas fa-star" style="font-size: 2rem; color: #ffd700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
                 </div>
-                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; line-height: 1.6; max-width: 600px; margin: 0 auto;">Com recomendações reais de tutores e médicos veterinários, somos o crematório de animais <strong style="color: #10b981;">mais bem avaliado do Brasil.</strong></p>
+                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; line-height: 1.6; max-width: 600px; margin: 0 auto; position: relative; z-index: 1;">Com recomendações reais de tutores e médicos veterinários, somos o crematório de animais <strong style="color: #10b981;">mais bem avaliado do Brasil.</strong></p>
 
                 <!-- Indicador de avaliações -->
-                <div class="reviews-indicator" style="margin-top: 2rem; display: flex; flex-direction: column; align-items: center; animation: floatUpDown 3s ease-in-out infinite;">
+                <div class="reviews-indicator" style="margin-top: 2rem; display: flex; flex-direction: column; align-items: center; animation: floatUpDown 3s ease-in-out infinite; position: relative; z-index: 1;">
                     <div style="color: var(--accent-gold); font-size: 2rem; margin-bottom: 0.5rem;">
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -4022,11 +4079,11 @@
     </section>
 
     <!-- Avaliações dos Tutores -->
-    <section class="section" style="background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%); padding: 80px 0; position: relative; overflow: hidden;">
+    <section class="section" style="background: linear-gradient(135deg, #D8E8DB 0%, #86F2C6 100%); padding: 80px 0; position: relative; overflow: hidden;">
         <div class="container" style="position: relative; z-index: 2;">
             <div class="section-header" style="text-align: center; margin-bottom: 60px;">
-                <h2 class="harmonized-title" style="color: white;">Avaliações dos <span class="highlight-elegant">Tutores</span></h2>
-                <p class="section-subtitle-elegant" style="color: rgba(255, 255, 255, 0.8);">Depoimentos reais de famílias que confiaram este momento delicado à nossa equipe.</p>
+                <h2 class="harmonized-title">Avaliações dos <span class="highlight-elegant">Tutores</span></h2>
+                <p class="section-subtitle-elegant">Depoimentos reais de famílias que confiaram este momento delicado à nossa equipe.</p>
             </div>
 
             <!-- Carrossel de Avaliações -->
@@ -4278,28 +4335,18 @@
                 function scrollCarousel(direction) {
                     const carousel = document.getElementById('reviewsCarousel');
                     if (!carousel) {
-                        console.error('Carrossel não encontrado');
                         return;
                     }
 
-                    console.log('Scroll carousel called with direction:', direction);
-
-                    // Pegar largura de um card individual
                     const card = carousel.querySelector('.review-card-carousel');
                     if (!card) {
-                        console.error('Card não encontrado');
                         return;
                     }
 
                     const cardWidth = card.offsetWidth;
-                    const gap = 32; // 2rem gap
+                    const gap = 32;
                     const scrollAmount = direction === 'left' ? -((cardWidth + gap) * 2) : ((cardWidth + gap) * 2);
 
-                    console.log('Card width:', cardWidth, 'Scroll amount:', scrollAmount);
-                    console.log('Current scroll position:', carousel.scrollLeft);
-                    console.log('Max scroll width:', carousel.scrollWidth);
-
-                    // Força o scroll mesmo que já esteja no fim/início
                     const currentScroll = carousel.scrollLeft;
                     const maxScroll = carousel.scrollWidth - carousel.clientWidth;
 
@@ -4314,11 +4361,6 @@
                         left: newPosition,
                         behavior: 'smooth'
                     });
-
-                    // Log após tentar scrollar
-                    setTimeout(() => {
-                        console.log('New scroll position:', carousel.scrollLeft);
-                    }, 300);
                 }
                 </script>
 
@@ -4505,6 +4547,22 @@
                 background-size: 100% 100%;
                 pointer-events: none;
                 z-index: 0;
+                opacity: 0;
+                transition: opacity 0.6s ease;
+            }
+
+            .steps-container.line-visible::before {
+                opacity: 1;
+                animation: lineDescend 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            }
+
+            @keyframes lineDescend {
+                0% {
+                    clip-path: inset(0 0 100% 0);
+                }
+                100% {
+                    clip-path: inset(0 0 0 0);
+                }
             }
 
             .step-item {
@@ -4512,10 +4570,6 @@
                 border: 2px solid var(--primary-blue);
                 border-radius: 1.5rem;
                 padding: 0;
-                opacity: 1;
-                filter: blur(0px);
-                transform: translateY(0);
-                transition: all 1s ease;
                 position: relative;
                 background: white;
                 box-shadow: 0 10px 30px rgba(5, 47, 95, 0.1);
@@ -4559,6 +4613,51 @@
 
             .step-item:last-child {
                 margin-bottom: 0;
+            }
+
+            /* Linhas conectoras entre cards no desktop - aparecem após cada card */
+            .step-item::after {
+                content: '';
+                position: absolute;
+                width: 3px;
+                height: 6rem;
+                background: linear-gradient(180deg, var(--primary-blue), var(--accent-gold));
+                border-radius: 2px;
+                opacity: 0;
+                transition: opacity 0.4s ease;
+                z-index: 0;
+            }
+
+            /* Card ímpar (esquerda) - linha vai para baixo-direita */
+            .step-item:nth-child(odd)::after {
+                bottom: -6rem;
+                left: 75%;
+            }
+
+            /* Card par (direita) - linha vai para baixo-esquerda */
+            .step-item:nth-child(even)::after {
+                bottom: -6rem;
+                right: 75%;
+            }
+
+            .step-item:last-child::after {
+                display: none;
+            }
+
+            .step-item.show-line::after {
+                opacity: 0.6;
+                animation: lineSegmentAppearDesktop 0.5s ease forwards;
+            }
+
+            @keyframes lineSegmentAppearDesktop {
+                0% {
+                    height: 0;
+                    opacity: 0;
+                }
+                100% {
+                    height: 6rem;
+                    opacity: 0.6;
+                }
             }
 
             .step-title {
@@ -4655,16 +4754,44 @@
                 }
 
                 .steps-container::before {
-                    display: block;
-                    background-image: none;
-                    background: linear-gradient(180deg, var(--primary-blue), var(--accent-gold));
-                    width: 3px;
-                    height: 90%;
-                    left: 50%;
+                    display: none;
+                }
+
+                /* Linhas conectoras entre cards - aparecem individualmente no mobile (centralizada) */
+                .step-item::after {
+                    content: '';
+                    position: absolute;
+                    left: 50% !important;
+                    right: auto !important;
                     transform: translateX(-50%);
-                    top: 5%;
+                    bottom: -4rem !important;
+                    width: 3px;
+                    height: 4rem;
+                    background: linear-gradient(180deg, var(--primary-blue), var(--accent-gold));
                     border-radius: 2px;
+                    opacity: 0;
+                    transition: opacity 0.4s ease;
                     z-index: 0;
+                }
+
+                .step-item:last-child::after {
+                    display: none;
+                }
+
+                .step-item.show-line::after {
+                    opacity: 0.6;
+                    animation: lineSegmentAppear 0.3s ease forwards;
+                }
+
+                @keyframes lineSegmentAppear {
+                    0% {
+                        height: 0;
+                        opacity: 0;
+                    }
+                    100% {
+                        height: 4rem;
+                        opacity: 0.6;
+                    }
                 }
 
                 .step-item {
@@ -4747,7 +4874,7 @@
                     </button>
                     <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
                         <div itemprop="text" style="padding: 1rem 0; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">
-                            <p>Na cremação individual, o pet é cremado sozinho, e suas cinzas são entregues à família em uma linda urna. Na cremação coletiva, três animais são cremados juntos, e as cinzas são espalhadas em nosso jardim, uma área verde de 100 mil m2, repleta de natureza. É gerado um certificado de cremação que atesta que o pet foi cremado conosco e teve uma despedida digna e respeitosa.</p>
+                            <p>Na cremação individual, o pet é cremado sozinho, suas cinzas são acomodadas em uma urna cinerária e entregue à família. Na cremação coletiva, três animais são cremados juntos, e as cinzas são espalhadas em nosso jardim, uma área verde de 100 mil m2, repleta de natureza. Em ambos, é gerado um certificado de cremação que atesta que o pet foi cremado conosco e teve uma despedida digna e respeitosa.</p>
                         </div>
                     </div>
                 </div>
@@ -4792,7 +4919,7 @@
                 </div>
 
                 <!-- FAQ Item 6 -->
-                <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="padding: 1.5rem 0;">
+                <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem 0;">
                     <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
                         Como funciona o velório pet?
                         <i class="fas fa-chevron-down faq-icon" style="color: var(--accent-gold); transition: transform 0.3s ease;"></i>
@@ -4803,27 +4930,83 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- FAQ Item 7 -->
+                <div class="faq-item" itemscope itemtype="https://schema.org/Question" style="padding: 1.5rem 0;">
+                    <button class="faq-question" itemprop="name" style="width: 100%; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0;">
+                        Onde ocorre a Cremação?
+                        <i class="fas fa-chevron-down faq-icon" style="color: var(--accent-gold); transition: transform 0.3s ease;"></i>
+                    </button>
+                    <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" style="max-height: 0; overflow: hidden; transition: all 0.3s ease;">
+                        <div itemprop="text" style="padding: 1rem 0; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">
+                            <p>Nossos procedimentos são sempre realizados em nossa Matriz, Pindamonhangaba. Conhecer o local de Cremação e verificar as licenças de operação são fundamentais para evitar qualquer situação indesejada em um momento delicado como a partida do pet. Caso as informações do local e regulamentação (CNPJ, CNAE, alvarás, licenças CETESB, etc) estejam omitidas, desconfie.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
     </section>
 
     <!-- CTA Section (movido para depois do FAQ) -->
-    <section class="section cta-section" style="background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%); padding: 80px 0; position: relative; overflow: hidden;">
-        <div class="container" style="position: relative; z-index: 2;">
-            <div class="cta-content" style="text-align: center; padding: 3rem 2rem; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
-                <h2 class="cta-title" style="color: white; font-size: 2.5rem; margin-bottom: 1rem; font-family: 'Nunito', sans-serif;">Fale Conosco Agora</h2>
-                <p class="cta-subtitle" style="color: rgba(255, 255, 255, 0.8); font-size: 1.2rem; margin-bottom: 2rem;">Nossa equipe está disponível 24h para esclarecer todas as suas questões</p>
+    <section class="section cta-section" style="background: linear-gradient(135deg, #D8E8DB 0%, #86F2C6 100%); padding: 80px 0; position: relative; overflow: visible;">
+        <div style="position: relative; z-index: 2;">
+            <div class="cta-content" style="padding: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2); width: calc(100vw - 40px); margin-left: calc(-50vw + 50% + 20px); max-width: none; display: flex; flex-direction: row; align-items: stretch; overflow: hidden;">
 
-                <div class="contact-options">
-                    <a href="javascript:void(0)" onclick="openWhatsAppPopup()" class="whatsapp-btn" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #25D366, #20B358); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); font-size: 1.1rem;">
-                        <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i> WhatsApp 24h
-                    </a>
+                <!-- Imagem do cachorro - Desktop (esquerda) -->
+                <div class="cta-image-desktop" style="flex: 0 0 50%; display: flex; align-items: center; justify-content: center; min-height: 400px; overflow: hidden;">
+                    <img src="./images/fale_conosco.png" alt="Cachorro" style="width: 100%; height: 100%; object-fit: cover; filter: drop-shadow(-15px -15px 30px rgba(0, 0, 0, 0.3)) drop-shadow(-8px -8px 15px rgba(0, 0, 0, 0.2));">
+                </div>
+
+                <!-- Conteúdo texto e CTA - Desktop (direita) -->
+                <div class="cta-text" style="flex: 1; padding: 3rem 2rem; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+                    <h2 class="cta-title" style="color: #111D13; font-size: 2.5rem; margin-bottom: 1rem; font-family: 'Nunito', sans-serif;">Fale Conosco Agora</h2>
+                    <p class="cta-subtitle" style="color: #111D13; font-size: 1.2rem; margin-bottom: 2rem;">Nossa equipe está disponível 24h para esclarecer todas as suas dúvidas sobre como oferecer uma <span style="color: #0A5A3A; font-weight: 700;">despedida digna e respeitosa</span> à quem trouxe <span style="color: #0A5A3A; font-weight: 700;">tanto amor</span></p>
+
+                    <div class="contact-options">
+                        <a href="javascript:void(0)" onclick="openWhatsAppPopup()" class="whatsapp-btn" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #25D366, #20B358); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); font-size: 1.1rem; margin: 0 auto;">
+                            <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i> WhatsApp 24h
+                        </a>
+                    </div>
+
+                    <!-- Imagem do cachorro - Mobile (abaixo do CTA) -->
+                    <div class="cta-image-mobile" style="display: none; margin-top: 2rem; margin-left: -2rem; margin-right: -2rem; margin-bottom: -0px;">
+                        <img src="./images/fale_conosco.png" alt="Cachorro" style="width: 100%; height: auto; display: block; border-radius: 0 0 20px 20px; filter: drop-shadow(-15px -15px 30px rgba(0, 0, 0, 0.3)) drop-shadow(-8px -8px 15px rgba(0, 0, 0, 0.2));">
+                    </div>
                 </div>
             </div>
         </div>
+
+        <style>
+            @media (max-width: 768px) {
+                .cta-content {
+                    flex-direction: column !important;
+                }
+
+                .cta-image-desktop {
+                    display: none !important;
+                }
+
+                .cta-image-mobile {
+                    display: block !important;
+                }
+
+                .cta-text {
+                    padding: 2rem 1.5rem !important;
+                    padding-bottom: 2rem !important;
+                }
+            }
+        </style>
     </section>
 
+    <!-- Logo Section -->
+    <section style="background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%); padding: 60px 0; display: flex; justify-content: center; align-items: center;">
+        <div style="text-align: center; max-width: 400px; padding: 0 20px;">
+            <img src="images/rippet_logo_vertical_fundo_azul.png" alt="RIP PET Logo" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto 70px; filter: drop-shadow(8px 8px 12px rgba(0, 0, 0, 0.25)) drop-shadow(4px 4px 6px rgba(0, 0, 0, 0.15));">
+            <p style="font-family: 'Autography', cursive; font-size: 2.6rem; color: #052F5F; margin: 0 0 8px 0; line-height: 1.2;"><span style="color: #021a35; position: relative; display: inline-block;">R<span style="content: ''; position: absolute; bottom: 0px; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, #10b981 20%, #059669 50%, #10b981 80%, transparent); border-radius: 2px; display: block;"></span></span>equiescat <span style="color: #021a35; position: relative; display: inline-block;">I<span style="content: ''; position: absolute; bottom: 0px; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, #10b981 20%, #059669 50%, #10b981 80%, transparent); border-radius: 2px; display: block;"></span></span>n <span style="color: #021a35; position: relative; display: inline-block;">P<span style="content: ''; position: absolute; bottom: 0px; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, #10b981 20%, #059669 50%, #10b981 80%, transparent); border-radius: 2px; display: block;"></span></span>ace</p>
+            <p style="font-family: 'Nunito', sans-serif; font-style: italic; font-size: 1rem; color: #666; margin: 0;">("Descanse em paz")</p>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer" style="background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%); padding: 60px 0 20px; position: relative; overflow: hidden;">
@@ -4850,8 +5033,9 @@
 
                 <div class="footer-section" style="color: white;">
                     <h3 style="color: var(--accent-gold); margin-bottom: 1rem; font-size: 1.5rem;">Matriz</h3>
-                    <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6; margin-bottom: 0.5rem;">RIP PET Pindamonhangaba</p>
-                    <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6; margin-bottom: 0.5rem;">Crematório Próprio</p>
+                    <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6; margin-bottom: 0.5rem; font-weight: 600;">RIP PET Pindamonhangaba</p>
+                    <p style="color: rgba(255, 255, 255, 0.5); line-height: 1.5; margin-bottom: 0.3rem; font-size: 0.9rem;">Estrada Municipal Francisco Barros Abreu, 800, Bairro do Borba, Pindamonhangaba - SP, CEP: 12412-847</p>
+                    <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6; margin-bottom: 0.5rem; margin-top: 1rem;">Crematório Próprio</p>
                     <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">Licenciado e Certificado</p>
                 </div>
             </div>
@@ -4982,7 +5166,6 @@
                     whatsappBtn.style.opacity = '1 !important';
                     whatsappBtn.style.visibility = 'visible !important';
                     whatsappBtn.style.zIndex = '9999 !important';
-                    console.log('WhatsApp button forced visible');
                 }
             }, 1500);
         });
@@ -5312,6 +5495,7 @@
         // Add scroll listener for video masking
         window.addEventListener('scroll', controlVideoMasking);
 
+
         // Video fallback for mobile
         document.addEventListener('DOMContentLoaded', function() {
             const video = document.querySelector('.video-background');
@@ -5370,30 +5554,16 @@
     </script>
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS0H2KX8EF"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-04KMEL26PC"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-LS0H2KX8EF');
+        gtag('config', 'G-04KMEL26PC');
     </script>
 
     <!-- RIP PET - Analytics Avançado -->
     <script src="./analytics-enhanced.js"></script>
-
-    <!-- Facebook Pixel (SUBSTITUA "YOUR_PIXEL_ID" pelo ID real da RIP PET) -->
-    <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window,document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', 'YOUR_PIXEL_ID');
-        fbq('track', 'PageView');
-    </script>
 
     <!-- Reviews functionality removed -->
     <script>
@@ -5472,7 +5642,6 @@
                         throw new Error('No data received');
                     }
                 } catch (error) {
-                    console.log('Using fallback reviews:', error);
                     this.displayReviews(this.fallbackReviews, 4.9, 360);
                 } finally {
                     this.hideLoading();
@@ -5515,8 +5684,6 @@
                         }
                     };
                 } catch (error) {
-                    console.error('Places API (New) Error:', error);
-
                     // Fallback para método alternativo ou proxy
                     return await this.fetchViaProxy();
                 }
@@ -5540,7 +5707,7 @@
                         return await response.json();
                     }
                 } catch (error) {
-                    console.log('Proxy method not available, using fallback');
+                    // Proxy method not available, using fallback
                 }
 
                 // Se nenhum método funcionar, retorna null para usar fallback
@@ -5559,7 +5726,6 @@
 
                     return JSON.parse(cachedData);
                 } catch (error) {
-                    console.error('Cache error:', error);
                     return null;
                 }
             }
@@ -5570,7 +5736,7 @@
                     localStorage.setItem(this.cacheKey, JSON.stringify(cacheData));
                     localStorage.setItem(this.cacheTimeKey, Date.now().toString());
                 } catch (error) {
-                    console.error('Cache save error:', error);
+                    // Cache save error
                 }
             }
 
@@ -5691,11 +5857,16 @@
                 }
             }
         }
+        */
 
         // Inicializar funcionalidades quando a página carregar
         document.addEventListener('DOMContentLoaded', () => {
             // Scroll reveal para imagens das etapas
             initScrollReveal();
+
+            // Inicializar lazy load do background de serviços
+            // DESABILITADO TEMPORARIAMENTE - background aplicado inline
+            // initServicesBackground();
         });
 
         function initScrollReveal() {
@@ -5722,7 +5893,8 @@
                 observer.observe(img);
             });
 
-            // Observer para efeito suave de desenrolar nas etapas
+            // Observer para efeito suave de desenrolar nas etapas - INDIVIDUAL
+            let firstCardAnimated = false;
             const blurObserver = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
@@ -5730,24 +5902,81 @@
                         entry.target.classList.remove('blur-effect');
                         entry.target.classList.add('animate-in');
 
+                        // Se for o primeiro card, mostrar a linha depois de 600ms (desktop)
+                        if (!firstCardAnimated) {
+                            firstCardAnimated = true;
+                            setTimeout(() => {
+                                const stepsContainer = document.querySelector('.steps-container');
+                                if (stepsContainer) {
+                                    stepsContainer.classList.add('line-visible');
+                                }
+                            }, 600);
+                        }
+
                         // Após animação, adiciona visible
                         setTimeout(() => {
                             entry.target.classList.add('visible');
                         }, 1200);
 
+                        // Desktop e Mobile: mostrar linha conectora do card ANTERIOR 500ms DEPOIS deste card aparecer
+                        setTimeout(() => {
+                            const previousCard = entry.target.previousElementSibling;
+                            if (previousCard && previousCard.classList.contains('step-item')) {
+                                previousCard.classList.add('show-line');
+                            }
+                        }, 500); // 500ms após o card atual aparecer
+
                         blurObserver.unobserve(entry.target);
                     }
                 });
             }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -80px 0px'
+                threshold: 0.2,
+                rootMargin: '0px 0px -100px 0px'
             });
 
             // Adicionar classe blur-effect inicialmente e observar todos os step-items
-            document.querySelectorAll('.step-item').forEach(item => {
+            const stepItems = document.querySelectorAll('.step-item');
+
+            stepItems.forEach((item, index) => {
                 item.classList.add('blur-effect');
                 blurObserver.observe(item);
             });
+        }
+
+        // Função para inicializar lazy load do background da seção de serviços
+        function initServicesBackground() {
+            // Lazy load da imagem de fundo da seção de serviços (estático, sem parallax)
+            const lazyBgObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const section = entry.target;
+
+                        // Detectar se é mobile ou desktop
+                        const isMobile = window.innerWidth <= 768;
+                        const bgImage = isMobile
+                            ? "url('images/fundo_linhas_mobile.png')"
+                            : "url('images/fundo_linhas_desk.png')";
+
+                        // Gradiente diagonal (#111320 → #0C325F)
+                        const gradient = "linear-gradient(to bottom right, #111320 0%, #0C325F 100%)";
+
+                        section.style.backgroundImage = `${gradient}, ${bgImage}`;
+                        section.style.backgroundSize = 'cover, 100% auto';
+                        section.style.backgroundPosition = 'center, center';
+                        section.style.backgroundRepeat = 'no-repeat, repeat-y';
+
+                        lazyBgObserver.unobserve(section);
+                    }
+                });
+            }, {
+                rootMargin: '200px'
+            });
+
+            // Observar a seção de serviços
+            const servicesSection = document.querySelector('.services-bg-lazy');
+            if (servicesSection) {
+                lazyBgObserver.observe(servicesSection);
+            }
         }
 
         // Função do carrossel já foi movida para antes dos botões HTML
@@ -5756,13 +5985,10 @@
 
         // Event listeners para o modal
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Configurando event listeners do modal...');
-
             // Fechar ao clicar no X
             const closeBtn = document.getElementById('closeModal');
             if (closeBtn) {
                 closeBtn.onclick = function() {
-                    console.log('Clicou no X para fechar');
                     closeReviewModal();
                 };
             }
@@ -5772,7 +5998,6 @@
             if (modal) {
                 modal.onclick = function(event) {
                     if (event.target === modal) {
-                        console.log('Clicou fora do modal para fechar');
                         closeReviewModal();
                     }
                 };
@@ -5781,14 +6006,10 @@
             // Fechar com ESC
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'Escape') {
-                    console.log('Pressionou ESC para fechar');
                     closeReviewModal();
                 }
             });
-
-            console.log('Event listeners configurados com sucesso!');
         });
-        */
     </script>
 
     <!-- Meta Pixel - Track WhatsApp Direct Links -->
@@ -5811,5 +6032,6 @@
 
     <!-- Vercel Web Analytics -->
     <script src="/_vercel/insights/script.js"></script>
+
 </body>
 </html>
