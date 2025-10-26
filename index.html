@@ -24,7 +24,7 @@
 
     <!-- Preload Critical Resources -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
-    <link rel="preload" href="./fonts/Autography.woff2" as="font" type="font/woff2">
+    <link rel="preload" href="./fonts/Autography.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
     <!-- Preconnect to External Domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,7 +49,8 @@
     <meta name="apple-mobile-web-app-title" content="RIP PET">
 
     <!-- Google Fonts (Optimized) -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
     <!-- Local Autography Font -->
     <style>
@@ -113,7 +114,8 @@
     <!-- End Meta Pixel Code -->
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 
     <!-- Modal Functions Script -->
     <script>
@@ -148,7 +150,8 @@
     </script>
     
     <!-- Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
 
     <style>
 
@@ -2051,7 +2054,7 @@
     </script>
 
     <!-- SEO: Structured Data (Schema.org) -->
-    <script src="./schema-seo.js"></script>
+    <script src="./schema-seo.js" defer></script>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -3459,7 +3462,9 @@
                     cursor: pointer;
                     transition: all 0.3s ease;
                     border: none;
+                    font-family: 'Nunito', sans-serif;
                     font-weight: 600;
+                    font-size: 1rem;
                 }
 
                 .prev-btn {
