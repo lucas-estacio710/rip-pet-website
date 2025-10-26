@@ -539,7 +539,6 @@ function injectSchemas() {
         document.head.appendChild(script);
     });
 
-    console.log('✅ SEO Schemas injetados:', schemas.length);
 }
 
 // Executar quando DOM estiver pronto

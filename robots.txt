@@ -22,6 +22,9 @@ Allow: /
 Disallow: /.git/
 Disallow: /.claude/
 Disallow: /*_backup*.html
+Disallow: /vendas.html
+Disallow: /formulario-vendas.html
+Disallow: /ficha-*.html
 
 # Proteção contra páginas maliciosas comuns (invasões anteriores)
 Disallow: /cassino/

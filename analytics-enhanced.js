@@ -63,13 +63,11 @@ function extractWhatsAppInfo(url) {
 function trackWhatsAppClick(element, context = {}) {
     // Proteção contra chamadas acidentais
     if (!element) {
-        console.warn('⚠️ trackWhatsAppClick chamado sem elemento válido');
         return;
     }
 
     const url = element.href || element.getAttribute('href');
     if (!url || !url.includes('wa.me')) {
-        console.warn('⚠️ trackWhatsAppClick chamado em elemento que não é WhatsApp:', url);
         return;
     }
 
@@ -88,11 +86,13 @@ function trackWhatsAppClick(element, context = {}) {
             button_location: context.location || 'popup',
             value: 10 // Valor estimado do lead
         });
+    }
 
-        console.log('📊 WhatsApp Click (User Action):', {
-            unit: info.unit_label,
-            section: section,
-            phone: info.phone
+    // Meta Pixel tracking
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Contact', {
+            content_name: 'WhatsApp Click',
+            content_category: 'Contact'
         });
     }
 }
@@ -101,7 +101,6 @@ function trackWhatsAppClick(element, context = {}) {
 function trackPhoneClick(element, context = {}) {
     // Proteção contra chamadas acidentais
     if (!element || !element.href) {
-        console.warn('⚠️ trackPhoneClick chamado sem elemento válido');
         return;
     }
 
@@ -109,7 +108,6 @@ function trackPhoneClick(element, context = {}) {
 
     // Verificar se é realmente um link tel:
     if (!tel.startsWith('tel:')) {
-        console.warn('⚠️ trackPhoneClick chamado em elemento que não é tel:', tel);
         return;
     }
 
@@ -127,11 +125,13 @@ function trackPhoneClick(element, context = {}) {
             page_section: section,
             value: 15 // Telefone tem valor maior que WhatsApp (mais comprometido)
         });
+    }
 
-        console.log('📞 Phone Click (User Action):', {
-            unit: unit.label,
-            section: section,
-            phone: phoneNumber
+    // Meta Pixel tracking
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Contact', {
+            content_name: 'Phone Click',
+            content_category: 'Contact'
         });
     }
 }
@@ -154,7 +154,6 @@ const scrollTracking = {
                     percent: percent
                 });
 
-                console.log(`📜 Scroll: ${percent}%`);
             }
         }
     },
@@ -170,7 +169,6 @@ const scrollTracking = {
                     section_name: sectionId
                 });
 
-                console.log(`👁️ Section Viewed: ${sectionId}`);
             }
         }
     },
@@ -229,7 +227,6 @@ const pricingTracking = {
                             value: 5 // Interesse moderado
                         });
 
-                        console.log('💰 Visualizou Preços');
                     }
                 }
             });
@@ -253,7 +250,6 @@ function trackReviewInteraction(action, reviewData = {}) {
             value: 3 // Engagement com social proof é valioso
         });
 
-        console.log('⭐ Review Interaction:', action);
     }
 }
 
@@ -267,7 +263,6 @@ function trackFAQClick(question) {
             value: 2
         });
 
-        console.log('❓ FAQ Clicked:', question);
     }
 }
 
@@ -293,7 +288,6 @@ const timeTracking = {
                             value: Math.floor(milestone / 30) // Valor aumenta com tempo
                         });
 
-                        console.log(`⏱️ Tempo na Página: ${milestone}s`);
                     }
                 }
             });
@@ -311,21 +305,16 @@ function trackWhatsAppPopup(action) {
             value: action === 'opened' ? 3 : 1
         });
 
-        console.log('📱 WhatsApp Popup:', action);
     }
 }
 
 // ===== INICIALIZAÇÃO AUTOMÁTICA =====
 function initEnhancedAnalytics() {
-    console.log('🚀 Iniciando Analytics Avançado RIP PET...');
-    console.log('📍 Document ready state:', document.readyState);
 
     // Aguardar DOM estar pronto
     if (document.readyState === 'loading') {
-        console.log('⏳ Aguardando DOMContentLoaded...');
         document.addEventListener('DOMContentLoaded', setupTracking);
     } else {
-        console.log('✅ DOM já pronto, iniciando setup...');
         setupTracking();
     }
 }
@@ -333,7 +322,6 @@ function initEnhancedAnalytics() {
 function setupTracking() {
     // Evitar múltiplas inicializações
     if (window._rippetAnalyticsInitialized) {
-        console.warn('⚠️ Analytics já inicializado, ignorando duplicata');
         return;
     }
     window._rippetAnalyticsInitialized = true;
@@ -349,32 +337,26 @@ function setupTracking() {
 
     // 4. Rastrear todos os links de WhatsApp (apenas cliques REAIS de usuário)
     const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
-    console.log(`🔗 Encontrados ${whatsappLinks.length} links de WhatsApp`);
     whatsappLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             // Proteção: só rastrear se foi clique real do usuário (não programático)
             if (!e.isTrusted) {
-                console.warn('⚠️ Evento de WhatsApp não-confiável ignorado');
                 return;
             }
 
-            console.log('👆 Clique REAL detectado em WhatsApp');
             trackWhatsAppClick(this);
         }, { passive: true });
     });
 
     // 5. Rastrear todos os links de telefone (apenas cliques REAIS de usuário)
     const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-    console.log(`📞 Encontrados ${phoneLinks.length} links de telefone`);
     phoneLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             // Proteção: só rastrear se foi clique real do usuário (não programático)
             if (!e.isTrusted) {
-                console.warn('⚠️ Evento de telefone não-confiável ignorado');
                 return;
             }
 
-            console.log('👆 Clique REAL detectado em telefone');
             trackPhoneClick(this);
         }, { passive: true });
     });
@@ -420,19 +402,6 @@ function setupTracking() {
             device_type: window.innerWidth < 768 ? 'mobile' : 'desktop'
         });
     }
-
-    console.log('✅ Analytics Avançado Configurado!');
-    console.log('📊 Eventos disponíveis:', [
-        'click_whatsapp',
-        'click_phone',
-        'scroll_depth',
-        'section_view',
-        'view_pricing',
-        'review_interaction',
-        'faq_click',
-        'time_on_page',
-        'whatsapp_popup'
-    ]);
 }
 
 // Iniciar quando script carregar

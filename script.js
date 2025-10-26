@@ -93,7 +93,6 @@ class ResponsiveNavigation {
 
     init() {
         if (!this.header || !this.menuToggle || !this.navbarMenu) {
-            console.warn('Elementos de navegação não encontrados');
             return;
         }
 
@@ -495,7 +494,6 @@ class FormValidator {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 // Simulate success (replace with actual API call)
-                console.log('Form data:', data);
                 resolve({ success: true });
             }, 2000);
         });
@@ -719,24 +717,20 @@ class App {
             this.logInitializationSuccess();
 
         } catch (error) {
-            console.error('Erro na inicialização da aplicação:', error);
             this.handleInitializationError(error);
         }
     }
 
     setupErrorHandling() {
         window.addEventListener('error', (e) => {
-            console.error('Erro JavaScript:', e.error);
         });
 
         window.addEventListener('unhandledrejection', (e) => {
-            console.error('Promise rejeitada:', e.reason);
         });
     }
 
     handleInitializationError(error) {
         // Fallback functionality
-        console.warn('Modo de fallback ativado devido a erro na inicialização');
         
         // Basic functionality without advanced features
         this.setupBasicFunctionality();
@@ -756,13 +750,7 @@ class App {
     }
 
     logInitializationSuccess() {
-        console.log('%c🚀 Premium Responsive Layout inicializado com sucesso!', 
                    'color: #10b981; font-weight: bold; font-size: 16px;');
-        console.log('📱 Navegação responsiva: ✓');
-        console.log('🎨 Animações: ✓');
-        console.log('📝 Validação de formulários: ✓');
-        console.log('♿ Acessibilidade: ✓');
-        console.log('⚡ Performance otimizada: ✓');
     }
 }
 
