@@ -154,6 +154,28 @@
     <noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></noscript>
 
     <style>
+        /* Force font-display: swap for Font Awesome */
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-style: normal;
+            font-weight: 900;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Font Awesome 6 Brands';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+        }
+    </style>
+
+    <style>
 
         * {
             margin: 0;
@@ -4336,37 +4358,63 @@
 
                 <!-- Script do Carousel -->
                 <script>
-                // Função do carrossel de avaliações - MOVIDA PARA CÁ!
-                function scrollCarousel(direction) {
-                    const carousel = document.getElementById('reviewsCarousel');
-                    if (!carousel) {
-                        return;
-                    }
-
-                    const card = carousel.querySelector('.review-card-carousel');
-                    if (!card) {
-                        return;
-                    }
-
-                    const cardWidth = card.offsetWidth;
+                // Função do carrossel de avaliações - OTIMIZADA para evitar forced reflow
+                (function() {
+                    let cachedCardWidth = null;
                     const gap = 32;
-                    const scrollAmount = direction === 'left' ? -((cardWidth + gap) * 2) : ((cardWidth + gap) * 2);
 
-                    const currentScroll = carousel.scrollLeft;
-                    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+                    // Calcula e armazena as dimensões do card
+                    function updateCardDimensions() {
+                        const carousel = document.getElementById('reviewsCarousel');
+                        if (!carousel) return;
 
-                    let newPosition;
-                    if (direction === 'left') {
-                        newPosition = Math.max(0, currentScroll + scrollAmount);
-                    } else {
-                        newPosition = Math.min(maxScroll, currentScroll + scrollAmount);
+                        const card = carousel.querySelector('.review-card-carousel');
+                        if (!card) return;
+
+                        cachedCardWidth = card.offsetWidth;
                     }
 
-                    carousel.scrollTo({
-                        left: newPosition,
-                        behavior: 'smooth'
+                    // Inicializa as dimensões quando o DOM estiver pronto
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', updateCardDimensions);
+                    } else {
+                        updateCardDimensions();
+                    }
+
+                    // Atualiza dimensões em resize usando debounce
+                    let resizeTimeout;
+                    window.addEventListener('resize', function() {
+                        clearTimeout(resizeTimeout);
+                        resizeTimeout = setTimeout(updateCardDimensions, 150);
                     });
-                }
+
+                    // Função global de scroll do carrossel
+                    window.scrollCarousel = function(direction) {
+                        const carousel = document.getElementById('reviewsCarousel');
+                        if (!carousel) return;
+
+                        // Se ainda não temos dimensões em cache, calcula uma vez
+                        if (cachedCardWidth === null) {
+                            updateCardDimensions();
+                        }
+
+                        const scrollAmount = direction === 'left' ? -((cachedCardWidth + gap) * 2) : ((cachedCardWidth + gap) * 2);
+                        const currentScroll = carousel.scrollLeft;
+                        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+                        let newPosition;
+                        if (direction === 'left') {
+                            newPosition = Math.max(0, currentScroll + scrollAmount);
+                        } else {
+                            newPosition = Math.min(maxScroll, currentScroll + scrollAmount);
+                        }
+
+                        carousel.scrollTo({
+                            left: newPosition,
+                            behavior: 'smooth'
+                        });
+                    };
+                })();
                 </script>
 
                 <!-- Controles do carrossel -->
