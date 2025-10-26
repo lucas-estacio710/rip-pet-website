@@ -5307,12 +5307,20 @@
                 hamburger.classList.remove('active');
                 overlay.classList.remove('active');
                 document.body.style.overflow = '';
+
+                // Remove do histórico se foi fechado manualmente
+                if (window.history.state && window.history.state.mobileMenu) {
+                    window.history.back();
+                }
             } else {
                 // Open menu
                 mobileNav.classList.add('active');
                 hamburger.classList.add('active');
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
+
+                // Adiciona ao histórico do navegador
+                window.history.pushState({ mobileMenu: true }, '');
             }
         }
 
@@ -5325,6 +5333,11 @@
             hamburger.classList.remove('active');
             overlay.classList.remove('active');
             document.body.style.overflow = '';
+
+            // Remove do histórico se foi fechado manualmente
+            if (window.history.state && window.history.state.mobileMenu) {
+                window.history.back();
+            }
         }
 
         // Phone Popup Functions with smooth animation
@@ -5341,6 +5354,9 @@
             overlay.style.display = 'flex';
             document.body.style.overflow = 'hidden';
             setTimeout(() => overlay.classList.add('active'), 10);
+
+            // Adiciona ao histórico do navegador
+            window.history.pushState({ phonePopup: true }, '');
         }
 
         function closePhonePopup() {
@@ -5350,6 +5366,11 @@
                 overlay.style.display = 'none';
                 document.body.style.overflow = '';
             }, 300);
+
+            // Remove do histórico se foi fechado manualmente
+            if (window.history.state && window.history.state.phonePopup) {
+                window.history.back();
+            }
         }
 
         // WhatsApp Popup Functions with smooth animation
@@ -5366,6 +5387,9 @@
             overlay.style.display = 'flex';
             document.body.style.overflow = 'hidden';
             setTimeout(() => overlay.classList.add('active'), 10);
+
+            // Adiciona ao histórico do navegador
+            window.history.pushState({ whatsappPopup: true }, '');
         }
 
         function closeWhatsAppPopup() {
@@ -5375,7 +5399,53 @@
                 overlay.style.display = 'none';
                 document.body.style.overflow = '';
             }, 300);
+
+            // Remove do histórico se foi fechado manualmente
+            if (window.history.state && window.history.state.whatsappPopup) {
+                window.history.back();
+            }
         }
+
+        // Intercepta o botão voltar do navegador para fechar popups/menu
+        window.addEventListener('popstate', function(event) {
+            // Se não há estado, significa que o usuário realmente quer voltar na navegação
+            if (!event.state) {
+                return;
+            }
+
+            // Detecta qual popup/menu estava aberto e fecha sem adicionar ao histórico novamente
+            const mobileNav = document.getElementById('mobileNav');
+            const phonePopupOverlay = document.getElementById('phonePopupOverlay');
+            const whatsappPopupOverlay = document.getElementById('whatsappPopupOverlay');
+
+            // Fecha menu mobile
+            if (mobileNav && mobileNav.classList.contains('active')) {
+                const hamburger = document.getElementById('hamburger');
+                const overlay = document.getElementById('mobileOverlay');
+                mobileNav.classList.remove('active');
+                if (hamburger) hamburger.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // Fecha popup de telefone
+            if (phonePopupOverlay && phonePopupOverlay.classList.contains('active')) {
+                phonePopupOverlay.classList.remove('active');
+                setTimeout(() => {
+                    phonePopupOverlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+
+            // Fecha popup de WhatsApp
+            if (whatsappPopupOverlay && whatsappPopupOverlay.classList.contains('active')) {
+                whatsappPopupOverlay.classList.remove('active');
+                setTimeout(() => {
+                    whatsappPopupOverlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.getElementById('hamburger');
