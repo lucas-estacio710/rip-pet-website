@@ -6215,8 +6215,34 @@
         });
     </script>
 
-    <!-- Vercel Web Analytics -->
-    <script src="/_vercel/insights/script.js"></script>
+    <!-- Vercel Web Analytics - Lazy Loaded -->
+    <script>
+        // Função para carregar Vercel Analytics sob demanda
+        function loadVercelAnalytics() {
+            if (window.vercelAnalyticsLoaded) return;
+            window.vercelAnalyticsLoaded = true;
+
+            const script = document.createElement('script');
+            script.src = '/_vercel/insights/script.js';
+            document.head.appendChild(script);
+        }
+
+        // Carrega quando o usuário interage ou após 3s
+        const vercelInteractionEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
+        const loadVercelOnInteraction = () => {
+            loadVercelAnalytics();
+            vercelInteractionEvents.forEach(event =>
+                window.removeEventListener(event, loadVercelOnInteraction)
+            );
+        };
+
+        vercelInteractionEvents.forEach(event =>
+            window.addEventListener(event, loadVercelOnInteraction, { passive: true, once: true })
+        );
+
+        // Fallback: carrega após 3 segundos
+        setTimeout(loadVercelAnalytics, 3000);
+    </script>
 
     <!-- Service Worker Registration -->
     <script>
