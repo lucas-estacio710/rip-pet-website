@@ -1,0 +1,46 @@
+# Documentação interna
+OTIMIZACAO-IMAGENS.md
+RELATORIO-ALTERACOES-COMPLETO.md
+diferencas_completas.txt
+diff-output.txt
+docs/DIAGNOSTICO-EVENTOS.md
+docs/GUIA-RELATORIO-LEADS-POR-UNIDADE-GA4.md
+
+# Scripts Python de otimização
+optimize_*.py
+fix_logo_transparency.py
+update_popups.py
+
+# Backups
+backups/
+
+# Instaladores
+python-installer.exe
+
+# Temporários
+nul
+
+# Backup de imagens
+images_backup/
+
+# Arquivos duplicados/temporários de imagens
+images/*- Copia.jpg
+images/etapa4-entregab.jpg
+images/sp.png
+images/unnamed.jpg
+images/matriz_pinda.jpg
+images/matriz_pinda2.jpg
+images/matriz_pinda3.jpg
+
+# Imagens otimizadas não usadas ainda
+images/*_opt@2x.jpg
+images/*_opt@2x.webp
+assets/*_opt@2x.jpg
+assets/*_opt@2x.webp
+
+# Projeto React (se for separado)
+rip-pet-app/
+
+# Arquivos do Supabase (configuração local)
+docs/SUPABASE-SETUP.md
+docs/supabase-schema.sql

@@ -2202,7 +2202,7 @@
 
     <!-- Phone Popup -->
     <div class="phone-popup-overlay" id="phonePopupOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
-        <div class="phone-popup" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); border-radius: 20px; padding: 2rem; max-width: 600px; width: 90%; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative;">
+        <div class="phone-popup" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%); border-radius: 20px; padding: 2rem; max-width: 600px; width: 90%; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative;">
             <button class="phone-popup-close" id="phonePopupClose" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; font-size: 1.3rem; color: white; cursor: pointer; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='scale(1)';">
                 <i class="fas fa-times"></i>
             </button>
@@ -2213,14 +2213,14 @@
             <div class="phone-list">
                 <!-- Grid container para todas as unidades - 2 colunas -->
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem;">
-                    <!-- Matriz em destaque - primeira posição -->
-                    <a href="tel:+5512997996543" class="region-compose" style="background: linear-gradient(135deg, #B9E28C, #a8d16f); color: #052F5F; padding: 1rem; border-radius: 10px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 2px solid #B9E28C; text-decoration: none; box-shadow: 0 8px 20px rgba(185, 226, 140, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 30px rgba(185, 226, 140, 0.4)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
+                    <!-- Matriz - primeira posição -->
+                    <a href="tel:+5512997996543" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
                         <div class="region-content">
-                            <h4 style="margin: 0; color: #052F5F; font-size: 1.1rem; font-weight: 700; font-family: 'Poppins', sans-serif; line-height: 1.2;">Matriz e Vale do Paraíba</h4>
-                            <p style="margin: 0; color: #052F5F; font-size: 1rem; text-align: left; font-family: 'Nunito', sans-serif; font-weight: 600; line-height: 1.2;">(12) 99799-6543</p>
+                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Matriz e Vale do Paraíba</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(12) 99799-6543</p>
                         </div>
-                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.3rem; background: linear-gradient(135deg, #1e40af, #1e3a8a); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
-                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #052F5F; transition: all 0.3s ease;"></div>
+                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; color: white; transition: all 0.3s ease;"></i>
+                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
                     </a>
 
                     <a href="tel:+5511991603041" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(185, 226, 140, 0.3)'; this.querySelector('.phone-icon-blue').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.phone-icon-blue').style.transform='scale(1)';">
@@ -2228,7 +2228,7 @@
                             <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">São Paulo e Região</h4>
                             <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(11) 99160-3041</p>
                         </div>
-                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
+                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; color: white; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
                     </a>
 
@@ -2237,7 +2237,7 @@
                             <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Santos e Região</h4>
                             <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(13) 99806-8262</p>
                         </div>
-                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
+                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; color: white; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
                     </a>
 
@@ -2246,7 +2246,7 @@
                             <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Campinas e Região</h4>
                             <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(19) 99916-1977</p>
                         </div>
-                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
+                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; color: white; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
                     </a>
 
@@ -2255,7 +2255,7 @@
                             <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Resende e Região</h4>
                             <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(24) 99837-9825</p>
                         </div>
-                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
+                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; color: white; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
                     </a>
 
@@ -2264,7 +2264,7 @@
                             <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Pouso Alegre e Região</h4>
                             <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(35) 99904-2223</p>
                         </div>
-                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; background: linear-gradient(135deg, #3b82f6, #1e40af); background-clip: text; -webkit-background-clip: text; color: transparent; transition: all 0.3s ease;"></i>
+                        <i class="fas fa-phone phone-icon-blue" style="font-size: 1.2rem; color: white; transition: all 0.3s ease;"></i>
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #B9E28C; transition: all 0.3s ease;"></div>
                     </a>
                 </div>
@@ -5320,14 +5320,14 @@
             <div class="whatsapp-list">
                 <!-- Grid container para todas as unidades - 2 colunas -->
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem;">
-                    <!-- Matriz em destaque - primeira posição -->
-                    <a href="https://wa.me/5512997996543?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." class="region-compose" style="background: linear-gradient(135deg, #25D366, #20B358); color: white; padding: 1rem; border-radius: 10px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 2px solid #25D366; text-decoration: none; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 30px rgba(37, 211, 102, 0.4)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
+                    <!-- Matriz - primeira posição -->
+                    <a href="https://wa.me/5512997996543?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
                         <div class="region-content">
-                            <h4 style="margin: 0; color: white; font-size: 1.1rem; font-weight: 700; font-family: 'Poppins', sans-serif; line-height: 1.2;">Matriz e Vale do Paraíba</h4>
-                            <p style="margin: 0; color: rgba(255,255,255,0.9); font-size: 1rem; text-align: left; font-family: 'Nunito', sans-serif; font-weight: 600; line-height: 1.2;">(12) 99799-6543</p>
+                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Matriz e Vale do Paraíba</h4>
+                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(12) 99799-6543</p>
                         </div>
                         <i class="fab fa-whatsapp whatsapp-icon" style="font-size: 1.8rem; color: white; transition: all 0.3s ease;"></i>
-                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: white; transition: all 0.3s ease;"></div>
+                        <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #25D366; transition: all 0.3s ease;"></div>
                     </a>
 
                     <a href="https://wa.me/5511991603041?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
@@ -5339,7 +5339,7 @@
                         <div style="content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: #25D366; transition: all 0.3s ease;"></div>
                     </a>
 
-                    <a href="https://wa.me/5513998068262?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
+                    <a href="https://wa.me/5513998068262?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." id="santos-whatsapp-link" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'; this.style.borderColor='rgba(37, 211, 102, 0.3)'; this.querySelector('.whatsapp-icon').style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.1)'; this.querySelector('.whatsapp-icon').style.transform='scale(1)';" target="_blank">
                         <div class="region-content">
                             <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Santos e Região</h4>
                             <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; line-height: 1.2;">(13) 99806-8262</p>
@@ -5397,6 +5397,39 @@
     </a>
 
     <script>
+        // ========== CAPTURA DE GCLID PARA GOOGLE ADS ==========
+        // Captura GCLID da URL e salva em cookie por 90 dias
+        function captureGCLID() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const gclid = urlParams.get('gclid');
+
+            if (gclid) {
+                // Salva GCLID em cookie por 90 dias
+                const expiryDate = new Date();
+                expiryDate.setDate(expiryDate.getDate() + 90);
+                document.cookie = `gclid=${gclid}; expires=${expiryDate.toUTCString()}; path=/`;
+                console.log('GCLID capturado:', gclid);
+            }
+        }
+
+        // Função para recuperar GCLID do cookie
+        function getGCLID() {
+            const name = 'gclid=';
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const cookieArray = decodedCookie.split(';');
+
+            for(let i = 0; i < cookieArray.length; i++) {
+                let cookie = cookieArray[i].trim();
+                if (cookie.indexOf(name) === 0) {
+                    return cookie.substring(name.length, cookie.length);
+                }
+            }
+            return null;
+        }
+
+        // Executa captura imediatamente
+        captureGCLID();
+
         // Loading Screen
         window.addEventListener('load', function() {
             const loadingScreen = document.getElementById('loadingScreen');
@@ -6416,6 +6449,35 @@
                     });
             });
         }
+    
+        // ========== ADICIONAR GCLID NO WHATSAPP DE SANTOS ==========
+        function updateSantosWhatsAppLink() {
+            const santosLink = document.getElementById('santos-whatsapp-link');
+            if (santosLink) {
+                const gclid = getGCLID();
+                if (gclid) {
+                    const baseUrl = 'https://wa.me/5513998068262';
+                    const message = encodeURIComponent(`Olá, estava no site da R.I.P. Pet e preciso de mais informações. (Protocolo: ${gclid})`);
+                    santosLink.href = `${baseUrl}?text=${message}`;
+                    console.log('Link de Santos atualizado com GCLID:', gclid);
+                }
+            }
+        }
+
+        // Atualizar link quando página carregar
+        window.addEventListener('load', updateSantosWhatsAppLink);
+
+        // Atualizar link quando popup de WhatsApp abrir
+        function openWhatsAppPopup() {
+            updateSantosWhatsAppLink();
+            const popup = document.getElementById('whatsappPopupOverlay');
+            if (popup) {
+                popup.style.display = 'flex';
+                setTimeout(() => popup.classList.add('active'), 10);
+            }
+            return false;
+        }
+
     </script>
 
 </body>
