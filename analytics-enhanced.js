@@ -19,7 +19,8 @@ const ANALYTICS_CONFIG = {
         '5511991603041': { name: 'sao_paulo', label: 'São Paulo' },
         '5513998068262': { name: 'santos', label: 'Santos' },
         '5519999161977': { name: 'campinas', label: 'Campinas' },
-        '5524998379825': { name: 'regiao_lagos', label: 'Região dos Lagos' }
+        '5524998379825': { name: 'resende', label: 'Resende' },
+        '553599042223': { name: 'pouso_alegre', label: 'Pouso Alegre' }
     },
     sections: {
         'hero': 'Topo da Página',
@@ -336,30 +337,55 @@ function setupTracking() {
     timeTracking.init();
 
     // 4. Rastrear todos os links de WhatsApp (apenas cliques REAIS de usuário)
-    const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
-    whatsappLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Proteção: só rastrear se foi clique real do usuário (não programático)
-            if (!e.isTrusted) {
-                return;
-            }
+    function attachWhatsAppListeners() {
+        const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
+        whatsappLinks.forEach(link => {
+            // Evitar adicionar múltiplos listeners
+            if (link.dataset.whatsappTracked) return;
+            link.dataset.whatsappTracked = 'true';
 
-            trackWhatsAppClick(this);
-        }, { passive: true });
-    });
+            link.addEventListener('click', function(e) {
+                // Proteção: só rastrear se foi clique real do usuário (não programático)
+                if (!e.isTrusted) {
+                    return;
+                }
+
+                trackWhatsAppClick(this);
+            }, { passive: true });
+        });
+    }
+
+    // Anexar listeners iniciais
+    attachWhatsAppListeners();
 
     // 5. Rastrear todos os links de telefone (apenas cliques REAIS de usuário)
-    const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-    phoneLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Proteção: só rastrear se foi clique real do usuário (não programático)
-            if (!e.isTrusted) {
-                return;
-            }
+    function attachPhoneListeners() {
+        const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+        phoneLinks.forEach(link => {
+            // Evitar adicionar múltiplos listeners
+            if (link.dataset.phoneTracked) return;
+            link.dataset.phoneTracked = 'true';
 
-            trackPhoneClick(this);
-        }, { passive: true });
+            link.addEventListener('click', function(e) {
+                // Proteção: só rastrear se foi clique real do usuário (não programático)
+                if (!e.isTrusted) {
+                    return;
+                }
+
+                trackPhoneClick(this);
+            }, { passive: true });
+        });
+    }
+
+    // Anexar listeners iniciais
+    attachPhoneListeners();
+
+    // Observar mudanças no DOM para popups dinâmicos
+    const observer = new MutationObserver(() => {
+        attachPhoneListeners();
+        attachWhatsAppListeners();
     });
+    observer.observe(document.body, { childList: true, subtree: true });
 
     // 6. Interceptar abertura do popup de WhatsApp
     const whatsappPopupBtn = document.querySelector('.whatsapp-btn, [onclick*="openWhatsAppPopup"]');
