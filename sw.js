@@ -1,8 +1,8 @@
 // Service Worker para RIP PET
 // Versão 1.0 - Cache de recursos estáticos e terceiros
 
-const CACHE_NAME = 'rippet-v1';
-const THIRD_PARTY_CACHE = 'rippet-third-party-v1';
+const CACHE_NAME = 'rippet-v2';
+const THIRD_PARTY_CACHE = 'rippet-third-party-v2';
 
 // Recursos para cachear na instalação
 const STATIC_CACHE = [

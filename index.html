@@ -23,7 +23,7 @@
     <meta name="googlebot" content="index, follow">
 
     <!-- Preload Critical Resources -->
-    <link rel="preload" href="assets/rippet_logo_horizontal_fundo_claro.png" as="image" fetchpriority="high">
+    <link rel="preload" href="assets/rippet_logo_horizontal_fundo_claro_opt.webp" as="image" type="image/webp" fetchpriority="high">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
     <link rel="preload" href="./fonts/Autography.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
@@ -292,7 +292,7 @@
             right: 1rem;
             z-index: 1000;
             padding: 1rem 0;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(5, 47, 95, 0.3);
             backdrop-filter: blur(20px) saturate(0);
             border-radius: 20px;
             transition: all 0.3s ease;
@@ -316,6 +316,18 @@
             align-items: center;
         }
 
+        .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            outline: none;
+        }
+
+        .logo picture {
+            display: flex;
+            align-items: center;
+        }
+
         .nav-links {
             justify-self: end;
             display: flex;
@@ -332,15 +344,18 @@
         .logo img {
             height: 60px;
             width: auto;
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)) 
-                    drop-shadow(0 0 30px rgba(255, 255, 255, 0.2)) 
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4))
+                    drop-shadow(0 0 30px rgba(255, 255, 255, 0.2))
                     drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
             transition: all 0.3s ease;
+            display: block;
+            vertical-align: middle;
+            object-fit: contain;
         }
 
-        .logo img:hover {
-            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6)) 
-                    drop-shadow(0 0 40px rgba(255, 255, 255, 0.3)) 
+        .logo a:hover img {
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6))
+                    drop-shadow(0 0 40px rgba(255, 255, 255, 0.3))
                     drop-shadow(0 0 15px rgba(185, 226, 140, 0.4))
                     drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
             transform: translateY(-2px);
@@ -390,7 +405,7 @@
             top: 50%;
             transform: translateY(calc(-50% - 3px));
             font-size: 0.75rem;
-            color: #fca5a5;
+            color: white;
             font-weight: 500;
             letter-spacing: 0.5px;
             transition: all 0.3s ease;
@@ -761,6 +776,140 @@
         @keyframes smoothFloat {
             0%, 100% { transform: translateX(-50%) translateY(0); }
             50% { transform: translateX(-50%) translateY(-8px); }
+        }
+
+        /* Floating Scroll Down Indicator */
+        .floating-scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            background: transparent;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+        }
+
+        .floating-scroll-indicator i {
+            font-size: 2rem;
+            color: white;
+            animation: gentleFloat 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+            mix-blend-mode: difference;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+        }
+
+        .floating-scroll-indicator:hover i {
+            opacity: 1;
+            transform: translateY(5px);
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Carousel Hint Arrows */
+        .carousel-hint-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .carousel-hint-arrow.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .carousel-hint-arrow i {
+            font-size: 2.5rem;
+            color: white;
+            animation: gentlePulse 2s ease-in-out infinite;
+            transition: all 0.3s ease;
+            mix-blend-mode: difference;
+            opacity: 0.7;
+            filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+        }
+
+        .carousel-hint-arrow:hover i {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .carousel-hint-arrow.left {
+            left: 1rem;
+        }
+
+        .carousel-hint-arrow.right {
+            right: 1rem;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% {
+                opacity: 0.7;
+                transform: translateX(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(8px);
+            }
+        }
+
+        .carousel-hint-arrow.left i {
+            animation: gentlePulseLeft 2s ease-in-out infinite;
+        }
+
+        @keyframes gentlePulseLeft {
+            0%, 100% {
+                opacity: 0.7;
+                transform: translateX(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(-8px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .carousel-hint-arrow i {
+                font-size: 2rem;
+            }
+
+            .carousel-hint-arrow.left {
+                left: 0.5rem;
+            }
+
+            .carousel-hint-arrow.right {
+                right: 0.5rem;
+            }
+        }
+
+        /* Mobile adjustments for floating scroll indicator */
+        @media (max-width: 768px) {
+            .floating-scroll-indicator {
+                bottom: 1.5rem;
+            }
+
+            .floating-scroll-indicator i {
+                font-size: 1.8rem;
+            }
         }
 
         /* Mobile fix for scroll indicator */
@@ -1642,8 +1791,8 @@
             position: fixed !important;
             bottom: 2rem !important;
             right: 2rem !important;
-            z-index: 1001 !important;
-            background: #25d366 !important;
+            z-index: 9999 !important;
+            background: linear-gradient(135deg, #34e77f 0%, #25d366 50%, #1ea952 100%) !important;
             color: white !important;
             width: 60px !important;
             height: 60px !important;
@@ -1653,15 +1802,65 @@
             justify-content: center !important;
             font-size: 1.5rem !important;
             text-decoration: none !important;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4) !important;
-            transition: all 0.3s ease !important;
-            animation: pulse 2s infinite !important;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+            animation: whatsappGlowBreathe 3s ease-in-out infinite !important;
             opacity: 1 !important;
             visibility: visible !important;
         }
 
+        @keyframes whatsappGlowBreathe {
+            0%, 100% {
+                box-shadow:
+                    0 0 20px rgba(37, 211, 102, 0.5),
+                    0 0 40px rgba(37, 211, 102, 0.3),
+                    0 4px 15px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow:
+                    0 0 30px rgba(37, 211, 102, 0.8),
+                    0 0 60px rgba(37, 211, 102, 0.5),
+                    0 4px 25px rgba(37, 211, 102, 0.6);
+            }
+        }
+
         .fixed-whatsapp:hover {
-            transform: scale(1.1) !important;
+            transform: translateY(-10px) scale(1.15) !important;
+            box-shadow:
+                0 0 35px rgba(37, 211, 102, 0.9),
+                0 0 70px rgba(37, 211, 102, 0.6),
+                0 20px 50px rgba(37, 211, 102, 0.5),
+                0 10px 30px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        /* Badge de notificação */
+        .fixed-whatsapp::before {
+            content: '1';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 24px;
+            height: 24px;
+            background: #ff4444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border: 3px solid white;
+            animation: whatsappBadgePulse 2s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes whatsappBadgePulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
         }
 
         /* Responsive WhatsApp button */
@@ -1673,6 +1872,13 @@
                 right: 1.5rem !important;
                 font-size: 1.3rem !important;
             }
+
+            .fixed-whatsapp::before {
+                width: 20px;
+                height: 20px;
+                font-size: 0.65rem;
+                border: 2px solid white;
+            }
         }
 
         @media (max-width: 430px) {
@@ -1682,6 +1888,14 @@
                 bottom: 1rem !important;
                 right: 1rem !important;
                 font-size: 1.2rem !important;
+            }
+
+            .fixed-whatsapp::before {
+                width: 18px;
+                height: 18px;
+                font-size: 0.6rem;
+                top: -4px;
+                right: -4px;
             }
 
             .animated-words {
@@ -1711,12 +1925,6 @@
             .hero-description {
                 font-size: 1rem !important;
             }
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
         /* Loading Screen */
@@ -2122,10 +2330,12 @@
     <nav class="navigation" id="navigation">
         <div class="nav-container">
             <div class="logo">
-                <picture>
-                    <source srcset="assets/rippet_logo_horizontal_fundo_claro_opt.webp" type="image/webp">
-                    <img src="assets/rippet_logo_horizontal_fundo_claro.png" alt="RIP PET" width="157" height="48" fetchpriority="high">
-                </picture>
+                <a href="#" aria-label="Voltar para o início">
+                    <picture>
+                        <source srcset="assets/rippet_logo_horizontal_fundo_claro_opt.webp" type="image/webp">
+                        <img src="assets/rippet_logo_horizontal_fundo_claro.png" alt="RIP PET" width="157" height="48" fetchpriority="high">
+                    </picture>
+                </a>
             </div>
             <ul class="nav-links">
                 <li><a href="#servicos">Serviços</a></li>
@@ -2199,6 +2409,11 @@
             <i class="fas fa-chevron-down"></i>
         </a>
     </header>
+
+    <!-- Scroll Down Indicator (Outside Hero) -->
+    <button id="scrollDownIndicator" class="floating-scroll-indicator" aria-label="Rolar para baixo" style="display: none;">
+        <i class="fas fa-chevron-down"></i>
+    </button>
 
     <!-- Phone Popup -->
     <div class="phone-popup-overlay" id="phonePopupOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
@@ -3495,6 +3710,7 @@
                     position: relative;
                     overflow: hidden;
                     scroll-snap-align: start;
+                    scroll-snap-stop: always;
                     height: 420px;
                     display: flex;
                     flex-direction: column;
@@ -4197,8 +4413,16 @@
                         <i class="fas fa-chevron-right" style="animation: swipeHint 2s ease-in-out infinite;"></i>
                     </div>
 
-                    <div class="carousel-track" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 0.3rem; padding: 0.1rem; padding-bottom: 0.5rem; scrollbar-width: none; -ms-overflow-style: none;">
-                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
+                    <!-- Hint Arrows -->
+                    <button class="carousel-hint-arrow left" id="whyChooseHintLeft" aria-label="Deslizar para esquerda">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-hint-arrow right visible" id="whyChooseHintRight" aria-label="Deslizar para direita">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                    <div class="carousel-track" id="whyChooseCarousel" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-snap-stop: always; gap: 0.3rem; padding: 0.1rem; padding-bottom: 0.5rem; scrollbar-width: none; -ms-overflow-style: none;">
+                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: start; scroll-snap-stop: always;">
                             <i class="fas fa-video" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
                             <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold); position: relative;">
                                 <span style="position: absolute; top: -5px; right: 10px; background: var(--accent-gold); color: white; font-size: 0.6rem; padding: 2px 4px; border-radius: 8px;">DESTAQUE</span>
@@ -4206,34 +4430,30 @@
                             </h4>
                             <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Oferecemos <strong>transparência completa</strong> através de <strong>vídeos em tempo real ou gravados</strong>, além da opção de <strong>acompanhar presencialmente</strong> — tudo <strong>sem custo adicional</strong>. É um dos nossos principais diferenciais para que você tenha <strong>total confiança</strong> em cada momento.<br><br>Se inicialmente preferir não acompanhar, respeitamos sua decisão. Seu pet receberá o <strong>mesmo carinho e cuidado</strong>. E se mudar de ideia durante o processo, não tem problema, ele estará preparado com todo amor para a despedida. Nosso <strong>zelo nunca depende de taxa adicional</strong>.</p>
                         </div>
-                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
+                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: start; scroll-snap-stop: always;">
                             <i class="fas fa-building" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
                             <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Crematório Próprio</h4>
                             <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">A RIP PET nasceu há <strong>12 anos</strong> com o objetivo de proporcionar <strong>dignidade e respeito</strong> aos pets, oferecendo <strong>suporte integral</strong> às famílias em todos os momentos.<br><br>Contamos com <strong>estrutura própria e exclusiva</strong>, equipamentos de <strong>última geração</strong>, todos licenciados. Somos especializados e trabalhamos <strong>exclusivamente com cremação pet</strong>, o que garante <strong>segurança, transparência e controle total</strong> de cada etapa do processo. Do acolhimento à entrega, sua família será atendida pela <strong>mesma equipe, sem qualquer tipo de terceirização</strong>.</p>
                         </div>
-                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
+                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: start; scroll-snap-stop: always;">
                             <i class="fas fa-heart" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
                             <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Atendimento Humanizado</h4>
                             <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Compreendemos a dor da perda e oferecemos mais que um serviço: <strong>acolhimento genuíno</strong>. Nossa equipe é especializada em escutar, amparar e cuidar de cada detalhe com <strong>empatia</strong>, do primeiro contato à despedida.<br><br>Disponibilizamos <strong>atendimento 24 horas</strong>, <strong>apoio psicológico especializado</strong> e <strong>acompanhamento personalizado</strong>, sempre respeitando sua história. Cada família é acolhida com carinho, pois sabemos que despedir-se de quem amamos exige <strong>cuidado em cada gesto</strong>.</p>
                         </div>
-                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
+                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: start; scroll-snap-stop: always;">
                             <i class="fas fa-gift" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
                             <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Homenagem Personalizada</h4>
                             <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Cada história é única, por isso criamos <strong>homenagens que refletem o amor</strong> e a trajetória do seu pet. Desde <strong>cerimônias privativas</strong> até <strong>urninhas exclusivas</strong> e <strong>lembranças personalizadas</strong>, cada detalhe preserva <strong>memórias vivas e eternas</strong>.<br><br>Tudo é cuidadosamente pensado para <strong>eternizar quem fez parte da sua vida</strong>, transformando a despedida em um <strong>ato de amor e gratidão</strong>.</p>
                         </div>
-                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: center;">
+                        <div style="min-width: 88vw; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); scroll-snap-align: start; scroll-snap-stop: always;">
                             <i class="fas fa-comments" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block;"></i>
                             <h4 style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--text-dark); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(185, 226, 140, 0.1) 100%); padding: 0.5rem 1rem; border-radius: 8px; border-left: 4px solid var(--accent-gold);">Comunicação Ativa</h4>
                             <p style="color: var(--text-light); font-size: 1rem; line-height: 1.6;">Sabemos que este é um momento de muitas dúvidas e ansiedade, por isso mantemos você <strong>informado a cada passo</strong>. Nossa equipe se comunica de forma <strong>clara e carinhosa</strong>, explicando cada etapa e respondendo todas as suas questões com <strong>paciência e empatia</strong>.<br><br>Desde o primeiro contato até a entrega final, você nunca ficará no escuro. Nossa <strong>comunicação constante e transparente</strong> é o que traz paz de espírito para sua família em um momento tão delicado.</p>
                         </div>
                     </div>
                     <!-- Carousel indicators -->
-                    <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem;">
-                        <div class="indicator-dot active" style="width: 8px; height: 8px; border-radius: 50%; cursor: pointer;"></div>
-                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; cursor: pointer;"></div>
-                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; cursor: pointer;"></div>
-                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; cursor: pointer;"></div>
-                        <div class="indicator-dot" style="width: 8px; height: 8px; border-radius: 50%; cursor: pointer;"></div>
+                    <div id="whyChooseIndicators" style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem;">
+                        <!-- Indicadores serão gerados dinamicamente -->
                     </div>
                 </div>
 
@@ -4243,15 +4463,17 @@
                     }
 
                     .indicator-dot {
-                        background: #cbd5e1 !important;
-                        opacity: 0.5 !important;
+                        background: #334155 !important;
+                        opacity: 0.8 !important;
                         transition: all 0.3s ease;
+                        width: 10px !important;
+                        height: 10px !important;
                     }
 
                     .indicator-dot.active {
-                        background: var(--accent-gold) !important;
+                        background: #3b82f6 !important;
                         opacity: 1 !important;
-                        transform: scale(1.2);
+                        transform: scale(1.3);
                     }
 
                     @media (max-width: 768px) {
@@ -4299,18 +4521,18 @@
                 <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; line-height: 1.6; max-width: 600px; margin: 0 auto; position: relative; z-index: 1; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);">Com recomendações reais de tutores e médicos veterinários, somos o crematório de animais <strong style="color: #10b981;">mais bem avaliado do Brasil.</strong></p>
 
                 <!-- Indicador de avaliações -->
-                <div class="reviews-indicator" style="margin-top: 2rem; display: flex; flex-direction: column; align-items: center; animation: floatUpDown 3s ease-in-out infinite; position: relative; z-index: 1;">
+                <a href="#avaliacoes" class="reviews-indicator" style="margin-top: 2rem; display: flex; flex-direction: column; align-items: center; animation: floatUpDown 3s ease-in-out infinite; position: relative; z-index: 1; text-decoration: none; cursor: pointer; transition: all 0.3s ease;" onclick="event.preventDefault(); document.getElementById('avaliacoes').scrollIntoView({ behavior: 'smooth', block: 'start' });" onmouseover="this.style.transform='translateY(5px)'; this.style.opacity='1';" onmouseout="this.style.transform='translateY(0)'; this.style.opacity='0.9';">
                     <div style="color: var(--accent-gold); font-size: 2rem; margin-bottom: 0.5rem;">
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <p style="color: white; font-weight: 600; font-size: 1rem; text-align: center; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);">Veja avaliações reais abaixo</p>
-                </div>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Avaliações dos Tutores -->
-    <section class="section" style="background: linear-gradient(135deg, #D8E8DB 0%, #86F2C6 100%); padding: 80px 0; position: relative; overflow: hidden;">
+    <section id="avaliacoes" class="section" style="background: linear-gradient(135deg, #D8E8DB 0%, #86F2C6 100%); padding: 80px 0; position: relative; overflow: hidden;">
         <div class="container" style="position: relative; z-index: 2;">
             <div class="section-header" style="text-align: center; margin-bottom: 60px;">
                 <h2 class="harmonized-title">Avaliações dos <span class="highlight-elegant">Tutores</span></h2>
@@ -4319,7 +4541,15 @@
 
             <!-- Carrossel de Avaliações -->
             <div class="reviews-carousel-container" style="position: relative; max-width: 1200px; margin: 0 auto;">
-                <div class="reviews-carousel" id="reviewsCarousel" style="display: flex; gap: 2rem; overflow-x: auto; scroll-behavior: smooth; padding: 1rem 0; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none;">
+                <!-- Hint Arrows -->
+                <button class="carousel-hint-arrow left" id="reviewsHintLeft" aria-label="Deslizar para esquerda">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-hint-arrow right visible" id="reviewsHintRight" aria-label="Deslizar para direita">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <div class="reviews-carousel" id="reviewsCarousel" style="display: flex; gap: 2rem; overflow-x: auto; scroll-behavior: smooth; padding: 1rem 0; scroll-snap-type: x mandatory; scroll-snap-stop: always; scrollbar-width: none; -ms-overflow-style: none;">
 
                     <!-- Card 1 - Pindamonhangaba - Melissa -->
                     <div class="review-card-carousel">
@@ -4621,14 +4851,9 @@
                 })();
                 </script>
 
-                <!-- Controles do carrossel -->
-                <div class="carousel-controls">
-                    <button class="carousel-btn prev-btn" onclick="scrollCarousel('left')">
-                        <i class="fas fa-chevron-left"></i> Anterior
-                    </button>
-                    <button class="carousel-btn next-btn" onclick="scrollCarousel('right')">
-                        Próximo <i class="fas fa-chevron-right"></i>
-                    </button>
+                <!-- Carousel indicators -->
+                <div id="reviewsIndicators" style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 2rem;">
+                    <!-- Indicadores serão gerados dinamicamente -->
                 </div>
             </div>
         </div>
@@ -5392,7 +5617,12 @@
     </div>
 
     <!-- Fixed WhatsApp Button -->
-    <a href="javascript:void(0)" onclick="openWhatsAppPopup(); return false;" class="fixed-whatsapp" title="WhatsApp 24h" aria-label="Entrar em contato via WhatsApp" style="position: fixed !important; bottom: 2rem !important; right: 2rem !important; z-index: 9999 !important; background: #25d366 !important; color: white !important; width: 60px !important; height: 60px !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 1.5rem !important; text-decoration: none !important; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4) !important; opacity: 1 !important; visibility: visible !important;">
+    <a href="javascript:void(0)"
+       onclick="openWhatsAppPopup(); return false;"
+       class="fixed-whatsapp"
+       title="WhatsApp 24h"
+       aria-label="Entrar em contato via WhatsApp"
+       style="position: fixed; bottom: 2rem; right: 2rem; z-index: 9999; background: linear-gradient(135deg, #34e77f 0%, #25d366 50%, #1ea952 100%); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; text-decoration: none; opacity: 1; visibility: visible;">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -5440,13 +5670,18 @@
             // Ensure WhatsApp button is visible
             setTimeout(() => {
                 const whatsappBtn = document.querySelector('.fixed-whatsapp');
+                console.log('WhatsApp Button:', whatsappBtn);
                 if (whatsappBtn) {
-                    whatsappBtn.style.display = 'flex !important';
-                    whatsappBtn.style.opacity = '1 !important';
-                    whatsappBtn.style.visibility = 'visible !important';
-                    whatsappBtn.style.zIndex = '9999 !important';
+                    console.log('WhatsApp button found! Making it visible...');
+                    whatsappBtn.style.setProperty('display', 'flex', 'important');
+                    whatsappBtn.style.setProperty('opacity', '1', 'important');
+                    whatsappBtn.style.setProperty('visibility', 'visible', 'important');
+                    whatsappBtn.style.setProperty('z-index', '9999', 'important');
+                    console.log('WhatsApp button styles applied');
+                } else {
+                    console.error('WhatsApp button NOT FOUND!');
                 }
-            }, 1500);
+            }, 100);
         });
 
         // Scroll Animations
@@ -5507,11 +5742,11 @@
         window.addEventListener('scroll', function() {
             const navigation = document.getElementById('navigation');
             if (window.scrollY > 100) {
-                navigation.style.background = 'rgba(0, 0, 0, 0.4)';
+                navigation.style.background = 'rgba(5, 47, 95, 0.4)';
                 navigation.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2)';
                 navigation.style.borderColor = 'rgba(255, 255, 255, 0.6)';
             } else {
-                navigation.style.background = 'rgba(0, 0, 0, 0.3)';
+                navigation.style.background = 'rgba(5, 47, 95, 0.3)';
                 navigation.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1)';
                 navigation.style.borderColor = 'rgba(255, 255, 255, 0.4)';
             }
@@ -6479,6 +6714,220 @@
             }
             return false;
         }
+
+        // Floating Scroll Down Indicator Control
+        (function() {
+            const scrollIndicator = document.getElementById('scrollDownIndicator');
+            if (!scrollIndicator) return;
+
+            // Scroll para próxima seção ao clicar
+            scrollIndicator.addEventListener('click', function() {
+                window.scrollBy({
+                    top: window.innerHeight * 0.8,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Controlar visibilidade baseado no scroll
+            function updateScrollIndicator() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+
+                // Altura da hero section (aproximadamente)
+                const heroHeight = windowHeight;
+
+                // Distância do fundo da página
+                const distanceFromBottom = documentHeight - (scrollTop + windowHeight);
+
+                // Mostrar apenas depois da hero e antes de chegar no footer (últimos 300px)
+                if (scrollTop > heroHeight && distanceFromBottom > 300) {
+                    scrollIndicator.style.display = 'flex';
+                    scrollIndicator.style.opacity = '1';
+                } else {
+                    scrollIndicator.style.opacity = '0';
+                    setTimeout(() => {
+                        if (scrollIndicator.style.opacity === '0') {
+                            scrollIndicator.style.display = 'none';
+                        }
+                    }, 300);
+                }
+            }
+
+            // Event listeners
+            window.addEventListener('scroll', updateScrollIndicator, { passive: true });
+            window.addEventListener('resize', updateScrollIndicator);
+
+            // Inicialização
+            updateScrollIndicator();
+        })();
+
+        // Carousel Hint Arrows and Indicators Control
+        (function() {
+            function setupCarouselHints(carouselId, leftArrowId, rightArrowId, indicatorsId) {
+                const carousel = document.getElementById(carouselId);
+                const leftArrow = document.getElementById(leftArrowId);
+                const rightArrow = document.getElementById(rightArrowId);
+                const indicatorsContainer = indicatorsId ? document.getElementById(indicatorsId) : null;
+
+                if (!carousel || !leftArrow || !rightArrow) return;
+
+                let indicators = [];
+
+                // Criar indicadores se o container existir
+                if (indicatorsContainer) {
+                    const cards = carousel.querySelectorAll('.review-card-carousel, [style*="min-width: 88vw"]');
+                    const numCards = cards.length;
+
+                    // Gerar indicadores
+                    for (let i = 0; i < numCards; i++) {
+                        const dot = document.createElement('div');
+                        dot.className = 'indicator-dot';
+                        dot.style.cssText = 'width: 10px; height: 10px; border-radius: 50%; cursor: pointer; background: #334155; opacity: 0.8; transition: all 0.3s ease;';
+
+                        // Click no indicador
+                        dot.addEventListener('click', () => {
+                            const cardWidth = cards[0].offsetWidth;
+                            const gap = carousel.id === 'reviewsCarousel' ? 32 : 5; // 2rem ou 0.3rem
+                            carousel.scrollTo({
+                                left: i * (cardWidth + gap),
+                                behavior: 'smooth'
+                            });
+                        });
+
+                        indicatorsContainer.appendChild(dot);
+                        indicators.push(dot);
+                    }
+
+                    // Ativar primeiro indicador
+                    if (indicators.length > 0) {
+                        indicators[0].style.background = '#3b82f6';
+                        indicators[0].style.opacity = '1';
+                        indicators[0].style.transform = 'scale(1.3)';
+                        indicators[0].classList.add('active');
+                    }
+                }
+
+                function updateArrows() {
+                    const scrollLeft = carousel.scrollLeft;
+                    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+                    // Mostrar seta esquerda se não estiver no início
+                    if (scrollLeft > 10) {
+                        leftArrow.classList.add('visible');
+                    } else {
+                        leftArrow.classList.remove('visible');
+                    }
+
+                    // Mostrar seta direita se não estiver no final
+                    if (scrollLeft < maxScroll - 10) {
+                        rightArrow.classList.add('visible');
+                    } else {
+                        rightArrow.classList.remove('visible');
+                    }
+
+                    // Atualizar indicadores
+                    if (indicators.length > 0) {
+                        const cards = carousel.querySelectorAll('.review-card-carousel, [style*="min-width: 88vw"]');
+                        if (cards.length > 0) {
+                            const cardWidth = cards[0].offsetWidth;
+                            // Gap em pixels: reviewsCarousel = 2rem (32px), whyChooseCarousel = 0.3rem (4.8px)
+                            const gap = carousel.id === 'reviewsCarousel' ? 32 : 5;
+                            const activeIndex = Math.round(scrollLeft / (cardWidth + gap));
+
+                            indicators.forEach((dot, idx) => {
+                                if (idx === activeIndex) {
+                                    dot.style.background = '#3b82f6';
+                                    dot.style.opacity = '1';
+                                    dot.style.transform = 'scale(1.3)';
+                                    dot.classList.add('active');
+                                } else {
+                                    dot.style.background = '#334155';
+                                    dot.style.opacity = '0.8';
+                                    dot.style.transform = 'scale(1)';
+                                    dot.classList.remove('active');
+                                }
+                            });
+                        }
+                    }
+                }
+
+                // Click handlers
+                leftArrow.addEventListener('click', () => {
+                    carousel.scrollBy({ left: -carousel.clientWidth * 0.8, behavior: 'smooth' });
+                });
+
+                rightArrow.addEventListener('click', () => {
+                    carousel.scrollBy({ left: carousel.clientWidth * 0.8, behavior: 'smooth' });
+                });
+
+                // Update on scroll
+                carousel.addEventListener('scroll', updateArrows, { passive: true });
+
+                // Initial update
+                setTimeout(updateArrows, 100);
+            }
+
+            // Setup para ambos os carrosséis
+            setupCarouselHints('reviewsCarousel', 'reviewsHintLeft', 'reviewsHintRight', 'reviewsIndicators');
+
+            // Setup para carrossel mobile (só quando visível)
+            const checkMobileCarousel = () => {
+                const mobileCarousel = document.getElementById('whyChooseCarousel');
+                if (mobileCarousel && getComputedStyle(mobileCarousel.parentElement).display !== 'none') {
+                    setupCarouselHints('whyChooseCarousel', 'whyChooseHintLeft', 'whyChooseHintRight', 'whyChooseIndicators');
+                }
+            };
+
+            setTimeout(checkMobileCarousel, 200);
+            window.addEventListener('resize', checkMobileCarousel);
+        })();
+
+        // Force single card snap on mobile carousels
+        (function() {
+            function enforceSnapBehavior(carouselId) {
+                const carousel = document.getElementById(carouselId);
+                if (!carousel) return;
+
+                let isScrolling;
+                let startX = 0;
+                let scrollStartLeft = 0;
+
+                carousel.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].pageX;
+                    scrollStartLeft = carousel.scrollLeft;
+                }, { passive: true });
+
+                carousel.addEventListener('scroll', () => {
+                    clearTimeout(isScrolling);
+
+                    isScrolling = setTimeout(() => {
+                        const cards = carousel.querySelectorAll('.review-card-carousel, [style*="min-width: 88vw"]');
+                        if (cards.length === 0) return;
+
+                        const cardWidth = cards[0].offsetWidth;
+                        const gap = carousel.id === 'reviewsCarousel' ? 32 : 5;
+                        const scrollPosition = carousel.scrollLeft;
+
+                        // Encontrar o card mais próximo
+                        const currentIndex = Math.round(scrollPosition / (cardWidth + gap));
+                        const targetScroll = currentIndex * (cardWidth + gap);
+
+                        // Snap suave para o card mais próximo
+                        if (Math.abs(scrollPosition - targetScroll) > 5) {
+                            carousel.scrollTo({
+                                left: targetScroll,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }, 100);
+                }, { passive: true });
+            }
+
+            // Aplicar aos carrosséis
+            enforceSnapBehavior('reviewsCarousel');
+            setTimeout(() => enforceSnapBehavior('whyChooseCarousel'), 200);
+        })();
 
     </script>
 
