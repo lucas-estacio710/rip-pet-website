@@ -1,15 +1,6 @@
 # RIP PET - Redirects 301 para capturar link juice
 RewriteEngine On
-
-# Redirects das URLs antigas para a página principal
-RewriteRule ^lp-campinas-a/?$ / [R=301,L]
-RewriteRule ^crematorio-de-animais-lp-sp/?$ / [R=301,L]
-RewriteRule ^crematorio-de-animais-lp-campinas/?$ / [R=301,L]
-# RewriteRule ^unidade-santos/?$ / [R=301,L]  # Comentado - agora /santos é página própria
-RewriteRule ^unidade-sp/?$ / [R=301,L]
-
-# Landing Pages por Unidade
-RewriteRule ^santos/?$ santos.html [L]
+RewriteBase /
 
 # Redirect com www para sem www (SEO)
 RewriteCond %{HTTP_HOST} ^www\.rippet\.com\.br [NC]
@@ -18,6 +9,16 @@ RewriteRule ^(.*)$ https://rippet.com.br/$1 [R=301,L]
 # Forçar HTTPS
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Landing Pages por Unidade
+RewriteRule ^santos/?$ santos.html [L]
+
+# Redirects das URLs antigas para a página principal
+RewriteRule ^lp-campinas-a/?$ / [R=301,L]
+RewriteRule ^crematorio-de-animais-lp-sp/?$ / [R=301,L]
+RewriteRule ^crematorio-de-animais-lp-campinas/?$ / [R=301,L]
+# RewriteRule ^unidade-santos/?$ / [R=301,L]  # Comentado - agora /santos é página própria
+RewriteRule ^unidade-sp/?$ / [R=301,L]
 
 # Proteção contra acesso direto a arquivos sensíveis
 <Files "*.log">
