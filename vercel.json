@@ -1,4 +1,10 @@
 {
+  "rewrites": [
+    {
+      "source": "/santos",
+      "destination": "/santos.html"
+    }
+  ],
   "redirects": [
     {
       "source": "/lp-campinas-a",
@@ -27,16 +33,6 @@
     },
     {
       "source": "/crematorio-de-animais-lp-campinas/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/unidade-santos",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/unidade-santos/",
       "destination": "/",
       "permanent": true
     },
