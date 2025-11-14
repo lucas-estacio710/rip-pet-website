@@ -29,13 +29,10 @@
     <link rel="preload" href="fonts/Autography.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/rippet_logo_horizontal_fundo_claro_opt.webp" as="image" type="image/webp">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Preconnect to External Domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
 
@@ -50,10 +47,6 @@
     <!-- Google Fonts (Optimized) -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
-
-    <!-- Font Awesome - Non-blocking (CSS carrega depois dos fonts via preload) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <!-- Critical CSS Inline - Above the fold -->
     <style>
@@ -73,7 +66,7 @@
         .icon-inline{display:inline-block;width:1em;height:1em;vertical-align:-.125em}
     </style>
 
-    <!-- Inline SVG Icons - Critical para hero (elimina dependência FontAwesome) -->
+    <!-- Inline SVG Icons - Todos os ícones inline (elimina FontAwesome 18KB) -->
     <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
         <symbol id="icon-phone" viewBox="0 0 512 512">
             <path fill="currentColor" d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/>
@@ -83,6 +76,12 @@
         </symbol>
         <symbol id="icon-chevron-down" viewBox="0 0 512 512">
             <path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/>
+        </symbol>
+        <symbol id="icon-times" viewBox="0 0 384 512">
+            <path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+        </symbol>
+        <symbol id="icon-bars" viewBox="0 0 448 512">
+            <path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
         </symbol>
     </svg>
 
@@ -928,6 +927,39 @@
                 color: white;
                 opacity: 0.8;
             }
+
+            /* About Section - Layout Editorial Mobile */
+            .about-header h2 {
+                font-size: 2.5rem !important;
+                text-align: left !important;
+            }
+
+            .about-header p.about-subtitle {
+                font-size: 1.1rem !important;
+                text-align: left !important;
+            }
+
+            .about-header {
+                text-align: left !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            .about-mobile-image {
+                display: block !important;
+            }
+
+            .about-mobile-text {
+                display: block !important;
+            }
+
+            .about-editorial-grid {
+                display: none !important;
+            }
+
+            /* Textos no mobile aparecem em sequência após a imagem */
+            .about-section .container {
+                padding: 0 1.5rem !important;
+            }
         }
 
         /* Scroll Indicator Desktop - mesmo estilo do mobile */
@@ -990,7 +1022,7 @@
             <div class="nav-contact">
                 <div class="phone-container">
                     <button class="phone-btn" onclick="openPhonePopup()" aria-label="Ligar para RIP PET">
-                        <i class="fas fa-phone"></i>
+                        <svg class="icon-inline"><use href="#icon-phone"></use></svg>
                     </button>
                 </div>
                 <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu de navegação">
@@ -1010,7 +1042,7 @@
     <!-- Mobile Navigation Menu -->
     <div class="mobile-nav" id="mobileNav">
         <button class="mobile-close" id="mobileClose" aria-label="Fechar menu de navegação">
-            <i class="fas fa-times"></i>
+            <svg class="icon-inline"><use href="#icon-times"></use></svg>
         </button>
         <div style="margin-top: 4rem;"></div>
         <a href="#servicos">Serviços</a>
@@ -1018,7 +1050,7 @@
         <a href="#depoimentos">Depoimentos</a>
         <div style="margin-top: 2rem;">
             <a href="tel:+5512997996543" onclick="openPhonePopup(); return false;" style="background: var(--accent-gold); color: #052F5F; padding: 1rem 2rem; border-radius: 30px; font-weight: 600; text-decoration: none; display: inline-block;">
-                <i class="fas fa-phone"></i> Ligar Agora
+                <svg class="icon-inline"><use href="#icon-phone"></use></svg> Ligar Agora
             </a>
         </div>
     </div>
@@ -1030,7 +1062,7 @@
     <div class="phone-popup-overlay" id="phonePopupOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
         <div class="phone-popup" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%); border-radius: 20px; padding: 2rem; max-width: 600px; width: 90%; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative;">
             <button class="phone-popup-close" id="phonePopupClose" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; font-size: 1.3rem; color: white; cursor: pointer; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='scale(1)';">
-                <i class="fas fa-times"></i>
+                <svg class="icon-inline"><use href="#icon-times"></use></svg>
             </button>
 
             <h3 style="text-align: center; color: white; margin-bottom: 0.5rem; font-size: 1.4rem; font-weight: 600; font-family: 'Poppins', sans-serif;">Atendimento Telefone 24h</h3>
@@ -1044,7 +1076,7 @@
                             <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Matriz e Vale do Paraíba</h4>
                             <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif;">(12) 99799-6543</p>
                         </div>
-                        <i class="fas fa-phone" style="font-size: 1.2rem; color: white;"></i>
+                        <svg class="icon-inline" style="font-size: 1.2rem; color: white;"><use href="#icon-phone"></use></svg>
                     </a>
 
                     <!-- São Paulo -->
@@ -1053,7 +1085,7 @@
                             <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">São Paulo e Região</h4>
                             <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif;">(11) 99160-3041</p>
                         </div>
-                        <i class="fas fa-phone" style="font-size: 1.2rem; color: white;"></i>
+                        <svg class="icon-inline" style="font-size: 1.2rem; color: white;"><use href="#icon-phone"></use></svg>
                     </a>
 
                     <!-- Santos - DESTAQUE -->
@@ -1062,7 +1094,7 @@
                             <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 600; font-family: 'Poppins', sans-serif; line-height: 1.2;">Santos e Região ⭐</h4>
                             <p style="margin: 0; color: #B9E28C; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; font-weight: 600;">(13) 99806-8262</p>
                         </div>
-                        <i class="fas fa-phone" style="font-size: 1.2rem; color: #B9E28C;"></i>
+                        <svg class="icon-inline" style="font-size: 1.2rem; color: #B9E28C;"><use href="#icon-phone"></use></svg>
                     </a>
 
                     <!-- Campinas -->
@@ -1071,7 +1103,7 @@
                             <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Campinas e Região</h4>
                             <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif;">(19) 99916-1977</p>
                         </div>
-                        <i class="fas fa-phone" style="font-size: 1.2rem; color: white;"></i>
+                        <svg class="icon-inline" style="font-size: 1.2rem; color: white;"><use href="#icon-phone"></use></svg>
                     </a>
 
                     <!-- Resende -->
@@ -1080,7 +1112,7 @@
                             <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Resende e Região</h4>
                             <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif;">(24) 99837-9825</p>
                         </div>
-                        <i class="fas fa-phone" style="font-size: 1.2rem; color: white;"></i>
+                        <svg class="icon-inline" style="font-size: 1.2rem; color: white;"><use href="#icon-phone"></use></svg>
                     </a>
 
                     <!-- Pouso Alegre -->
@@ -1089,7 +1121,7 @@
                             <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Pouso Alegre e Região</h4>
                             <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif;">(35) 99904-2223</p>
                         </div>
-                        <i class="fas fa-phone" style="font-size: 1.2rem; color: white;"></i>
+                        <svg class="icon-inline" style="font-size: 1.2rem; color: white;"><use href="#icon-phone"></use></svg>
                     </a>
                 </div>
             </div>
@@ -1100,6 +1132,75 @@
                         max-width: 400px !important;
                     }
                     .phone-list > div[style*="repeat(2, 1fr)"] {
+                        grid-template-columns: 1fr !important;
+                    }
+                }
+            </style>
+        </div>
+    </div>
+
+    <!-- Map Popup - Cidades Atendidas -->
+    <div class="map-popup-overlay" id="mapPopupOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
+        <div class="map-popup" style="background: linear-gradient(135deg, #052F5F 0%, #0a4080 50%, #1565c0 100%); border-radius: 20px; padding: 2.5rem; max-width: 700px; width: 90%; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative;">
+            <button class="map-popup-close" id="mapPopupClose" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; font-size: 1.3rem; color: white; cursor: pointer; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='scale(1)';">
+                <svg class="icon-inline"><use href="#icon-times"></use></svg>
+            </button>
+
+            <h3 style="text-align: center; color: white; margin-bottom: 0.5rem; font-size: 1.8rem; font-weight: 600; font-family: 'Poppins', sans-serif;">Atendimento 24h em Toda Baixada Santista</h3>
+            <p style="text-align: center; color: #ccc; margin-bottom: 2.5rem; font-size: 1rem; font-family: 'Nunito', sans-serif; line-height: 1.4;">Busca e remoção no conforto do seu lar, sem custo adicional</p>
+
+            <div class="cities-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem;">
+                <!-- Santos -->
+                <div style="background: rgba(185, 226, 140, 0.15); backdrop-filter: blur(10px); border-radius: 12px; padding: 1.5rem; border: 2px solid rgba(185, 226, 140, 0.4); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(185, 226, 140, 0.25)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.background='rgba(185, 226, 140, 0.15)'; this.style.transform='translateY(0)';">
+                    <h4 style="margin: 0 0 0.8rem 0; color: #B9E28C; font-size: 1.3rem; font-weight: 600; font-family: 'Poppins', sans-serif;">Santos ⭐</h4>
+                    <p style="margin: 0; color: rgba(255,255,255,0.9); font-size: 0.9rem; line-height: 1.5; font-family: 'Nunito', sans-serif;">Centro, Gonzaga, José Menino, Boqueirão, Embaré, Ponta da Praia e toda orla</p>
+                </div>
+
+                <!-- São Vicente -->
+                <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.18)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
+                    <h4 style="margin: 0 0 0.8rem 0; color: white; font-size: 1.2rem; font-weight: 600; font-family: 'Poppins', sans-serif;">São Vicente</h4>
+                    <p style="margin: 0; color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.5; font-family: 'Nunito', sans-serif;">Itararé, Humaitá, Centro e toda região vicentina</p>
+                </div>
+
+                <!-- Guarujá -->
+                <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.18)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
+                    <h4 style="margin: 0 0 0.8rem 0; color: white; font-size: 1.2rem; font-weight: 600; font-family: 'Poppins', sans-serif;">Guarujá</h4>
+                    <p style="margin: 0; color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.5; font-family: 'Nunito', sans-serif;">Enseada, Pitangueiras, Astúrias, Pernambuco e toda ilha</p>
+                </div>
+
+                <!-- Praia Grande -->
+                <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.18)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
+                    <h4 style="margin: 0 0 0.8rem 0; color: white; font-size: 1.2rem; font-weight: 600; font-family: 'Poppins', sans-serif;">Praia Grande</h4>
+                    <p style="margin: 0; color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.5; font-family: 'Nunito', sans-serif;">Aviação, Canto do Forte, Boqueirão, Guilhermina e orla</p>
+                </div>
+
+                <!-- Cubatão -->
+                <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.18)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
+                    <h4 style="margin: 0 0 0.8rem 0; color: white; font-size: 1.2rem; font-weight: 600; font-family: 'Poppins', sans-serif;">Cubatão</h4>
+                    <p style="margin: 0; color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.5; font-family: 'Nunito', sans-serif;">Centro, Casqueiro, Vila Paulista e região industrial</p>
+                </div>
+
+                <!-- Bertioga -->
+                <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.18)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
+                    <h4 style="margin: 0 0 0.8rem 0; color: white; font-size: 1.2rem; font-weight: 600; font-family: 'Poppins', sans-serif;">Bertioga</h4>
+                    <p style="margin: 0; color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.5; font-family: 'Nunito', sans-serif;">Indaiá, Riviera, Centro, Boracéia e região litorânea</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                <p style="font-size: 0.95rem; color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; font-family: 'Nunito', sans-serif;">Precisa de atendimento urgente?</p>
+                <a href="tel:+5513998068262" style="display: inline-flex; align-items: center; gap: 0.5rem; background: #B9E28C; color: #052F5F; padding: 1rem 2rem; border-radius: 50px; font-size: 1.1rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 15px rgba(185,226,140,0.4); transition: all 0.3s ease;" onmouseover="this.style.background='#a8d17c'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(185,226,140,0.6)';" onmouseout="this.style.background='#B9E28C'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(185,226,140,0.4)';">
+                    <svg class="icon-inline"><use href="#icon-phone"></use></svg> Ligar Agora: (13) 99806-8262
+                </a>
+            </div>
+
+            <style>
+                @media (max-width: 600px) {
+                    .map-popup {
+                        max-width: 95% !important;
+                        padding: 2rem 1.5rem !important;
+                    }
+                    .cities-grid {
                         grid-template-columns: 1fr !important;
                     }
                 }
@@ -1159,28 +1260,71 @@
          ======================================== -->
     <section id="about" class="about-section" style="background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%); padding: 80px 0; position: relative;">
         <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
-            <div class="about-content" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
-                <!-- Text Content Left -->
-                <div class="about-text" style="padding-right: 2rem;">
-                    <h2 style="font-size: 3.5rem; font-weight: 400; color: #052F5F; margin-bottom: 0.5rem; font-family: 'Autography', 'Dancing Script', 'Brush Script MT', cursive, serif; line-height: 1.3;">
-                        Maior Crematório do Brasil, Aqui em Santos
-                    </h2>
-                    <p style="font-size: 1.3rem; color: #666; line-height: 1.6; margin-bottom: 2rem; font-family: 'Nunito', sans-serif; font-style: italic; font-weight: 300;">
-                        Há 12 anos, honrando e homenageando conexões entre humanos e anjos
-                    </p>
-                    <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin-bottom: 1.5rem; font-family: 'Nunito', sans-serif;">
-                        A <strong>R.I.P. Pet Crematório de Animais</strong> nasceu para transformar despedidas em homenagens com <strong>amor</strong> e <strong>gratidão</strong>.
-                    </p>
-                    <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin-bottom: 1.5rem; font-family: 'Nunito', sans-serif;">
-                        Hoje, nos orgulhamos de ser a <strong>maior organização de Cremação Pet do Brasil</strong> e de fazer parte da história de milhares de famílias acolhidas. Com <strong>7 unidades</strong> em SP, MG e RJ, atendendo mais de <strong>80 cidades</strong>, somos reconhecidos por nossos procedimentos <strong>claros</strong>, <strong>atenciosos</strong> e <strong>transparentes</strong>.
-                    </p>
-                    <p style="font-size: 1.1rem; color: #333; line-height: 1.8; font-family: 'Nunito', sans-serif;">
-                        Na <strong>R.I.P. Pet</strong>, cada despedida é única. Cuidamos de cada detalhe com <strong>empatia</strong>, <strong>carinho</strong> e o compromisso de honrar cada momento vivido.
+            <!-- Título e Subtítulo -->
+            <div class="about-header" style="margin-bottom: 3rem; text-align: center;">
+                <h2 style="font-size: 3.5rem; font-weight: 400; color: #052F5F; margin-bottom: 0.5rem; font-family: 'Autography', 'Dancing Script', 'Brush Script MT', cursive, serif; line-height: 1.3;">
+                    Maior Crematório do Brasil, Aqui em Santos
+                </h2>
+                <p class="about-subtitle" style="font-size: 1.3rem; color: #666; line-height: 1.6; margin-bottom: 0; font-family: 'Nunito', sans-serif; font-style: italic; font-weight: 300;">
+                    Há 12 anos, honrando e homenageando conexões entre humanos e anjinhos
+                </p>
+            </div>
+
+            <!-- Mobile Text (só aparece no mobile) -->
+            <div class="about-mobile-text" style="display: none;">
+                <!-- Parágrafo 1 -->
+                <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin-bottom: 1.5rem; font-family: 'Nunito', sans-serif;">
+                    A <strong>R.I.P. Pet Crematório de Animais</strong> nasceu para transformar despedidas em homenagens com <strong>amor e gratidão</strong>. Hoje, nos orgulhamos de ser a <strong>maior organização</strong> de Cremação Pet do Brasil e de fazer parte da história de <strong>milhares de famílias</strong> acolhidas.
+                </p>
+
+                <!-- Mobile Image entre parágrafo 1 e 2 -->
+                <div class="about-mobile-image" style="margin-bottom: 2rem;">
+                    <img src="images/homem-cachorro-jadim.webp?v=2" alt="Homem com cachorro no jardim" style="width: 100%; height: auto; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));">
+                </div>
+
+                <!-- Parágrafo 2 -->
+                <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin-bottom: 1.5rem; font-family: 'Nunito', sans-serif;">
+                    A R.I.P. Pet Santos foi inaugurada em 2023, oferecendo o melhor <strong>Serviço Funerário Pet da Baixada Santista</strong>, atendendo à todas as nossas cidades (<a href="#" onclick="openMapPopup(); return false;" style="color: #052F5F; text-decoration: underline; font-weight: 600;">Confira o mapa</a>), com suporte e remoção 24h, equipe altamente qualificada, sala de despedida em Santos, translado ágil e cuidadoso, acompanhamento da cremação e entrega das cinzas/recordações no conforto de seu lar, em mãos.
+                </p>
+
+                <!-- Parágrafo 3 -->
+                <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin-bottom: 0; font-family: 'Nunito', sans-serif;">
+                    Nosso atendimento é feito pela nossa equipe própria do <strong>início ao fim</strong> e com <strong>transparência de verdade</strong> (sem custo adicional), para que tenha certeza que seu pet será cremado <strong>conforme suas escolhas</strong>.
+                </p>
+            </div>
+
+            <!-- Layout Editorial Grid (Desktop) -->
+            <div class="about-editorial-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start;">
+                <!-- Row 1: Imagem Left + Texto Right -->
+                <div class="editorial-image-1" style="grid-column: 1; grid-row: 1;">
+                    <img src="images/homem-cachorro-jadim.webp?v=2" alt="Homem com cachorro no jardim" style="width: 100%; height: auto; filter: drop-shadow(0 15px 40px rgba(0,0,0,0.25));">
+                </div>
+                <div class="editorial-text-1" style="grid-column: 2; grid-row: 1; align-self: center;">
+                    <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin: 0; font-family: 'Nunito', sans-serif;">
+                        A <strong>R.I.P. Pet Crematório de Animais</strong> nasceu para transformar despedidas em homenagens com <strong>amor e gratidão</strong>. Hoje, nos orgulhamos de ser a <strong>maior organização</strong> de Cremação Pet do Brasil e de fazer parte da história de <strong>milhares de famílias</strong> acolhidas.
                     </p>
                 </div>
 
-                <!-- Image Gallery Right -->
-                <div class="about-gallery" style="position: relative; height: 500px;">
+                <!-- Row 2: Texto Left + Espaço para Imagem Right -->
+                <div class="editorial-text-2" style="grid-column: 1; grid-row: 2; align-self: center;">
+                    <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin: 0; font-family: 'Nunito', sans-serif;">
+                        A R.I.P. Pet Santos foi inaugurada em 2023, oferecendo o melhor <strong>Serviço Funerário Pet da Baixada Santista</strong>, atendendo à todas as nossas cidades (<a href="#" onclick="openMapPopup(); return false;" style="color: #052F5F; text-decoration: underline; font-weight: 600;">Confira o mapa</a>), com suporte e remoção 24h, equipe altamente qualificada, sala de despedida em Santos, translado ágil e cuidadoso, acompanhamento da cremação e entrega das cinzas/recordações no conforto de seu lar, em mãos.
+                    </p>
+                </div>
+                <div class="editorial-image-placeholder" style="grid-column: 2; grid-row: 2; background: linear-gradient(135deg, #e0e0e0 0%, #f0f0f0 100%); border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); min-height: 250px; display: flex; align-items: center; justify-content: center;">
+                    <span style="color: #999; font-family: 'Nunito', sans-serif; font-size: 0.9rem;">Espaço para imagem</span>
+                </div>
+
+                <!-- Row 3: Texto Full Width -->
+                <div class="editorial-text-3" style="grid-column: 1 / -1; grid-row: 3;">
+                    <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin: 0; font-family: 'Nunito', sans-serif; max-width: 800px; margin: 0 auto; text-align: center;">
+                        Nosso atendimento é feito pela nossa equipe própria do <strong>início ao fim</strong> e com <strong>transparência de verdade</strong> (sem custo adicional), para que tenha certeza que seu pet será cremado <strong>conforme suas escolhas</strong>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Old Gallery (Hidden, removido depois) -->
+            <div class="about-gallery" style="position: relative; height: 500px; display: none;">
                     <!-- Image 1 - Top -->
                     <div class="gallery-image gallery-img-1" style="position: absolute; top: 0; right: 0; width: 75%; height: 45%; cursor: pointer; transition: all 0.3s ease; z-index: 3; overflow: hidden; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);" onclick="openImagePopup('images/matriz_pinda_opt.jpg')">
                         <picture>
@@ -1293,7 +1437,7 @@
     <!-- Image Popup Modal -->
     <div id="imagePopup" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; padding: 20px;">
         <button onclick="closeImagePopup()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); border: 2px solid white; color: white; font-size: 2rem; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='rotate(90deg)';" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='rotate(0deg)';">
-            <i class="fas fa-times"></i>
+            <svg class="icon-inline"><use href="#icon-times"></use></svg>
         </button>
         <img id="popupImage" src="" alt="Imagem expandida" style="max-width: 90%; max-height: 90vh; object-fit: contain; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
     </div>
@@ -1427,6 +1571,47 @@
             }
         });
 
+        // Map Popup Functions
+        function openMapPopup() {
+            const overlay = document.getElementById('mapPopupOverlay');
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => overlay.classList.add('active'), 10);
+
+            // Adiciona ao histórico do navegador
+            window.history.pushState({ mapPopup: true }, '');
+
+            // Track event (se GA4 configurado)
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'map_popup_open', {
+                    'event_category': 'engagement',
+                    'event_label': 'santos_cities'
+                });
+            }
+        }
+
+        function closeMapPopup() {
+            const overlay = document.getElementById('mapPopupOverlay');
+            overlay.classList.remove('active');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
+
+            // Remove do histórico se foi fechado manualmente
+            if (window.history.state && window.history.state.mapPopup) {
+                window.history.back();
+            }
+        }
+
+        // Event listeners para map popup
+        document.getElementById('mapPopupClose').addEventListener('click', closeMapPopup);
+        document.getElementById('mapPopupOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeMapPopup();
+            }
+        });
+
         // Intercepta o botão voltar do navegador para fechar popups/menu
         window.addEventListener('popstate', function(event) {
             // Se não há estado, significa que o usuário realmente quer voltar na navegação
@@ -1437,6 +1622,7 @@
             // Detecta qual popup/menu estava aberto e fecha sem adicionar ao histórico novamente
             const mobileNav = document.getElementById('mobileNav');
             const phonePopupOverlay = document.getElementById('phonePopupOverlay');
+            const mapPopupOverlay = document.getElementById('mapPopupOverlay');
 
             // Fecha menu mobile
             if (mobileNav && mobileNav.classList.contains('active')) {
@@ -1453,6 +1639,15 @@
                 phonePopupOverlay.classList.remove('active');
                 setTimeout(() => {
                     phonePopupOverlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+
+            // Fecha popup de mapa
+            if (mapPopupOverlay && mapPopupOverlay.classList.contains('active')) {
+                mapPopupOverlay.classList.remove('active');
+                setTimeout(() => {
+                    mapPopupOverlay.style.display = 'none';
                     document.body.style.overflow = '';
                 }, 300);
             }
