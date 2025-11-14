@@ -25,7 +25,8 @@
     <meta name="googlebot" content="index, follow">
 
     <!-- Preload Critical Resources -->
-    <link rel="preload" href="assets/rippet_logo_horizontal_fundo_claro_opt.webp" as="image" type="image/webp" fetchpriority="high">
+    <link rel="preload" href="images/header-santos-linhas.webp" as="image" type="image/webp" fetchpriority="high">
+    <link rel="preload" href="assets/rippet_logo_horizontal_fundo_claro_opt.webp" as="image" type="image/webp">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
 
     <!-- Preconnect to External Domains -->
@@ -46,8 +47,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome - Non-blocking -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+    <!-- Critical CSS Inline - Above the fold -->
+    <style>
+        /* Reset crítico */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:system-ui,-apple-system,sans-serif;overflow-x:hidden}
+
+        /* Hero crítico para LCP */
+        .hero{min-height:100vh;background:#052F5F;position:relative;overflow:hidden}
+        .hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center 25%;z-index:0}
+        .hero-bg-1{background-image:linear-gradient(to bottom,transparent 0%,transparent 60%,rgba(5,47,95,.7)85%,#052F5F 100%),url('images/header-santos-linhas.webp')}
+
+        /* Navbar crítica */
+        .navigation{position:fixed;top:1rem;left:1rem;right:1rem;z-index:1000;background:rgba(5,47,95,.3);backdrop-filter:blur(20px);border-radius:20px}
+    </style>
 
     <!-- Local Autography Font -->
     <style>
