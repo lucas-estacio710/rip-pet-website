@@ -10,8 +10,10 @@ RewriteRule ^(.*)$ https://rippet.com.br/$1 [R=301,L]
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Landing Pages por Unidade
-RewriteRule ^santos/?$ santos.html [L]
+# Landing Pages por Unidade - Rewrite interno (sem mudar URL)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^santos/?$ /santos.html [L,QSA]
 
 # Redirects das URLs antigas para a página principal
 RewriteRule ^lp-campinas-a/?$ / [R=301,L]
