@@ -5,8 +5,11 @@ RewriteEngine On
 RewriteRule ^lp-campinas-a/?$ / [R=301,L]
 RewriteRule ^crematorio-de-animais-lp-sp/?$ / [R=301,L]
 RewriteRule ^crematorio-de-animais-lp-campinas/?$ / [R=301,L]
-RewriteRule ^unidade-santos/?$ / [R=301,L]
+# RewriteRule ^unidade-santos/?$ / [R=301,L]  # Comentado - agora /santos é página própria
 RewriteRule ^unidade-sp/?$ / [R=301,L]
+
+# Landing Pages por Unidade
+RewriteRule ^santos/?$ santos.html [L]
 
 # Redirect com www para sem www (SEO)
 RewriteCond %{HTTP_HOST} ^www\.rippet\.com\.br [NC]
