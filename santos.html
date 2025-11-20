@@ -154,6 +154,8 @@
                 font-size: 0.95rem !important;
                 line-height: 1.35 !important;
                 top: 48vh !important;
+                padding: 1rem 1.25rem !important;
+                max-width: 90% !important;
             }
 
             .hero-ctas {
@@ -357,6 +359,7 @@
         .phone-container {
             position: relative;
             display: inline-block;
+            padding-right: 40px;
         }
 
         .phone-btn {
@@ -376,26 +379,44 @@
         .phone-btn::after {
             content: "24h";
             position: absolute;
-            right: -8px;
+            right: -35px;
             top: 50%;
-            transform: translateY(calc(-50% - 3px));
-            font-size: 0.75rem;
+            transform: translateY(-50%);
+            font-size: 0.7rem;
             color: white;
-            font-weight: 500;
+            font-weight: 700;
             letter-spacing: 0.5px;
+            background: #5DADE2;
+            padding: 0.3rem 0.6rem;
+            border-radius: 12px;
             transition: all 0.3s ease;
             pointer-events: none;
+            box-shadow: 0 2px 8px rgba(93, 173, 226, 0.3);
         }
 
-        /* Ajuste para desktop - menos sobreposição */
+        /* Ajuste para desktop */
         @media (min-width: 1024px) {
             .phone-btn::after {
-                right: -6px !important;
+                right: -35px !important;
+            }
+        }
+
+        /* Ajuste para mobile - badge menor */
+        @media (max-width: 768px) {
+            .phone-btn::after {
+                right: -30px;
+                font-size: 0.65rem;
+                padding: 0.25rem 0.5rem;
+            }
+
+            .phone-container {
+                padding-right: 35px;
             }
         }
 
         .phone-btn:hover::after {
-            color: var(--accent-gold);
+            background: #3498DB;
+            box-shadow: 0 4px 12px rgba(93, 173, 226, 0.5);
         }
 
         .phone-btn:hover {
@@ -627,7 +648,7 @@
                     rgba(5, 47, 95, 0.7) 85%,
                     rgba(5, 47, 95, 1) 100%
                 ),
-                url('images/cremacao_individual_opt.webp');
+                url('images/pegadas-praia.png');
             animation: crossfade3-2 18s ease-in-out infinite;
         }
 
@@ -639,33 +660,34 @@
                     rgba(5, 47, 95, 0.7) 85%,
                     rgba(5, 47, 95, 1) 100%
                 ),
-                url('images/homem-cachorro.webp');
+                url('images/homem-cao-linhas.png');
+            background-position: 30% 25%;
             animation: crossfade3-3 18s ease-in-out infinite;
         }
 
         @keyframes crossfade3-1 {
-            0% { opacity: 1; }
-            28% { opacity: 1; }
-            33% { opacity: 0; }
-            95% { opacity: 0; }
-            100% { opacity: 1; }
+            0% { opacity: 1; transform: scale(1); }
+            28% { opacity: 1; transform: scale(1.1); }
+            33% { opacity: 0; transform: scale(1.1); }
+            95% { opacity: 0; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         @keyframes crossfade3-2 {
-            0% { opacity: 0; }
-            28% { opacity: 0; }
-            33% { opacity: 1; }
-            61% { opacity: 1; }
-            66% { opacity: 0; }
-            100% { opacity: 0; }
+            0% { opacity: 0; transform: scale(1.1); }
+            28% { opacity: 0; transform: scale(1.1); }
+            33% { opacity: 1; transform: scale(1.1); }
+            61% { opacity: 1; transform: scale(1); }
+            66% { opacity: 0; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.1); }
         }
 
         @keyframes crossfade3-3 {
-            0% { opacity: 0; }
-            61% { opacity: 0; }
-            66% { opacity: 1; }
-            95% { opacity: 1; }
-            100% { opacity: 0; }
+            0% { opacity: 0; transform: scale(1); }
+            61% { opacity: 0; transform: scale(1); }
+            66% { opacity: 1; transform: scale(1); }
+            95% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0; transform: scale(1.1); }
         }
 
         .hero-container {
@@ -704,13 +726,19 @@
         .hero-subtitle {
             font-size: 1.3rem;
             margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
             max-width: 45%;
             margin-left: 0;
             margin-right: auto;
             text-align: right;
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4),
                          0 3px 12px rgba(0, 0, 0, 0.3);
+            background: rgba(5, 47, 95, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            border: none;
         }
 
         .hero-ctas {
@@ -1021,9 +1049,9 @@
             </ul>
             <div class="nav-contact">
                 <div class="phone-container">
-                    <button class="phone-btn" onclick="openPhonePopup()" aria-label="Ligar para RIP PET">
+                    <a href="tel:+5513998068262" class="phone-btn" aria-label="Ligar para RIP PET Santos" style="background: none; color: white; border: none; padding: 0.5rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
                         <svg class="icon-inline"><use href="#icon-phone"></use></svg>
-                    </button>
+                    </a>
                 </div>
                 <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu de navegação">
                     <div class="hamburger" id="hamburger">
@@ -1049,95 +1077,14 @@
         <a href="#como-funciona">Como Funciona</a>
         <a href="#depoimentos">Depoimentos</a>
         <div style="margin-top: 2rem;">
-            <a href="tel:+5512997996543" onclick="openPhonePopup(); return false;" style="background: var(--accent-gold); color: #052F5F; padding: 1rem 2rem; border-radius: 30px; font-weight: 600; text-decoration: none; display: inline-block;">
-                <svg class="icon-inline"><use href="#icon-phone"></use></svg> Ligar Agora
+            <a href="https://wa.me/5513998068262?text=Olá!%20Meu%20pet%20faleceu%20em%20Santos.%20Podem%20me%20atender%20agora?" target="_blank" style="background: var(--accent-gold); color: #052F5F; padding: 1rem 2rem; border-radius: 30px; font-weight: 600; text-decoration: none; display: inline-block;">
+                <svg class="icon-inline"><use href="#icon-whatsapp"></use></svg> Falar no WhatsApp
             </a>
         </div>
     </div>
 
     <!-- Unidade Santos Label -->
     <div class="unidade-label">Unidade Santos</div>
-
-    <!-- Phone Popup - IGUAL À PÁGINA PRINCIPAL -->
-    <div class="phone-popup-overlay" id="phonePopupOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
-        <div class="phone-popup" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%); border-radius: 20px; padding: 2rem; max-width: 600px; width: 90%; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative;">
-            <button class="phone-popup-close" id="phonePopupClose" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; font-size: 1.3rem; color: white; cursor: pointer; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='scale(1)';">
-                <svg class="icon-inline"><use href="#icon-times"></use></svg>
-            </button>
-
-            <h3 style="text-align: center; color: white; margin-bottom: 0.5rem; font-size: 1.4rem; font-weight: 600; font-family: 'Poppins', sans-serif;">Atendimento Telefone 24h</h3>
-            <p style="text-align: center; color: #ccc; margin-bottom: 2rem; font-size: 0.9rem; font-family: 'Nunito', sans-serif; line-height: 1.2;">Escolha sua região</p>
-
-            <div class="phone-list">
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem;">
-                    <!-- Matriz -->
-                    <a href="tel:+5512997996543" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
-                        <div class="region-content">
-                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Matriz e Vale do Paraíba</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif;">(12) 99799-6543</p>
-                        </div>
-                        <svg class="icon-inline" style="font-size: 1.2rem; color: white;"><use href="#icon-phone"></use></svg>
-                    </a>
-
-                    <!-- São Paulo -->
-                    <a href="tel:+5511991603041" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
-                        <div class="region-content">
-                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">São Paulo e Região</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif;">(11) 99160-3041</p>
-                        </div>
-                        <svg class="icon-inline" style="font-size: 1.2rem; color: white;"><use href="#icon-phone"></use></svg>
-                    </a>
-
-                    <!-- Santos - DESTAQUE -->
-                    <a href="tel:+5513998068262" class="region-compose" style="background: rgba(185, 226, 140, 0.15); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 2px solid rgba(185, 226, 140, 0.4); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(185, 226, 140, 0.25)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';" onmouseout="this.style.background='rgba(185, 226, 140, 0.15)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
-                        <div class="region-content">
-                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 600; font-family: 'Poppins', sans-serif; line-height: 1.2;">Santos e Região ⭐</h4>
-                            <p style="margin: 0; color: #B9E28C; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif; font-weight: 600;">(13) 99806-8262</p>
-                        </div>
-                        <svg class="icon-inline" style="font-size: 1.2rem; color: #B9E28C;"><use href="#icon-phone"></use></svg>
-                    </a>
-
-                    <!-- Campinas -->
-                    <a href="tel:+5519999161977" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
-                        <div class="region-content">
-                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Campinas e Região</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif;">(19) 99916-1977</p>
-                        </div>
-                        <svg class="icon-inline" style="font-size: 1.2rem; color: white;"><use href="#icon-phone"></use></svg>
-                    </a>
-
-                    <!-- Resende -->
-                    <a href="tel:+5524998379825" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
-                        <div class="region-content">
-                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Resende e Região</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif;">(24) 99837-9825</p>
-                        </div>
-                        <svg class="icon-inline" style="font-size: 1.2rem; color: white;"><use href="#icon-phone"></use></svg>
-                    </a>
-
-                    <!-- Pouso Alegre -->
-                    <a href="tel:+553599042223" class="region-compose" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
-                        <div class="region-content">
-                            <h4 style="margin: 0; color: white; font-size: 1.05rem; font-weight: 500; font-family: 'Poppins', sans-serif; line-height: 1.2;">Pouso Alegre e Região</h4>
-                            <p style="margin: 0; color: #ccc; font-size: 0.95rem; text-align: left; font-family: 'Nunito', sans-serif;">(35) 99904-2223</p>
-                        </div>
-                        <svg class="icon-inline" style="font-size: 1.2rem; color: white;"><use href="#icon-phone"></use></svg>
-                    </a>
-                </div>
-            </div>
-
-            <style>
-                @media (max-width: 600px) {
-                    .phone-popup {
-                        max-width: 400px !important;
-                    }
-                    .phone-list > div[style*="repeat(2, 1fr)"] {
-                        grid-template-columns: 1fr !important;
-                    }
-                }
-            </style>
-        </div>
-    </div>
 
     <!-- Map Popup - Cidades Atendidas -->
     <div class="map-popup-overlay" id="mapPopupOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
@@ -1241,8 +1188,8 @@
             <h1 class="hero-h1-mobile">Dê ao seu melhor amigo um <span style="color: #B9E28C;">descanso digno</span></h1>
 
             <!-- Subheadline -->
-            <p class="hero-subtitle">
-                <strong>Cremação com Transparência Total.</strong><br>
+            <p class="hero-subtitle" style="font-style: italic;">
+                <strong style="font-size: 1.15em; font-style: normal;">Cremação com Transparência Total.</strong><br>
                 Acompanhe o processo presencialmente ou por vídeo, <strong>sem nenhuma taxa adicional</strong>. O carinho que você merece, com a <strong>confiança e segurança</strong> que você precisa.
             </p>
 
@@ -1274,7 +1221,7 @@
             <div class="about-mobile-text" style="display: none;">
                 <!-- Parágrafo 1 -->
                 <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin-bottom: 1.5rem; font-family: 'Nunito', sans-serif;">
-                    A <strong>R.I.P. Pet Crematório de Animais</strong> nasceu para transformar despedidas em homenagens com <strong>amor e gratidão</strong>. Hoje, nos orgulhamos de ser a <strong>maior organização</strong> de Cremação Pet do Brasil e de fazer parte da história de <strong>milhares de famílias</strong> acolhidas.
+                    A R.I.P. Pet Crematório de Animais nasceu para transformar despedidas em homenagens com <strong>amor e gratidão</strong>. Hoje, nos orgulhamos de ser <strong>a maior organização de Cremação Pet do Brasil</strong> e de fazer parte da história de <strong>milhares de famílias acolhidas</strong>.
                 </p>
 
                 <!-- Mobile Image entre parágrafo 1 e 2 -->
@@ -1284,12 +1231,12 @@
 
                 <!-- Parágrafo 2 -->
                 <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin-bottom: 1.5rem; font-family: 'Nunito', sans-serif;">
-                    A R.I.P. Pet Santos foi inaugurada em 2023, oferecendo o melhor <strong>Serviço Funerário Pet da Baixada Santista</strong>, atendendo à todas as nossas cidades (<a href="#" onclick="openMapPopup(); return false;" style="color: #052F5F; text-decoration: underline; font-weight: 600;">Confira o mapa</a>), com suporte e remoção 24h, equipe altamente qualificada, sala de despedida em Santos, translado ágil e cuidadoso, acompanhamento da cremação e entrega das cinzas/recordações no conforto de seu lar, em mãos.
+                    A <strong>R.I.P. Pet Santos</strong> foi inaugurada em 2023, oferecendo <strong>o melhor Serviço Funerário Pet da Baixada Santista</strong>, atendendo à todas as nossas cidades (<a href="#" onclick="openMapPopup(); return false;" style="color: #052F5F; text-decoration: underline; font-weight: 600;">confira a relação</a>), com suporte e remoção 24h, equipe altamente qualificada, sala de despedida em Santos, translado ágil e cuidadoso, acompanhamento da cremação e entrega das cinzas/recordações no conforto de seu lar, sempre em mãos.
                 </p>
 
                 <!-- Parágrafo 3 -->
                 <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin-bottom: 0; font-family: 'Nunito', sans-serif;">
-                    Nosso atendimento é feito pela nossa equipe própria do <strong>início ao fim</strong> e com <strong>transparência de verdade</strong> (sem custo adicional), para que tenha certeza que seu pet será cremado <strong>conforme suas escolhas</strong>.
+                    Nosso atendimento é 100% feito pelos nossos colaboradores. <strong>Não terceirizamos nenhuma etapa</strong>, com transparência de <strong>verdade</strong> (sem custo adicional), para que tenha <strong>certeza</strong> que seu pet será cremado conforme suas escolhas e segurança de que ele será cuidado <strong>do início ao fim do processo.</strong>
                 </p>
             </div>
 
@@ -1301,14 +1248,14 @@
                 </div>
                 <div class="editorial-text-1" style="grid-column: 2; grid-row: 1; align-self: center;">
                     <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin: 0; font-family: 'Nunito', sans-serif;">
-                        A <strong>R.I.P. Pet Crematório de Animais</strong> nasceu para transformar despedidas em homenagens com <strong>amor e gratidão</strong>. Hoje, nos orgulhamos de ser a <strong>maior organização</strong> de Cremação Pet do Brasil e de fazer parte da história de <strong>milhares de famílias</strong> acolhidas.
+                        A R.I.P. Pet Crematório de Animais nasceu para transformar despedidas em homenagens com <strong>amor e gratidão</strong>. Hoje, nos orgulhamos de ser <strong>a maior organização de Cremação Pet do Brasil</strong> e de fazer parte da história de <strong>milhares de famílias acolhidas</strong>.
                     </p>
                 </div>
 
                 <!-- Row 2: Texto Left + Espaço para Imagem Right -->
                 <div class="editorial-text-2" style="grid-column: 1; grid-row: 2; align-self: center;">
                     <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin: 0; font-family: 'Nunito', sans-serif;">
-                        A R.I.P. Pet Santos foi inaugurada em 2023, oferecendo o melhor <strong>Serviço Funerário Pet da Baixada Santista</strong>, atendendo à todas as nossas cidades (<a href="#" onclick="openMapPopup(); return false;" style="color: #052F5F; text-decoration: underline; font-weight: 600;">Confira o mapa</a>), com suporte e remoção 24h, equipe altamente qualificada, sala de despedida em Santos, translado ágil e cuidadoso, acompanhamento da cremação e entrega das cinzas/recordações no conforto de seu lar, em mãos.
+                        A <strong>R.I.P. Pet Santos</strong> foi inaugurada em 2023, oferecendo <strong>o melhor Serviço Funerário Pet da Baixada Santista</strong>, atendendo à todas as nossas cidades (<a href="#" onclick="openMapPopup(); return false;" style="color: #052F5F; text-decoration: underline; font-weight: 600;">confira a relação</a>), com suporte e remoção 24h, equipe altamente qualificada, sala de despedida em Santos, translado ágil e cuidadoso, acompanhamento da cremação e entrega das cinzas/recordações no conforto de seu lar, sempre em mãos.
                     </p>
                 </div>
                 <div class="editorial-image-placeholder" style="grid-column: 2; grid-row: 2; background: linear-gradient(135deg, #e0e0e0 0%, #f0f0f0 100%); border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); min-height: 250px; display: flex; align-items: center; justify-content: center;">
@@ -1318,7 +1265,7 @@
                 <!-- Row 3: Texto Full Width -->
                 <div class="editorial-text-3" style="grid-column: 1 / -1; grid-row: 3;">
                     <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin: 0; font-family: 'Nunito', sans-serif; max-width: 800px; margin: 0 auto; text-align: center;">
-                        Nosso atendimento é feito pela nossa equipe própria do <strong>início ao fim</strong> e com <strong>transparência de verdade</strong> (sem custo adicional), para que tenha certeza que seu pet será cremado <strong>conforme suas escolhas</strong>.
+                        Nosso atendimento é 100% feito pelos nossos colaboradores. <strong>Não terceirizamos nenhuma etapa</strong>, com transparência de <strong>verdade</strong> (sem custo adicional), para que tenha <strong>certeza</strong> que seu pet será cremado conforme suas escolhas e segurança de que ele será cuidado <strong>do início ao fim do processo.</strong>
                     </p>
                 </div>
             </div>
@@ -1443,16 +1390,1928 @@
     </div>
 
     <!-- ========================================
+         MEU PET MORREU, O QUE FAZER?
+         ======================================== -->
+
+    <section class="section" id="o-que-fazer" style="background: #F8F9FA; padding: 4rem 0;">
+        <div class="container" style="padding: 0 1.5rem;">
+            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: clamp(2rem, 5vw, 3.5rem); color: #052F5F; margin-bottom: 1rem; font-family: 'Autography', 'Dancing Script', 'Brush Script MT', cursive, serif; font-weight: 400; line-height: 1.2;">Meu pet morreu, o que fazer? 😔</h2>
+                <p style="font-size: clamp(1rem, 3vw, 1.1rem); color: #666; max-width: 800px; margin: 0 auto; font-family: 'Nunito', sans-serif; line-height: 1.6;">Conheça as opções disponíveis quando seu anjinho parte:</p>
+            </div>
+
+            <div class="options-wrapper" style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem;">
+
+                <!-- Opção 1: Sepultamento -->
+                <div class="option-card" style="background: white; border-radius: 20px; padding: 1.5rem; box-shadow: 0 8px 25px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                    <div class="option-content" style="display: flex; flex-direction: column; gap: 1.25rem;">
+                        <div class="option-image" style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                            <img src="images/processo-sepultamento.png" alt="Sepultamento Pet" style="width: 100%; height: auto; display: block;">
+                        </div>
+                        <div class="option-text">
+                            <h3 style="font-size: clamp(1.3rem, 4vw, 1.6rem); color: #052F5F; margin-bottom: 0.75rem; font-family: 'Nunito', sans-serif; font-weight: 700;">Sepultamento</h3>
+                            <p style="font-size: clamp(0.95rem, 3vw, 1.05rem); color: #555; line-height: 1.7; font-family: 'Nunito', sans-serif; margin: 0;">O corpo do pet é destinado para um lóculo ou cova, ficando sob ação do tempo e da natureza para desintegração - podendo levar <strong>meses ou anos</strong>. Deve seguir todas as <strong>leis ambientais</strong> sob pena de multa se realizado incorretamente.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opção 2: Incineração (Coleta Municipal) -->
+                <div class="option-card" style="background: white; border-radius: 20px; padding: 1.5rem; box-shadow: 0 8px 25px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                    <div class="option-content" style="display: flex; flex-direction: column; gap: 1.25rem;">
+                        <div class="option-image" style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                            <img src="images/processo-incineração.png" alt="Incineração Municipal" style="width: 100%; height: auto; display: block;">
+                        </div>
+                        <div class="option-text">
+                            <h3 style="font-size: clamp(1.3rem, 4vw, 1.6rem); color: #052F5F; margin-bottom: 0.75rem; font-family: 'Nunito', sans-serif; font-weight: 700;">Incineração Municipal</h3>
+                            <p style="font-size: clamp(0.95rem, 3vw, 1.05rem); color: #555; line-height: 1.7; font-family: 'Nunito', sans-serif; margin: 0;">Serviço de coleta hospitalar ou municipal - geralmente gratuito ou cobrado por peso. O pet é destinado para <strong>incineração de grandes volumes</strong>, junto a outros animais, materiais e <strong>resíduos hospitalares</strong> (seringas, agulhas, gazes, etc). Como não atinge altas temperaturas, o material resultante vai para <strong>aterros sanitários</strong>. Não funciona fora do horário comercial.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opção 3: Agência Funerária (com alerta) -->
+                <div class="option-card" style="background: white; border-radius: 20px; padding: 1.5rem; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border-left: 4px solid #FFA500; transition: all 0.3s ease;">
+                    <div class="option-content" style="display: flex; flex-direction: column; gap: 1.25rem;">
+                        <div class="option-image" style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                            <img src="images/processo-agente.png" alt="Agência Funerária" style="width: 100%; height: auto; display: block;">
+                        </div>
+                        <div class="option-text">
+                            <h3 style="font-size: clamp(1.3rem, 4vw, 1.6rem); color: #052F5F; margin-bottom: 0.75rem; font-family: 'Nunito', sans-serif; font-weight: 700;">Agência Funerária ⚠️</h3>
+                            <p style="font-size: clamp(0.95rem, 3vw, 1.05rem); color: #555; line-height: 1.7; font-family: 'Nunito', sans-serif; margin: 0;">Intermediários que <strong>podem terceirizar etapas</strong> do processo. <span style="color: #E67E22; font-weight: 600;">Atenção:</span> Muitos lugares se dizem "crematórios" mas <strong>não mostram onde é o local</strong>, não apresentam licenças ambientais ou sanitárias. Exija transparência!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opção 4: Crematório R.I.P. Pet (DESTAQUE) -->
+                <div class="option-card option-highlight" style="background: linear-gradient(135deg, #052F5F 0%, #0A4A8F 100%); border-radius: 20px; padding: 2rem 1.5rem; box-shadow: 0 12px 35px rgba(5,47,95,0.3); border: 3px solid #D4AF37; position: relative; overflow: hidden;">
+                    <!-- Badge "Nosso Serviço" -->
+                    <div style="position: absolute; top: 1rem; right: 1rem; background: #D4AF37; color: #052F5F; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; font-family: 'Nunito', sans-serif; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">✨ Nosso Serviço</div>
+
+                    <div class="option-content" style="display: flex; flex-direction: column; gap: 1.25rem;">
+                        <div class="option-image" style="border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.1);">
+                            <img src="images/processo-cremacao.png" alt="Cremação R.I.P. Pet" style="width: 100%; height: auto; display: block;">
+                        </div>
+                        <div class="option-text">
+                            <h3 style="font-size: clamp(1.4rem, 4vw, 1.8rem); color: #D4AF37; margin-bottom: 0.75rem; font-family: 'Nunito', sans-serif; font-weight: 700;">Cremação R.I.P. Pet</h3>
+                            <p style="font-size: clamp(0.95rem, 3vw, 1.05rem); color: rgba(255,255,255,0.95); line-height: 1.7; font-family: 'Nunito', sans-serif; margin-bottom: 1rem;">O corpinho do pet é encaminhado para <strong style="color: #B9E28C;">equipamento exclusivo</strong> para cremação de pets. O processo leva de <strong style="color: #B9E28C;">1h a 2h</strong> para ser concluído e as cinzas são completamente <strong style="color: #B9E28C;">inorgânicas, inócuas e inertes</strong>, podendo ser guardadas ou espalhadas em local simbólico.</p>
+
+                            <div style="background: rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; border-left: 3px solid #B9E28C;">
+                                <p style="font-size: clamp(0.9rem, 3vw, 1rem); color: white; line-height: 1.6; font-family: 'Nunito', sans-serif; margin: 0;"><strong style="color: #B9E28C;">Nossa prioridade:</strong> Atendimento acolhedor e atencioso para apoiar neste momento delicado. Cremação completa <strong>(individual ou coletiva)</strong>, garantindo que as cinzas poderão ser guardadas pelo tempo que for preciso ou espalhadas sem problema ao ambiente.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <style>
+            .option-card {
+                animation: fadeInUp 0.6s ease-out;
+            }
+
+            .option-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+            }
+
+            .option-highlight:hover {
+                transform: translateY(-5px) scale(1.01);
+                box-shadow: 0 15px 45px rgba(5,47,95,0.4);
+            }
+
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @media (max-width: 768px) {
+                .option-card {
+                    padding: 1.25rem !important;
+                }
+
+                .option-highlight {
+                    padding: 1.5rem 1.25rem !important;
+                }
+            }
+        </style>
+    </section>
+
+    <!-- ========================================
          SEÇÕES A SEREM ADICIONADAS
          ======================================== -->
 
-    <!-- Seção placeholder para scroll -->
-    <section id="servicos" style="min-height: 100vh; padding: 4rem 2rem; background: #052F5F;">
-        <div style="max-width: 1200px; margin: 0 auto; text-align: center; color: white;">
-            <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Nossos Serviços</h2>
-            <p style="font-size: 1.2rem; color: rgba(255,255,255,0.8);">Seção em desenvolvimento...</p>
-        </div>
-    </section>
+    <section class="section" id="servicos" style="background: linear-gradient(to bottom right, #111320 0%, #0C325F 100%); position: relative; overflow: hidden;">
+
+            <div class="container" style="position: relative; z-index: 4;">
+                <div class="section-header fade-in-up" style="text-align: center;">
+                    <h2 class="harmonized-title" style="color: white; margin-bottom: 1.5rem; font-weight: 400; font-family: 'Autography', 'Dancing Script', 'Brush Script MT', cursive, serif; font-size: clamp(2.5rem, 5vw, 4rem);">Serviços <span class="highlight-elegant" style="background: linear-gradient(135deg, #B9E28C 0%, #10b981 50%, #059669 100%); background-clip: text; -webkit-background-clip: text; color: transparent;">Inclusos</span></h2>
+                    <div class="services-intro">
+                        <div class="services-includes stagger-container">
+                            <div class="stagger-item">
+                                <span style="font-size: 1.5rem;">🚗</span>
+                                <div class="service-content">
+                                    <div class="service-title">Remoção 24h</div>
+                                    <div class="service-description">onde estiver, todos os dias</div>
+                                </div>
+                                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="stagger-item">
+                                <span style="font-size: 1.5rem;">🌼</span>
+                                <div class="service-content">
+                                    <div class="service-title">Cerimônia de Despedida</div>
+                                    <div class="service-description">agendada na unidade e privativa</div>
+                                </div>
+                                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="stagger-item">
+                                <span style="font-size: 1.5rem;">✨</span>
+                                <div class="service-content">
+                                    <div class="service-title">Cremação Assistida e Homenagem</div>
+                                    <div class="service-description">no melhor horário, de forma delicada</div>
+                                </div>
+                                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="stagger-item">
+                                <span style="font-size: 1.5rem;">⚱️</span>
+                                <div class="service-content">
+                                    <div class="service-title">Urna</div>
+                                    <div class="service-description">inclusa na cremação individual</div>
+                                </div>
+                                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="stagger-item">
+                                <span style="font-size: 1.5rem;">💎</span>
+                                <div class="service-content">
+                                    <div class="service-title">Recordação Afetiva</div>
+                                    <div class="service-description">única e exclusiva</div>
+                                </div>
+                                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="stagger-item">
+                                <span style="font-size: 1.5rem;">📄</span>
+                                <div class="service-content">
+                                    <div class="service-title">Certificado de Cremação</div>
+                                    <div class="service-description">assinada por veterinário</div>
+                                </div>
+                                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="stagger-item">
+                                <span style="font-size: 1.5rem;">🏡</span>
+                                <div class="service-content">
+                                    <div class="service-title">Entrega em seu endereço</div>
+                                    <div class="service-description">em mãos, de forma agendada</div>
+                                </div>
+                                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="stagger-item">
+                                <span style="font-size: 1.5rem;">🤝</span>
+                                <div class="service-content">
+                                    <div class="service-title">Apoio Psicológico</div>
+                                    <div class="service-description">receba todo amparo necessário</div>
+                                </div>
+                                <svg class="instagram-check-fixed" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
+                                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <style>
+                    /* Estilos para animação stagger */
+                    .stagger-item {
+                        opacity: 0;
+                        transform: translateX(-20px);
+                        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                    }
+
+                    .stagger-item.animate {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+
+                    /* Delay para efeito escalonado */
+                    .stagger-item:nth-child(1) { transition-delay: 0.1s; }
+                    .stagger-item:nth-child(2) { transition-delay: 0.2s; }
+                    .stagger-item:nth-child(3) { transition-delay: 0.3s; }
+                    .stagger-item:nth-child(4) { transition-delay: 0.4s; }
+                    .stagger-item:nth-child(5) { transition-delay: 0.5s; }
+                    .stagger-item:nth-child(6) { transition-delay: 0.6s; }
+                    .stagger-item:nth-child(7) { transition-delay: 0.7s; }
+                    .stagger-item:nth-child(8) { transition-delay: 0.8s; }
+                    .stagger-item:nth-child(9) { transition-delay: 0.9s; }
+
+                    /* Estilos base para serviços inclusos */
+                    .services-includes {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 1rem;
+                        max-width: 1200px;
+                        margin: 0 auto;
+                        padding: 0;
+                    }
+
+                    /* Grid responsivo para serviços inclusos */
+                    @media (max-width: 768px) {
+                        .services-includes {
+                            grid-template-columns: 1fr;
+                            gap: 1rem;
+                            max-width: none;
+                            margin: 0;
+                            padding: 0 1rem;
+                            text-align: left;
+                        }
+                    }
+
+                    /* Estilo dos itens de serviço no grid */
+                    .services-includes .stagger-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                        padding: 0.75rem;
+                        background: linear-gradient(135deg,
+                            rgba(255, 255, 255, 0.12) 0%,
+                            rgba(185, 226, 140, 0.08) 15%,
+                            rgba(255, 255, 255, 0.10) 50%,
+                            rgba(16, 185, 129, 0.06) 85%,
+                            rgba(255, 255, 255, 0.11) 100%
+                        );
+                        border-radius: 0.5rem;
+                        border-left: 3px solid #B9E28C;
+                        border: 1px solid rgba(185, 226, 140, 0.1);
+                        position: relative;
+                        backdrop-filter: blur(10px);
+                    }
+
+                    .services-includes .service-content {
+                        flex: 1;
+                        padding-right: 2rem;
+                    }
+
+                    .services-includes .service-title {
+                        font-family: 'Nunito', sans-serif;
+                        font-weight: 600;
+                        font-size: 0.95rem;
+                        color: rgba(255, 255, 255, 0.95);
+                        margin-bottom: 0.25rem;
+                    }
+
+                    .services-includes .service-description {
+                        color: rgba(255, 255, 255, 0.6);
+                        font-size: 0.8rem;
+                        font-style: italic;
+                    }
+
+                    .services-includes .instagram-check-fixed {
+                        position: absolute;
+                        right: 0.75rem;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        width: 16px;
+                        height: 16px;
+                        flex-shrink: 0;
+                    }
+
+                    /* Cores para títulos shimmer */
+                    .shimmer-text-individual {
+                        color: #55E6A6;
+                    }
+
+                    .shimmer-text-coletiva {
+                        color: #D975FF;
+                    }
+
+                    .shimmer-text-preventivo {
+                        color: #3b82f6;
+                    }
+
+                    .custom-title {
+                        width: 90%;
+                        margin: 0 auto;
+                        color: white;
+                        text-align: center;
+                        font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive, serif;
+                        white-space: nowrap;
+                    }
+
+                    @media (min-width: 1024px) {
+                        .custom-title {
+                            width: 40%;
+                        }
+                    }
+
+                    .modern-services-container {
+                        padding: 0;
+                        overflow: hidden;
+                    }
+                    
+                    .services-header {
+                        text-align: center;
+                        padding: 3rem 2rem;
+                        background: linear-gradient(135deg,
+                            rgba(255, 255, 255, 0.12) 0%,
+                            rgba(255, 255, 255, 0.08) 50%,
+                            rgba(255, 255, 255, 0.05) 100%);
+                        backdrop-filter: blur(20px) saturate(1.5);
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        border-radius: 2rem 2rem 0 0;
+                        margin: 2rem 1rem 0;
+                        box-shadow:
+                            0 -10px 30px rgba(0, 0, 0, 0.1),
+                            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                        position: relative;
+                        overflow: hidden;
+                    }
+
+                    .services-header::before {
+                        content: '';
+                        position: absolute;
+                        inset: 0;
+                        background: linear-gradient(45deg,
+                            transparent 30%,
+                            rgba(185, 226, 140, 0.03) 50%,
+                            transparent 70%);
+                        animation: headerShimmer 6s infinite;
+                    }
+
+                    @keyframes headerShimmer {
+                        0% { transform: translateX(-100%); }
+                        100% { transform: translateX(100%); }
+                    }
+                    
+                    .services-title {
+                        font-size: clamp(2.5rem, 5vw, 3.5rem);
+                        font-weight: 800;
+                        background: linear-gradient(135deg,
+                            #ffffff 0%,
+                            #f8fafc 20%,
+                            #e2e8f0 40%,
+                            var(--accent-gold) 60%,
+                            #10b981 80%,
+                            #0ea5e9 100%);
+                        background-clip: text;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        margin-bottom: 1rem;
+                        letter-spacing: -0.05em;
+                        text-shadow: 0 0 30px rgba(185, 226, 140, 0.3);
+                        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+                        position: relative;
+                        z-index: 1;
+                    }
+                    
+                    .services-subtitle {
+                        font-size: 1.25rem;
+                        color: rgba(255, 255, 255, 0.85);
+                        font-weight: 500;
+                        max-width: 700px;
+                        margin: 0 auto;
+                        line-height: 1.6;
+                        letter-spacing: 0.02em;
+                        position: relative;
+                        z-index: 1;
+                    }
+                    
+                    .services-section {
+                        padding: 2rem 0 3rem;
+                        overflow: hidden;
+                    }
+                    
+                    .carousel-track {
+                        display: flex;
+                        gap: 1rem;
+                        padding: 1rem;
+                        scroll-behavior: smooth;
+                        overflow-x: auto;
+                        scroll-snap-type: x mandatory;
+                        -webkit-overflow-scrolling: touch;
+                        scrollbar-width: none;
+                        -ms-overflow-style: none;
+                    }
+                    
+                    .carousel-track::-webkit-scrollbar {
+                        display: none;
+                    }
+                    
+                    .service-card {
+                        min-width: calc(100vw - 4rem);
+                        max-width: 420px;
+                        background: rgba(255, 255, 255, 0.08);
+                        backdrop-filter: blur(24px) saturate(1.8);
+                        border: 1px solid rgba(255, 255, 255, 0.12);
+                        border-radius: 2rem;
+                        box-shadow:
+                            0 32px 64px -12px rgba(0, 0, 0, 0.3),
+                            0 0 0 1px rgba(255, 255, 255, 0.05),
+                            inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                            inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+                        overflow: hidden;
+                        scroll-snap-align: center;
+                        scroll-snap-stop: always;
+                        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+                        transform-style: preserve-3d;
+                        position: relative;
+                    }
+
+                    .service-card::before {
+                        content: '';
+                        position: absolute;
+                        inset: 0;
+                        background: linear-gradient(135deg,
+                            rgba(255, 255, 255, 0.1) 0%,
+                            rgba(255, 255, 255, 0.02) 50%,
+                            rgba(0, 0, 0, 0.02) 100%);
+                        pointer-events: none;
+                        z-index: 1;
+                    }
+
+                    .service-card:hover {
+                        transform: translateY(-8px) scale(1.02);
+                        box-shadow:
+                            0 40px 80px -12px rgba(0, 0, 0, 0.4),
+                            0 0 0 1px rgba(255, 255, 255, 0.15),
+                            inset 0 2px 0 rgba(255, 255, 255, 0.15),
+                            0 0 60px rgba(185, 226, 140, 0.2);
+                        border-color: rgba(185, 226, 140, 0.3);
+                    }
+                    
+                    .card-header {
+                        height: 140px;
+                        position: relative;
+                        overflow: hidden;
+                        z-index: 2;
+                    }
+
+                    .card-header::after {
+                        content: '';
+                        position: absolute;
+                        inset: 0;
+                        background: linear-gradient(180deg,
+                            transparent 0%,
+                            rgba(0, 0, 0, 0.1) 100%);
+                        z-index: 1;
+                    }
+
+                    .card-gradient {
+                        position: absolute;
+                        inset: 0;
+                        opacity: 0.9;
+                        background-size: 400% 400%;
+                        animation: gradientShift 8s ease-in-out infinite;
+                    }
+
+                    @keyframes gradientShift {
+                        0%, 100% { background-position: 0% 50%; }
+                        50% { background-position: 100% 50%; }
+                    }
+
+                    .service-card:nth-child(1) .card-gradient {
+                        background: linear-gradient(135deg,
+                            #06b6d4 0%, #0ea5e9 25%, #3b82f6 50%, #1e40af 75%, #1e3a8a 100%);
+                    }
+
+                    .service-card:nth-child(2) .card-gradient {
+                        background: linear-gradient(135deg,
+                            #f59e0b 0%, #d97706 25%, #b45309 50%, #92400e 75%, #78350f 100%);
+                    }
+
+                    .service-card:nth-child(3) .card-gradient {
+                        background: linear-gradient(135deg,
+                            #10b981 0%, #059669 25%, #047857 50%, #065f46 75%, #064e3b 100%);
+                    }
+
+                    .card-icon {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        font-size: 3rem;
+                        z-index: 3;
+                        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+                        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+                    }
+
+                    .service-card:hover .card-icon {
+                        transform: translate(-50%, -50%) scale(1.1);
+                        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+                    }
+                    
+                    .card-body {
+                        padding: 2rem 1.75rem;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1.5rem;
+                        text-align: center;
+                        background: rgba(255, 255, 255, 0.03);
+                        backdrop-filter: blur(12px);
+                        position: relative;
+                        z-index: 2;
+                    }
+
+                    .card-body::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 60%;
+                        height: 1px;
+                        background: linear-gradient(90deg,
+                            transparent 0%,
+                            rgba(255, 255, 255, 0.2) 50%,
+                            transparent 100%);
+                    }
+
+                    .modern-service-title {
+                        font-family: 'Nunito', sans-serif;
+                        font-size: 1.5rem;
+                        font-weight: 700;
+                        color: rgba(255, 255, 255, 0.95);
+                        margin-bottom: 0.75rem;
+                        letter-spacing: -0.025em;
+                        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    }
+
+                    .service-description {
+                        font-size: 0.95rem;
+                        color: rgba(255, 255, 255, 0.8);
+                        line-height: 1.7;
+                        font-weight: 400;
+                        letter-spacing: 0.01em;
+                    }
+                    
+                    .modern-service-features {
+                        margin-top: 1rem;
+                        text-align: left !important;
+                        background: transparent;
+                        border-radius: 0;
+                        padding: 0;
+                        border: none;
+                    }
+
+                    .feature-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                        font-size: 0.9rem;
+                        color: rgba(255, 255, 255, 0.9);
+                        padding: 0.375rem 0;
+                        transition: all 0.3s ease;
+                        background: none;
+                        border: none;
+                    }
+
+                    .feature-item:hover {
+                        color: rgba(255, 255, 255, 1);
+                        transform: translateX(4px);
+                    }
+
+                    .feature-check {
+                        color: var(--accent-gold);
+                        font-weight: 600;
+                        font-size: 0.9rem;
+                        margin-top: 0;
+                        flex-shrink: 0;
+                        filter: none;
+                        transition: all 0.2s ease;
+                        opacity: 0.9;
+                    }
+
+                    .feature-item:hover .feature-check {
+                        transform: none;
+                        opacity: 1;
+                        color: #ffffff;
+                    }
+
+                    .features-list {
+                        display: flex !important;
+                        flex-direction: column !important;
+                        gap: 0.25rem !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+
+                    /* Margem só para os checkboxes do "Todos os serviços incluem" */
+                    .services-include-check {
+                        margin-left: 2rem !important;
+                    }
+
+                    /* Layout responsivo para serviços inclusos - CORRIGIDO */
+
+                    @media (max-width: 480px) {
+                        .services-includes {
+                            gap: 0.75rem;
+                        }
+                    }
+                    
+                    .modern-service-price {
+                        background: white;
+                        padding: 1.5rem;
+                        border-radius: 1rem;
+                        margin-top: auto;
+                        border: 2px solid #f1f5f9;
+                        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    
+                    .modern-service-price::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        height: 3px;
+                        background: linear-gradient(90deg, #10b981, #06b6d4);
+                    }
+                    
+                    .price-pix {
+                        background: linear-gradient(135deg, #10b981, #059669);
+                        color: white;
+                        padding: 1.25rem;
+                        border-radius: 0.75rem;
+                        text-align: center;
+                        margin-bottom: 1rem;
+                        box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.3);
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    
+                    .price-pix::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: -100%;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+                        animation: shimmer 2s infinite;
+                    }
+                    
+                    @keyframes shimmer {
+                        0% { left: -100%; }
+                        100% { left: 100%; }
+                    }
+                    
+                    .price-cash {
+                        font-size: 1.6rem;
+                        font-weight: 700;
+                        margin-bottom: 0.25rem;
+                    }
+                    
+                    .price-method {
+                        font-size: 0.875rem;
+                        opacity: 0.9;
+                        font-weight: 500;
+                    }
+                    
+                    .price-card {
+                        background: #f8fafc;
+                        padding: 1.25rem;
+                        border-radius: 0.75rem;
+                        border: 1px solid #e2e8f0;
+                    }
+                    
+                    .price-card-header {
+                        font-size: 0.875rem;
+                        font-weight: 600;
+                        color: #059669;
+                        margin-bottom: 0.75rem;
+                        text-align: center;
+                    }
+                    
+                    .price-card-content {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 1rem;
+                    }
+                    
+                    .price-total {
+                        font-size: 1rem;
+                        font-weight: 600;
+                        color: #1e293b;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 0.25rem;
+                    }
+                    
+                    .payment-method {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                    }
+                    
+                    .payment-subtitle {
+                        font-size: 0.75rem;
+                        color: #94a3b8;
+                        font-weight: 400;
+                    }
+                    
+                    .installment-selector {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                    }
+                    
+                    .installment-dropdown {
+                        padding: 0.5rem;
+                        border: none;
+                        border-radius: 0.5rem;
+                        background: white;
+                        font-size: 0.875rem;
+                        font-weight: 500;
+                        color: #475569;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                        min-width: 60px;
+                        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                    }
+                    
+                    .installment-dropdown:focus {
+                        outline: none;
+                        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+                    }
+                    
+                    .card-payment-method {
+                        text-align: center;
+                        font-size: 0.775rem;
+                        color: #64748b;
+                        margin-bottom: 0.5rem;
+                        font-weight: 500;
+                    }
+
+                    .card-price {
+                        text-align: center;
+                        font-size: 1.475rem;
+                        font-weight: 700;
+                        color: #1e293b;
+                        margin-bottom: 1rem;
+                    }
+
+                    .installment-selector-row {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 0.75rem;
+                        margin-bottom: 0.75rem;
+                        flex-wrap: wrap;
+                    }
+
+                    .selector-label {
+                        font-size: 0.725rem;
+                        color: #475569;
+                        font-weight: 500;
+                        text-align: center;
+                        line-height: 1.2;
+                    }
+
+                    .installment-result {
+                        text-align: center;
+                        font-size: 0.8rem;
+                        color: #64748b;
+                        font-style: italic;
+                    }
+
+                    .installment-result span[id$="-installment"] {
+                        color: #10b981;
+                        font-weight: 600;
+                    }
+
+                    .total-price {
+                        margin-top: 0.3rem;
+                        font-size: 0.65rem;
+                        color: #94a3b8;
+                        font-weight: 400;
+                    }
+                    
+                    .popular-badge {
+                        position: absolute;
+                        top: -8px;
+                        right: 1rem;
+                        background: linear-gradient(135deg, #f59e0b, #d97706);
+                        color: white;
+                        padding: 0.25rem 0.75rem;
+                        border-radius: 9999px;
+                        font-size: 0.75rem;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                    }
+                    
+                    .cta-card {
+                        min-width: calc(100vw - 4rem);
+                        max-width: 420px;
+                        background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+                        border-radius: 1.5rem;
+                        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                        overflow: hidden;
+                        scroll-snap-align: center;
+                        scroll-snap-stop: always;
+                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                        text-decoration: none;
+                        color: white;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 2rem;
+                        text-align: center;
+                        min-height: 400px;
+                    }
+                    
+                    .cta-card:hover {
+                        transform: translateY(-4px) scale(1.02);
+                        box-shadow: 0 20px 25px -5px rgba(14, 165, 233, 0.4);
+                    }
+                    
+                    .cta-icon {
+                        font-size: 3rem;
+                        margin-bottom: 1rem;
+                        animation: bounce 2s infinite;
+                    }
+                    
+                    @keyframes bounce {
+                        0%, 20%, 53%, 80%, 100% {
+                            animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                            transform: translate3d(0,0,0);
+                        }
+                        40%, 43% {
+                            animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                            transform: translate3d(0, -8px, 0);
+                        }
+                        70% {
+                            animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                            transform: translate3d(0, -4px, 0);
+                        }
+                        90% {
+                            transform: translate3d(0,-2px,0);
+                        }
+                    }
+
+                    @keyframes float {
+                        0%, 100% { transform: translateY(0px); }
+                        50% { transform: translateY(-10px); }
+                    }
+                    
+                    .cta-title {
+                        font-size: 1.5rem;
+                        font-weight: 600;
+                        margin-bottom: 0.5rem;
+                    }
+                    
+                    .cta-subtitle {
+                        font-size: 1rem;
+                        opacity: 0.9;
+                        margin-bottom: 1rem;
+                    }
+                    
+                    .cta-features {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.5rem;
+                        justify-content: center;
+                    }
+                    
+                    .cta-feature {
+                        background: rgba(255, 255, 255, 0.2);
+                        padding: 0.25rem 0.75rem;
+                        border-radius: 9999px;
+                        font-size: 0.75rem;
+                        font-weight: 500;
+                    }
+                    
+                    .scroll-indicator {
+                        display: flex;
+                        justify-content: center;
+                        gap: 0.5rem;
+                        padding: 1rem;
+                        margin-top: 1rem;
+                    }
+                    
+                    .indicator-dot {
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50%;
+                        background: #cbd5e1;
+                        transition: all 0.3s ease;
+                        cursor: pointer;
+                    }
+                    
+                    .indicator-dot.active {
+                        background: #0ea5e9;
+                        transform: scale(1.25);
+                    }
+                    
+                    .scroll-hint {
+                        text-align: center;
+                        padding: 1rem;
+                        font-size: 0.875rem;
+                        color: #64748b;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 0.5rem;
+                    }
+                    
+                    .scroll-arrow {
+                        animation: slide 2s ease-in-out infinite;
+                    }
+                    
+                    @keyframes slide {
+                        0%, 100% { transform: translateX(0); }
+                        50% { transform: translateX(8px); }
+                    }
+
+                    /* Timeline Animation */
+                    @keyframes slideInStep {
+                        to {
+                            opacity: 1;
+                            transform: translateX(0);
+                        }
+                    }
+
+                    /* Timeline Hover Effects - DISABLED */
+                    .timeline-content:hover {
+                        transform: none !important;
+                        box-shadow: 0 4px 20px rgba(30, 64, 175, 0.1) !important;
+                    }
+
+                    .timeline-content:hover .step-image {
+                        opacity: 1 !important;
+                    }
+
+                    /* Timeline Responsive Styles */
+                    @media (max-width: 968px) {
+                        .timeline-content {
+                            min-height: 200px !important;
+                        }
+                        .step-content {
+                            max-width: 65% !important;
+                        }
+                    }
+
+                    @media (max-width: 768px) {
+                        .etapas-timeline {
+                            padding-left: 30px !important;
+                        }
+                        .timeline-marker {
+                            left: -27px !important;
+                        }
+                        .timeline-content {
+                            padding: 30px !important;
+                            min-height: 240px !important;
+                        }
+                        .step-content {
+                            max-width: 65% !important;
+                            padding-right: 8px !important;
+                        }
+                        .step-icon {
+                            font-size: 1.8rem !important;
+                        }
+                        .step-title {
+                            font-size: 1.4rem !important;
+                        }
+                        .step-description {
+                            font-size: 1rem !important;
+                        }
+                    }
+
+                    @media (max-width: 480px) {
+                        .timeline-content {
+                            padding: 25px !important;
+                            min-height: 280px !important;
+                            flex-direction: column !important;
+                        }
+                        .step-content {
+                            max-width: 100% !important;
+                            padding-right: 0 !important;
+                            order: 2;
+                        }
+                        .step-image {
+                            position: relative !important;
+                            width: 100% !important;
+                            height: 120px !important;
+                            border-radius: 10px !important;
+                            margin-bottom: 15px !important;
+                            order: 1;
+                        }
+                        .step-title {
+                            font-size: 1.2rem !important;
+                        }
+                        .step-description {
+                            font-size: 0.95rem !important;
+                            line-height: 1.6 !important;
+                        }
+                    }
+                    
+                    /* Mobile specific spacing for checklists */
+                    @media (max-width: 767px) {
+                        .features-list {
+                            margin-left: 0 !important;
+                            padding-left: 2rem !important;
+                        }
+
+                        .feature-item {
+                            padding-left: 1rem !important;
+                        }
+                    }
+
+                    @media (min-width: 640px) {
+                        .service-card, .cta-card {
+                            min-width: calc(50vw - 2rem);
+                        }
+
+                        .carousel-track {
+                            padding: 1.5rem;
+                            gap: 1.5rem;
+                        }
+                    }
+                    
+                    @media (min-width: 1024px) {
+                        .service-card, .cta-card {
+                            min-width: calc(33.333vw - 2rem);
+                            max-width: 380px;
+                        }
+                        
+                        .carousel-track {
+                            padding: 2rem;
+                            gap: 2rem;
+                        }
+                        
+                        .scroll-hint {
+                            display: none;
+                        }
+                    }
+                    
+                    @media (min-width: 1280px) {
+                        .carousel-track {
+                            justify-content: center;
+                            overflow-x: visible;
+                        }
+                        
+                        .service-card, .cta-card {
+                            min-width: 300px;
+                            max-width: 300px;
+                        }
+                    }
+                </style>
+
+            <!-- Decorative Background Elements -->
+            <style>
+                /* Imagem de linhas por cima de tudo */
+                #servicos::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-image: url('./images/fundo_linhas_desk.png');
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    pointer-events: none;
+                    z-index: 10;
+                }
+
+                #servicos::after {
+                    display: none;
+                }
+
+                /* Mobile - trocar para imagem mobile */
+                @media (max-width: 768px) {
+                    #servicos::before {
+                        background-image: url('./images/fundo_linhas_mobile.png');
+                    }
+
+                    /* Mostrar imagem da veia no mobile */
+                    .gato-fade-desktop {
+                        display: none !important;
+                    }
+                    .gato-fade-mobile {
+                        display: block !important;
+                    }
+                }
+
+                /* Curved line 1 - diagonal flowing line */
+                /*
+                #servicos::before {
+                    top: 15%;
+                    left: -2%;
+                    width: 60%;
+                    height: 4px;
+                    background: linear-gradient(90deg,
+                        transparent 0%,
+                        rgba(255, 255, 255, 0.08) 20%,
+                        rgba(185, 226, 140, 0.12) 50%,
+                        rgba(255, 255, 255, 0.06) 80%,
+                        transparent 100%);
+                    border-radius: 50px;
+                    transform: rotate(-8deg);
+                    animation: floatGentle1 20s ease-in-out infinite;
+                }
+                */
+
+                /* Curved line 2 - organic flowing line */
+                /*
+                #servicos::after {
+                    bottom: 25%;
+                    right: -3%;
+                    width: 70%;
+                    height: 3px;
+                    background: linear-gradient(90deg,
+                        transparent 0%,
+                        rgba(255, 255, 255, 0.06) 15%,
+                        rgba(140, 226, 185, 0.10) 45%,
+                        rgba(255, 255, 255, 0.08) 75%,
+                        transparent 100%);
+                    border-radius: 50px;
+                    transform: rotate(5deg);
+                    animation: floatGentle2 18s ease-in-out infinite;
+                }
+                */
+
+                /* Additional accent lines within container - DESABILITADO */
+                #servicos .container::before,
+                #servicos .container::after {
+                    display: none;
+                }
+
+                /* Accent line 3 - subtle curved accent */
+                /*
+                .container::before {
+                    top: 35%;
+                    right: 5%;
+                    width: 40%;
+                    height: 2px;
+                    background: linear-gradient(90deg,
+                        transparent 0%,
+                        rgba(255, 255, 255, 0.04) 30%,
+                        rgba(226, 185, 140, 0.06) 60%,
+                        transparent 100%);
+                    border-radius: 50px;
+                    transform: rotate(-15deg);
+                    animation: floatGentle3 25s ease-in-out infinite;
+                }
+                */
+
+                /* Accent line 4 - small decorative line */
+                /*
+                .container::after {
+                    bottom: 40%;
+                    left: 8%;
+                    width: 35%;
+                    height: 2px;
+                    background: linear-gradient(90deg,
+                        transparent 0%,
+                        rgba(255, 255, 255, 0.05) 25%,
+                        rgba(226, 140, 185, 0.07) 55%,
+                        rgba(255, 255, 255, 0.03) 85%,
+                        transparent 100%);
+                    border-radius: 50px;
+                    transform: rotate(12deg);
+                    animation: floatGentle4 22s ease-in-out infinite;
+                }
+                */
+
+                /* Subtle floating animations for lines */
+                @keyframes floatGentle1 {
+                    0%, 100% { transform: rotate(-8deg) translateY(0); }
+                    50% { transform: rotate(-6deg) translateY(-2px); }
+                }
+
+                @keyframes floatGentle2 {
+                    0%, 100% { transform: rotate(5deg) translateY(0); }
+                    50% { transform: rotate(7deg) translateY(2px); }
+                }
+
+                @keyframes floatGentle3 {
+                    0%, 100% { transform: rotate(-15deg) translateX(0); }
+                    50% { transform: rotate(-12deg) translateX(3px); }
+                }
+
+                @keyframes floatGentle4 {
+                    0%, 100% { transform: rotate(12deg) translateX(0); }
+                    50% { transform: rotate(15deg) translateX(-2px); }
+                }
+
+                /* Animação para indicativo de deslize */
+                @keyframes swipeHint {
+                    0%, 100% { transform: translateX(0); opacity: 0.7; }
+                    50% { transform: translateX(5px); opacity: 1; }
+                }
+
+                /* Otimização de popups - Layout compacto sem scroll */
+
+                /* Animação da setinha indicativa */
+                @keyframes floatUpDown {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-10px); }
+                }
+
+                /* Estilos do carrossel de avaliações */
+                .reviews-carousel::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .review-card-carousel {
+                    min-width: 380px;
+                    max-width: 380px;
+                    background: white;
+                    border-radius: 20px;
+                    padding: 2rem;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+                    transition: all 0.3s ease;
+                    border: 1px solid #f1f5f9;
+                    position: relative;
+                    overflow: hidden;
+                    scroll-snap-align: start;
+                    scroll-snap-stop: always;
+                    height: 420px;
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .review-card-carousel::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 4px;
+                    background: linear-gradient(90deg, var(--primary-blue), var(--accent-gold));
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+
+                .review-card-carousel:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+                }
+
+                .review-card-carousel:hover::before {
+                    opacity: 1;
+                }
+
+                .review-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+                }
+
+                .unit-badge {
+                    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    border-radius: 25px;
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                }
+
+                .stars {
+                    color: #ffd700;
+                    font-size: 1.1rem;
+                    text-shadow: 0 1px 2px rgba(255, 215, 0, 0.3);
+                }
+
+                .review-content {
+                    flex: 1;
+                    margin-bottom: 1rem;
+                }
+
+                .review-text {
+                    color: #475569;
+                    line-height: 1.6;
+                    font-size: 0.95rem;
+                    font-style: italic;
+                    position: relative;
+                    padding-left: 1.2rem;
+                }
+
+                .text-full {
+                    font-size: 0.85rem;
+                    line-height: 1.5;
+                    display: none;
+                }
+
+                .text-preview {
+                    display: inline;
+                }
+
+                /* Estilos do popup de review */
+                .review-popup-overlay {
+                    opacity: 0;
+                    transition: all 0.3s ease;
+                }
+
+                .review-popup-overlay.active {
+                    opacity: 1;
+                }
+
+                .review-popup {
+                    transform: scale(0.8) translateY(20px);
+                    transition: all 0.3s ease;
+                }
+
+                .review-popup-overlay.active .review-popup {
+                    transform: scale(1) translateY(0);
+                }
+
+                .review-popup-close:hover {
+                    background: #f1f5f9;
+                    color: var(--primary-blue);
+                    transform: scale(1.1);
+                }
+
+                .review-popup-text::before {
+                    content: '"';
+                    position: absolute;
+                    left: 0;
+                    top: -5px;
+                    font-size: 2rem;
+                    color: var(--accent-gold);
+                    font-family: serif;
+                    line-height: 1;
+                }
+
+                .review-popup-text::after {
+                    content: '"';
+                    color: var(--accent-gold);
+                    font-size: 1.5rem;
+                    font-family: serif;
+                    margin-left: 5px;
+                }
+
+                @media (max-width: 768px) {
+                    .review-popup {
+                        padding: 1.5rem;
+                        margin: 10px;
+                    }
+
+                    .review-popup-text {
+                        font-size: 0.95rem;
+                        padding-left: 1.2rem;
+                    }
+                }
+
+                .review-text::before {
+                    content: '"';
+                    position: absolute;
+                    left: 0;
+                    top: -3px;
+                    font-size: 1.5rem;
+                    color: var(--accent-gold);
+                    font-family: serif;
+                    line-height: 1;
+                }
+
+                .expand-btn {
+                    background: none;
+                    border: none;
+                    color: var(--primary-blue);
+                    font-weight: 600;
+                    cursor: pointer;
+                    font-size: 0.9rem;
+                    padding: 0;
+                    margin-left: 0.5rem;
+                    transition: color 0.3s ease;
+                }
+
+                .expand-btn:hover {
+                    color: #3b82f6;
+                }
+
+                .review-author {
+                    color: var(--primary-blue);
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                    text-align: right;
+                    border-top: 1px solid #f1f5f9;
+                    padding-top: 1rem;
+                    margin-top: auto;
+                }
+
+                .carousel-controls {
+                    display: flex;
+                    justify-content: center;
+                    gap: 1rem;
+                    margin-top: 2rem;
+                }
+
+                .carousel-btn {
+                    padding: 0.75rem 1.5rem;
+                    border-radius: 30px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    border: none;
+                    font-family: 'Nunito', sans-serif;
+                    font-weight: 600;
+                    font-size: 1rem;
+                }
+
+                .prev-btn {
+                    background: rgba(255, 255, 255, 0.25);
+                    backdrop-filter: blur(10px);
+                    color: #111D13;
+                    border: 1px solid rgba(255, 255, 255, 0.4);
+                    font-weight: 700;
+                }
+
+                .next-btn {
+                    background: var(--accent-gold);
+                    color: #111D13;
+                    font-weight: 700;
+                }
+
+                .carousel-btn:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                }
+
+                /* Responsivo para mobile */
+                @media (max-width: 768px) {
+                    .review-card-carousel {
+                        min-width: 320px;
+                        max-width: 320px;
+                        padding: 1.5rem;
+                        height: 400px;
+                    }
+
+                    .review-header {
+                        flex-direction: column;
+                        gap: 0.8rem;
+                        align-items: flex-start;
+                        margin-bottom: 1rem;
+                    }
+
+                    .unit-badge {
+                        font-size: 0.8rem;
+                        padding: 0.4rem 0.8rem;
+                    }
+
+                }
+
+                /* CSS dos controles agora está centralizado abaixo */
+
+                /* Mostrar botões sempre, exceto no mobile */
+                .carousel-controls {
+                    display: flex !important;
+                    justify-content: center;
+                    gap: 1rem;
+                    margin-top: 2rem;
+                }
+
+                /* Ocultar apenas no mobile pequeno */
+                @media (max-width: 480px) {
+                    .carousel-controls {
+                        display: none !important;
+                    }
+                }
+
+                /* Garantir que os botões apareçam no desktop */
+                @media (min-width: 769px) {
+                    .carousel-controls {
+                        display: flex !important;
+                        justify-content: center;
+                        gap: 1rem;
+                        margin-top: 2rem;
+                    }
+                }
+                @media (max-width: 768px) {
+                    .phone-popup, .whatsapp-popup {
+                        padding: 1.2rem !important;
+                        margin: 0.8rem !important;
+                        max-width: none !important;
+                        width: calc(100% - 1.6rem) !important;
+                        max-height: 90vh !important;
+                        overflow: visible !important;
+                    }
+
+                    .phone-popup h3, .whatsapp-popup h3 {
+                        font-size: 1.4rem !important;
+                        margin-bottom: 0.3rem !important;
+                    }
+
+                    .phone-popup p, .whatsapp-popup p {
+                        font-size: 1rem !important;
+                        margin-bottom: 1rem !important;
+                    }
+
+                    .phone-popup .region-compose, .whatsapp-popup .region-compose {
+                        padding: 1rem !important;
+                        min-height: 60px !important;
+                        margin-bottom: 0.6rem !important;
+                    }
+
+                    .phone-popup .region-content h4, .whatsapp-popup .region-content h4 {
+                        font-size: 1.1rem !important;
+                        margin-bottom: 0.2rem !important;
+                        line-height: 1.2 !important;
+                    }
+
+                    .phone-popup .region-content p, .whatsapp-popup .region-content p {
+                        font-size: 1rem !important;
+                        margin: 0 !important;
+                        line-height: 1.2 !important;
+                    }
+
+                    .phone-popup div[style*="grid-template-columns"],
+                    .whatsapp-popup div[style*="grid-template-columns"] {
+                        gap: 0.6rem !important;
+                    }
+
+                    .phone-popup-close, .whatsapp-popup-close {
+                        top: 12px !important;
+                        right: 12px !important;
+                        width: 32px !important;
+                        height: 32px !important;
+                        font-size: 1.2rem !important;
+                    }
+                }
+
+                @media (max-width: 430px) {
+                    .phone-popup, .whatsapp-popup {
+                        padding: 1rem !important;
+                        margin: 0.5rem !important;
+                        width: calc(100% - 1rem) !important;
+                        border-radius: 15px !important;
+                    }
+
+                    .phone-popup h3, .whatsapp-popup h3 {
+                        font-size: 1.3rem !important;
+                    }
+
+                    .phone-popup .region-compose, .whatsapp-popup .region-compose {
+                        padding: 0.9rem !important;
+                        min-height: 55px !important;
+                        border-radius: 8px !important;
+                    }
+
+                    .phone-popup .region-content h4, .whatsapp-popup .region-content h4 {
+                        font-size: 1rem !important;
+                    }
+
+                    .phone-popup .region-content p, .whatsapp-popup .region-content p {
+                        font-size: 0.95rem !important;
+                    }
+
+                    .phone-popup div[style*="grid-template-columns"],
+                    .whatsapp-popup div[style*="grid-template-columns"] {
+                        grid-template-columns: 1fr !important;
+                    }
+
+                    .phone-popup-close, .whatsapp-popup-close {
+                        top: 8px !important;
+                        right: 8px !important;
+                        width: 30px !important;
+                        height: 30px !important;
+                        font-size: 1.1rem !important;
+                    }
+                }
+
+                @media (max-width: 375px) {
+                    .phone-popup, .whatsapp-popup {
+                        padding: 0.8rem !important;
+                        width: calc(100% - 0.8rem) !important;
+                        margin: 0.4rem !important;
+                    }
+
+                    .phone-popup .region-compose, .whatsapp-popup .region-compose {
+                        padding: 0.8rem !important;
+                        min-height: 50px !important;
+                        min-width: auto !important;
+                        width: 100% !important;
+                    }
+
+                    .phone-popup .region-content h4, .whatsapp-popup .region-content h4 {
+                        font-size: 0.95rem !important;
+                    }
+
+                    .phone-popup .region-content p, .whatsapp-popup .region-content p {
+                        font-size: 0.9rem !important;
+                    }
+
+                    .phone-popup div[style*="grid-template-columns"],
+                    .whatsapp-popup div[style*="grid-template-columns"] {
+                        gap: 0.5rem !important;
+                    }
+                }
+
+                /* Responsive adjustments */
+                @media (max-width: 768px) {
+                    #servicos::before,
+                    #servicos::after {
+                        opacity: 0.6;
+                    }
+
+                    .container::before,
+                    .container::after {
+                        opacity: 0.4;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    #servicos::before,
+                    #servicos::after {
+                        opacity: 0.4;
+                    }
+
+                    .container::before,
+                    .container::after {
+                        display: none;
+                    }
+                }
+
+
+                </style>
+            </div>
+        </section>
+
+    <!-- Tipos de Cremação Section -->
+    <section class="section" style="background: linear-gradient(135deg, #D8E8DB 0%, #86F2C6 100%); padding: 80px 0; position: relative; overflow: hidden;">
+        <div class="container" style="position: relative; z-index: 2;">
+                <!-- Título dos Tipos de Cremação -->
+                <div class="fade-in-up" style="text-align: center; margin: 2rem 0 2rem 0;">
+                    <h2 style="font-family: 'Nunito', sans-serif; font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 700; color: #111D13; margin: 0;">Conheça os tipos de Cremação</h2>
+                </div>
+
+                <div class="modern-services-container">
+                    <!-- CREMAÇÃO INDIVIDUAL -->
+                    <div class="fade-in-scale" style="text-align: center; margin: 1rem 0 0 0; padding: 1.5rem 1rem; overflow-x: hidden;">
+                        <div style="display: inline-block; position: relative; padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 4vw, 2rem); padding-bottom: 2rem; background: rgba(255, 255, 255, 0.95); border: none; border-top: 3px solid #55E6A6; border-radius: 1rem; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); max-width: calc(100vw - 2rem); box-sizing: border-box; overflow: hidden;">
+
+                            <!-- Imagem de fundo na parte inferior -->
+                            <picture>
+                                <source srcset="images/cremacao_individual_opt.webp" type="image/webp">
+                                <img src="images/cremacao_individual_opt.jpg" alt="Cremação Individual" loading="lazy" style="position: absolute; bottom: 0; left: 0; right: 0; width: 100%; height: auto; max-height: 50%; object-fit: cover; border-radius: 0 0 1rem 1rem; pointer-events: none; z-index: 0; mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 100%); -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 100%);">
+                            </picture>
+
+                            <h2 style="margin: 0 0 0.75rem 0; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 300; letter-spacing: 2px; color: #111D13; white-space: nowrap; position: relative; z-index: 1;">
+                                <span style="font-family: 'Nunito', sans-serif; line-height: 1.2;">Cremação</span> <span class="shimmer-text-individual" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Individual</span>
+                            </h2>
+                            <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #55E6A6, transparent); margin: 1rem auto; position: relative; z-index: 1;"></div>
+                            <p style="margin: 0 0 1.5rem 0; font-size: 1rem; color: #111D13; line-height: 1.6; max-width: 600px; position: relative; z-index: 1;">O pet é cremado de forma individual, e as cinzinhas do pet são entregues acomodadas em uma urna. Optamos pela cremação completa, o que garante que as cinzinhas possam ser guardadas pelo tempo que for preciso - sem nenhuma alteração de aspecto - ou espalhadas em locais simbólicos, sem riscos ao meio-ambiente.</p>
+                            <a href="https://wa.me/5513998068262?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20cremação%20pet%20em%20Santos" target="_blank" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #55E6A6, #40d890); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(85, 230, 166, 0.3); position: relative; z-index: 1;">
+                                <svg class="icon-inline" style="margin-right: 8px; width: 1.2rem; height: 1.2rem;"><use href="#icon-whatsapp"></use></svg>
+                                Falar no WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- CREMAÇÃO COLETIVA -->
+                    <div class="fade-in-scale" style="text-align: center; margin: 1rem 0 0 0; padding: 1.5rem 1rem; overflow-x: hidden;">
+                        <div style="display: inline-block; position: relative; padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 4vw, 2rem); padding-bottom: 2rem; background: rgba(255, 255, 255, 0.95); border: none; border-top: 3px solid #D975FF; border-radius: 1rem; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); max-width: calc(100vw - 2rem); box-sizing: border-box; overflow: hidden;">
+
+                            <!-- Imagem de fundo na parte inferior -->
+                            <picture>
+                                <source srcset="images/cremacao_coletiva_opt.webp" type="image/webp">
+                                <img src="images/cremacao_coletiva_opt.jpg" alt="Cremação Coletiva" loading="lazy" style="position: absolute; bottom: 0; left: 0; right: 0; width: 100%; height: auto; max-height: 50%; object-fit: cover; border-radius: 0 0 1rem 1rem; pointer-events: none; z-index: 0; mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 100%); -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 100%);">
+                            </picture>
+
+                            <h2 style="margin: 0 0 0.75rem 0; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 300; letter-spacing: 2px; color: #111D13; white-space: nowrap; position: relative; z-index: 1;">
+                                <span style="font-family: 'Nunito', sans-serif; line-height: 1.2;">Cremação</span> <span class="shimmer-text-coletiva" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Coletiva</span>
+                            </h2>
+                            <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #D975FF, transparent); margin: 1rem auto; position: relative; z-index: 1;"></div>
+                            <p style="margin: 0 0 1.5rem 0; font-size: 1rem; color: #111D13; line-height: 1.6; max-width: 600px; position: relative; z-index: 1;">A cremação acontece com três animais no mesmo equipamento e as cinzinhas são espalhadas em nosso jardim, uma área verde de 100 mil m², repleta de natureza. Geramos o certificado de cremação que atesta que o pet foi cremado conosco e teve sua despedida digna e respeitosa.</p>
+                            <a href="https://wa.me/5513998068262?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20cremação%20pet%20em%20Santos" target="_blank" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #D975FF, #C85EFF); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(217, 117, 255, 0.4); position: relative; z-index: 1;">
+                                <svg class="icon-inline" style="margin-right: 8px; width: 1.2rem; height: 1.2rem;"><use href="#icon-whatsapp"></use></svg>
+                                Falar no WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PLANOS PREVENTIVOS -->
+                <div class="fade-in-scale" style="text-align: center; margin: 4rem 0 2rem 0; padding: 1.5rem 1rem; overflow-x: hidden;">
+                    <div style="display: inline-block; position: relative; padding: clamp(1.5rem, 3vw, 2rem) clamp(0.1rem, 2vw, 0.6rem); padding-bottom: 2rem; background: rgba(255, 255, 255, 0.95); border: none; border-top: 3px solid #3b82f6; border-radius: 1rem; backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); max-width: calc(100vw - 2rem); box-sizing: border-box; overflow: hidden;">
+
+                        <!-- Imagem de fundo na parte inferior -->
+                        <picture>
+                            <source srcset="images/planos_preventivos_opt.webp" type="image/webp">
+                            <img src="images/planos_preventivos_opt.jpg" alt="Planos Preventivos" loading="lazy" style="position: absolute; bottom: 0; left: 0; right: 0; width: 100%; height: auto; max-height: 50%; object-fit: cover; border-radius: 0 0 1rem 1rem; pointer-events: none; z-index: 0; mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 100%); -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 100%);">
+                        </picture>
+
+                        <h2 style="margin: 0 0 0.75rem 0; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 300; letter-spacing: 2px; color: #111D13; white-space: nowrap; position: relative; z-index: 1;">
+                            <span style="font-family: 'Nunito', sans-serif; line-height: 1.2;">Planos</span> <span class="shimmer-text-preventivo" style="font-weight: 400; font-family: 'Autography', 'Autography-Fallback', 'Dancing Script', 'Brush Script MT', cursive; font-size: 1.3em;">Preventivos</span>
+                        </h2>
+                        <div style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #3b82f6, transparent); margin: 1rem auto; position: relative; z-index: 1;"></div>
+                        <p style="margin: 0 auto 1.5rem auto; font-size: 1rem; color: #555; line-height: 1.6; max-width: 500px; font-style: italic; text-align: center; position: relative; z-index: 1;">Para quem deseja se preparar com carinho e tranquilidade, oferecemos opções para contratação antecipada</p>
+
+                        <div class="benefits-container" style="text-align: left; max-width: 600px; margin: 0 auto; background: rgba(59, 130, 246, 0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(59, 130, 246, 0.1); position: relative; z-index: 1;">
+
+                            <ul class="benefits-list" style="list-style: none; padding: 0; margin: 1.5rem 0;">
+                                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; color: #111D13;">
+                                    <span style="color: #3b82f6; margin-right: 0.75rem; font-size: 1.2rem; flex-shrink: 0;">✓</span>
+                                    <span>Planejamento financeiro mais leve</span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; color: #111D13;">
+                                    <span style="color: #3b82f6; margin-right: 0.75rem; font-size: 1.2rem; flex-shrink: 0;">✓</span>
+                                    <span>Desconto especial de antecipação</span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start; margin-bottom: 1rem; color: #111D13;">
+                                    <span style="color: #3b82f6; margin-right: 0.75rem; font-size: 1.2rem; flex-shrink: 0;">✓</span>
+                                    <span>Carência de apenas 48h</span>
+                                </li>
+                            </ul>
+
+                            <div class="flexibility-box" style="background: rgba(59, 130, 246, 0.08); padding: 1.5rem; border-radius: 0.75rem; border-left: 4px solid #3b82f6; margin: 1.5rem 0;">
+                                <p style="margin: 0 0 1rem 0; font-size: 0.95rem; color: #111D13; line-height: 1.6;">
+                                    <strong>Flexibilidade total:</strong> Pensando em tutores de mais de um pet, nosso contrato não é nominal. Pode ser utilizado para o pet que precisar primeiro, e é vitalício até seu uso (não expira).
+                                </p>
+                                <p style="margin: 0; font-size: 0.95rem; color: #111D13; line-height: 1.6;">
+                                    <strong>Sem complicações:</strong> Sem taxa de manutenção, sem anuidade, com o mesmo carinho que você precisa e merece.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 2rem; position: relative; z-index: 1;">
+                            <a href="https://wa.me/5513998068262?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20cremação%20pet%20em%20Santos" target="_blank" style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); position: relative;">
+                                <svg class="icon-inline" style="margin-right: 8px; width: 1.2rem; height: 1.2rem;"><use href="#icon-whatsapp"></use></svg>
+                                Saiba Mais sobre os Planos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function calculateInstallment(selectElement, basePrice1to6, basePrice7to12, targetId, totalPriceId, headerId, labelId, totalPriceSpanId) {
+                        const installments = parseInt(selectElement.value);
+                        const totalValue = installments <= 6 ? basePrice1to6 : basePrice7to12;
+                        const installmentValue = totalValue / installments;
+
+                        const formattedInstallment = installmentValue.toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        });
+
+                        const formattedTotal = totalValue.toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        });
+
+                        const labelText = installments === 1 ? 'parcela de:' : 'parcelas de:';
+
+                        document.getElementById(targetId).textContent = formattedInstallment;
+                        document.getElementById(labelId).textContent = labelText;
+
+                        // Atualiza o "Total parcelado"
+                        if (totalPriceSpanId) {
+                            const spanElement = document.getElementById(totalPriceSpanId);
+                            if (spanElement) {
+                                spanElement.textContent = formattedTotal;
+                            }
+                        }
+                    }
+
+                    // Animação de entrada dos elementos
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const observerOptions = {
+                            threshold: 0.1,
+                            rootMargin: '0px 0px -50px 0px'
+                        };
+
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    entry.target.classList.add('animate');
+
+                                    // Para elementos com stagger, animar filhos
+                                    if (entry.target.classList.contains('stagger-container')) {
+                                        const children = entry.target.querySelectorAll('.stagger-item');
+                                        children.forEach(child => {
+                                            child.classList.add('animate');
+                                        });
+                                    }
+                                }
+                            });
+                        }, observerOptions);
+
+                        // Observar todos os elementos com classes de animação
+                        const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in-scale, .stagger-container');
+                        animatedElements.forEach(el => observer.observe(el));
+                    });
+
+                    // Inicializar carrossel quando a página carregar
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const carousels = document.querySelectorAll('.carousel-track');
+                        const allIndicators = document.querySelectorAll('.indicator-dot');
+
+                        carousels.forEach((carousel, carouselIndex) => {
+                        const indicators = carousel.parentElement.querySelectorAll('.indicator-dot');
+                        let currentIndex = 0;
+                        
+                        function updateIndicators() {
+                            requestAnimationFrame(() => {
+                                const scrollLeft = carousel.scrollLeft;
+                                const carouselWidth = carousel.offsetWidth;
+                                const centerPosition = scrollLeft + carouselWidth / 2;
+
+                                let newIndex = 0;
+                                let minDistance = Infinity;
+
+                                Array.from(carousel.children).forEach((card, index) => {
+                                    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                                    const distance = Math.abs(centerPosition - cardCenter);
+
+                                    if (distance < minDistance) {
+                                        minDistance = distance;
+                                        newIndex = index;
+                                    }
+                                });
+
+                                if (newIndex !== currentIndex) {
+                                    currentIndex = newIndex;
+                                    indicators.forEach((dot, index) => {
+                                        dot.classList.toggle('active', index === currentIndex);
+                                    });
+                                }
+                            });
+                        }
+
+                        let scrollTimeout;
+                        let rafPending = false;
+                        carousel.addEventListener('scroll', () => {
+                            if (!rafPending) {
+                                rafPending = true;
+                                requestAnimationFrame(() => {
+                                    updateIndicators();
+                                    rafPending = false;
+                                });
+                            }
+                        });
+                        
+                        indicators.forEach((dot, index) => {
+                            dot.addEventListener('click', () => {
+                                const targetCard = carousel.children[index];
+                                const cardLeft = targetCard.offsetLeft;
+                                const cardWidth = targetCard.offsetWidth;
+                                const carouselWidth = carousel.offsetWidth;
+                                const scrollPosition = cardLeft - (carouselWidth - cardWidth) / 2;
+
+                                carousel.scrollTo({
+                                    left: Math.max(0, scrollPosition),
+                                    behavior: 'smooth'
+                                });
+                            });
+                        });
+                        
+                        let isScrolling = false;
+                        carousel.addEventListener('touchstart', () => {
+                            isScrolling = true;
+                        }, { passive: true });
+                        
+                        carousel.addEventListener('touchend', () => {
+                            setTimeout(() => {
+                                isScrolling = false;
+                            }, 100);
+                        }, { passive: true });
+                    });
+
+                    // Forçar atualização inicial dos indicadores
+                    setTimeout(() => {
+                        carousels.forEach(carousel => {
+                            const indicators = carousel.parentElement.querySelectorAll('.indicator-dot');
+                            if (indicators.length > 0) {
+                                indicators[0].classList.add('active');
+                            }
+                        });
+                    }, 100);
+                });
+                </script>
+            </div>
+        </section>
 
     <!-- TODO: Seção Diferencial (Por que somos diferentes) -->
     <!-- TODO: Seção Atendemos (Santos + Baixada) -->
@@ -1530,46 +3389,6 @@
             });
         });
 
-        // Phone Popup Functions
-        function openPhonePopup() {
-            const overlay = document.getElementById('phonePopupOverlay');
-            overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => overlay.classList.add('active'), 10);
-
-            // Adiciona ao histórico do navegador
-            window.history.pushState({ phonePopup: true }, '');
-
-            // Track event (se GA4 configurado)
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'phone_popup_open', {
-                    'event_category': 'engagement',
-                    'event_label': 'santos'
-                });
-            }
-        }
-
-        function closePhonePopup() {
-            const overlay = document.getElementById('phonePopupOverlay');
-            overlay.classList.remove('active');
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                document.body.style.overflow = '';
-            }, 300);
-
-            // Remove do histórico se foi fechado manualmente
-            if (window.history.state && window.history.state.phonePopup) {
-                window.history.back();
-            }
-        }
-
-        // Event listeners para phone popup
-        document.getElementById('phonePopupClose').addEventListener('click', closePhonePopup);
-        document.getElementById('phonePopupOverlay').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePhonePopup();
-            }
-        });
 
         // Map Popup Functions
         function openMapPopup() {
@@ -1621,7 +3440,6 @@
 
             // Detecta qual popup/menu estava aberto e fecha sem adicionar ao histórico novamente
             const mobileNav = document.getElementById('mobileNav');
-            const phonePopupOverlay = document.getElementById('phonePopupOverlay');
             const mapPopupOverlay = document.getElementById('mapPopupOverlay');
 
             // Fecha menu mobile
@@ -1632,15 +3450,6 @@
                 if (hamburger) hamburger.classList.remove('active');
                 if (overlay) overlay.classList.remove('active');
                 document.body.style.overflow = '';
-            }
-
-            // Fecha popup de telefone
-            if (phonePopupOverlay && phonePopupOverlay.classList.contains('active')) {
-                phonePopupOverlay.classList.remove('active');
-                setTimeout(() => {
-                    phonePopupOverlay.style.display = 'none';
-                    document.body.style.overflow = '';
-                }, 300);
             }
 
             // Fecha popup de mapa
