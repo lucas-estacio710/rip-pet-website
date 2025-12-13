@@ -7,6 +7,10 @@
     {
       "source": "/novo",
       "destination": "/index-novo-layout.html"
+    },
+    {
+      "source": "/novo-otimizado",
+      "destination": "/site_principal_novo_layout/index.html"
     }
   ],
   "redirects": [
