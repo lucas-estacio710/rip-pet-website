@@ -3,6 +3,10 @@
     {
       "source": "/santos",
       "destination": "/santos.html"
+    },
+    {
+      "source": "/novo",
+      "destination": "/index-novo-layout.html"
     }
   ],
   "redirects": [
