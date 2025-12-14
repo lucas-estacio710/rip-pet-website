@@ -158,6 +158,12 @@
         --fs-icon: clamp(1.125rem, 1rem + 0.5vw, 1.5rem);
         --fs-icon-lg: clamp(1.5rem, 1.25rem + 1vw, 2rem);
         --fs-icon-float: clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem);
+
+        /* NAVBAR PROPORTIONAL SIZING (~8% of viewport height) */
+        --navbar-height: clamp(3.5rem, 8svh, 5rem);
+        --navbar-logo: clamp(2.5rem, 5.5svh, 3.5rem);
+        --navbar-padding-y: clamp(0.4rem, 1svh, 0.75rem);
+        --navbar-padding-x: clamp(0.75rem, 2vw, 2rem);
         }
 
         /* ============================================
@@ -228,7 +234,7 @@
 
         /* Offset para âncoras - compensa navbar fixa */
         section[id] {
-            scroll-margin-top: 80px;
+            scroll-margin-top: calc(var(--navbar-height) + 1rem);
         }
 
         body {
@@ -374,17 +380,19 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            padding: 0.6rem 2rem;
+            padding: var(--navbar-padding-y) var(--navbar-padding-x);
+            min-height: var(--navbar-height);
             gap: 2rem;
-            transition: padding 0.3s ease;
+            transition: padding 0.3s ease, min-height 0.3s ease;
         }
 
         .header.scrolled .nav-container {
-            padding: 0.5rem 2.5rem;
+            padding: calc(var(--navbar-padding-y) * 0.8) var(--navbar-padding-x);
+            min-height: calc(var(--navbar-height) * 0.85);
         }
 
         .header.scrolled .logo img {
-            height: 40px;
+            height: calc(var(--navbar-logo) * 0.9);
             transition: height 0.3s ease;
         }
 
@@ -395,7 +403,7 @@
         }
 
         .logo img {
-            height: 45px;
+            height: var(--navbar-logo);
             width: auto;
             display: block;
             transition: height 0.3s ease;
@@ -3231,7 +3239,7 @@
 
             /* Compensar header fixo */
             body {
-                padding-top: 60px !important;
+                padding-top: var(--navbar-height) !important;
             }
 
             /* Catch-all container overflow prevention */
@@ -3305,7 +3313,7 @@
 
             /* Offset para âncoras no mobile */
             section[id] {
-                scroll-margin-top: 80px;
+                scroll-margin-top: calc(var(--navbar-height) + 1rem);
             }
 
             /* HEADER - Logo left, Hamburger right, always visible fixed */
@@ -3335,8 +3343,8 @@
             .nav-container,
             .header.scrolled .nav-container {
                 justify-content: space-between !important;
-                padding: 0.7rem 0.7rem 0.7rem 1.2rem !important;
-                min-height: 68px !important;
+                padding: var(--navbar-padding-y) var(--navbar-padding-x) !important;
+                min-height: var(--navbar-height) !important;
             }
 
             .logo,
@@ -3348,7 +3356,7 @@
 
             .logo img,
             .header.scrolled .logo img {
-                height: 52px !important;
+                height: var(--navbar-logo) !important;
             }
 
             .mobile-menu-btn {
