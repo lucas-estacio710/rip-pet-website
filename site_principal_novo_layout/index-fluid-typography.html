@@ -164,6 +164,11 @@
         --navbar-logo: clamp(2.5rem, 5.5svh, 3.5rem);
         --navbar-padding-y: clamp(0.4rem, 1svh, 0.75rem);
         --navbar-padding-x: clamp(0.75rem, 2vw, 2rem);
+
+        /* MOBILE MENU PROPORTIONAL SIZING */
+        --menu-item-padding: clamp(0.75rem, 2svh, 1.25rem);
+        --menu-btn-padding: clamp(0.6rem, 1.5svh, 1rem);
+        --menu-gap: clamp(0.5rem, 1.25svh, 0.875rem);
         }
 
         /* ============================================
@@ -3380,11 +3385,13 @@
                 top: 0;
                 right: 0;
                 width: 70%;
-                height: 100vh;
+                height: 100svh; /* Small viewport height - considera barra do navegador */
+                height: 100dvh; /* Fallback para browsers que suportam dvh */
+                max-height: -webkit-fill-available; /* Fallback iOS Safari */
                 background: rgba(10, 35, 66, 0.92);
                 backdrop-filter: blur(15px);
                 -webkit-backdrop-filter: blur(15px);
-                padding: 0.75rem;
+                padding: var(--menu-gap);
                 box-shadow: -5px 0 30px rgba(0,0,0,0.4);
                 opacity: 0;
                 visibility: hidden;
@@ -3392,6 +3399,7 @@
                 transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
                 z-index: 1001;
                 overflow-y: auto;
+                overflow-x: hidden;
             }
 
             .nav-menu-wrapper.active {
@@ -3409,10 +3417,11 @@
                 color: white;
                 font-size: var(--fs-lg);
                 cursor: pointer;
-                padding: 0.4rem;
+                padding: var(--menu-btn-padding);
                 opacity: 0.8;
                 transition: opacity 0.3s ease, transform 0.3s ease;
-                margin: 0 0 0.25rem 0;
+                margin: 0 0 var(--menu-gap) 0;
+                flex-shrink: 0;
             }
 
             .menu-close-btn:hover {
@@ -3424,11 +3433,12 @@
             .nav-menu {
                 display: flex !important;
                 flex-direction: column !important;
-                flex: none !important;
+                flex: 1 !important; /* Ocupa espaço disponível */
                 gap: 0 !important;
                 list-style: none !important;
                 padding: 0 !important;
                 margin: 0 !important;
+                justify-content: flex-start;
             }
 
             .nav-menu li:first-child {
@@ -3463,10 +3473,10 @@
                 border-bottom: none;
             }
 
-            /* Textos alinhados à direita */
+            /* Textos alinhados à direita - tamanho proporcional */
             .nav-menu li a {
                 display: block;
-                padding: 1rem;
+                padding: var(--menu-item-padding);
                 font-size: var(--fs-base);
                 text-align: right;
             }
@@ -3475,7 +3485,7 @@
             .menu-contact-icons a {
                 display: flex !important;
                 text-align: center !important;
-                padding: 0.85rem 1.25rem !important;
+                padding: var(--menu-btn-padding) var(--menu-item-padding) !important;
             }
 
             .nav-menu li a .separator {
@@ -3487,10 +3497,10 @@
                 display: flex !important;
                 flex-direction: column;
                 align-items: stretch;
-                gap: 0.75rem;
-                padding: 1.25rem 1rem !important;
+                gap: var(--menu-gap);
+                padding: var(--menu-item-padding) !important;
                 border-bottom: none !important;
-                margin-top: 0.5rem;
+                margin-top: auto; /* Empurra para baixo */
             }
 
             .menu-icon-btn {
@@ -3499,7 +3509,7 @@
                 justify-content: center !important;
                 text-align: center !important;
                 gap: 0.5rem;
-                padding: 0.85rem 1.25rem !important;
+                padding: var(--menu-btn-padding) var(--menu-item-padding) !important;
                 border-radius: 25px;
                 font-size: var(--fs-sm);
                 font-weight: 600;
@@ -3528,10 +3538,10 @@
             /* Footer redes sociais no menu */
             .menu-social-footer {
                 display: block !important;
-                padding: 1rem !important;
+                padding: var(--menu-item-padding) !important;
                 border-top: 1px solid rgba(255,255,255,0.1) !important;
                 border-bottom: none !important;
-                margin-top: 0.5rem;
+                margin-top: var(--menu-gap);
                 text-align: center;
             }
 
@@ -3539,14 +3549,14 @@
                 display: block;
                 font-size: var(--fs-lg);
                 color: rgba(255,255,255,0.85);
-                margin-bottom: 0.75rem;
+                margin-bottom: var(--menu-gap);
                 font-family: var(--font-autography);
             }
 
             .menu-social-footer .social-links {
                 display: flex;
                 flex-direction: column;
-                gap: 0.5rem;
+                gap: var(--menu-gap);
             }
 
             .menu-social-footer .social-links a {
@@ -3557,7 +3567,7 @@
                 color: white;
                 text-decoration: none;
                 font-size: var(--fs-sm);
-                padding: 0.5rem;
+                padding: var(--menu-btn-padding);
                 transition: opacity 0.2s ease;
             }
 
