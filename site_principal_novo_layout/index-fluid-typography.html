@@ -625,7 +625,7 @@
 
         /* Historia Header Strip - título em faixa full-width */
         .historia-header-strip {
-            background: linear-gradient(135deg, #6E945A 0%, #A7E189 50%, #6E945A 100%);
+            background: linear-gradient(135deg, #02243C 0%, #033F69 50%, #02243C 100%);
             padding: clamp(0.6rem, 1.5svh, 1rem) 2rem;
             margin-left: calc(-50vw + 50%);
             margin-right: calc(-50vw + 50%);
@@ -3643,7 +3643,7 @@
             .historia-text {
                 display: flex;
                 flex-direction: column;
-                gap: 1rem;
+                gap: 0;
                 margin-top: 0;
                 padding-top: 0;
             }
@@ -3652,10 +3652,9 @@
                 font-size: var(--fs-md);
                 line-height: 1.7;
                 text-align: center;
-                margin: 1rem 0;
-                padding: 0 1rem;
+                margin: 0;
+                padding: 0 1rem 1rem 1rem;
             }
-
 
             /* Mobile images between paragraphs - FULL WIDTH SEM CORTE */
             .historia-text p::before {
@@ -3667,9 +3666,10 @@
                 background-position: center;
                 background-repeat: no-repeat;
                 border-radius: 0;
-                margin-bottom: 1.5rem;
+                margin-bottom: 1rem;
             }
 
+            /* 1º parágrafo: foto dos fundadores */
             .historia-text p:nth-of-type(1)::before {
                 background-image:
                     linear-gradient(
@@ -3684,22 +3684,21 @@
                 background-position: center, center 30%;
             }
 
-            .historia-text p:nth-of-type(2) {
-                margin-top: 0;
-            }
-
+            /* 2º parágrafo: foto capela */
             .historia-text p:nth-of-type(2)::before {
                 background-image: url('/site_principal_novo_layout/images/capela.webp');
                 aspect-ratio: 16/10;
             }
 
-            .historia-text p:nth-of-type(3) {
-                margin-top: 0;
-            }
-
+            /* 3º parágrafo: foto sala campinas */
             .historia-text p:nth-of-type(3)::before {
                 background-image: url('/site_principal_novo_layout/images/sala_camp.webp');
                 aspect-ratio: 16/10;
+            }
+
+            /* 4º parágrafo: sem foto antes */
+            .historia-text p:nth-of-type(4)::before {
+                display: none;
             }
 
             /* TRANSPARÊNCIA - Vídeo full + texto overlay (título topo, texto rodapé) */
@@ -5064,9 +5063,8 @@
                 <img src="/site_principal_novo_layout/images/medalha_rip_pet_maior_crematorio_brasil.webp" alt="A Maior Rede de Crematórios Pet do Brasil" class="historia-badge" width="206" height="206">
                 <div class="historia-text">
                     <p>Fundada em <strong>2013</strong> pelos veterinários <em>Adriele e Carlos Eduardo</em>, a R.I.P. Pet nasceu para transformar despedidas em <strong>homenagens com amor e gratidão.</strong></p>
-                    <br>
-                    <p>Pioneira no <strong>cuidado gentil e acolhedor</strong> aos pets e aos tutores em luto, hoje, nos orgulhamos de ser <strong>a maior organização de Cremação Pet do Brasil</strong> e de fazer parte da história de milhares de famílias.<br><br>Com <strong>7 unidades</strong> em SP, MG e RJ, atendendo <strong>mais de 80 cidades nas regiões</strong>, somos reconhecidos por nossos procedimentos claros, atenciosos e transparentes.</p>
-                    <br>
+                    <p>Pioneira no <strong>cuidado gentil e acolhedor</strong> aos pets e aos tutores em luto, hoje, nos orgulhamos de ser <strong>a maior organização de Cremação Pet do Brasil</strong> e de fazer parte da história de milhares de famílias.</p>
+                    <p>Com <strong>7 unidades</strong> em SP, MG e RJ, atendendo <strong>mais de 80 cidades nas regiões</strong>, somos reconhecidos por nossos procedimentos claros, atenciosos e transparentes.</p>
                     <p>Na R.I.P. Pet, <strong>cada despedida é única</strong>. Cuidamos de cada detalhe com empatia, carinho e o compromisso de <strong>honrar cada momento vivido</strong>.</p>
                 </div>
             </div>
