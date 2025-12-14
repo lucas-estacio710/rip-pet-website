@@ -153,6 +153,11 @@
         --lh-relaxed: 1.6;
         --lh-autography: 0.95;
         --lh-autography-mobile: 1.1; /* -10px aproximado */
+
+        /* ICON SIZES */
+        --fs-icon: clamp(1.125rem, 1rem + 0.5vw, 1.5rem);
+        --fs-icon-lg: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+        --fs-icon-float: clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem);
         }
 
         /* ============================================
@@ -417,7 +422,7 @@
             color: white;
             font-family: var(--font-poppins);
             font-weight: 300;
-            font-size: 0.8rem;
+            font-size: var(--fs-xs);
             padding: 0.4rem 0;
             transition: color 0.3s ease;
             letter-spacing: -0.3px;
@@ -447,7 +452,7 @@
             background: none;
             border: none;
             color: white;
-            font-size: 1.5rem;
+            font-size: var(--fs-lg);
             cursor: pointer;
         }
 
@@ -740,7 +745,7 @@
         .planos-header h2 {
             font-family: var(--font-poppins);
             font-weight: 300;
-            font-size: 1.4rem;
+            font-size: var(--fs-lg);
             color: #02243c;
         }
 
@@ -754,7 +759,7 @@
         .planos-subtitle {
             font-family: var(--font-poppins);
             font-weight: 600;
-            font-size: 1.5rem;
+            font-size: var(--fs-lg);
             color: white;
             margin-top: 0.75rem;
         }
@@ -1212,7 +1217,7 @@
             border-radius: 12px;
             font-family: var(--font-poppins);
             font-weight: 400;
-            font-size: 0.8rem;
+            font-size: var(--fs-xs);
             color: var(--azul-escuro);
             background: rgba(2, 36, 60, 0.08);
             cursor: pointer;
@@ -1288,7 +1293,7 @@
         .transparencia-content h2 {
             font-family: var(--font-poppins);
             font-weight: 500;
-            font-size: 3.1rem;
+            font-size: var(--fs-3xl);
             color: var(--azul-escuro);
             letter-spacing: -1px;
         }
@@ -1304,7 +1309,7 @@
         .transparencia-content p {
             font-family: var(--font-poppins);
             font-weight: 200;
-            font-size: 1.4rem;
+            font-size: var(--fs-lg);
             color: var(--azul-escuro);
             margin-top: -3rem;
         }
@@ -1371,7 +1376,7 @@
         .urnas-title h2 {
             font-family: var(--font-poppins);
             font-weight: 200;
-            font-size: 3.2rem;
+            font-size: var(--fs-3xl);
             color: white;
             letter-spacing: -1px;
             margin-top: -1rem;
@@ -1389,7 +1394,7 @@
         .urnas-title p {
             font-family: var(--font-poppins);
             font-weight: 400;
-            font-size: 1.3rem;
+            font-size: var(--fs-md);
             color: white;
             letter-spacing: -0.3px;
             margin-top: -2.5rem;
@@ -1484,7 +1489,7 @@
             height: 40px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: var(--fs-lg);
             z-index: 10;
             transition: background 0.3s ease;
             display: flex;
@@ -1506,7 +1511,7 @@
 
         .urna-modal-content h3 {
             font-family: var(--font-poppins);
-            font-size: 1.3rem;
+            font-size: var(--fs-md);
             font-weight: 600;
             color: var(--azul-escuro);
             padding: 1.2rem;
@@ -1538,7 +1543,7 @@
         .como-header h2 {
             font-family: var(--font-poppins);
             font-weight: 500;
-            font-size: 2.2rem;
+            font-size: var(--fs-2xl);
             color: var(--azul-escuro);
             letter-spacing: -1px;
             display: inline;
@@ -1547,7 +1552,7 @@
         .como-divider {
             font-family: var(--font-poppins);
             font-weight: 300;
-            font-size: 1.8rem;
+            font-size: var(--fs-xl);
             color: var(--azul-escuro);
             margin: 0 0.5rem;
         }
@@ -1555,7 +1560,7 @@
         .como-subtitle {
             font-family: var(--font-poppins);
             font-weight: 300;
-            font-size: 1.8rem;
+            font-size: var(--fs-xl);
             color: var(--azul-escuro);
         }
 
@@ -1891,7 +1896,7 @@
 
         .equipe-subtitle .script {
             font-family: 'Autography', cursive;
-            font-size: 2.4rem;
+            font-size: var(--fs-3xl);
             color: var(--azul-escuro);
             margin: 0 0.3rem;
             line-height: 1;
@@ -1995,7 +2000,7 @@
             height: 40px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: var(--fs-lg);
             z-index: 10;
             transition: all 0.3s ease;
             backdrop-filter: blur(4px);
@@ -2054,7 +2059,7 @@
         .equipe-modal-unidade {
             font-family: var(--font-poppins);
             font-weight: 300;
-            font-size: 0.8rem;
+            font-size: var(--fs-xs);
             color: #888;
             margin: 0;
         }
@@ -2075,7 +2080,7 @@
 
         .equipe-modal-pets {
             font-family: 'Autography', cursive;
-            font-size: 1.8rem;
+            font-size: var(--fs-xl);
             color: var(--azul-escuro);
             line-height: 1.1;
         }
@@ -2104,7 +2109,7 @@
                 right: 0.8rem;
                 width: 36px;
                 height: 36px;
-                font-size: 1.3rem;
+                font-size: var(--fs-md);
             }
 
             .equipe-modal-photo {
@@ -2136,7 +2141,7 @@
             }
 
             .equipe-modal-pets {
-                font-size: 1.5rem;
+                font-size: var(--fs-lg);
             }
         }
 
@@ -2235,13 +2240,13 @@
         }
 
         .dedicatoria-modal-memoria-left .memoria-label {
-            font-size: 1.4rem;
+            font-size: var(--fs-lg);
             display: block;
             margin-bottom: 0.2rem;
         }
 
         .dedicatoria-modal-memoria-left span#modalPetName {
-            font-size: 2.4rem;
+            font-size: var(--fs-3xl);
             display: block;
         }
 
@@ -2257,11 +2262,11 @@
         }
 
         .dedicatoria-modal-memoria-right .memoria-cross {
-            font-size: 1.8rem;
+            font-size: var(--fs-xl);
         }
 
         .dedicatoria-modal-memoria-right span#modalDeathDate {
-            font-size: 1.6rem;
+            font-size: var(--fs-lg);
         }
 
         .dedicatoria-modal-right {
@@ -2285,7 +2290,7 @@
         }
 
         .dedicatoria-modal-header span {
-            font-size: 0.8rem;
+            font-size: var(--fs-xs);
             color: #888;
         }
 
@@ -2354,7 +2359,7 @@
 
         .blog-header-strip h2 {
             font-family: var(--font-autography);
-            font-size: 3.2rem;
+            font-size: var(--fs-3xl);
             font-weight: 300;
             color: white;
             letter-spacing: 0px;
@@ -2423,7 +2428,7 @@
         .blog-main h3 {
             font-family: var(--font-poppins);
             font-weight: 600;
-            font-size: 1.4rem;
+            font-size: var(--fs-lg);
             color: white;
             letter-spacing: -0.5px;
         }
@@ -2516,7 +2521,7 @@
         .cta-content h2 {
             font-family: var(--font-poppins);
             font-weight: 700;
-            font-size: 1.8rem;
+            font-size: var(--fs-xl);
             color: var(--azul-escuro);
             letter-spacing: -0.5px;
             display: flex;
@@ -2637,7 +2642,7 @@
 
         .footer-tagline .script {
             font-family: var(--font-autography);
-            font-size: 1.8rem;
+            font-size: var(--fs-xl);
             color: white;
             letter-spacing: 1px;
             line-height: 0.8;
@@ -2650,7 +2655,7 @@
         .footer-highlights {
             font-family: var(--font-poppins);
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: var(--fs-xs);
             color: white;
             text-transform: uppercase;
             white-space: nowrap;
@@ -2688,7 +2693,7 @@
 
         .google-rating .stars {
             color: #FBBC04;
-            font-size: 1.25rem;
+            font-size: var(--fs-md);
         }
 
         /* ============================================
@@ -2734,7 +2739,7 @@
             }
 
             .dedicatoria-overlay p {
-                font-size: 0.55rem;
+                font-size: var(--fs-2xs);
             }
 
             .hero-title {
@@ -2764,7 +2769,7 @@
             }
 
             .dedicatoria-overlay p {
-                font-size: 0.5rem;
+                font-size: var(--fs-2xs);
             }
 
             .footer-container {
@@ -2977,7 +2982,7 @@
             }
 
             .dedicatorias-header-strip h2 {
-                font-size: 2rem;
+                font-size: var(--fs-2xl);
             }
 
             .dedicatorias-container {
@@ -3023,11 +3028,6 @@
            MOBILE - Typography & Touch Targets
            ============================================ */
         @media (max-width: 480px) {
-            /* Minimum 16px font for readability */
-            body {
-                font-size: 16px;
-            }
-
             /* Touch targets minimum 48px */
             .btn, button, a.btn {
                 min-height: 48px;
@@ -3037,7 +3037,7 @@
             .unidade-tab {
                 min-height: 44px;
                 padding: 0.5rem 0.75rem;
-                font-size: 0.8rem;
+                font-size: var(--fs-xs);
             }
 
             /* Hero adjustments */
@@ -3047,13 +3047,13 @@
             }
 
             .hero-subtitle {
-                font-size: 1.3rem;
+                font-size: var(--fs-md);
             }
 
             /* Section headers */
             .historia-content h2,
             .urnas-header h2 {
-                font-size: 2rem;
+                font-size: var(--fs-2xl);
             }
 
             /* Cards grid adjustments */
@@ -3095,7 +3095,7 @@
             }
 
             .blog-header-strip h2 {
-                font-size: 4rem;
+                font-size: var(--fs-display);
             }
 
             .blog-container {
@@ -3117,7 +3117,7 @@
 
             /* CTA section mobile */
             .cta-content h2 {
-                font-size: 1.75rem;
+                font-size: var(--fs-xl);
             }
 
             .cta-features {
@@ -3255,7 +3255,7 @@
                 right: 1rem !important;
                 width: 60px !important;
                 height: 60px !important;
-                font-size: 1.6rem !important;
+                font-size: var(--fs-lg) !important;
             }
 
             /* Popup WhatsApp - uma coluna no mobile */
@@ -3361,7 +3361,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 2rem;
+                font-size: var(--fs-2xl);
                 position: relative;
                 z-index: 1002;
                 transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -3402,7 +3402,7 @@
                 background: none;
                 border: none;
                 color: white;
-                font-size: 1.5rem;
+                font-size: var(--fs-lg);
                 cursor: pointer;
                 padding: 0.4rem;
                 opacity: 0.8;
@@ -3532,7 +3532,7 @@
 
             .menu-social-footer .social-label {
                 display: block;
-                font-size: 1.4rem;
+                font-size: var(--fs-lg);
                 color: rgba(255,255,255,0.85);
                 margin-bottom: 0.75rem;
                 font-family: var(--font-autography);
@@ -3728,7 +3728,7 @@
             .transparencia-titulo {
                 font-family: var(--font-poppins);
                 font-weight: 500;
-                font-size: 2.5rem;
+                font-size: var(--fs-3xl);
                 color: white;
                 letter-spacing: -1px;
                 text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
@@ -3736,7 +3736,7 @@
 
             .transparencia-script {
                 font-family: var(--font-autography);
-                font-size: 3.5rem;
+                font-size: var(--fs-display);
                 color: white;
                 letter-spacing: 1px;
                 text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
@@ -3760,7 +3760,7 @@
             .transparencia-valores {
                 font-family: var(--font-poppins);
                 font-weight: 300;
-                font-size: 1.5rem;
+                font-size: var(--fs-lg);
                 color: white;
                 text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
             }
@@ -3780,13 +3780,13 @@
             }
 
             .planos-header-strip h2 {
-                font-size: 1.4rem;
+                font-size: var(--fs-lg);
                 line-height: 1.8;
                 letter-spacing: -0.5px;
             }
 
             .planos-header-strip h2 .script {
-                font-size: 2.4rem;
+                font-size: var(--fs-3xl);
                 line-height: 0.9;
             }
 
@@ -3797,7 +3797,7 @@
             }
 
             .planos-subtitle {
-                font-size: 1.5rem;
+                font-size: var(--fs-lg);
                 padding: 0 0.5rem;
                 margin-top: 1rem;
             }
@@ -3827,7 +3827,7 @@
 
             .servicos-subtitle {
                 flex: 1;
-                font-size: 1rem !important;
+                font-size: var(--fs-base) !important;
                 line-height: 1.3;
                 text-align: left;
             }
@@ -3897,12 +3897,12 @@
             }
 
             .servico-card .servico-card-content h3 {
-                font-size: 1.4rem !important;
+                font-size: var(--fs-lg) !important;
                 margin-bottom: 0.75rem;
             }
 
             .servico-card .servico-card-content p {
-                font-size: 1.1rem !important;
+                font-size: var(--fs-md) !important;
                 line-height: 1.5;
             }
 
@@ -3920,13 +3920,13 @@
             }
 
             .como-header h2 {
-                font-size: 2.2rem !important;
+                font-size: var(--fs-2xl) !important;
                 display: block !important;
                 text-align: right;
             }
 
             .como-divider {
-                font-size: 2.2rem !important;
+                font-size: var(--fs-2xl) !important;
                 font-weight: 200 !important;
                 margin: 0 0.3rem !important;
                 align-self: stretch;
@@ -3936,7 +3936,7 @@
 
             .como-subtitle {
                 flex: 1;
-                font-size: 1rem !important;
+                font-size: var(--fs-base) !important;
                 line-height: 1.3;
                 text-align: left;
             }
@@ -4000,12 +4000,12 @@
             }
 
             .como-card h3 {
-                font-size: 2rem;
+                font-size: var(--fs-2xl);
                 margin-bottom: 1rem;
             }
 
             .como-card p {
-                font-size: 1.5rem;
+                font-size: var(--fs-lg);
                 line-height: 1.6;
             }
 
@@ -4073,7 +4073,7 @@
             /* Pinda sozinho na primeira linha - ocupa 3 colunas */
             .unidade-tab:first-child {
                 grid-column: 1 / -1 !important;
-                font-size: 0.85rem !important;
+                font-size: var(--fs-sm) !important;
                 padding: 0.6rem 0.5rem !important;
                 min-height: 44px !important;
             }
@@ -4081,7 +4081,7 @@
             /* Outros tabs - forçar largura igual */
             .unidade-tab {
                 padding: 0.4rem 0.2rem !important;
-                font-size: 0.8rem !important;
+                font-size: var(--fs-xs) !important;
                 min-height: 38px !important;
                 text-align: center !important;
                 border-radius: 12px !important;
@@ -4093,7 +4093,7 @@
             }
 
             .unidade-tab.tab-sjc {
-                font-size: clamp(0.55rem, 2.5vw, 0.8rem) !important;
+                font-size: clamp(0.625rem, 2.5vw, 0.8rem) !important;
             }
 
             /* CONTEÚDO DA UNIDADE - linear: nome→foto→endereço→descrição→mapa */
@@ -4166,7 +4166,7 @@
             .unidade-endereco,
             .unidade-info p {
                 text-align: center !important;
-                font-size: 0.95rem !important;
+                font-size: var(--fs-base) !important;
                 line-height: 1.5 !important;
                 margin: 0 !important;
             }
@@ -4175,7 +4175,7 @@
             .unidade-descricao,
             .unidade-text p.unidade-descricao {
                 order: 4 !important;
-                font-size: 1.05rem !important;
+                font-size: var(--fs-md) !important;
                 line-height: 1.7 !important;
                 text-align: justify !important;
                 padding: 0 1rem !important;
@@ -4260,12 +4260,12 @@
             }
 
             .urnas-title h2 {
-                font-size: 2.2rem;
+                font-size: var(--fs-2xl);
                 margin-top: 0;
             }
 
             .urnas-title h2 .script {
-                font-size: 3.5rem;
+                font-size: var(--fs-display);
                 margin-top: -1.5rem;
                 line-height: 0.8;
                 color: var(--azul-escuro);
@@ -4400,7 +4400,7 @@
             }
 
             .dedicatorias-header-strip h2 {
-                font-size: 2.5rem;
+                font-size: var(--fs-3xl);
             }
 
             .dedicatorias-container {
@@ -4519,7 +4519,7 @@
             }
 
             .dedicatoria-modal-memoria-left .memoria-label {
-                font-size: 1.3rem !important;
+                font-size: var(--fs-md) !important;
                 font-family: 'Autography', cursive !important;
                 color: white !important;
                 line-height: 1.2 !important;
@@ -4532,7 +4532,7 @@
             }
 
             .dedicatoria-modal-memoria-left span#modalPetName {
-                font-size: 2.4rem !important;
+                font-size: var(--fs-3xl) !important;
                 font-family: 'Autography', cursive !important;
                 color: white !important;
                 line-height: 1 !important;
@@ -4557,7 +4557,7 @@
             }
 
             .dedicatoria-modal-memoria-right .memoria-cross {
-                font-size: 1.2rem !important;
+                font-size: var(--fs-md) !important;
                 font-family: 'Autography', cursive !important;
                 color: white !important;
                 text-shadow:
@@ -4569,7 +4569,7 @@
             }
 
             .dedicatoria-modal-memoria-right span#modalDeathDate {
-                font-size: 1.5rem !important;
+                font-size: var(--fs-lg) !important;
                 font-family: 'Autography', cursive !important;
                 color: white !important;
                 text-shadow:
@@ -4598,7 +4598,7 @@
                 right: 10px !important;
                 width: 32px !important;
                 height: 32px !important;
-                font-size: 1rem !important;
+                font-size: var(--fs-base) !important;
                 background: rgba(0,0,0,0.6) !important;
                 backdrop-filter: blur(10px) !important;
                 -webkit-backdrop-filter: blur(10px) !important;
@@ -4625,7 +4625,7 @@
             }
 
             .cta-content h2 {
-                font-size: 1.5rem;
+                font-size: var(--fs-lg);
             }
 
             .cta-buttons {
@@ -4684,7 +4684,7 @@
             }
 
             .footer-links a {
-                font-size: 0.8rem;
+                font-size: var(--fs-xs);
             }
 
             .footer-copy {
@@ -4707,7 +4707,7 @@
         /* Extra small devices */
         @media (max-width: 380px) {
             .unidade-tab {
-                font-size: 0.6rem;
+                font-size: var(--fs-2xs);
                 padding: 0.4rem 0.2rem;
             }
 
@@ -4716,11 +4716,11 @@
             }
 
             .planos-header-strip h2 .script {
-                font-size: 1.5rem;
+                font-size: var(--fs-lg);
             }
 
             .footer-badge {
-                font-size: 0.6rem;
+                font-size: var(--fs-2xs);
                 padding: 0.3rem 0.5rem;
             }
         }
@@ -6185,7 +6185,7 @@
                 <i class="fas fa-times"></i>
             </button>
 
-            <h3 style="text-align: center; color: white; margin-bottom: 0.5rem; font-size: 1.3rem; font-weight: 600; font-family: 'Poppins', sans-serif;">Atendimento WhatsApp 24h</h3>
+            <h3 style="text-align: center; color: white; margin-bottom: 0.5rem; font-size: var(--fs-md); font-weight: 600; font-family: 'Poppins', sans-serif;">Atendimento WhatsApp 24h</h3>
             <p style="text-align: center; color: #ccc; margin-bottom: 1.5rem; font-size: var(--fs-sm); font-family: 'Poppins', sans-serif;">Nossa equipe está sempre pronta para esclarecer suas dúvidas e prestar todo suporte que necessitar, com carinho e respeito</p>
 
             <div class="popup-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem;">
@@ -6194,42 +6194,42 @@
                         <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Matriz e Vale do Paraíba</h4>
                         <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(12) 99799-6543</p>
                     </div>
-                    <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+                    <i class="fab fa-whatsapp" style="font-size: var(--fs-icon);"></i>
                 </a>
                 <a href="https://wa.me/5511991603041?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." target="_blank" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #25D366;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
                     <div>
                         <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">São Paulo e Região</h4>
                         <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(11) 99160-3041</p>
                     </div>
-                    <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+                    <i class="fab fa-whatsapp" style="font-size: var(--fs-icon);"></i>
                 </a>
                 <a href="https://wa.me/5513998068262?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." target="_blank" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #25D366;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
                     <div>
                         <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Santos e Região</h4>
                         <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(13) 99806-8262</p>
                     </div>
-                    <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+                    <i class="fab fa-whatsapp" style="font-size: var(--fs-icon);"></i>
                 </a>
                 <a href="https://wa.me/5519999161977?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." target="_blank" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #25D366;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
                     <div>
                         <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Campinas e Região</h4>
                         <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(19) 99916-1977</p>
                     </div>
-                    <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+                    <i class="fab fa-whatsapp" style="font-size: var(--fs-icon);"></i>
                 </a>
                 <a href="https://wa.me/5524998379825?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." target="_blank" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #25D366;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
                     <div>
                         <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Resende e Região</h4>
                         <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(24) 99837-9825</p>
                     </div>
-                    <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+                    <i class="fab fa-whatsapp" style="font-size: var(--fs-icon);"></i>
                 </a>
                 <a href="https://wa.me/553599042223?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." target="_blank" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #25D366;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
                     <div>
                         <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Pouso Alegre e Região</h4>
                         <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(35) 99904-2223</p>
                     </div>
-                    <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+                    <i class="fab fa-whatsapp" style="font-size: var(--fs-icon);"></i>
                 </a>
             </div>
         </div>
@@ -6242,7 +6242,7 @@
                 <i class="fas fa-times"></i>
             </button>
 
-            <h3 style="text-align: center; color: white; margin-bottom: 0.5rem; font-size: 1.3rem; font-weight: 600; font-family: 'Poppins', sans-serif;">Atendimento 24h</h3>
+            <h3 style="text-align: center; color: white; margin-bottom: 0.5rem; font-size: var(--fs-md); font-weight: 600; font-family: 'Poppins', sans-serif;">Atendimento 24h</h3>
             <p style="text-align: center; color: #ccc; margin-bottom: 1.5rem; font-size: var(--fs-sm); font-family: 'Poppins', sans-serif;">Nossa equipe está sempre pronta para esclarecer suas dúvidas e prestar todo suporte que necessitar, com carinho e respeito</p>
 
             <div class="popup-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem;">
@@ -6251,42 +6251,42 @@
                         <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Matriz e Vale do Paraíba</h4>
                         <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(12) 99799-6543</p>
                     </div>
-                    <i class="fas fa-phone-alt" style="font-size: 1.3rem;"></i>
+                    <i class="fas fa-phone-alt" style="font-size: var(--fs-md);"></i>
                 </a>
                 <a href="tel:+5511991603041" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #4CAF50;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
                     <div>
                         <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">São Paulo e Região</h4>
                         <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(11) 99160-3041</p>
                     </div>
-                    <i class="fas fa-phone-alt" style="font-size: 1.3rem;"></i>
+                    <i class="fas fa-phone-alt" style="font-size: var(--fs-md);"></i>
                 </a>
                 <a href="tel:+5513998068262" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #4CAF50;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
                     <div>
                         <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Santos e Região</h4>
                         <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(13) 99806-8262</p>
                     </div>
-                    <i class="fas fa-phone-alt" style="font-size: 1.3rem;"></i>
+                    <i class="fas fa-phone-alt" style="font-size: var(--fs-md);"></i>
                 </a>
                 <a href="tel:+5519999161977" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #4CAF50;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
                     <div>
                         <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Campinas e Região</h4>
                         <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(19) 99916-1977</p>
                     </div>
-                    <i class="fas fa-phone-alt" style="font-size: 1.3rem;"></i>
+                    <i class="fas fa-phone-alt" style="font-size: var(--fs-md);"></i>
                 </a>
                 <a href="tel:+5524998379825" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #4CAF50;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
                     <div>
                         <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Resende e Região</h4>
                         <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(24) 99837-9825</p>
                     </div>
-                    <i class="fas fa-phone-alt" style="font-size: 1.3rem;"></i>
+                    <i class="fas fa-phone-alt" style="font-size: var(--fs-md);"></i>
                 </a>
                 <a href="tel:+553599042223" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #4CAF50;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
                     <div>
                         <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Pouso Alegre e Região</h4>
                         <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(35) 99904-2223</p>
                     </div>
-                    <i class="fas fa-phone-alt" style="font-size: 1.3rem;"></i>
+                    <i class="fas fa-phone-alt" style="font-size: var(--fs-md);"></i>
                 </a>
             </div>
         </div>
@@ -6319,7 +6319,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: var(--fs-icon-float);
             text-decoration: none;
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
