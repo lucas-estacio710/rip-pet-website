@@ -176,7 +176,7 @@
            ============================================ */
         /* Autography font global line-height fix */
         .script,
-        .historia-title,
+        .historia-header-strip h2,
         .unidades-header h2,
         .unidade-text h3,
         .dedicatorias-header h2,
@@ -623,14 +623,29 @@
             z-index: 10;
         }
 
-        .historia-title {
+        /* Historia Header Strip - título em faixa full-width */
+        .historia-header-strip {
+            background: linear-gradient(135deg, #6E945A 0%, #A7E189 50%, #6E945A 100%);
+            padding: clamp(0.6rem, 1.5svh, 1rem) 2rem;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .historia-header-strip h2 {
             font-family: var(--font-autography);
-            font-size: var(--fs-3xl);
+            font-size: clamp(2rem, 8vw, var(--fs-3xl));
             font-weight: 300;
             color: white;
-            letter-spacing: 0px;
-            margin-bottom: 1.25rem;
+            letter-spacing: 1px;
             -webkit-text-stroke: 0.2px white;
+            white-space: nowrap;
+            text-align: center;
+            margin: 0;
+            line-height: var(--lh-autography);
         }
 
         .historia-text {
@@ -3061,7 +3076,6 @@
             }
 
             /* Section headers */
-            .historia-content h2,
             .urnas-header h2 {
                 font-size: var(--fs-2xl);
             }
@@ -3614,11 +3628,10 @@
                 display: none;
             }
 
-            .historia-title {
-                text-align: center;
-                margin-bottom: -1rem !important;
-                padding: 0 1rem;
-
+            /* Historia header strip mobile */
+            .historia-header-strip {
+                padding: clamp(0.5rem, 1.25svh, 0.875rem) 1rem;
+                margin-bottom: 1rem;
             }
 
             /* Hide desktop slider on mobile */
@@ -5043,10 +5056,12 @@
          SECTION: NOSSA HISTÓRIA
          ========================================== -->
     <section id="sobre" class="section-historia">
+        <div class="historia-header-strip">
+            <h2>Nossa história</h2>
+        </div>
         <div class="historia-container">
             <div class="historia-content">
                 <img src="/site_principal_novo_layout/images/medalha_rip_pet_maior_crematorio_brasil.webp" alt="A Maior Rede de Crematórios Pet do Brasil" class="historia-badge" width="206" height="206">
-                <h2 class="historia-title">Nossa história</h2>
                 <div class="historia-text">
                     <p>Fundada em <strong>2013</strong> pelos veterinários <em>Adriele e Carlos Eduardo</em>, a R.I.P. Pet nasceu para transformar despedidas em <strong>homenagens com amor e gratidão.</strong></p>
                     <br>
@@ -6540,7 +6555,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         // Add reveal classes to elements
         const revealElements = [
-            { selector: '.historia-content h2', class: 'reveal reveal-up' },
+            { selector: '.historia-header-strip h2', class: 'reveal reveal-up' },
             { selector: '.historia-content p', class: 'reveal reveal-up' },
             { selector: '.como-card', class: 'reveal reveal-up' },
             { selector: '.urnas-header h2', class: 'reveal reveal-up' },
