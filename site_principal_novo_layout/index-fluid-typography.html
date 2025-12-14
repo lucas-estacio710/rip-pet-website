@@ -171,7 +171,6 @@
            ============================================ */
         /* Autography font global line-height fix */
         .script,
-        .script-block,
         .historia-title,
         .unidades-header h2,
         .unidade-text h3,
@@ -539,15 +538,27 @@
             font-family: var(--font-poppins);
             font-weight: 500;
             font-size: var(--fs-hero);
-            text-wrap: balance;
             line-height: 1.15;
             letter-spacing: -1px;
             margin-bottom: 0.25rem;
         }
 
-        .hero-title .line-2 {
+        /* Cada linha é um bloco que não quebra internamente */
+        .hero-title .hero-line {
             display: block;
-            margin-top: -1.2rem;
+            white-space: nowrap;
+        }
+
+        .hero-title .hero-line-1 {
+            margin-bottom: -0.3rem;
+        }
+
+        .hero-title .hero-line-2 {
+            margin-bottom: -0.2rem;
+        }
+
+        .hero-title .hero-line-3 {
+            margin-top: 0.3rem;
         }
 
         .hero-title .script {
@@ -555,16 +566,10 @@
             font-weight: 400;
             font-size: var(--fs-display);
             letter-spacing: 1px;
-            display: inline;
         }
 
-        .hero-title .script-block {
-            font-family: var(--font-autography);
-            font-weight: 400;
+        .hero-title .hero-line-3.script {
             font-size: var(--fs-display-lg);
-            letter-spacing: 1px;
-            display: block;
-            margin-top: 0.5rem;
         }
 
         .hero-subtitle {
@@ -2750,18 +2755,11 @@
                 font-size: var(--fs-2xs);
             }
 
-            .hero-title {
-            text-wrap: balance;
-            }
         }
 
         @media (max-width: 768px) {
             .top-bar-units {
                 display: none;
-            }
-
-            .hero-title {
-            text-wrap: balance;
             }
 
             .como-grid {
@@ -3050,7 +3048,6 @@
 
             /* Hero adjustments */
             .hero-title {
-            text-wrap: balance;
                 line-height: 1.2;
             }
 
@@ -5024,9 +5021,9 @@
                 <img src="/site_principal_novo_layout/images/24H.webp" alt="24h" class="icon-24h" width="125" height="83" style="width: 125px; height: auto;">
             </div>
             <h1 class="hero-title">
-                A <span class="script">maior rede</span>
-                <span class="line-2">de crematórios pet</span>
-                <span class="script-block">do Brasil</span>
+                <span class="hero-line hero-line-1">A <span class="script">maior rede</span></span>
+                <span class="hero-line hero-line-2">de crematórios pet</span>
+                <span class="hero-line hero-line-3 script">do Brasil</span>
             </h1>
             <p class="hero-subtitle">Atendimento <strong>24h</strong> todos os dias</p>
         </div>
