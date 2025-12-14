@@ -11,6 +11,10 @@
     {
       "source": "/novo-otimizado",
       "destination": "/site_principal_novo_layout/index.html"
+    },
+    {
+      "source": "/novo-fluido",
+      "destination": "/site_principal_novo_layout/index-fluid-typography.html"
     }
   ],
   "redirects": [
