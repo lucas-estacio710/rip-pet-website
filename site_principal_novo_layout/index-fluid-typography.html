@@ -176,7 +176,7 @@
            ============================================ */
         /* Autography font global line-height fix */
         .script,
-        .historia-header-strip h2,
+        .historia-title,
         .unidades-header h2,
         .unidade-text h3,
         .dedicatorias-header h2,
@@ -238,7 +238,7 @@
 
         /* Offset para âncoras - compensa navbar fixa */
         section[id] {
-            scroll-margin-top: calc(var(--navbar-height) + 1rem);
+            scroll-margin-top: 80px;
         }
 
         body {
@@ -384,19 +384,17 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            padding: var(--navbar-padding-y) var(--navbar-padding-x);
-            min-height: var(--navbar-height);
+            padding: 0.6rem 2rem;
             gap: 2rem;
-            transition: padding 0.3s ease, min-height 0.3s ease;
+            transition: padding 0.3s ease;
         }
 
         .header.scrolled .nav-container {
-            padding: calc(var(--navbar-padding-y) * 0.8) var(--navbar-padding-x);
-            min-height: calc(var(--navbar-height) * 0.85);
+            padding: 0.5rem 2.5rem;
         }
 
         .header.scrolled .logo img {
-            height: calc(var(--navbar-logo) * 0.9);
+            height: 40px;
             transition: height 0.3s ease;
         }
 
@@ -407,7 +405,7 @@
         }
 
         .logo img {
-            height: var(--navbar-logo);
+            height: 45px;
             width: auto;
             display: block;
             transition: height 0.3s ease;
@@ -543,27 +541,15 @@
             font-family: var(--font-poppins);
             font-weight: 500;
             font-size: var(--fs-hero);
+            text-wrap: balance;
             line-height: 1.15;
             letter-spacing: -1px;
             margin-bottom: 0.25rem;
         }
 
-        /* Cada linha é um bloco que não quebra internamente */
-        .hero-title .hero-line {
+        .hero-title .line-2 {
             display: block;
-            white-space: nowrap;
-        }
-
-        .hero-title .hero-line-1 {
-            margin-bottom: -0.3rem;
-        }
-
-        .hero-title .hero-line-2 {
-            margin-bottom: -0.2rem;
-        }
-
-        .hero-title .hero-line-3 {
-            margin-top: 0.3rem;
+            margin-top: -1.2rem;
         }
 
         .hero-title .script {
@@ -571,10 +557,16 @@
             font-weight: 400;
             font-size: var(--fs-display);
             letter-spacing: 1px;
+            display: inline;
         }
 
-        .hero-title .hero-line-3.script {
+        .hero-title .script-block {
+            font-family: var(--font-autography);
+            font-weight: 400;
             font-size: var(--fs-display-lg);
+            letter-spacing: 1px;
+            display: block;
+            margin-top: 0.5rem;
         }
 
         .hero-subtitle {
@@ -623,29 +615,14 @@
             z-index: 10;
         }
 
-        /* Historia Header Strip - título em faixa full-width */
-        .historia-header-strip {
-            background: linear-gradient(135deg, #02243C 0%, #033F69 50%, #02243C 100%);
-            padding: clamp(0.6rem, 1.5svh, 1rem) 2rem;
-            margin-left: calc(-50vw + 50%);
-            margin-right: calc(-50vw + 50%);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .historia-header-strip h2 {
+        .historia-title {
             font-family: var(--font-autography);
-            font-size: clamp(2rem, 8vw, var(--fs-3xl));
+            font-size: var(--fs-3xl);
             font-weight: 300;
             color: white;
-            letter-spacing: 1px;
+            letter-spacing: 0px;
+            margin-bottom: 1.25rem;
             -webkit-text-stroke: 0.2px white;
-            white-space: nowrap;
-            text-align: center;
-            margin: 0;
-            line-height: var(--lh-autography);
         }
 
         .historia-text {
@@ -981,6 +958,11 @@
 
         .carousel-arrow.prev svg {
             transform: rotate(180deg);
+        }
+
+        /* Setas mobile - escondidas no desktop */
+        .servicos-arrow {
+            display: none;
         }
 
         .servico-card {
@@ -1689,7 +1671,7 @@
            ============================================ */
         .section-faq {
             background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%);
-            padding: 80px 0;
+            padding: 2.5rem 0 80px 0;
         }
 
         .faq-container {
@@ -3113,13 +3095,20 @@
                 min-height: 48px;
             }
 
-            /* Blog mobile */
+            /* BLOG - Título centralizado com respiro vertical */
             .blog-header-strip {
-                padding: 0.6rem 0.5rem;
+                padding: clamp(0.75rem, 2svh, 1.25rem) 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .blog-header-strip h2 {
-                font-size: var(--fs-display);
+                font-size: clamp(2rem, 10vw, var(--fs-display));
+                white-space: nowrap;
+                text-align: center;
+                margin: 0;
+                line-height: var(--lh-autography);
             }
 
             .blog-container {
@@ -3628,12 +3617,6 @@
                 display: none;
             }
 
-            /* Historia header strip mobile */
-            .historia-header-strip {
-                padding: clamp(0.5rem, 1.25svh, 0.875rem) 1rem;
-                margin-bottom: 1rem;
-            }
-
             /* Hide desktop slider on mobile */
             .historia-images {
                 display: none;
@@ -3759,6 +3742,8 @@
                 color: white;
                 letter-spacing: -1px;
                 text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+                display: block;
+                white-space: nowrap;
             }
 
             .transparencia-script {
@@ -3768,6 +3753,8 @@
                 letter-spacing: 1px;
                 text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
                 line-height: 0.9;
+                display: block;
+                white-space: nowrap;
             }
 
             .transparencia-bottom {
@@ -3782,6 +3769,8 @@
                 font-size: var(--fs-base);
                 color: white;
                 text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+                display: block;
+                white-space: nowrap;
             }
 
             .transparencia-valores {
@@ -3790,6 +3779,8 @@
                 font-size: var(--fs-lg);
                 color: white;
                 text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+                display: block;
+                white-space: nowrap;
             }
 
             .transparencia-valores strong {
@@ -3801,26 +3792,31 @@
                 display: none;
             }
 
-            /* PLANOS - Título grande em 2 linhas com quebra específica */
+            /* PLANOS - Título em 2 linhas, centralizado na faixa com margem de respiro */
             .planos-header-strip {
-                padding: 1rem 0.5rem;
+                padding: clamp(0.75rem, 2svh, 1.25rem) 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .planos-header-strip h2 {
-                font-size: var(--fs-lg);
-                line-height: 1.8;
-                letter-spacing: -0.5px;
+                font-size: clamp(1rem, 4.5vw, var(--fs-lg));
+                line-height: 1.6;
+                letter-spacing: -0.3px;
+                text-align: center;
             }
 
             .planos-header-strip h2 .script {
-                font-size: var(--fs-3xl);
-                line-height: 0.9;
+                font-size: clamp(1.5rem, 7vw, var(--fs-3xl));
+                line-height: var(--lh-autography);
             }
 
-            /* Quebra de linha específica mobile */
+            /* Quebra de linha específica mobile - cada linha é bloco que não quebra */
             .planos-line1,
             .planos-line2 {
                 display: block;
+                white-space: nowrap;
             }
 
             .planos-subtitle {
@@ -3829,39 +3825,55 @@
                 margin-top: 1rem;
             }
 
+            /* BENEFÍCIOS - Cada card com título e descrição em linhas únicas */
+            .beneficio-content h3 {
+                white-space: nowrap;
+                font-size: clamp(0.875rem, 4vw, var(--fs-base));
+            }
+
+            .beneficio-content p {
+                white-space: nowrap;
+                font-size: clamp(0.75rem, 3.5vw, var(--fs-sm));
+            }
+
             /* SERVIÇOS - Header em linha: 40% título + 60% subtítulo */
             .servicos-header {
                 display: flex !important;
                 align-items: center;
-                justify-content: flex-end;
+                justify-content: flex-start;
                 gap: 0;
                 margin-bottom: 1rem;
-                padding: 0 1rem;
+                padding: 0;
             }
 
             .servicos-header h2 {
+                flex: 0 0 40%;
                 display: block !important;
                 text-align: right;
+                font-size: clamp(1.25rem, 6vw, var(--fs-2xl));
+                padding-right: 0.5rem;
             }
 
             .servicos-divider {
                 font-weight: 200 !important;
-                margin: 0 0.3rem !important;
+                margin: 0 !important;
                 align-self: stretch;
                 display: flex;
                 align-items: center;
             }
 
             .servicos-subtitle {
-                flex: 1;
-                font-size: var(--fs-base) !important;
-                line-height: 1.3;
+                flex: 0 0 calc(60% - 1rem);
+                font-size: clamp(1rem, 4.5vw, var(--fs-lg)) !important;
+                line-height: 1.2;
                 text-align: left;
+                padding-left: 0.5rem;
             }
 
             .servicos-line1,
             .servicos-line2 {
                 display: block;
+                white-space: nowrap;
             }
 
             .servicos-line2::before {
@@ -3875,6 +3887,44 @@
 
             .servicos-carousel-wrapper .carousel-arrow {
                 display: none;
+            }
+
+            /* Setas mobile para serviços (igual ao como-trabalhamos) */
+            .servicos-arrow {
+                position: absolute;
+                top: 40%;
+                transform: translateY(-50%);
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: rgba(2, 36, 60, 0.7);
+                color: white;
+                border: none;
+                cursor: pointer;
+                z-index: 10;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: var(--fs-base);
+                transition: opacity 0.3s ease, background 0.3s ease;
+            }
+
+            .servicos-arrow-left {
+                left: 10px;
+            }
+
+            .servicos-arrow-right {
+                right: 10px;
+            }
+
+            .servicos-arrow.disabled {
+                opacity: 0.3;
+                cursor: default;
+                pointer-events: none;
+            }
+
+            .servicos-arrow:not(.disabled):active {
+                background: rgba(2, 36, 60, 0.9);
             }
 
             .servicos-carousel {
@@ -3938,39 +3988,45 @@
                 padding: 2rem 0;
             }
 
+            /* COMO TRABALHAMOS - Header 40% título + 60% subtítulo */
             .como-header {
                 display: flex !important;
                 align-items: center;
-                justify-content: flex-end;
+                justify-content: flex-start;
                 gap: 0;
-                padding: 1rem !important;
+                padding: 0 !important;
+                margin-bottom: 1rem;
             }
 
             .como-header h2 {
-                font-size: var(--fs-2xl) !important;
+                flex: 0 0 40%;
+                font-size: clamp(1rem, 5vw, var(--fs-xl)) !important;
                 display: block !important;
                 text-align: right;
+                padding-right: 0.5rem;
             }
 
             .como-divider {
-                font-size: var(--fs-2xl) !important;
+                font-size: var(--fs-xl) !important;
                 font-weight: 200 !important;
-                margin: 0 0.3rem !important;
+                margin: 0 !important;
                 align-self: stretch;
                 display: flex;
                 align-items: center;
             }
 
             .como-subtitle {
-                flex: 1;
-                font-size: var(--fs-base) !important;
-                line-height: 1.3;
+                flex: 0 0 calc(60% - 1rem);
+                font-size: clamp(1rem, 4.5vw, var(--fs-lg)) !important;
+                line-height: 1.2;
                 text-align: left;
+                padding-left: 0.5rem;
             }
 
             .como-line1,
             .como-line2 {
                 display: block;
+                white-space: nowrap;
             }
 
             .como-line2::before {
@@ -3996,14 +4052,14 @@
                 flex: 0 0 calc(100% - 2rem);
                 scroll-snap-align: start;
                 scroll-snap-stop: always;
-                min-height: 70vh;
+                min-height: 50vh;
                 margin-left: 0;
                 border-radius: 0;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                padding: 2rem 1.5rem;
+                padding: 1.25rem 1rem;
                 opacity: 0.92;
             }
 
@@ -4020,20 +4076,29 @@
                 opacity: 0.92 !important;
             }
 
+            .como-card-number {
+                font-size: clamp(3rem, 12vw, 5rem) !important;
+            }
+
             .como-card-icon {
-                width: 80px;
-                height: 80px;
-                margin-bottom: 1.5rem;
+                width: 50px;
+                height: 50px;
+                margin-bottom: 0.75rem;
+            }
+
+            .como-card-icon img {
+                width: 50px !important;
+                height: 50px !important;
             }
 
             .como-card h3 {
-                font-size: var(--fs-2xl);
-                margin-bottom: 1rem;
+                font-size: var(--fs-lg);
+                margin-bottom: 0.5rem;
             }
 
             .como-card p {
-                font-size: var(--fs-lg);
-                line-height: 1.6;
+                font-size: var(--fs-sm);
+                line-height: 1.5;
             }
 
             /* Setas de navegação do carrossel Como Trabalhamos */
@@ -4078,10 +4143,25 @@
                 background: rgba(2, 36, 60, 0.9);
             }
 
-            /* UNIDADES - Pinda sozinho + outros em 2 linhas de 3 */
+            /* UNIDADES - Título centralizado em tamanho máximo */
             .section-unidades {
                 padding: 0 0 2rem 0;
                 margin-top: -1px;
+            }
+
+            .unidades-header-strip {
+                padding: clamp(0.75rem, 2svh, 1.25rem) 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .unidades-header h2 {
+                font-size: clamp(2rem, 9vw, var(--fs-3xl));
+                white-space: nowrap;
+                text-align: center;
+                margin: 0;
+                line-height: var(--lh-autography);
             }
 
             .unidades-container {
@@ -4198,15 +4278,16 @@
                 margin: 0 !important;
             }
 
-            /* 4. Descrição - texto justificado */
+            /* 4. Descrição - 35-45% da largura, fonte menor */
             .unidade-descricao,
             .unidade-text p.unidade-descricao {
                 order: 4 !important;
-                font-size: var(--fs-md) !important;
-                line-height: 1.7 !important;
+                font-size: clamp(0.7rem, 2.8vw, var(--fs-sm)) !important;
+                line-height: 1.6 !important;
                 text-align: justify !important;
-                padding: 0 1rem !important;
-                margin-bottom: 1rem !important;
+                width: clamp(35%, 40vw, 45%) !important;
+                margin: 0 auto 1rem auto !important;
+                padding: 0 !important;
                 display: block !important;
             }
 
@@ -4367,25 +4448,57 @@
                 scroll-snap-align: start;
             }
 
-            /* FAQ - Accordion fechado com efeitos */
+            /* FAQ - Título centralizado em tamanho máximo */
+            .section-faq {
+                padding: 0 0 2rem 0;
+            }
+
+            .faq-header {
+                background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #000000 100%);
+                padding: clamp(0.75rem, 2svh, 1.25rem) 1rem !important;
+                margin: 0 calc(-50vw + 50%) 1.5rem calc(-50vw + 50%) !important;
+                width: 100vw !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+
+            .faq-header h2 {
+                font-size: clamp(1.75rem, 9vw, var(--fs-3xl)) !important;
+                white-space: nowrap !important;
+                text-align: center !important;
+                margin: 0 !important;
+                line-height: var(--lh-autography) !important;
+            }
+
+            .faq-header p {
+                display: none !important;
+            }
+
             .faq-container {
-                padding: 0 1rem;
+                padding: 0 0.5rem;
+            }
+
+            .faq-list {
+                padding: 0.75rem;
+                border-radius: 0.75rem;
             }
 
             .faq-item {
-                margin-bottom: 0.75rem;
-                border-radius: 12px;
+                margin-bottom: 0.5rem;
+                border-radius: 8px;
                 overflow: hidden;
             }
 
             .faq-question {
-                padding: 1rem;
+                padding: 0.75rem 0.5rem;
                 font-size: var(--fs-sm);
                 cursor: pointer;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                min-height: 56px;
+                min-height: 44px;
                 touch-action: manipulation;
                 -webkit-tap-highlight-color: rgba(0,0,0,0.1);
             }
@@ -4396,7 +4509,7 @@
                 color: #10b981;
                 transition: transform 0.3s ease;
                 flex-shrink: 0;
-                margin-left: 1rem;
+                margin-left: 0.5rem;
             }
 
             .faq-item.active .faq-arrow {
@@ -4407,7 +4520,7 @@
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.3s ease, padding 0.3s ease;
-                padding: 0 1rem;
+                padding: 0 0.5rem;
             }
 
             .faq-item.active .faq-answer {
@@ -4421,13 +4534,21 @@
                 overflow: hidden;
             }
 
+            /* DEDICATÓRIAS - Título centralizado em tamanho máximo */
             .dedicatorias-header-strip {
-                padding: 0.75rem 1rem;
+                padding: clamp(0.75rem, 2svh, 1.25rem) 1rem;
                 margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .dedicatorias-header-strip h2 {
-                font-size: var(--fs-3xl);
+                font-size: clamp(2rem, 10vw, var(--fs-3xl));
+                white-space: nowrap;
+                text-align: center;
+                margin: 0;
+                line-height: var(--lh-autography);
             }
 
             .dedicatorias-container {
@@ -4659,8 +4780,22 @@
                 order: 2;
                 display: flex;
                 flex-direction: column;
+                align-items: center;
+                justify-content: center;
                 gap: 0.75rem;
-                padding: 0 1rem;
+                padding: 0;
+                width: 100%;
+            }
+
+            .cta-btn {
+                width: clamp(200px, 70vw, 300px);
+                min-width: unset;
+                padding: 0.9rem 1.5rem;
+                font-size: clamp(0.875rem, 3.5vw, var(--fs-md));
+            }
+
+            .cta-btn i {
+                font-size: clamp(1rem, 4vw, var(--fs-md));
             }
 
             .cta-image {
@@ -5043,9 +5178,9 @@
                 <img src="/site_principal_novo_layout/images/24H.webp" alt="24h" class="icon-24h" width="125" height="83" style="width: 125px; height: auto;">
             </div>
             <h1 class="hero-title">
-                <span class="hero-line hero-line-1">A <span class="script">maior rede</span></span>
-                <span class="hero-line hero-line-2">de crematórios pet</span>
-                <span class="hero-line hero-line-3 script">do Brasil</span>
+                A <span class="script">maior rede</span>
+                <span class="line-2">de crematórios pet</span>
+                <span class="script-block">do Brasil</span>
             </h1>
             <p class="hero-subtitle">Atendimento <strong>24h</strong> todos os dias</p>
         </div>
@@ -5055,12 +5190,10 @@
          SECTION: NOSSA HISTÓRIA
          ========================================== -->
     <section id="sobre" class="section-historia">
-        <div class="historia-header-strip">
-            <h2>Nossa história</h2>
-        </div>
         <div class="historia-container">
             <div class="historia-content">
                 <img src="/site_principal_novo_layout/images/medalha_rip_pet_maior_crematorio_brasil.webp" alt="A Maior Rede de Crematórios Pet do Brasil" class="historia-badge" width="206" height="206">
+                <h2 class="historia-title">Nossa história</h2>
                 <div class="historia-text">
                     <p>Fundada em <strong>2013</strong> pelos veterinários <em>Adriele e Carlos Eduardo</em>, a R.I.P. Pet nasceu para transformar despedidas em <strong>homenagens com amor e gratidão.</strong></p>
                     <p>Pioneira no <strong>cuidado gentil e acolhedor</strong> aos pets e aos tutores em luto, hoje, nos orgulhamos de ser <strong>a maior organização de Cremação Pet do Brasil</strong> e de fazer parte da história de milhares de famílias.</p>
@@ -5226,6 +5359,10 @@
                 <button class="carousel-arrow prev" aria-label="Anterior">
                     <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
                 </button>
+                <!-- Setas mobile -->
+                <button class="servicos-arrow servicos-arrow-left disabled" aria-label="Anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
                 <div class="servicos-carousel">
                     <div class="servico-card">
                         <img src="/site_principal_novo_layout/images/golden.webp" alt="Cremação Individual" loading="lazy">
@@ -5295,6 +5432,9 @@
                 </div>
                 <button class="carousel-arrow next" aria-label="Próximo">
                     <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                </button>
+                <button class="servicos-arrow servicos-arrow-right" aria-label="Próximo">
+                    <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
         </div>
@@ -6553,7 +6693,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         // Add reveal classes to elements
         const revealElements = [
-            { selector: '.historia-header-strip h2', class: 'reveal reveal-up' },
+            { selector: '.historia-title', class: 'reveal reveal-up' },
             { selector: '.historia-content p', class: 'reveal reveal-up' },
             { selector: '.como-card', class: 'reveal reveal-up' },
             { selector: '.urnas-header h2', class: 'reveal reveal-up' },
@@ -6865,6 +7005,57 @@
 
         // Atualiza setas ao scroll
         comoGrid.addEventListener('scroll', updateArrows);
+
+        // Atualiza setas no resize
+        window.addEventListener('resize', updateArrows);
+
+        // Estado inicial
+        updateArrows();
+    })();
+
+    // ============================================
+    // SERVIÇOS CAROUSEL - Setas de navegação mobile
+    // ============================================
+    (function() {
+        const servicosCarousel = document.querySelector('.servicos-carousel');
+        const leftArrow = document.querySelector('.servicos-arrow-left');
+        const rightArrow = document.querySelector('.servicos-arrow-right');
+
+        if (!servicosCarousel || !leftArrow || !rightArrow) return;
+
+        function updateArrows() {
+            const scrollLeft = servicosCarousel.scrollLeft;
+            const maxScroll = servicosCarousel.scrollWidth - servicosCarousel.clientWidth;
+
+            // Desabilita seta esquerda se no início
+            if (scrollLeft <= 10) {
+                leftArrow.classList.add('disabled');
+            } else {
+                leftArrow.classList.remove('disabled');
+            }
+
+            // Desabilita seta direita se no fim
+            if (scrollLeft >= maxScroll - 10) {
+                rightArrow.classList.add('disabled');
+            } else {
+                rightArrow.classList.remove('disabled');
+            }
+        }
+
+        // Navegar para esquerda
+        leftArrow.addEventListener('click', () => {
+            const cardWidth = servicosCarousel.querySelector('.servico-card').offsetWidth;
+            servicosCarousel.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        });
+
+        // Navegar para direita
+        rightArrow.addEventListener('click', () => {
+            const cardWidth = servicosCarousel.querySelector('.servico-card').offsetWidth;
+            servicosCarousel.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+
+        // Atualiza setas ao scroll
+        servicosCarousel.addEventListener('scroll', updateArrows);
 
         // Atualiza setas no resize
         window.addEventListener('resize', updateArrows);
