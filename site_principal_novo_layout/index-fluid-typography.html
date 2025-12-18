@@ -1542,6 +1542,50 @@
             text-transform: uppercase;
         }
 
+        .urna-modal-relacionados {
+            padding: 1rem 1.5rem 1.5rem;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+
+        .relacionados-titulo {
+            font-family: var(--font-poppins);
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            color: var(--azul-escuro);
+            margin: 0 0 0.75rem 0;
+            text-align: left;
+        }
+
+        .relacionados-grid {
+            display: flex;
+            gap: 0.75rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .relacionado-item {
+            flex-shrink: 0;
+            width: 80px;
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .relacionado-item:hover {
+            border-color: var(--verde-principal);
+            transform: scale(1.05);
+        }
+
+        .relacionado-item img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            display: block;
+        }
+
         /* ============================================
            SECTION: COMO TRABALHAMOS
            ============================================ */
@@ -5655,7 +5699,7 @@
         </div>
         <div class="urnas-container">
             <div class="urnas-grid">
-                <div class="urna-card" onclick="openUrnaModal('/site_principal_novo_layout/images/biournas.webp', 'Urnas Biodegradáveis')">
+                <div class="urna-card" onclick="openUrnaModal('/site_principal_novo_layout/images/biournas.webp', 'Urnas Biodegradáveis', [{img: '/images/novo_layout/Camada 20.png', title: 'Urna Biodegradável Modelo 1'}, {img: '/images/novo_layout/Camada 21.png', title: 'Urna Biodegradável Modelo 2'}])">
                     <img src="/site_principal_novo_layout/images/biournas.webp" alt="Urnas Biodegradáveis" loading="lazy">
                     <h4>Urnas Biodegradáveis</h4>
                 </div>
@@ -5686,6 +5730,12 @@
             <button class="urna-modal-close" onclick="closeUrnaModal()">&times;</button>
             <img id="urnaModalImage" src="" alt="">
             <h3 id="urnaModalTitle"></h3>
+            <div class="urna-modal-relacionados" id="urnaModalRelacionados">
+                <p class="relacionados-titulo">Veja também:</p>
+                <div class="relacionados-grid" id="urnaModalRelacionadosGrid">
+                    <!-- Produtos relacionados serão inseridos via JS -->
+                </div>
+            </div>
         </div>
     </div>
 
@@ -6785,9 +6835,25 @@
     }
 
     // Modal Urnas
-    function openUrnaModal(imgSrc, title) {
+    function openUrnaModal(imgSrc, title, relacionados) {
         document.getElementById('urnaModalImage').src = imgSrc;
         document.getElementById('urnaModalTitle').textContent = title;
+
+        // Renderizar produtos relacionados
+        const relacionadosContainer = document.getElementById('urnaModalRelacionados');
+        const relacionadosGrid = document.getElementById('urnaModalRelacionadosGrid');
+
+        if (relacionados && relacionados.length > 0) {
+            relacionadosGrid.innerHTML = relacionados.map(item =>
+                `<div class="relacionado-item" onclick="openUrnaModal('${item.img}', '${item.title}', ${JSON.stringify(item.relacionados || []).replace(/"/g, "'")})">
+                    <img src="${item.img}" alt="${item.title}">
+                </div>`
+            ).join('');
+            relacionadosContainer.style.display = 'block';
+        } else {
+            relacionadosContainer.style.display = 'none';
+        }
+
         document.getElementById('urnaModal').classList.add('active');
         document.body.classList.add('modal-open');
         history.pushState({ popup: 'urna' }, '');
