@@ -3641,76 +3641,59 @@
                 position: relative;
                 z-index: 1;
                 overflow: hidden;
-                min-height: 420px;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
+                box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
             }
             .como-card:hover {
-                transform: scale(1.02);
+                transform: scale(1.04);
                 z-index: 10;
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+                box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15), 0 8px 25px rgba(0, 0, 0, 0.25);
             }
             .como-card:hover .como-card-bg {
-                transform: scale(1.08);
+                transform: scale(1.05);
             }
+            .como-card:nth-child(1) { background: #A9CF96; }
+            .como-card:nth-child(2) { background: #9DC988; }
+            .como-card:nth-child(3) { background: #91C279; }
+            .como-card:nth-child(4) { background: #85BB6A; }
             .como-card-bg {
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
+                height: 160px;
                 background-size: cover;
-                background-position: center;
+                background-position: center top;
                 transition: transform 0.5s ease;
-                z-index: 1;
-            }
-            .como-card::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: linear-gradient(to bottom,
-                    rgba(0,0,0,0) 0%,
-                    rgba(0,0,0,0.1) 30%,
-                    rgba(0,0,0,0.5) 60%,
-                    rgba(0,0,0,0.85) 100%);
-                z-index: 2;
+                -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%),
+                                    linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 65%);
+                -webkit-mask-composite: source-in;
+                mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%),
+                            linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 65%);
+                mask-composite: intersect;
             }
             .como-card-content {
-                position: relative;
-                z-index: 3;
-                padding: 2rem 1.5rem;
+                padding: 0.5rem 1.5rem 2rem;
             }
             .como-card h3 {
                 font-family: 'Poppins', sans-serif;
                 font-weight: 600;
-                font-size: 1.1rem;
-                color: white;
+                font-size: 1rem;
+                color: #052F5F;
                 letter-spacing: -0.3px;
                 margin-bottom: 0.75rem;
-                text-shadow: 0 2px 4px rgba(0,0,0,0.3);
             }
             .como-card p {
                 font-family: 'Poppins', sans-serif;
                 font-weight: 300;
                 font-size: 0.9rem;
-                color: rgba(255,255,255,0.95);
+                color: #052F5F;
                 line-height: 1.5;
-                text-shadow: 0 1px 3px rgba(0,0,0,0.3);
             }
             .como-card p strong {
-                color: #B9E28C;
                 font-weight: 600;
             }
             .como-card-number {
                 font-family: 'Autography', cursive;
                 font-style: italic;
                 font-size: 14rem;
-                color: white;
-                opacity: 0.15;
+                color: #052F5F;
+                opacity: 0.2;
                 position: absolute;
                 top: 0;
                 right: 0.5rem;
@@ -3718,7 +3701,6 @@
                 padding: 0;
                 line-height: 1;
                 z-index: 3;
-                text-shadow: 0 4px 15px rgba(0,0,0,0.3);
             }
             @media (max-width: 768px) {
                 .como-header {
@@ -3753,28 +3735,35 @@
                     flex: 0 0 100%;
                     min-width: 100%;
                     scroll-snap-align: start;
-                    min-height: 85vh;
+                    min-height: auto;
+                }
+                .como-card-bg {
+                    height: 45vw;
+                    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%),
+                                        linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 65%);
+                    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%),
+                                linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 65%);
                 }
                 .como-card-content {
-                    padding: 2rem;
+                    padding: 1rem 2rem 2.5rem;
                 }
                 .como-card h3 {
-                    font-size: 1.3rem;
+                    font-size: 1.2rem;
                     margin-bottom: 1rem;
                 }
                 .como-card p {
-                    font-size: 1.05rem;
-                    line-height: 1.7;
+                    font-size: 1rem;
+                    line-height: 1.6;
                 }
                 .como-card-number {
-                    font-size: 10rem;
-                    opacity: 0.12;
+                    font-size: 12rem;
+                    opacity: 0.15;
                 }
                 .como-carousel-wrapper { position: relative; }
                 .como-arrow {
                     display: flex;
                     position: absolute;
-                    top: 40%;
+                    top: 22vw;
                     transform: translateY(-50%);
                     width: 44px;
                     height: 44px;
@@ -3809,7 +3798,7 @@
                 </button>
                 <div class="como-grid">
                     <div class="como-card">
-                        <div class="como-card-bg" style="background-image: url('images/etapa1-acolhimento.jpg')"></div>
+                        <div class="como-card-bg" style="background-image: url('images/etapa1-acolhimento.jpg'); background-position: right top"></div>
                         <span class="como-card-number">1</span>
                         <div class="como-card-content">
                             <h3>Você aciona nosso 24h</h3>
@@ -3837,7 +3826,7 @@
                         <span class="como-card-number">4</span>
                         <div class="como-card-content">
                             <h3>Entrega das cinzas</h3>
-                            <p>O momento final é conduzido com carinho e respeito. Você receberá um <strong>certificado de cremação</strong>, e pode <strong>eternizar seu companheiro</strong> em diversas <strong>urnas e recordações</strong> disponíveis em nosso catálogo</p>
+                            <p>O momento final é conduzido com carinho e respeito. Você receberá um <strong>certificado de cremação</strong>, e pode <strong>eternizar seu companheiro</strong> em diversas <strong>urnas e recordações</strong> disponíveis em nosso catálogo exclusivo</p>
                         </div>
                     </div>
                 </div>
@@ -4116,101 +4105,138 @@
         </div>
     </section>
 
-    <!-- ========================================
-         ONDE ESTAMOS - Unidades
+<!-- ========================================
+         NOSSAS UNIDADES
          ======================================== -->
-    <section class="section" id="onde-estamos" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 80px 0; position: relative;">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
-            <!-- Header da Seção -->
-            <div style="text-align: center; margin-bottom: 4rem;">
-                <h2 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; font-family: 'Autography', 'Dancing Script', cursive; color: #052F5F; margin-bottom: 0.5rem;">Onde Estamos</h2>
-                <p style="font-size: 1.1rem; color: #64748b; font-family: 'Nunito', sans-serif; font-style: italic;">Conheça nossas unidades e venha nos visitar</p>
-            </div>
+    <section id="unidades" class="section-unidades">
+        <style>
+            .section-unidades { background: linear-gradient(135deg, #AEC3C9 0%, #8D9EA3 50%, #AEC3C9 100%); padding: 0; overflow: hidden; }
+            .unidades-container { max-width: 1400px; margin: 0 auto; padding: 0 3rem; }
+            .unidades-header { text-align: center; margin-bottom: 1.5rem; }
+            .unidades-header-strip { background: linear-gradient(135deg, #02243C 0%, #033F69 50%, #02243C 100%); padding: 1rem 2rem; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); margin-bottom: 1.5rem; }
+            .unidades-header h2 { font-family: 'Autography', cursive; font-size: 3.5rem; font-weight: 300; color: white; letter-spacing: 1px; }
+            .unidade-tabs { display: flex; justify-content: center; flex-wrap: nowrap; gap: 0.5rem; margin-bottom: 2rem; }
+            .unidade-content { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; min-height: 400px; transition: opacity 0.5s ease; }
+            .unidade-content.fading { opacity: 0; }
+            .unidade-content.reversed { direction: rtl; }
+            .unidade-content.reversed > * { direction: ltr; }
+            .unidade-content.reversed .unidade-text h3 { text-align: left; }
+            .unidade-content.reversed .unidade-image { left: calc(-50vw + 50%); right: 50vw; }
+            .unidade-text h3 { font-family: 'Autography', cursive; font-size: 3.5rem; font-weight: 300; color: #052F5F; letter-spacing: 1px; margin-bottom: 1rem; text-align: right; }
+            .unidade-text p { font-family: 'Poppins', sans-serif; font-weight: 300; font-size: 0.95rem; color: #052F5F; line-height: 1.7; text-align: justify; }
+            .unidade-info { margin-top: 1.5rem; padding: 0.8rem 1rem; background: rgba(255,255,255,0.5); border-radius: 10px; }
+            .unidade-info p { margin: 0; font-size: 0.75rem; text-align: left; }
+            .unidade-mapa { margin-top: 1rem; background: rgba(2, 36, 60, 0.08); padding: 0.5rem; border-radius: 12px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+            .unidade-mapa iframe { width: 100%; height: 180px; border: 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); }
+            .unidade-acoes-mobile { display: none; }
+            .unidade-tab { padding: 0.4rem 1rem; border: none; border-radius: 12px; font-family: 'Poppins', sans-serif; font-weight: 400; font-size: 0.8rem; color: #052F5F; background: rgba(2, 36, 60, 0.08); cursor: pointer; transition: all 0.3s ease; }
+            .unidade-tab:hover { background: rgba(2, 36, 60, 0.15); }
+            .unidade-tab.active { background: linear-gradient(135deg, rgba(2, 36, 60, 0.25) 0%, rgba(2, 36, 60, 0.4) 50%, rgba(2, 36, 60, 0.25) 100%); color: white; font-weight: 600; }
+            .unidade-image { position: absolute; left: 50vw; right: calc(-50vw + 50%); top: 0; bottom: -15%; overflow: visible; }
+            .unidade-image img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+            .mobile-only { display: none; }
+            @media (max-width: 768px) {
+                .section-unidades { padding: 0 0 2rem 0; }
+                .unidades-container { padding: 0 0.3rem !important; }
+                .unidade-tabs { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 0.3rem !important; padding: 0 0.3rem !important; width: 100% !important; }
+                .unidade-tab:first-child { grid-column: 1 / -1 !important; font-size: 0.85rem !important; padding: 0.6rem 0.5rem !important; }
+                .unidade-tab { padding: 0.4rem 0.2rem !important; font-size: 0.7rem !important; text-align: center !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+                .unidade-tab.tab-sjc { font-size: clamp(0.55rem, 2.5vw, 0.7rem) !important; }
+                .unidade-content { display: flex !important; flex-direction: column !important; gap: 0 !important; padding: 0.5rem 0 0 !important; min-height: auto !important; }
+                .unidade-content.reversed { direction: ltr !important; }
+                .unidade-text { display: contents !important; }
+                .unidade-nome, .unidade-text h3 { order: 1 !important; width: 100% !important; text-align: center !important; font-size: clamp(2.5rem, 11vw, 5rem) !important; padding: 0 0.5rem !important; margin-bottom: 1rem !important; position: static !important; }
+                .unidade-image { order: 2 !important; position: static !important; width: 100vw !important; height: auto !important; margin-left: calc(-50vw + 50%) !important; }
+                .unidade-foto { width: 100% !important; height: auto !important; border-radius: 0 !important; }
+                .unidade-info { order: 3 !important; padding: 0.75rem 1rem !important; margin: 0 0 1rem 0 !important; width: 100vw !important; margin-left: calc(-50vw + 50%) !important; border-radius: 0 !important; }
+                .unidade-info p { text-align: center !important; font-size: 0.95rem !important; }
+                .unidade-descricao { order: 4 !important; font-size: 1.05rem !important; text-align: justify !important; padding: 0 1rem !important; margin-bottom: 1rem !important; }
+                .unidade-mapa { order: 5 !important; width: calc(100% - 2rem) !important; margin: 0 1rem !important; }
+                .unidade-mapa iframe { height: 200px !important; }
+                .unidade-acoes-mobile { order: 6 !important; display: flex !important; gap: 0.75rem; padding: 1rem; justify-content: center; }
+                .btn-acao-mobile { flex: 1; max-width: 160px; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1rem; border: none; border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
+                .btn-navegar { background: linear-gradient(135deg, #052F5F 0%, #0a4a8f 100%); color: white; }
+                .btn-compartilhar { background: rgba(255,255,255,0.9); color: #052F5F; border: 1px solid rgba(5,47,95,0.2) !important; }
+                .mobile-only { display: inline; }
+            }
+        </style>
 
-            <!-- Unidade Santos -->
-            <div style="margin-bottom: 4rem;">
-                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #052F5F; margin-bottom: 2rem; text-align: center; position: relative;">
-                    <span style="background: linear-gradient(135deg, #10b981, #059669); background-clip: text; -webkit-background-clip: text; color: transparent;">Unidade Santos</span>
-                </h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
-                    <!-- Foto e Texto -->
-                    <div>
-                        <div style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.15); margin-bottom: 1.5rem; background: #e2e8f0; aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center;">
-                            <img src="images/rip-pet-santos-wavy.webp" alt="Unidade R.I.P. Pet Santos" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <p style="font-size: 1rem; color: #475569; line-height: 1.8; font-family: 'Nunito', sans-serif; text-align: justify;">
-                            Nossa unidade em Santos foi inaugurada em 2023 para levar o padrão de excelência da R.I.P. Pet à Baixada Santista. Localizada em ponto estratégico, oferecemos atendimento 24 horas com equipe especializada, sala de despedida acolhedora e todo suporte necessário para este momento delicado. Estamos prontos para atender Santos, São Vicente, Praia Grande, Guarujá, Cubatão e toda a região litorânea com o mesmo carinho e respeito que nos tornaram referência nacional.
-                        </p>
-                        <p style="font-size: 0.95rem; color: #052F5F; font-weight: 600; margin-top: 1rem; font-family: 'Nunito', sans-serif;">
-                            <svg style="width: 16px; height: 16px; fill: #10b981; vertical-align: middle; margin-right: 0.5rem;" viewBox="0 0 384 512"><use href="#icon-map-marker"></use></svg>
-                            Rua Exemplo, 123 - Gonzaga, Santos - SP
-                        </p>
-                    </div>
-                    <!-- Mapa Santos -->
-                    <div style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.15); height: 100%; min-height: 350px;">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3645.8876543210!2d-46.3288889!3d-23.9666667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDU4JzAwLjAiUyA0NsKwMTknNDQuMCJX!5e0!3m2!1spt-BR!2sbr!4v1234567890"
-                            width="100%"
-                            height="100%"
-                            style="border:0; min-height: 350px;"
-                            allowfullscreen=""
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-                    </div>
+        <div class="unidades-container">
+            <div class="unidades-header">
+                <div class="unidades-header-strip">
+                    <h2>Nossas Unidades</h2>
+                </div>
+                <div class="unidade-tabs">
+                    <button class="unidade-tab" data-tab="santos" data-nome="Santos" data-img="images/novo_layout/unid santos.webp" data-desc="Inaugurada em 2023, nossa unidade em Santos fica em uma &lt;strong&gt;casa clássica no canal 6&lt;/strong&gt;, o mais tranquilo da cidade, com detalhes sutis e acolhedores. A localização oferece fácil acesso à balsa e à perimetral, permitindo atender &lt;strong&gt;toda a Baixada Santista&lt;/strong&gt; com agilidade. Com &lt;strong&gt;atendimento 24h&lt;/strong&gt;, o espaço conta com estacionamento próprio, acessibilidade e uma sala de despedida pensada para proporcionar conforto e privacidade às famílias." data-endereco="Av. Cel. Joaquim Montenegro, 334 - Ponta da Praia" data-mapsq="RIP+Pet+Funeral+Crematório+Santos">Santos</button>
+                    <button class="unidade-tab active" data-tab="pinda" data-nome="Matriz Pindamonhangaba" data-img="images/novo_layout/unid matriz.webp" data-desc="Nossa matriz em Pindamonhangaba ocupa um sítio de &lt;strong&gt;100 mil m²&lt;/strong&gt; cercado por natureza, onde realizamos todos os procedimentos com &lt;strong&gt;estrutura e equipe própria&lt;/strong&gt;. O espaço foi pensado para oferecer paz e acolhimento às famílias do Vale do Paraíba e região. Contamos com &lt;strong&gt;duas salas ecumênicas&lt;/strong&gt; e uma capela dedicada a São Francisco de Assis." data-endereco="Estrada Mun. José Benedito Marcondes Vieira, 800 - Goiabal" data-mapsq="RIP+Pet+Crematório+Pindamonhangaba">Pindamonhangaba</button>
+                    <button class="unidade-tab" data-tab="sp" data-nome="São Paulo" data-img="images/novo_layout/unid sp.webp" data-desc="Inaugurada em 2018, nossa unidade de São Paulo foi o &lt;strong&gt;primeiro velório pet na região central da capital paulista&lt;/strong&gt;. Localizada no bairro de Higienópolis, garante &lt;strong&gt;atendimento ágil 24h&lt;/strong&gt; para toda a cidade e região metropolitana." data-endereco="R. Roque Friguglieti - Santa Cecilia" data-mapsq="RIP+Pet+Funeral+Crematório+São+Paulo+Higienópolis">São Paulo</button>
+                    <button class="unidade-tab tab-sjc" data-tab="sjc" data-nome="São José dos Campos" data-img="images/novo_layout/unid sjc.webp" data-desc="Nossa unidade em São José dos Campos fica em &lt;strong&gt;ponto estratégico da capital do Vale do Paraíba&lt;/strong&gt;. Com &lt;strong&gt;atendimento 24h&lt;/strong&gt;, atendemos toda a região, incluindo o &lt;strong&gt;Litoral Norte, Campos do Jordão e a Serra da Mantiqueira&lt;/strong&gt;." data-endereco="Av. Dr. Ademar de Barros, 1257 - Vila Ema" data-mapsq="RIP+Pet+Crematório+São+José+dos+Campos">S. J. Campos</button>
+                    <button class="unidade-tab" data-tab="camp" data-nome="Campinas" data-img="images/novo_layout/unid camp.webp" data-desc="Em 2020, inauguramos nossa unidade para atender &lt;strong&gt;Campinas e todas as cidades da região&lt;/strong&gt;. Localizada no &lt;strong&gt;coração do Parque Taquaral&lt;/strong&gt;. Nossa estrutura conta com &lt;strong&gt;duas salas de velório&lt;/strong&gt;." data-endereco="Av. Dr. Heitor Penteado, 841 - Parque Taquaral" data-mapsq="RIP+Pet+Crematório+Animais+Campinas+Parque+Taquaral">Campinas</button>
+                    <button class="unidade-tab" data-tab="resende" data-nome="Resende" data-img="images/novo_layout/unid resende.webp" data-desc="Nossa unidade em Resende é o &lt;strong&gt;primeiro e único crematório pet da região Sul Fluminense&lt;/strong&gt;. Com localização estratégica, atendemos toda a região com agilidade." data-endereco="R. Santa Teresinha, 168 - Paraíso" data-mapsq="RIP+Pet+Crematório+Resende">Resende</button>
+                    <button class="unidade-tab" data-tab="pouso" data-nome="Pouso Alegre" data-img="images/novo_layout/unid pouso.webp" data-desc="Nossa unidade em Pouso Alegre é a &lt;strong&gt;primeira da R.I.P. Pet em Minas Gerais&lt;/strong&gt;. Com &lt;strong&gt;atendimento 24h&lt;/strong&gt;, atendemos todo o &lt;strong&gt;Sul de Minas&lt;/strong&gt; com agilidade." data-endereco="R. Paulino Pereira da Silva, 69 - Saúde" data-mapsq="RIP+Pet+Crematório+Pouso+Alegre">Pouso Alegre</button>
                 </div>
             </div>
-
-            <!-- Divisor -->
-            <div style="width: 100%; height: 1px; background: linear-gradient(90deg, transparent, #cbd5e1, transparent); margin: 3rem 0;"></div>
-
-            <!-- Matriz Pindamonhangaba -->
-            <div>
-                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #052F5F; margin-bottom: 2rem; text-align: center; position: relative;">
-                    <span style="background: linear-gradient(135deg, #D4AF37, #b8960c); background-clip: text; -webkit-background-clip: text; color: transparent;">Matriz - Pindamonhangaba</span>
-                </h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
-                    <!-- Mapa Matriz (invertido) -->
-                    <div style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.15); height: 100%; min-height: 350px;">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.123456789!2d-45.4616667!3d-22.9241667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDU1JzI3LjAiUyA0NcKwMjcnNDIuMCJX!5e0!3m2!1spt-BR!2sbr!4v1234567890"
-                            width="100%"
-                            height="100%"
-                            style="border:0; min-height: 350px;"
-                            allowfullscreen=""
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+            <div class="unidade-content" data-unidade="pinda">
+                <div class="unidade-text">
+                    <h3 class="unidade-nome">Matriz <br class="mobile-only">Pindamonhangaba</h3>
+                    <p class="unidade-descricao">Nossa matriz em Pindamonhangaba ocupa um sítio de <strong>100 mil m²</strong> cercado por natureza, onde realizamos todos os procedimentos com <strong>estrutura e equipe própria</strong>. O espaço foi pensado para oferecer paz e acolhimento às famílias do Vale do Paraíba e região. Contamos com <strong>duas salas ecumênicas</strong> e uma capela dedicada a São Francisco de Assis.</p>
+                    <div class="unidade-info">
+                        <p class="unidade-endereco">📍 <span class="endereco-text">Estrada Mun. José Benedito Marcondes Vieira, 800 - Goiabal</span></p>
                     </div>
-                    <!-- Foto e Texto -->
-                    <div>
-                        <div style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.15); margin-bottom: 1.5rem; background: #e2e8f0; aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center;">
-                            <img src="images/matriz_pinda_opt.webp" alt="Matriz R.I.P. Pet Pindamonhangaba" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <p style="font-size: 1rem; color: #475569; line-height: 1.8; font-family: 'Nunito', sans-serif; text-align: justify;">
-                            Nossa matriz em Pindamonhangaba é onde tudo começou há mais de 12 anos. Com mais de 100 mil m² de área verde, abrigamos o maior crematório de animais do Brasil, equipado com tecnologia de ponta e uma equipe altamente capacitada. É aqui que realizamos todos os procedimentos de cremação com a máxima transparência, dignidade e respeito. Nossa estrutura permite que famílias acompanhem presencialmente ou por vídeo todo o processo, garantindo a certeza e a paz que você merece.
-                        </p>
-                        <p style="font-size: 0.95rem; color: #052F5F; font-weight: 600; margin-top: 1rem; font-family: 'Nunito', sans-serif;">
-                            <svg style="width: 16px; height: 16px; fill: #D4AF37; vertical-align: middle; margin-right: 0.5rem;" viewBox="0 0 384 512"><use href="#icon-map-marker"></use></svg>
-                            Estrada Municipal do Leiteiro, Km 3 - Pindamonhangaba - SP
-                        </p>
+                    <div class="unidade-mapa">
+                        <iframe class="mapa-iframe" src="https://www.google.com/maps?q=RIP+Pet+Crematório+Pindamonhangaba&z=15&output=embed" width="100%" height="200" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
+                    <div class="unidade-acoes-mobile">
+                        <button class="btn-acao-mobile btn-navegar" data-mapsq="RIP+Pet+Crematório+Pindamonhangaba" data-nome="Matriz Pindamonhangaba" data-endereco="Estrada Mun. José Benedito Marcondes Vieira, 800 - Goiabal">📍 Como chegar</button>
+                        <button class="btn-acao-mobile btn-compartilhar">🔗 Compartilhar</button>
+                    </div>
+                </div>
+                <div class="unidade-image">
+                    <img src="images/novo_layout/unid matriz.webp" alt="Unidade Pindamonhangaba" class="unidade-foto" loading="lazy">
                 </div>
             </div>
         </div>
-
-        <style>
-            /* Mobile - Onde Estamos */
-            @media (max-width: 768px) {
-                #onde-estamos [style*="grid-template-columns: 1fr 1fr"] {
-                    grid-template-columns: 1fr !important;
-                }
-                #onde-estamos iframe {
-                    min-height: 280px !important;
-                }
-            }
-        </style>
     </section>
+
+    <script>
+    (function() {
+        const unidadeTabs = document.querySelectorAll('.unidade-tab');
+        unidadeTabs.forEach((tab, index) => {
+            tab.addEventListener('click', function() {
+                unidadeTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                const nome = this.dataset.nome, img = this.dataset.img, desc = this.dataset.desc, endereco = this.dataset.endereco, mapsq = this.dataset.mapsq;
+                const content = document.querySelector('.unidade-content');
+                content.classList.add('fading');
+                setTimeout(() => {
+                    const nomeEl = document.querySelector('.unidade-nome');
+                    nomeEl.innerHTML = nome === 'Matriz Pindamonhangaba' ? 'Matriz <br class="mobile-only">Pindamonhangaba' : nome;
+                    document.querySelector('.unidade-descricao').innerHTML = desc;
+                    document.querySelector('.unidade-foto').src = img;
+                    document.querySelector('.unidade-foto').alt = 'Unidade ' + nome;
+                    document.querySelector('.endereco-text').textContent = endereco;
+                    document.querySelector('.mapa-iframe').src = 'https://www.google.com/maps?q=' + mapsq + '&z=15&output=embed';
+                    const btnNavegar = document.querySelector('.btn-navegar');
+                    if (btnNavegar) { btnNavegar.dataset.mapsq = mapsq; btnNavegar.dataset.nome = nome; btnNavegar.dataset.endereco = endereco; }
+                    index % 2 === 1 ? content.classList.add('reversed') : content.classList.remove('reversed');
+                    content.classList.remove('fading');
+                }, 500);
+            });
+        });
+        document.querySelector('.btn-navegar')?.addEventListener('click', function() {
+            window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(this.dataset.mapsq.replace(/\+/g, ' ')), '_blank');
+        });
+        document.querySelector('.btn-compartilhar')?.addEventListener('click', async function() {
+            const nome = document.querySelector('.btn-navegar')?.dataset.nome || 'RIP Pet';
+            const endereco = document.querySelector('.endereco-text')?.textContent || '';
+            const mapsq = document.querySelector('.btn-navegar')?.dataset.mapsq || '';
+            const shareData = { title: 'RIP Pet - ' + nome, text: 'Conheça a unidade ' + nome + ' da RIP Pet!
+📍 ' + endereco, url: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(mapsq.replace(/\+/g, ' ')) };
+            if (navigator.share) { try { await navigator.share(shareData); } catch (e) {} } else { navigator.clipboard.writeText(shareData.text + '
+' + shareData.url); alert('Link copiado!'); }
+        });
+    })();
+    </script>
 
     <!-- FAQ Section -->
     <section class="section" id="faq" style="background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%); padding: 80px 0; position: relative; overflow: hidden;">
