@@ -2712,6 +2712,88 @@
         }
 
         /* ============================================
+           LARGE SCREENS - Escala proporcional
+           Para monitores grandes (1920px+, 2K, 4K)
+           ============================================ */
+
+        /* Full HD+ (1920px e acima) */
+        @media (min-width: 1920px) {
+            html {
+                font-size: 112.5%; /* 18px base = +12.5% */
+            }
+
+            .logo img {
+                height: 50px;
+            }
+
+            .header.scrolled .logo img {
+                height: 45px;
+            }
+
+            .historia-badge {
+                width: 100px;
+            }
+
+            .footer-badge img {
+                width: 85px;
+            }
+        }
+
+        /* 2K / QHD (2560px e acima) */
+        @media (min-width: 2560px) {
+            html {
+                font-size: 131.25%; /* 21px base = +31.25% */
+            }
+
+            .logo img {
+                height: 58px;
+            }
+
+            .header.scrolled .logo img {
+                height: 52px;
+            }
+
+            .historia-badge {
+                width: 115px;
+            }
+
+            .footer-badge img {
+                width: 100px;
+            }
+
+            .nav-container {
+                padding: 0.8rem 3rem;
+            }
+        }
+
+        /* 4K / UHD (3840px e acima) */
+        @media (min-width: 3840px) {
+            html {
+                font-size: 162.5%; /* 26px base = +62.5% */
+            }
+
+            .logo img {
+                height: 72px;
+            }
+
+            .header.scrolled .logo img {
+                height: 62px;
+            }
+
+            .historia-badge {
+                width: 140px;
+            }
+
+            .footer-badge img {
+                width: 120px;
+            }
+
+            .nav-container {
+                padding: 1rem 4rem;
+            }
+        }
+
+        /* ============================================
            RESPONSIVE
            ============================================ */
         @media (max-width: 1024px) {
