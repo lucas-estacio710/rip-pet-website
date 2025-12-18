@@ -1664,17 +1664,12 @@
             flex: 1;
             text-align: center;
             padding: 2rem 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0s;
             position: relative;
             z-index: 1;
             box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
             overflow: hidden;
-        }
-
-        .como-card:hover {
-            transform: scale(1.04);
-            z-index: 10;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15), 0 8px 25px rgba(0, 0, 0, 0.25);
+            pointer-events: none;
+            cursor: default;
         }
 
         .como-card:nth-child(1) { background: #A9CF96; }
@@ -3315,11 +3310,6 @@
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
 
-            .como-card:hover {
-                transform: scale(1.05);
-                box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-            }
-
             .urna-item:hover {
                 transform: scale(1.03);
             }
@@ -3519,13 +3509,15 @@
                 padding-right: 0.9rem !important;
                 min-width: 52px;
                 min-height: 52px;
-                display: flex;
+                display: flex !important;
                 align-items: center;
                 justify-content: center;
                 font-size: var(--fs-2xl);
                 position: relative;
                 z-index: 1002;
                 transition: opacity 0.3s ease, visibility 0.3s ease;
+                pointer-events: auto !important;
+                cursor: pointer;
             }
 
             /* MOBILE MENU - Wrapper que desliza da direita */
@@ -4143,7 +4135,7 @@
                 justify-content: flex-start;
                 gap: 0;
                 padding: 0 !important;
-                margin-bottom: 1rem;
+                margin-bottom: 0;
             }
 
             .como-header h2 {
@@ -4225,7 +4217,7 @@
             }
 
             .como-card-number {
-                font-size: clamp(3rem, 12vw, 5rem) !important;
+                font-size: clamp(4rem, 15vw, 6rem) !important;
             }
 
             .como-card-icon {
@@ -5304,7 +5296,7 @@
                     </li>
                 </ul>
             </div>
-            <button class="mobile-menu-btn" aria-label="Menu">
+            <button class="mobile-menu-btn" aria-label="Menu" onclick="openMobileMenu()">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
@@ -5403,7 +5395,7 @@
                     <img src="/site_principal_novo_layout/images/forno_planta.webp" alt="Tecnologia de Última Geração" loading="lazy">
                     <div class="servico-card-content">
                         <h3>Tecnologia de Última Geração</h3>
-                        <p>Contamos com quatro equipamentos próprios com tecnologia de última geração. O que garante que nossa operação não polui o ambiente</p>
+                        <p>Contamos com equipamentos próprios com tecnologia de última geração, o que garante que nossa operação não polua o meio-ambiente</p>
                     </div>
                 </div>
                 <div class="servico-card">
@@ -5424,7 +5416,7 @@
                     <img src="/site_principal_novo_layout/images/sala_pouco.webp" alt="Salas de velório" loading="lazy">
                     <div class="servico-card-content">
                         <h3>Salas de velório</h3>
-                        <p>Todas as unidades possuem salas de velório reservadas e planejadas em cada detalhe para um momento reservado e único</p>
+                        <p>Todas as unidades possuem salas de velório privativas e planejadas em cada detalhe para um momento reservado e único</p>
                         <span><i class="fas fa-check"></i> Acessibilidade</span>
                     </div>
                 </div>
@@ -6155,78 +6147,103 @@
             });
         })();
 
-        // Mobile Menu - Variáveis
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenuWrapper = document.querySelector('.nav-menu-wrapper');
-        const menuOverlay = document.querySelector('.menu-overlay');
-
         // Função para abrir menu
         function openMobileMenu() {
-            if (!navMenuWrapper || !menuOverlay || !mobileMenuBtn) return;
-            navMenuWrapper.classList.add('active');
-            menuOverlay.classList.add('active');
-            mobileMenuBtn.style.opacity = '0';
-            mobileMenuBtn.style.visibility = 'hidden';
+            const navMenuWrapper = document.querySelector('.nav-menu-wrapper');
+            const menuOverlay = document.querySelector('.menu-overlay');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            if (navMenuWrapper) {
+                navMenuWrapper.classList.add('active');
+            }
+            if (menuOverlay) {
+                menuOverlay.classList.add('active');
+            }
+            if (mobileMenuBtn) {
+                mobileMenuBtn.style.opacity = '0';
+                mobileMenuBtn.style.visibility = 'hidden';
+            }
             document.body.style.overflow = 'hidden';
-            // Adiciona estado no histórico para interceptar botão voltar
             history.pushState({ menuOpen: true }, '');
         }
 
         // Função para fechar menu
         function closeMobileMenu(fromHistory) {
-            if (!navMenuWrapper || !menuOverlay || !mobileMenuBtn) return;
-            if (!navMenuWrapper.classList.contains('active')) return;
-            navMenuWrapper.classList.remove('active');
-            menuOverlay.classList.remove('active');
-            mobileMenuBtn.style.opacity = '1';
-            mobileMenuBtn.style.visibility = 'visible';
+            const navMenuWrapper = document.querySelector('.nav-menu-wrapper');
+            const menuOverlay = document.querySelector('.menu-overlay');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            if (navMenuWrapper) {
+                if (!navMenuWrapper.classList.contains('active')) return;
+                navMenuWrapper.classList.remove('active');
+            }
+            if (menuOverlay) {
+                menuOverlay.classList.remove('active');
+            }
+            if (mobileMenuBtn) {
+                mobileMenuBtn.style.opacity = '1';
+                mobileMenuBtn.style.visibility = 'visible';
+            }
             document.body.style.overflow = '';
             if (!fromHistory) history.back();
         }
 
-        // Toggle do botão hamburguer
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (navMenuWrapper.classList.contains('active')) {
-                    closeMobileMenu();
-                } else {
+        // Event listeners do menu mobile - todos em DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Botão hamburger para abrir
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     openMobileMenu();
-                }
-            });
-        }
+                });
+                // Touch event para mobile
+                mobileMenuBtn.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openMobileMenu();
+                }, { passive: false });
+            }
 
-        // Fecha ao clicar no overlay (área escura à esquerda)
-        if (menuOverlay) {
-            menuOverlay.addEventListener('click', function() {
-                closeMobileMenu();
-            });
-        }
+            // Fecha ao clicar no overlay (área escura à esquerda)
+            const menuOverlay = document.querySelector('.menu-overlay');
+            if (menuOverlay) {
+                menuOverlay.addEventListener('click', function() {
+                    closeMobileMenu();
+                });
+            }
 
-        // Fecha ao clicar no botão X dentro do menu
-        document.querySelector('.menu-close-btn')?.addEventListener('click', function() {
-            closeMobileMenu();
-        });
+            // Fecha ao clicar no botão X dentro do menu
+            const menuCloseBtn = document.querySelector('.menu-close-btn');
+            if (menuCloseBtn) {
+                menuCloseBtn.addEventListener('click', function() {
+                    closeMobileMenu();
+                });
+            }
 
-        // Fecha menu ao clicar em um item de navegação (links âncora)
-        document.querySelectorAll('.nav-menu a[href^="#"]').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navMenuWrapper.classList.contains('active')) {
-                    // Fecha menu visualmente sem history.back()
-                    // O link âncora vai criar seu próprio estado no histórico
-                    navMenuWrapper.classList.remove('active');
-                    menuOverlay.classList.remove('active');
-                    mobileMenuBtn.style.opacity = '1';
-                    mobileMenuBtn.style.visibility = 'visible';
-                    document.body.style.overflow = '';
-                }
+            // Fecha menu ao clicar em um item de navegação (links âncora)
+            document.querySelectorAll('.nav-menu a[href^="#"]').forEach(link => {
+                link.addEventListener('click', () => {
+                    const navMenuWrapper = document.querySelector('.nav-menu-wrapper');
+                    const menuOverlayEl = document.querySelector('.menu-overlay');
+                    const mobileMenuBtnEl = document.querySelector('.mobile-menu-btn');
+                    if (navMenuWrapper && navMenuWrapper.classList.contains('active')) {
+                        navMenuWrapper.classList.remove('active');
+                        if (menuOverlayEl) menuOverlayEl.classList.remove('active');
+                        if (mobileMenuBtnEl) {
+                            mobileMenuBtnEl.style.opacity = '1';
+                            mobileMenuBtnEl.style.visibility = 'visible';
+                        }
+                        document.body.style.overflow = '';
+                    }
+                });
             });
         });
 
         // Intercepta botão voltar do celular - fecha qualquer popup/menu aberto
         window.addEventListener('popstate', function(event) {
             // Fecha menu mobile
-            if (navMenuWrapper.classList.contains('active')) {
+            const navMenuWrapper = document.querySelector('.nav-menu-wrapper');
+            if (navMenuWrapper && navMenuWrapper.classList.contains('active')) {
                 closeMobileMenu(true);
                 return;
             }
