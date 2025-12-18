@@ -230,7 +230,7 @@
         }
 
         html {
-            scroll-behavior: smooth;
+            scroll-behavior: auto;
             -webkit-text-size-adjust: 100%;
             -moz-text-size-adjust: 100%;
             text-size-adjust: 100%;
@@ -1305,6 +1305,14 @@
             padding: 2.5rem 3rem;
         }
 
+        .transparencia-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            min-height: 400px;
+        }
+
         .transparencia-content h2 {
             font-family: var(--font-poppins);
             font-weight: 500;
@@ -1317,7 +1325,7 @@
             font-family: var(--font-autography);
             font-size: var(--fs-display-lg);
             display: block;
-            margin-top: -3rem;
+            margin-top: -1rem;
             letter-spacing: 1px;
         }
 
@@ -1326,7 +1334,7 @@
             font-weight: 200;
             font-size: var(--fs-lg);
             color: var(--azul-escuro);
-            margin-top: -3rem;
+            margin-top: auto;
         }
 
         .transparencia-content .google-rating {
@@ -3278,10 +3286,10 @@
             }
         }
 
-        /* Smooth scroll behavior */
+        /* Smooth scroll customizado via JS - não usar scroll-behavior nativo */
         @media (prefers-reduced-motion: no-preference) {
             html {
-                scroll-behavior: smooth;
+                scroll-behavior: auto;
             -webkit-text-size-adjust: 100%;
             -moz-text-size-adjust: 100%;
             text-size-adjust: 100%;
@@ -3364,13 +3372,18 @@
 
             /* Google stars - canto inferior esquerdo */
             .fixed-google-stars {
-                display: block !important;
+                display: flex !important;
                 bottom: 1.5rem !important;
                 left: 1rem !important;
             }
 
             .fixed-google-stars img {
-                height: 20px !important;
+                width: 70px !important;
+            }
+
+            /* VIP Pet só no desktop */
+            .fixed-google-stars .vip-pet-logo {
+                display: none !important;
             }
 
             /* Remover barra inferior mobile */
@@ -6025,6 +6038,65 @@
          SCRIPTS
          ========================================== -->
     <script>
+        // ============================================
+        // SMOOTH SCROLL COM INÉRCIA (momentum)
+        // ============================================
+        (function() {
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+            // Não aplicar em touch devices (já têm scroll nativo suave)
+            if (isTouchDevice) return;
+
+            let targetY = window.scrollY;
+            let currentY = window.scrollY;
+            let rafId = null;
+            const ease = 0.06; // Suavidade (0.05-0.06 = mais suave)
+
+            function smoothScroll() {
+                const diff = targetY - currentY;
+
+                // Lerp: aproxima suavemente do destino
+                currentY += diff * ease;
+
+                // Para quando a diferença for mínima
+                if (Math.abs(diff) < 0.5) {
+                    currentY = targetY;
+                    window.scrollTo(0, currentY);
+                    rafId = null;
+                    return;
+                }
+
+                window.scrollTo(0, currentY);
+                rafId = requestAnimationFrame(smoothScroll);
+            }
+
+            window.addEventListener('wheel', function(e) {
+                e.preventDefault();
+
+                // Adiciona delta ao target
+                targetY += e.deltaY;
+
+                // Limita aos bounds da página
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                targetY = Math.max(0, Math.min(targetY, maxScroll));
+
+                // Inicia animação se não estiver rodando
+                if (!rafId) {
+                    rafId = requestAnimationFrame(smoothScroll);
+                }
+            }, { passive: false });
+
+            // Sincroniza ao clicar em links de âncora
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function() {
+                    setTimeout(() => {
+                        targetY = window.scrollY;
+                        currentY = window.scrollY;
+                    }, 50);
+                });
+            });
+        })();
+
         // Mobile Menu - Variáveis
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navMenuWrapper = document.querySelector('.nav-menu-wrapper');
@@ -6549,7 +6621,7 @@
 
     <!-- Fixed VIP Pet + Google 5 Estrelas - Bottom Left -->
     <div class="fixed-google-stars" style="position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 9998; display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
-        <img src="/images/LOGO VIP PET.png" alt="VIP Pet" style="width: 90px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
+        <img src="/images/LOGO VIP PET.png" alt="VIP Pet" class="vip-pet-logo" style="width: 90px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
         <img src="/site_principal_novo_layout/images/google_5_estrelas.webp" alt="Google 5 estrelas" style="width: 90px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
     </div>
 
