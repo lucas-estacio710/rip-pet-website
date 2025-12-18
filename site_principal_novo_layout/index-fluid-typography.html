@@ -5217,7 +5217,7 @@
                 </button>
                 <ul class="nav-menu">
                     <li><a href="#sobre">A R.I.P. PET <span class="separator">|</span></a></li>
-                    <li><a href="#tecnologia">TECNOLOGIA <span class="separator">|</span></a></li>
+                    <li><a href="#tecnologia">TRANSPARÊNCIA <span class="separator">|</span></a></li>
                     <li><a href="#planos">PLANOS <span class="separator">|</span></a></li>
                     <li><a href="#unidades">UNIDADES <span class="separator">|</span></a></li>
                     <li><a href="#urnas">URNAS <span class="separator">|</span></a></li>
@@ -6104,6 +6104,7 @@
 
         // Função para abrir menu
         function openMobileMenu() {
+            if (!navMenuWrapper || !menuOverlay || !mobileMenuBtn) return;
             navMenuWrapper.classList.add('active');
             menuOverlay.classList.add('active');
             mobileMenuBtn.style.opacity = '0';
@@ -6115,6 +6116,7 @@
 
         // Função para fechar menu
         function closeMobileMenu(fromHistory) {
+            if (!navMenuWrapper || !menuOverlay || !mobileMenuBtn) return;
             if (!navMenuWrapper.classList.contains('active')) return;
             navMenuWrapper.classList.remove('active');
             menuOverlay.classList.remove('active');
@@ -6125,18 +6127,23 @@
         }
 
         // Toggle do botão hamburguer
-        mobileMenuBtn.addEventListener('click', function() {
-            if (navMenuWrapper.classList.contains('active')) {
-                closeMobileMenu();
-            } else {
-                openMobileMenu();
-            }
-        });
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (navMenuWrapper.classList.contains('active')) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            });
+        }
 
         // Fecha ao clicar no overlay (área escura à esquerda)
-        menuOverlay.addEventListener('click', function() {
-            closeMobileMenu();
-        });
+        if (menuOverlay) {
+            menuOverlay.addEventListener('click', function() {
+                closeMobileMenu();
+            });
+        }
 
         // Fecha ao clicar no botão X dentro do menu
         document.querySelector('.menu-close-btn')?.addEventListener('click', function() {
