@@ -1964,17 +1964,22 @@
             width: fit-content;
         }
 
-        /* Layout legislação três colunas */
+        /* Layout legislação duas colunas (docs + conteúdo) - mesma altura */
         .dest-lei-layout {
             display: grid;
-            grid-template-columns: 14% 54% 32%;
+            grid-template-columns: 14% 1fr;
             gap: 1rem;
             margin-bottom: 2rem;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
             padding: 0 2%;
             box-sizing: border-box;
-            align-items: start;
+            align-items: stretch;
+        }
+
+        /* Esconder notícias no layout - agora é popup */
+        .dest-lei-noticias {
+            display: none;
         }
         .dest-lei-docs {
             text-align: center;
@@ -2124,6 +2129,197 @@
             66.66%, 80% { transform: translateY(-760px); }
             83.33%, 96% { transform: translateY(-950px); }
             100% { transform: translateY(0); }
+        }
+
+        /* Botão para abrir popup de notícias */
+        .btn-ver-noticias {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+            margin: 1rem auto 0 auto;
+            width: fit-content;
+        }
+        .btn-ver-noticias:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+        }
+        .btn-ver-noticias svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* Popup de notícias */
+        .noticias-popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+        .noticias-popup-overlay.active {
+            display: flex;
+        }
+        .noticias-popup {
+            background: #1a1a1a;
+            border-radius: 16px;
+            max-width: 420px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: popupIn 0.3s ease;
+        }
+        @keyframes popupIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .noticias-popup-header {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .noticias-popup-header h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+        }
+        .noticias-popup-header span {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.8);
+        }
+        .noticias-popup-close {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            line-height: 1;
+            transition: background 0.3s ease;
+        }
+        .noticias-popup-close:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .noticias-popup-content {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Cards empilhados */
+        .noticias-cards-stack {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            margin-bottom: 1rem;
+        }
+        .noticia-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 280px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #111;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .noticia-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #111;
+        }
+        .noticia-card.dismissed {
+            transform: translateX(150%) rotate(15deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+        /* Z-index e posicionamento controlados via JavaScript */
+
+        /* Contador */
+        .noticias-counter {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Botões de controle */
+        .noticias-controls {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+        .noticias-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-voltar {
+            background: #333;
+            color: #fff;
+        }
+        .btn-voltar:hover:not(:disabled) {
+            background: #444;
+        }
+        .btn-voltar:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .btn-proximo {
+            background: #dc2626;
+            color: white;
+        }
+        .btn-proximo:hover {
+            background: #b91c1c;
+        }
+        .btn-recomecar {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+        }
+        .noticias-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
         }
 
         /* Seção Sepultamento - Card Style com Ilustração */
@@ -2668,9 +2864,16 @@
                 <div class="dest-lei-content">
                     <h3 class="dest-lei-titulo">O que diz a Lei?</h3>
                     <p>A <strong>Lei Federal nº 9.605/98</strong> (Lei de Crimes Ambientais) e a <strong>Resolução nº 1.321/2020 do CFMV</strong> (Conselho Federal de Medicina Veterinária) estabelecem que todo animal em óbito deve receber <strong>destinação ambientalmente adequada</strong>. O descarte irregular — como lixo comum, terrenos baldios ou corpos d'água (mar, rios, canais) — configura <strong>crime ambiental</strong>, com penas severas de multas e até reclusão.</p>
+
+                    <button class="btn-ver-noticias" onclick="abrirNoticiasPopup()">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        Isso aconteceu — Ver casos reais na mídia
+                    </button>
+
                     <div class="dest-lei-destaque">
-                        <p><strong>É dever do Veterinário/Clínica/Hospital</strong> orientar os tutores sobre as opções corretas de destinação e o que realmente acontece em cada uma delas. Como tutor, você tem o <strong>direito de ser informado para escolher</strong> e a <strong>responsabilidade de optar por uma alternativa regulamentada</strong>.</p>
-                        <p style="margin-top: 0.8rem; font-size: 0.85rem; color: #7c2d12;">Antes de indicar qualquer empresa particular, o profissional veterinário tem a <strong>obrigação ética de verificar pessoalmente</strong> as instalações, licenças ambientais e procedimentos do serviço recomendado.</p>
+                        <p><strong>É dever do Veterinário/Clínica/Hospital</strong> orientar os tutores sobre as opções corretas de destinação e o que realmente acontece em cada uma delas. Como tutor, você tem o <strong>direito de ser informado para escolher</strong> e a <strong>responsabilidade de optar por uma alternativa regulamentada</strong>. Antes de indicar qualquer empresa particular, o profissional veterinário tem a <strong>obrigação ética de verificar</strong> as instalações, licenças ambientais e procedimentos do serviço recomendado.</p>
                     </div>
                 </div>
 
@@ -7446,7 +7649,170 @@
                 c.style.opacity = '';
             });
         }
+
+        // Popup de notícias - Casos reais na mídia
+        let noticiaAtual = 0;
+        const totalNoticias = 6;
+
+        function abrirNoticiasPopup() {
+            document.getElementById('noticiasPopup').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            recomecarNoticias();
+        }
+
+        function fecharNoticiasPopup() {
+            document.getElementById('noticiasPopup').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function atualizarContadorNoticias() {
+            document.getElementById('noticiasAtual').textContent = Math.min(noticiaAtual + 1, totalNoticias);
+        }
+
+        function atualizarStackNoticias() {
+            const cards = document.querySelectorAll('.noticia-card');
+            cards.forEach((card, i) => {
+                card.classList.remove('dismissed');
+                card.style.zIndex = '';
+                card.style.transform = '';
+                card.style.opacity = '';
+
+                if (i < noticiaAtual) {
+                    card.classList.add('dismissed');
+                } else {
+                    const posicaoRelativa = i - noticiaAtual;
+                    card.style.zIndex = totalNoticias - posicaoRelativa;
+                    if (posicaoRelativa === 0) {
+                        card.style.transform = 'translateY(0) scale(1)';
+                        card.style.opacity = '1';
+                    } else {
+                        const offset = posicaoRelativa * 6;
+                        const scale = 1 - (posicaoRelativa * 0.02);
+                        const opacity = Math.max(0.5, 1 - (posicaoRelativa * 0.1));
+                        card.style.transform = `translateY(${offset}px) scale(${scale})`;
+                        card.style.opacity = opacity;
+                    }
+                }
+            });
+
+            // Mostrar/ocultar botões
+            document.querySelector('.btn-voltar').style.visibility = noticiaAtual > 0 ? 'visible' : 'hidden';
+
+            if (noticiaAtual >= totalNoticias) {
+                document.querySelector('.btn-proximo').style.display = 'none';
+                document.getElementById('btnRecomecar').style.display = 'flex';
+            } else {
+                document.querySelector('.btn-proximo').style.display = 'flex';
+                document.getElementById('btnRecomecar').style.display = 'none';
+            }
+        }
+
+        function proximaNoticia() {
+            if (noticiaAtual < totalNoticias) {
+                noticiaAtual++;
+                atualizarContadorNoticias();
+                atualizarStackNoticias();
+            }
+        }
+
+        function voltarNoticia() {
+            if (noticiaAtual > 0) {
+                noticiaAtual--;
+                atualizarContadorNoticias();
+                atualizarStackNoticias();
+            }
+        }
+
+        function recomecarNoticias() {
+            noticiaAtual = 0;
+            atualizarContadorNoticias();
+            atualizarStackNoticias();
+        }
+
+        // Clicar no card para avançar
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.noticia-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    if (!this.classList.contains('dismissed')) {
+                        proximaNoticia();
+                    }
+                });
+            });
+        });
+
+        // Fechar popup ao clicar fora
+        document.addEventListener('click', function(e) {
+            const popup = document.getElementById('noticiasPopup');
+            if (e.target === popup) {
+                fecharNoticiasPopup();
+            }
+        });
+
+        // Fechar popup com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                fecharNoticiasPopup();
+            }
+        });
     </script>
+
+    <!-- Popup de Notícias -->
+    <div id="noticiasPopup" class="noticias-popup-overlay">
+        <div class="noticias-popup">
+            <div class="noticias-popup-header">
+                <div>
+                    <h3>Isso aconteceu</h3>
+                    <span>Casos reais na mídia</span>
+                </div>
+                <button class="noticias-popup-close" onclick="fecharNoticiasPopup()">&times;</button>
+            </div>
+            <div class="noticias-popup-content">
+                <div class="noticias-counter">
+                    <span id="noticiasAtual">1</span> de <span id="noticiasTotal">6</span>
+                </div>
+                <div class="noticias-cards-stack" id="noticiasStack">
+                    <div class="noticia-card" data-index="0">
+                        <img src="images/novo_layout/noticias-1.png" alt="Notícia sobre cemitério clandestino">
+                    </div>
+                    <div class="noticia-card" data-index="1">
+                        <img src="images/novo_layout/noticias-2.png" alt="Notícia sobre golpe da cremação">
+                    </div>
+                    <div class="noticia-card" data-index="2">
+                        <img src="images/novo_layout/noticias-3.png" alt="Notícia sobre descarte irregular">
+                    </div>
+                    <div class="noticia-card" data-index="3">
+                        <img src="images/novo_layout/noticias-4.png" alt="Notícia sobre irregularidades">
+                    </div>
+                    <div class="noticia-card" data-index="4">
+                        <img src="images/novo_layout/noticias-5.png" alt="Notícia sobre destinação irregular">
+                    </div>
+                    <div class="noticia-card" data-index="5">
+                        <img src="images/novo_layout/noticias-6.png" alt="Notícia sobre irregularidades">
+                    </div>
+                </div>
+                <div class="noticias-controls">
+                    <button class="noticias-btn btn-voltar" onclick="voltarNoticia()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                        </svg>
+                        Voltar
+                    </button>
+                    <button class="noticias-btn btn-proximo" onclick="proximaNoticia()">
+                        Próximo
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                        </svg>
+                    </button>
+                </div>
+                <button class="noticias-btn btn-recomecar" id="btnRecomecar" onclick="recomecarNoticias()" style="display: none; margin-top: 0.75rem;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                    </svg>
+                    Recomeçar
+                </button>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
