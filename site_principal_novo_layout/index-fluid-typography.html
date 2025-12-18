@@ -4360,16 +4360,16 @@
                 margin: 0 !important;
             }
 
-            /* 4. Descrição - 35-45% da largura, fonte menor */
+            /* 4. Descrição - full width com padding lateral */
             .unidade-descricao,
             .unidade-text p.unidade-descricao {
                 order: 4 !important;
-                font-size: clamp(0.7rem, 2.8vw, var(--fs-sm)) !important;
-                line-height: 1.6 !important;
+                font-size: var(--fs-base) !important;
+                line-height: 1.7 !important;
                 text-align: justify !important;
-                width: clamp(35%, 40vw, 45%) !important;
-                margin: 0 auto 1rem auto !important;
-                padding: 0 !important;
+                width: 100% !important;
+                margin: 0 0 1rem 0 !important;
+                padding: 0 1rem !important;
                 display: block !important;
             }
 
@@ -5340,7 +5340,7 @@
                 <div class="planos-header-strip">
                     <h2><span class="planos-line1">Aqui, <span class="script">cada história</span> é única e</span><span class="planos-line2">merece ser tratada <span class="script">com carinho</span></span></h2>
                 </div>
-                <p class="planos-subtitle">Todos os planos preventivos e emergenciais incluem:</p>
+                <p class="planos-subtitle">Os planos preventivos e emergenciais incluem:</p>
             </div>
             <div class="beneficios-grid">
                 <div class="beneficio-card verde-1">
@@ -6125,30 +6125,35 @@
             }
         });
 
-        // Top Bar - mostrar ao scrollar para cima (só desktop)
+        // Top Bar - mostrar no topo ou ao scrollar para cima (só desktop)
         let lastScrollY = window.scrollY;
         const topBar = document.querySelector('.top-bar');
         const headerEl = document.querySelector('.header');
 
-        window.addEventListener('scroll', function() {
+        function updateTopBar() {
             // Só funciona em desktop (largura > 768px)
             if (window.innerWidth <= 768) return;
 
             const currentScrollY = window.scrollY;
 
-            // Scrollando para cima
-            if (currentScrollY < lastScrollY && currentScrollY > 50) {
+            // Mostrar no topo (scroll = 0) ou scrollando para cima
+            if (currentScrollY === 0 || (currentScrollY < lastScrollY && currentScrollY > 50)) {
                 topBar.classList.add('visible');
                 headerEl.classList.add('topbar-visible');
             }
-            // Scrollando para baixo ou no topo
-            else {
+            // Scrollando para baixo
+            else if (currentScrollY > lastScrollY) {
                 topBar.classList.remove('visible');
                 headerEl.classList.remove('topbar-visible');
             }
 
             lastScrollY = currentScrollY;
-        });
+        }
+
+        // Verificar estado inicial ao carregar
+        updateTopBar();
+
+        window.addEventListener('scroll', updateTopBar);
 
         // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(button => {
@@ -6542,9 +6547,10 @@
         </div>
     </div>
 
-    <!-- Fixed Google 5 Estrelas - Bottom Left -->
-    <div class="fixed-google-stars" style="position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 9998;">
-        <img src="/site_principal_novo_layout/images/google_5_estrelas.webp" alt="Google 5 estrelas" style="height: 18px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
+    <!-- Fixed VIP Pet + Google 5 Estrelas - Bottom Left -->
+    <div class="fixed-google-stars" style="position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 9998; display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
+        <img src="/images/LOGO VIP PET.png" alt="VIP Pet" style="width: 90px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
+        <img src="/site_principal_novo_layout/images/google_5_estrelas.webp" alt="Google 5 estrelas" style="width: 90px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
     </div>
 
     <!-- Fixed WhatsApp Button - Bottom Right (Gradiente + Pulse + Notificação) -->
