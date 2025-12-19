@@ -3526,82 +3526,83 @@
                 -webkit-tap-highlight-color: transparent;
             }
 
-            /* Overlay - cobre tela toda quando menu aberto */
+            /* Overlay - fundo escuro */
             .menu-overlay {
-                position: fixed;
-                inset: 0;
-                background: rgba(0, 0, 0, 0.5);
-                z-index: 1000;
-                opacity: 0;
-                visibility: hidden;
-                transition: opacity 0.3s, visibility 0.3s;
+                display: none !important;
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                background: rgba(0, 0, 0, 0.6) !important;
+                z-index: 9998 !important;
             }
 
             .menu-overlay.active {
-                opacity: 1;
-                visibility: visible;
+                display: block !important;
             }
 
-            /* Menu lateral */
+            /* Menu lateral - DIREITA */
             .nav-menu-wrapper {
-                position: fixed;
-                top: 0;
-                right: 0;
-                width: 75%;
-                max-width: 320px;
-                height: 100%;
-                background: #0a2342;
-                z-index: 1001;
-                display: flex;
-                flex-direction: column;
-                padding: 1rem;
-                transform: translateX(100%);
-                transition: transform 0.3s ease;
-                overflow-y: auto;
+                display: none !important;
+                position: fixed !important;
+                top: 0 !important;
+                right: 0 !important;
+                left: auto !important;
+                width: 280px !important;
+                height: 100% !important;
+                background: #0a2342 !important;
+                z-index: 9999 !important;
+                flex-direction: column !important;
+                padding: 1rem !important;
+                overflow-y: auto !important;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.3) !important;
             }
 
             .nav-menu-wrapper.active {
-                transform: translateX(0);
+                display: flex !important;
             }
 
             /* Botão fechar */
             .menu-close-btn {
-                display: flex;
-                align-self: flex-end;
-                padding: 0.5rem;
-                margin-bottom: 1rem;
-                background: none;
-                border: none;
-                color: white;
-                font-size: 1.5rem;
-                cursor: pointer;
+                display: flex !important;
+                align-self: flex-end !important;
+                padding: 0.8rem !important;
+                margin-bottom: 1rem !important;
+                background: none !important;
+                border: none !important;
+                color: white !important;
+                font-size: 1.8rem !important;
+                cursor: pointer !important;
             }
 
             /* Lista do menu */
             .nav-menu {
-                display: flex;
-                flex-direction: column;
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                flex: 1;
+                display: flex !important;
+                flex-direction: column !important;
+                list-style: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                flex: 1 !important;
             }
 
             .nav-menu li {
-                border-bottom: 1px solid rgba(255,255,255,0.1);
+                border-bottom: 1px solid rgba(255,255,255,0.15) !important;
             }
 
             .nav-menu li a {
-                display: block;
-                padding: 1rem;
-                color: white;
-                text-decoration: none;
-                text-align: right;
-                font-size: 1rem;
+                display: block !important;
+                padding: 1rem !important;
+                color: white !important;
+                text-decoration: none !important;
+                text-align: right !important;
+                font-size: 1.1rem !important;
             }
 
             .nav-menu li a .separator {
-                display: none;
+                display: none !important;
             }
 
             /* Contatos no menu */
