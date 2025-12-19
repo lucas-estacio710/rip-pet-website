@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/santos",
-      "destination": "/santos.html"
+      "destination": "/site_santos_novo_layout/index.html"
     },
     {
       "source": "/novo",
