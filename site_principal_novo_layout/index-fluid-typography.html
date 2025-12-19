@@ -415,28 +415,90 @@
            DESKTOP MENU
            ============================================ */
 
-        /* Desktop: wrapper posicionado fixo sobrepondo o header */
+        /* Desktop: wrapper é transparente, apenas container */
         .nav-menu-wrapper {
-            position: fixed;
-            top: 0;
-            right: 0;
-            height: auto;
-            background: transparent;
-            z-index: 1001;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 0.6rem 2rem;
-            pointer-events: none;
+            display: contents;
         }
 
-        .nav-menu-wrapper * {
-            pointer-events: auto;
+        /* Menu mobile ativo - aplicar em qualquer resolução */
+        .nav-menu-wrapper.active {
+            display: flex !important;
+            flex-direction: column;
+            position: fixed !important;
+            top: 0 !important;
+            right: 0 !important;
+            width: 70% !important;
+            height: 100vh !important;
+            background: rgba(10, 35, 66, 0.95) !important;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 1rem;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.4);
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateX(0) !important;
+            z-index: 9999 !important;
+            overflow-y: auto;
+        }
+
+        /* Overlay escondido por padrão */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 30%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+        }
+
+        .menu-overlay.active {
+            display: block !important;
+        }
+
+        .menu-close-btn {
+            display: none;
+        }
+
+        .nav-menu-wrapper.active .menu-close-btn {
+            display: flex !important;
+            align-self: flex-end;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Mostrar nav-menu quando wrapper está ativo */
+        .nav-menu-wrapper.active .nav-menu {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 0 !important;
+            list-style: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .nav-menu-wrapper.active .nav-menu li {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-menu-wrapper.active .nav-menu li a {
+            display: block !important;
+            padding: 1rem !important;
+            color: white !important;
+            text-align: right;
+            font-size: 1rem;
+        }
+
+        .nav-menu-wrapper.active .nav-menu li a .separator {
+            display: none !important;
         }
 
         /* Desktop: esconder elementos mobile-only */
-        .menu-close-btn,
-        .menu-overlay,
         .mobile-menu-btn,
         .menu-contact-icons,
         .menu-social-footer {
@@ -447,6 +509,7 @@
             display: flex;
             list-style: none;
             gap: 0.1rem;
+            flex: 1;
             justify-content: flex-end;
         }
 
@@ -3539,70 +3602,100 @@
                 -webkit-tap-highlight-color: transparent;
             }
 
-            /* Overlay - fundo escuro */
-            .menu-overlay {
-                display: none !important;
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                bottom: 0 !important;
-                width: 100% !important;
-                height: 100% !important;
-                background: rgba(0, 0, 0, 0.6) !important;
-                z-index: 9998 !important;
-            }
-
-            .menu-overlay.active {
-                display: block !important;
-            }
-
-            /* Menu lateral - DIREITA */
+            /* MOBILE MENU - Wrapper que desliza da direita */
             .nav-menu-wrapper {
-                display: none !important;
-                position: fixed !important;
-                top: 0 !important;
-                right: 0 !important;
-                left: auto !important;
-                width: 280px !important;
-                height: 100% !important;
-                background: #0a2342 !important;
-                z-index: 9999 !important;
-                flex-direction: column !important;
-                padding: 1rem !important;
-                overflow-y: auto !important;
-                box-shadow: -5px 0 20px rgba(0,0,0,0.3) !important;
+                display: flex !important;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 70%;
+                height: 100svh;
+                height: 100dvh;
+                max-height: -webkit-fill-available;
+                background: rgba(10, 35, 66, 0.92);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                padding: var(--menu-gap);
+                box-shadow: -5px 0 30px rgba(0,0,0,0.4);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateX(100%);
+                transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+                z-index: 1001;
+                overflow-y: auto;
+                overflow-x: hidden;
             }
 
             .nav-menu-wrapper.active {
-                display: flex !important;
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(0);
             }
 
-            /* Botão fechar */
+            /* Botão fechar no topo */
             .menu-close-btn {
                 display: flex !important;
-                align-self: flex-end !important;
-                padding: 0.8rem !important;
-                margin-bottom: 1rem !important;
-                background: none !important;
-                border: none !important;
-                color: white !important;
-                font-size: 1.8rem !important;
-                cursor: pointer !important;
+                align-self: flex-end;
+                background: none;
+                border: none;
+                color: white;
+                font-size: var(--fs-lg);
+                cursor: pointer;
+                padding: var(--menu-btn-padding);
+                opacity: 0.8;
+                transition: opacity 0.3s ease, transform 0.3s ease;
+                margin: 0 0 var(--menu-gap) 0;
+                flex-shrink: 0;
             }
 
-            /* Lista do menu */
+            .menu-close-btn:hover {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+
+            /* Menu dentro do wrapper */
             .nav-menu {
                 display: flex !important;
                 flex-direction: column !important;
+                flex: 1 !important;
+                gap: 0 !important;
                 list-style: none !important;
                 padding: 0 !important;
                 margin: 0 !important;
-                flex: 1 !important;
+                justify-content: flex-start;
+            }
+
+            .nav-menu li:first-child {
+                margin-top: 0 !important;
+                padding-top: 0;
+            }
+
+            /* Overlay escuro quando menu aberto - só nos 30% da esquerda */
+            .menu-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 30%;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.4s ease, visibility 0.4s ease;
+            }
+
+            .menu-overlay.active {
+                opacity: 1;
+                visibility: visible;
             }
 
             .nav-menu li {
-                border-bottom: 1px solid rgba(255,255,255,0.15) !important;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .nav-menu li:last-child {
+                border-bottom: none;
             }
 
             .nav-menu li a {
@@ -5212,6 +5305,44 @@
                     <img src="/site_principal_novo_layout/images/assets/rippet_logo_horizontal_fundo_claro_sombra.webp" alt="RIP PET - Crematório de Animais" width="150" height="46">
                 </a>
             </div>
+            <div class="nav-menu-wrapper">
+                <button class="menu-close-btn" aria-label="Fechar menu">
+                    <i class="fas fa-times"></i>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="#sobre">A R.I.P. PET <span class="separator">|</span></a></li>
+                    <li><a href="#planos">PLANOS <span class="separator">|</span></a></li>
+                    <li><a href="#tecnologia">TRANSPARÊNCIA <span class="separator">|</span></a></li>
+                    <li><a href="#unidades">UNIDADES <span class="separator">|</span></a></li>
+                    <li><a href="#urnas">URNAS <span class="separator">|</span></a></li>
+                    <li><a href="#dedicatorias">DEDICATÓRIAS <span class="separator">|</span></a></li>
+                    <li><a href="#faq">FAQ <span class="separator">|</span></a></li>
+                    <li><a href="#blog">BLOG</a></li>
+                    <li class="menu-contact-icons">
+                        <a href="javascript:void(0)" onclick="closeMobileMenu(); setTimeout(openPhonePopup, 100);" class="menu-icon-btn phone">
+                            <i class="fas fa-phone"></i>
+                            <span>Ligue Agora 24h</span>
+                        </a>
+                        <a href="javascript:void(0)" onclick="closeMobileMenu(); setTimeout(openWhatsAppPopup, 100);" class="menu-icon-btn whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </li>
+                    <li class="menu-social-footer">
+                        <span class="social-label">Siga nossas redes sociais:</span>
+                        <div class="social-links">
+                            <a href="https://instagram.com/rippetcrematorio" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                                <span>@rippetcrematorio</span>
+                            </a>
+                            <a href="https://facebook.com/rippetcrematorio" target="_blank">
+                                <i class="fab fa-facebook"></i>
+                                <span>@rippetcrematorio</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
             <button class="mobile-menu-btn" aria-label="Menu" onclick="openMobileMenu()">
                 <i class="fas fa-bars"></i>
             </button>
@@ -5220,46 +5351,6 @@
 
     <!-- Overlay do menu mobile -->
     <div class="menu-overlay"></div>
-
-    <!-- Menu mobile lateral - FORA do header para evitar conflito de z-index -->
-    <div class="nav-menu-wrapper">
-        <button class="menu-close-btn" aria-label="Fechar menu">
-            <i class="fas fa-times"></i>
-        </button>
-        <ul class="nav-menu">
-            <li><a href="#sobre">A R.I.P. PET</a></li>
-            <li><a href="#planos">PLANOS</a></li>
-            <li><a href="#tecnologia">TRANSPARÊNCIA</a></li>
-            <li><a href="#unidades">UNIDADES</a></li>
-            <li><a href="#urnas">URNAS</a></li>
-            <li><a href="#dedicatorias">DEDICATÓRIAS</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#blog">BLOG</a></li>
-            <li class="menu-contact-icons">
-                <a href="javascript:void(0)" onclick="closeMobileMenu(); setTimeout(openPhonePopup, 100);" class="menu-icon-btn phone">
-                    <i class="fas fa-phone"></i>
-                    <span>Ligue Agora 24h</span>
-                </a>
-                <a href="javascript:void(0)" onclick="closeMobileMenu(); setTimeout(openWhatsAppPopup, 100);" class="menu-icon-btn whatsapp">
-                    <i class="fab fa-whatsapp"></i>
-                    <span>WhatsApp</span>
-                </a>
-            </li>
-            <li class="menu-social-footer">
-                <span class="social-label">Siga nossas redes sociais:</span>
-                <div class="social-links">
-                    <a href="https://instagram.com/rippetcrematorio" target="_blank">
-                        <i class="fab fa-instagram"></i>
-                        <span>@rippetcrematorio</span>
-                    </a>
-                    <a href="https://facebook.com/rippetcrematorio" target="_blank">
-                        <i class="fab fa-facebook"></i>
-                        <span>@rippetcrematorio</span>
-                    </a>
-                </div>
-            </li>
-        </ul>
-    </div>
 
     <!-- ==========================================
          HERO SECTION
