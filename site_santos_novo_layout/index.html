@@ -1841,273 +1841,6 @@
         <img id="popupImage" src="" alt="Imagem expandida" style="max-width: 90%; max-height: 90vh; object-fit: contain; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
     </div>
 
-    <section id="planos" class="section-planos">
-        <style>
-            .section-planos {
-                background-color: #02243c;
-                padding: 0 0 2.5rem 0;
-                position: relative;
-            }
-            .section-planos::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-image: url('images/novo_layout/matriz-horizontal.png');
-                background-size: cover;
-                background-position: center;
-                opacity: 0.16;
-                z-index: 1;
-            }
-            .planos-container {
-                max-width: 1100px;
-                margin: 0 auto;
-                padding: 0 1.5rem;
-                position: relative;
-                z-index: 2;
-            }
-            .planos-header {
-                text-align: center;
-                margin-bottom: 1.75rem;
-            }
-            .planos-header-strip {
-                background: linear-gradient(135deg, #6E945A 0%, #A7E189 50%, #6E945A 100%);
-                padding: 1.2rem 2rem;
-                margin-left: calc(-50vw + 50%);
-                margin-right: calc(-50vw + 50%);
-                margin-bottom: 1rem;
-            }
-            .planos-header h2 {
-                font-family: 'Poppins', sans-serif;
-                font-weight: 300;
-                font-size: 1.4rem;
-                color: #02243c;
-            }
-            .planos-header h2 .script {
-                font-family: 'Autography', cursive;
-                font-size: 3.25rem;
-                color: #02243c;
-                letter-spacing: 1px;
-            }
-            .planos-subtitle {
-                font-family: 'Poppins', sans-serif;
-                font-weight: 600;
-                font-size: 1.5rem;
-                color: white;
-                margin-top: 0.75rem;
-            }
-            .beneficios-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.9rem;
-                max-width: 950px;
-                margin: 0 auto;
-            }
-            .beneficio-card {
-                display: flex;
-                align-items: center;
-                gap: 0.75rem;
-                padding: 0.6rem 1rem;
-                border-radius: 50px;
-                position: relative;
-                opacity: 0;
-                transform: translateY(15px);
-                transition: opacity 1.2s ease, transform 1.2s ease;
-            }
-            .beneficio-card.revealed {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            .beneficio-card:nth-child(1) { transition-delay: 0s; }
-            .beneficio-card:nth-child(2) { transition-delay: 0.15s; }
-            .beneficio-card:nth-child(3) { transition-delay: 0.3s; }
-            .beneficio-card:nth-child(4) { transition-delay: 0.45s; }
-            .beneficio-card:nth-child(5) { transition-delay: 0.6s; }
-            .beneficio-card:nth-child(6) { transition-delay: 0.75s; }
-            .beneficio-card:nth-child(7) { transition-delay: 0.9s; }
-            .beneficio-card:nth-child(8) { transition-delay: 1.05s; }
-            .beneficio-card.verde-1 { background-color: #98cf81; }
-            .beneficio-card.verde-2 { background-color: #a6ce96; }
-            .beneficio-card.verde-3 { background-color: #adc7a7; }
-            .beneficio-card.verde-4 { background-color: #d5dad8; }
-            .beneficio-img-wrapper {
-                position: relative;
-                flex-shrink: 0;
-            }
-            .beneficio-img {
-                width: 55px;
-                height: 55px;
-                border-radius: 50%;
-                object-fit: cover;
-                display: block;
-            }
-            .beneficio-check {
-                position: absolute;
-                top: -2px;
-                right: -2px;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-            }
-            .beneficio-content {
-                flex: 1;
-                text-align: center;
-            }
-            .beneficio-content h3 {
-                font-family: 'Poppins', sans-serif;
-                font-weight: 600;
-                font-size: 1rem;
-                color: #02243c;
-                letter-spacing: -0.3px;
-            }
-            .beneficio-content p {
-                font-family: 'Poppins', sans-serif;
-                font-weight: 300;
-                font-style: italic;
-                font-size: 0.85rem;
-                color: #02243c;
-            }
-            @media (max-width: 900px) {
-                .beneficios-grid {
-                    grid-template-columns: 1fr;
-                }
-            }
-            @media (max-width: 768px) {
-                .planos-header-strip {
-                    padding: 1rem 0.5rem;
-                }
-                .planos-header-strip h2 {
-                    font-size: 1.4rem;
-                    line-height: 1.8;
-                    letter-spacing: -0.5px;
-                }
-                .planos-header-strip h2 .script {
-                    font-size: 2.4rem;
-                    line-height: 0.9;
-                }
-                .planos-line1,
-                .planos-line2 {
-                    display: block;
-                }
-                .planos-subtitle {
-                    font-size: 1.5rem;
-                    padding: 0 0.5rem;
-                    margin-top: 1rem;
-                }
-            }
-        </style>
-
-        <div class="planos-container">
-            <div class="planos-header">
-                <div class="planos-header-strip">
-                    <h2><span class="planos-line1">Aqui, <span class="script">cada história</span> é única e</span><span class="planos-line2">merece ser tratada <span class="script">com carinho</span></span></h2>
-                </div>
-                <p class="planos-subtitle">Todos os planos preventivos e emergenciais incluem:</p>
-            </div>
-            <div class="beneficios-grid">
-                <div class="beneficio-card verde-1">
-                    <div class="beneficio-img-wrapper">
-                        <img src="images/novo_layout/carro-facahda.png" alt="Remoção 24h" class="beneficio-img" loading="lazy">
-                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
-                    </div>
-                    <div class="beneficio-content">
-                        <h3>Remoção 24h</h3>
-                        <p>onde estiver, todos os dias</p>
-                    </div>
-                </div>
-                <div class="beneficio-card verde-1">
-                    <div class="beneficio-img-wrapper">
-                        <img src="images/novo_layout/sala-camp.webp" alt="Cerimônia de despedida" class="beneficio-img" loading="lazy">
-                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
-                    </div>
-                    <div class="beneficio-content">
-                        <h3>Cerimônia de despedida</h3>
-                        <p>agendada e reservada</p>
-                    </div>
-                </div>
-                <div class="beneficio-card verde-2">
-                    <div class="beneficio-img-wrapper">
-                        <img src="images/novo_layout/forno-planta.png" alt="Cremação assistida" class="beneficio-img" loading="lazy">
-                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
-                    </div>
-                    <div class="beneficio-content">
-                        <h3>Cremação assistida</h3>
-                        <p>equipamentos crematórios próprios</p>
-                    </div>
-                </div>
-                <div class="beneficio-card verde-2">
-                    <div class="beneficio-img-wrapper">
-                        <img src="images/novo_layout/biourna-provisoria.png" alt="Urna" class="beneficio-img" loading="lazy">
-                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
-                    </div>
-                    <div class="beneficio-content">
-                        <h3>Urna</h3>
-                        <p>inclusa na cremação individual</p>
-                    </div>
-                </div>
-                <div class="beneficio-card verde-3">
-                    <div class="beneficio-img-wrapper">
-                        <img src="images/novo_layout/recordacao-provisoria.png" alt="Recordação afetiva" class="beneficio-img" loading="lazy">
-                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
-                    </div>
-                    <div class="beneficio-content">
-                        <h3>Recordação afetiva</h3>
-                        <p>únicas e exclusivas</p>
-                    </div>
-                </div>
-                <div class="beneficio-card verde-3">
-                    <div class="beneficio-img-wrapper">
-                        <img src="images/novo_layout/certificado-provisorio.png" alt="Certificado de cremação" class="beneficio-img" loading="lazy">
-                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
-                    </div>
-                    <div class="beneficio-content">
-                        <h3>Certificado de cremação</h3>
-                        <p>assinado por veterinário responsável</p>
-                    </div>
-                </div>
-                <div class="beneficio-card verde-4">
-                    <div class="beneficio-img-wrapper">
-                        <img src="images/novo_layout/entrega-provisoria.png" alt="Entrega em seu endereço" class="beneficio-img" loading="lazy">
-                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
-                    </div>
-                    <div class="beneficio-content">
-                        <h3>Entrega em seu endereço</h3>
-                        <p>em mãos, de forma agendada</p>
-                    </div>
-                </div>
-                <div class="beneficio-card verde-4">
-                    <div class="beneficio-img-wrapper">
-                        <img src="images/novo_layout/apoio-psico.png" alt="Apoio psicológico" class="beneficio-img" loading="lazy">
-                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
-                    </div>
-                    <div class="beneficio-content">
-                        <h3>Apoio psicológico</h3>
-                        <p>receba todo o amparo psicológico</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-    // Beneficio cards reveal animation
-    (function() {
-        const beneficioObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                }
-            });
-        }, { root: null, rootMargin: '0px', threshold: 0.2 });
-
-        document.querySelectorAll('.beneficio-card').forEach(el => {
-            beneficioObserver.observe(el);
-        });
-    })();
-    </script>
-
     <!-- ==========================================
          SECTION: COMO TRABALHAMOS
          ========================================== -->
@@ -2389,6 +2122,272 @@
         comoGrid.addEventListener('scroll', updateArrows);
         window.addEventListener('resize', updateArrows);
         updateArrows();
+    })();
+    </script>
+    <section id="planos" class="section-planos">
+        <style>
+            .section-planos {
+                background-color: #02243c;
+                padding: 0 0 2.5rem 0;
+                position: relative;
+            }
+            .section-planos::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-image: url('images/novo_layout/matriz-horizontal.png');
+                background-size: cover;
+                background-position: center;
+                opacity: 0.16;
+                z-index: 1;
+            }
+            .planos-container {
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 0 1.5rem;
+                position: relative;
+                z-index: 2;
+            }
+            .planos-header {
+                text-align: center;
+                margin-bottom: 1.75rem;
+            }
+            .planos-header-strip {
+                background: linear-gradient(135deg, #6E945A 0%, #A7E189 50%, #6E945A 100%);
+                padding: 1.2rem 2rem;
+                margin-left: calc(-50vw + 50%);
+                margin-right: calc(-50vw + 50%);
+                margin-bottom: 1rem;
+            }
+            .planos-header h2 {
+                font-family: 'Poppins', sans-serif;
+                font-weight: 300;
+                font-size: 1.4rem;
+                color: #02243c;
+            }
+            .planos-header h2 .script {
+                font-family: 'Autography', cursive;
+                font-size: 3.25rem;
+                color: #02243c;
+                letter-spacing: 1px;
+            }
+            .planos-subtitle {
+                font-family: 'Poppins', sans-serif;
+                font-weight: 600;
+                font-size: 1.5rem;
+                color: white;
+                margin-top: 0.75rem;
+            }
+            .beneficios-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.9rem;
+                max-width: 950px;
+                margin: 0 auto;
+            }
+            .beneficio-card {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                padding: 0.6rem 1rem;
+                border-radius: 50px;
+                position: relative;
+                opacity: 0;
+                transform: translateY(15px);
+                transition: opacity 1.2s ease, transform 1.2s ease;
+            }
+            .beneficio-card.revealed {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .beneficio-card:nth-child(1) { transition-delay: 0s; }
+            .beneficio-card:nth-child(2) { transition-delay: 0.15s; }
+            .beneficio-card:nth-child(3) { transition-delay: 0.3s; }
+            .beneficio-card:nth-child(4) { transition-delay: 0.45s; }
+            .beneficio-card:nth-child(5) { transition-delay: 0.6s; }
+            .beneficio-card:nth-child(6) { transition-delay: 0.75s; }
+            .beneficio-card:nth-child(7) { transition-delay: 0.9s; }
+            .beneficio-card:nth-child(8) { transition-delay: 1.05s; }
+            .beneficio-card.verde-1 { background-color: #98cf81; }
+            .beneficio-card.verde-2 { background-color: #a6ce96; }
+            .beneficio-card.verde-3 { background-color: #adc7a7; }
+            .beneficio-card.verde-4 { background-color: #d5dad8; }
+            .beneficio-img-wrapper {
+                position: relative;
+                flex-shrink: 0;
+            }
+            .beneficio-img {
+                width: 55px;
+                height: 55px;
+                border-radius: 50%;
+                object-fit: cover;
+                display: block;
+            }
+            .beneficio-check {
+                position: absolute;
+                top: -2px;
+                right: -2px;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+            }
+            .beneficio-content {
+                flex: 1;
+                text-align: center;
+            }
+            .beneficio-content h3 {
+                font-family: 'Poppins', sans-serif;
+                font-weight: 600;
+                font-size: 1rem;
+                color: #02243c;
+                letter-spacing: -0.3px;
+            }
+            .beneficio-content p {
+                font-family: 'Poppins', sans-serif;
+                font-weight: 300;
+                font-style: italic;
+                font-size: 0.85rem;
+                color: #02243c;
+            }
+            @media (max-width: 900px) {
+                .beneficios-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+            @media (max-width: 768px) {
+                .planos-header-strip {
+                    padding: 1rem 0.5rem;
+                }
+                .planos-header-strip h2 {
+                    font-size: 1.4rem;
+                    line-height: 1.8;
+                    letter-spacing: -0.5px;
+                }
+                .planos-header-strip h2 .script {
+                    font-size: 2.4rem;
+                    line-height: 0.9;
+                }
+                .planos-line1,
+                .planos-line2 {
+                    display: block;
+                }
+                .planos-subtitle {
+                    font-size: 1.5rem;
+                    padding: 0 0.5rem;
+                    margin-top: 1rem;
+                }
+            }
+        </style>
+
+        <div class="planos-container">
+            <div class="planos-header">
+                <div class="planos-header-strip">
+                    <h2><span class="planos-line1">Aqui, <span class="script">cada história</span> é única e</span><span class="planos-line2">merece ser tratada <span class="script">com carinho</span></span></h2>
+                </div>
+                <p class="planos-subtitle">Os planos preventivos e emergenciais incluem:</p>
+            </div>
+            <div class="beneficios-grid">
+                <div class="beneficio-card verde-1">
+                    <div class="beneficio-img-wrapper">
+                        <img src="images/novo_layout/carro-facahda.png" alt="Remoção 24h" class="beneficio-img" loading="lazy">
+                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
+                    </div>
+                    <div class="beneficio-content">
+                        <h3>Remoção 24h</h3>
+                        <p>onde estiver, todos os dias</p>
+                    </div>
+                </div>
+                <div class="beneficio-card verde-1">
+                    <div class="beneficio-img-wrapper">
+                        <img src="images/novo_layout/sala-camp.webp" alt="Cerimônia de despedida" class="beneficio-img" loading="lazy">
+                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
+                    </div>
+                    <div class="beneficio-content">
+                        <h3>Cerimônia de despedida</h3>
+                        <p>agendada e reservada</p>
+                    </div>
+                </div>
+                <div class="beneficio-card verde-2">
+                    <div class="beneficio-img-wrapper">
+                        <img src="images/novo_layout/forno-planta.png" alt="Cremação assistida" class="beneficio-img" loading="lazy">
+                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
+                    </div>
+                    <div class="beneficio-content">
+                        <h3>Cremação assistida</h3>
+                        <p>equipamentos crematórios próprios</p>
+                    </div>
+                </div>
+                <div class="beneficio-card verde-2">
+                    <div class="beneficio-img-wrapper">
+                        <img src="images/novo_layout/biourna-provisoria.png" alt="Urna" class="beneficio-img" loading="lazy">
+                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
+                    </div>
+                    <div class="beneficio-content">
+                        <h3>Urna</h3>
+                        <p>inclusa na cremação individual</p>
+                    </div>
+                </div>
+                <div class="beneficio-card verde-3">
+                    <div class="beneficio-img-wrapper">
+                        <img src="images/novo_layout/recordacao-provisoria.png" alt="Recordação afetiva" class="beneficio-img" loading="lazy">
+                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
+                    </div>
+                    <div class="beneficio-content">
+                        <h3>Recordação afetiva</h3>
+                        <p>únicas e exclusivas</p>
+                    </div>
+                </div>
+                <div class="beneficio-card verde-3">
+                    <div class="beneficio-img-wrapper">
+                        <img src="images/novo_layout/certificado-provisorio.png" alt="Certificado de cremação" class="beneficio-img" loading="lazy">
+                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
+                    </div>
+                    <div class="beneficio-content">
+                        <h3>Certificado de cremação</h3>
+                        <p>assinado por veterinário responsável</p>
+                    </div>
+                </div>
+                <div class="beneficio-card verde-4">
+                    <div class="beneficio-img-wrapper">
+                        <img src="images/novo_layout/entrega-provisoria.png" alt="Entrega em seu endereço" class="beneficio-img" loading="lazy">
+                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
+                    </div>
+                    <div class="beneficio-content">
+                        <h3>Entrega em seu endereço</h3>
+                        <p>em mãos, de forma agendada</p>
+                    </div>
+                </div>
+                <div class="beneficio-card verde-4">
+                    <div class="beneficio-img-wrapper">
+                        <img src="images/novo_layout/apoio-psico.png" alt="Apoio psicológico" class="beneficio-img" loading="lazy">
+                        <img src="images/novo_layout/icon-verificado.png" alt="" class="beneficio-check">
+                    </div>
+                    <div class="beneficio-content">
+                        <h3>Apoio psicológico</h3>
+                        <p>receba todo o amparo psicológico</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    // Beneficio cards reveal animation
+    (function() {
+        const beneficioObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { root: null, rootMargin: '0px', threshold: 0.2 });
+
+        document.querySelectorAll('.beneficio-card').forEach(el => {
+            beneficioObserver.observe(el);
+        });
     })();
     </script>
 
