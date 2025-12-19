@@ -5199,46 +5199,6 @@
                     <img src="/site_principal_novo_layout/images/assets/rippet_logo_horizontal_fundo_claro_sombra.webp" alt="RIP PET - Crematório de Animais" width="150" height="46">
                 </a>
             </div>
-            <div class="nav-menu-wrapper">
-                <button class="menu-close-btn" aria-label="Fechar menu">
-                    <i class="fas fa-times"></i>
-                </button>
-                <ul class="nav-menu">
-                    <li><a href="#sobre">A R.I.P. PET <span class="separator">|</span></a></li>
-                    <li><a href="#planos">PLANOS <span class="separator">|</span></a></li>
-                    <li><a href="#tecnologia">TRANSPARÊNCIA <span class="separator">|</span></a></li>
-                    <li><a href="#unidades">UNIDADES <span class="separator">|</span></a></li>
-                    <li><a href="#urnas">URNAS <span class="separator">|</span></a></li>
-                    <li><a href="#dedicatorias" class="highlight">DEDICATÓRIAS <span class="separator">|</span></a></li>
-                    <li><a href="#faq" class="highlight">FAQ <span class="separator">|</span></a></li>
-                    <li><a href="#blog" class="highlight">BLOG</a></li>
-                <!-- Ícones de contato mobile -->
-                <li class="menu-contact-icons">
-                    <a href="javascript:void(0)" onclick="closeMobileMenu(true); setTimeout(openPhonePopup, 100);" class="menu-icon-btn phone">
-                        <i class="fas fa-phone"></i>
-                        <span>Ligue Agora 24h</span>
-                    </a>
-                    <a href="javascript:void(0)" onclick="closeMobileMenu(true); setTimeout(openWhatsAppPopup, 100);" class="menu-icon-btn whatsapp">
-                        <i class="fab fa-whatsapp"></i>
-                        <span>WhatsApp</span>
-                    </a>
-                </li>
-                <!-- Footer redes sociais -->
-                <li class="menu-social-footer">
-                    <span class="social-label">Siga nossas redes sociais:</span>
-                    <div class="social-links">
-                        <a href="https://instagram.com/rippetcrematorio" target="_blank">
-                            <i class="fab fa-instagram"></i>
-                            <span>@rippetcrematorio</span>
-                        </a>
-                        <a href="https://facebook.com/rippetcrematorio" target="_blank">
-                            <i class="fab fa-facebook"></i>
-                            <span>@rippetcrematorio</span>
-                        </a>
-                    </div>
-                    </li>
-                </ul>
-            </div>
             <button class="mobile-menu-btn" aria-label="Menu" onclick="openMobileMenu()">
                 <i class="fas fa-bars"></i>
             </button>
@@ -5247,6 +5207,46 @@
 
     <!-- Overlay do menu mobile -->
     <div class="menu-overlay"></div>
+
+    <!-- Menu mobile lateral - FORA do header para evitar conflito de z-index -->
+    <div class="nav-menu-wrapper">
+        <button class="menu-close-btn" aria-label="Fechar menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="#sobre">A R.I.P. PET</a></li>
+            <li><a href="#planos">PLANOS</a></li>
+            <li><a href="#tecnologia">TRANSPARÊNCIA</a></li>
+            <li><a href="#unidades">UNIDADES</a></li>
+            <li><a href="#urnas">URNAS</a></li>
+            <li><a href="#dedicatorias">DEDICATÓRIAS</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#blog">BLOG</a></li>
+            <li class="menu-contact-icons">
+                <a href="javascript:void(0)" onclick="closeMobileMenu(); setTimeout(openPhonePopup, 100);" class="menu-icon-btn phone">
+                    <i class="fas fa-phone"></i>
+                    <span>Ligue Agora 24h</span>
+                </a>
+                <a href="javascript:void(0)" onclick="closeMobileMenu(); setTimeout(openWhatsAppPopup, 100);" class="menu-icon-btn whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+            </li>
+            <li class="menu-social-footer">
+                <span class="social-label">Siga nossas redes sociais:</span>
+                <div class="social-links">
+                    <a href="https://instagram.com/rippetcrematorio" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                        <span>@rippetcrematorio</span>
+                    </a>
+                    <a href="https://facebook.com/rippetcrematorio" target="_blank">
+                        <i class="fab fa-facebook"></i>
+                        <span>@rippetcrematorio</span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
 
     <!-- ==========================================
          HERO SECTION
