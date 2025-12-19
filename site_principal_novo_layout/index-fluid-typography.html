@@ -416,8 +416,56 @@
             display: contents;
         }
 
+        /* Menu mobile ativo - aplicar em qualquer resolução */
+        .nav-menu-wrapper.active {
+            display: flex !important;
+            flex-direction: column;
+            position: fixed !important;
+            top: 0 !important;
+            right: 0 !important;
+            width: 70% !important;
+            height: 100vh !important;
+            background: rgba(10, 35, 66, 0.95) !important;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 1rem;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.4);
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateX(0) !important;
+            z-index: 9999 !important;
+            overflow-y: auto;
+        }
+
+        /* Overlay escondido por padrão */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 30%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+        }
+
+        .menu-overlay.active {
+            display: block !important;
+        }
+
         .menu-close-btn {
             display: none;
+        }
+
+        .nav-menu-wrapper.active .menu-close-btn {
+            display: flex !important;
+            align-self: flex-end;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
         }
 
         .nav-menu {
