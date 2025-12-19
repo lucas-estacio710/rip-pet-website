@@ -415,105 +415,18 @@
            DESKTOP MENU
            ============================================ */
 
-        /* Desktop: wrapper é transparente, apenas container */
-        .nav-menu-wrapper {
-            display: contents;
-        }
-
-        /* Menu mobile ativo - aplicar em qualquer resolução */
-        .nav-menu-wrapper.active {
-            display: flex !important;
-            flex-direction: column;
-            position: fixed !important;
-            top: 0 !important;
-            right: 0 !important;
-            width: 70% !important;
-            height: 100vh !important;
-            background: rgba(10, 35, 66, 0.95) !important;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 1rem;
-            box-shadow: -5px 0 30px rgba(0,0,0,0.4);
-            opacity: 1 !important;
-            visibility: visible !important;
-            transform: translateX(0) !important;
-            z-index: 9999 !important;
-            overflow-y: auto;
-        }
-
-        /* Overlay escondido por padrão */
-        .menu-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 30%;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 9998;
-        }
-
-        .menu-overlay.active {
-            display: block !important;
-        }
-
-        .menu-close-btn {
-            display: none;
-        }
-
-        .nav-menu-wrapper.active .menu-close-btn {
-            display: flex !important;
-            align-self: flex-end;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        /* Mostrar nav-menu quando wrapper está ativo */
-        .nav-menu-wrapper.active .nav-menu {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 0 !important;
-            list-style: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-
-        .nav-menu-wrapper.active .nav-menu li {
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .nav-menu-wrapper.active .nav-menu li a {
-            display: block !important;
-            padding: 1rem !important;
-            color: white !important;
-            text-align: right;
-            font-size: 1rem;
-        }
-
-        .nav-menu-wrapper.active .nav-menu li a .separator {
-            display: none !important;
-        }
-
-        /* Desktop: esconder elementos mobile-only */
-        .mobile-menu-btn,
-        .menu-contact-icons,
-        .menu-social-footer {
-            display: none;
-        }
-
-        .nav-menu {
+        /* Menu Desktop - horizontal na navbar */
+        .nav-menu-desktop {
             display: flex;
             list-style: none;
             gap: 0.1rem;
             flex: 1;
             justify-content: flex-end;
+            margin: 0;
+            padding: 0;
         }
 
-        .nav-menu li a {
+        .nav-menu-desktop li a {
             color: white;
             font-family: var(--font-poppins);
             font-weight: 300;
@@ -524,24 +437,46 @@
             white-space: nowrap;
             display: flex;
             align-items: center;
+            text-decoration: none;
         }
 
-        .nav-menu li a:hover {
+        .nav-menu-desktop li a:hover {
             color: var(--verde-2);
         }
 
-        .nav-menu li a.highlight {
+        .nav-menu-desktop li a.highlight {
             color: var(--verde-2);
             font-weight: 700;
         }
 
-        .nav-menu li a .separator {
+        .nav-menu-desktop li a .separator {
             color: rgba(255,255,255,0.5);
             margin: 0 0.6rem;
             font-weight: 300;
         }
 
-        /* Mobile Menu Button */
+        /* Menu Mobile - escondido no desktop */
+        .nav-menu-mobile {
+            display: none;
+        }
+
+        /* Overlay escondido por padrão */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+        }
+
+        .menu-overlay.active {
+            display: block;
+        }
+
+        /* Botão hamburger - escondido no desktop */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -3583,7 +3518,16 @@
                MOBILE MENU - Best Practices 2025
                ============================================ */
 
-            /* Botão hamburger */
+            /* ============================================
+               MOBILE: Esconder menu desktop, mostrar hamburger
+               ============================================ */
+
+            /* Esconder menu desktop no mobile */
+            .nav-menu-desktop {
+                display: none !important;
+            }
+
+            /* Botão hamburger visível no mobile */
             .mobile-menu-btn {
                 display: flex;
                 align-items: center;
@@ -3602,9 +3546,11 @@
                 -webkit-tap-highlight-color: transparent;
             }
 
-            /* MOBILE MENU - Wrapper que desliza da direita */
-            .nav-menu-wrapper {
-                display: flex !important;
+            /* ============================================
+               MOBILE MENU - Sidebar que desliza da direita
+               ============================================ */
+            .nav-menu-mobile {
+                display: flex;
                 flex-direction: column;
                 position: fixed;
                 top: 0;
@@ -3613,73 +3559,88 @@
                 height: 100svh;
                 height: 100dvh;
                 max-height: -webkit-fill-available;
-                background: rgba(10, 35, 66, 0.92);
+                background: rgba(10, 35, 66, 0.95);
                 backdrop-filter: blur(15px);
                 -webkit-backdrop-filter: blur(15px);
-                padding: var(--menu-gap);
+                padding: 1rem;
                 box-shadow: -5px 0 30px rgba(0,0,0,0.4);
                 opacity: 0;
                 visibility: hidden;
                 transform: translateX(100%);
                 transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
-                z-index: 9999 !important;
+                z-index: 9999;
                 overflow-y: auto;
                 overflow-x: hidden;
             }
 
-            .nav-menu-wrapper.active {
+            .nav-menu-mobile.active {
                 opacity: 1;
                 visibility: visible;
                 transform: translateX(0);
             }
 
-            /* Botão fechar no topo */
-            .menu-close-btn {
-                display: flex !important;
+            /* Botão fechar */
+            .nav-menu-mobile .menu-close-btn {
+                display: flex;
                 align-self: flex-end;
                 background: none;
                 border: none;
                 color: white;
-                font-size: var(--fs-lg);
+                font-size: 1.5rem;
                 cursor: pointer;
-                padding: var(--menu-btn-padding);
+                padding: 0.5rem;
                 opacity: 0.8;
                 transition: opacity 0.3s ease, transform 0.3s ease;
-                margin: 0 0 var(--menu-gap) 0;
-                flex-shrink: 0;
+                margin-bottom: 1rem;
             }
 
-            .menu-close-btn:hover {
+            .nav-menu-mobile .menu-close-btn:hover {
                 opacity: 1;
                 transform: scale(1.1);
             }
 
-            /* Menu dentro do wrapper */
-            .nav-menu {
-                display: flex !important;
-                flex-direction: column !important;
-                flex: 1 !important;
-                gap: 0 !important;
-                list-style: none !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                justify-content: flex-start;
+            /* Lista de links */
+            .nav-menu-mobile-list {
+                display: flex;
+                flex-direction: column;
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                flex: 1;
             }
 
-            .nav-menu li:first-child {
-                margin-top: 0 !important;
-                padding-top: 0;
+            .nav-menu-mobile-list li {
+                border-bottom: 1px solid rgba(255,255,255,0.1);
             }
 
-            /* Overlay escuro quando menu aberto - só nos 30% da esquerda */
+            .nav-menu-mobile-list li:last-child {
+                border-bottom: none;
+            }
+
+            .nav-menu-mobile-list li a {
+                display: block;
+                padding: 1rem;
+                color: white;
+                text-decoration: none;
+                text-align: right;
+                font-size: 1.1rem;
+                font-family: var(--font-poppins);
+            }
+
+            .nav-menu-mobile-list li a.highlight {
+                color: var(--verde-2);
+                font-weight: 600;
+            }
+
+            /* Overlay - cobre toda a tela */
             .menu-overlay {
                 position: fixed;
                 top: 0;
                 left: 0;
-                width: 30%;
+                width: 100%;
                 height: 100vh;
                 background: rgba(0, 0, 0, 0.5);
-                z-index: 9998 !important;
+                z-index: 9998;
                 opacity: 0;
                 visibility: hidden;
                 transition: opacity 0.4s ease, visibility 0.4s ease;
@@ -3690,38 +3651,16 @@
                 visibility: visible;
             }
 
-            .nav-menu li {
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
-
-            .nav-menu li:last-child {
-                border-bottom: none;
-            }
-
-            .nav-menu li a {
-                display: block !important;
-                padding: 1rem !important;
-                color: white !important;
-                text-decoration: none !important;
-                text-align: right !important;
-                font-size: 1.1rem !important;
-            }
-
-            .nav-menu li a .separator {
-                display: none !important;
-            }
-
-            /* Contatos no menu */
-            .menu-contact-icons {
+            /* Contatos no menu mobile */
+            .nav-menu-mobile .menu-contact-icons {
                 display: flex;
                 flex-direction: column;
                 gap: 0.75rem;
                 padding: 1rem 0;
                 margin-top: auto;
-                border: none;
             }
 
-            .menu-icon-btn {
+            .nav-menu-mobile .menu-icon-btn {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -3733,25 +3672,24 @@
                 text-decoration: none;
             }
 
-            .menu-icon-btn.phone {
-                background: white !important;
-                color: #0a2342 !important;
+            .nav-menu-mobile .menu-icon-btn.phone {
+                background: white;
+                color: #0a2342;
             }
 
-            .menu-icon-btn.whatsapp {
+            .nav-menu-mobile .menu-icon-btn.whatsapp {
                 background: #25D366;
                 color: white;
             }
 
-            /* Redes sociais no menu */
-            .menu-social-footer {
-                display: block;
+            /* Redes sociais no menu mobile */
+            .nav-menu-mobile .menu-social-footer {
                 padding: 1rem 0;
                 border-top: 1px solid rgba(255,255,255,0.1);
                 text-align: center;
             }
 
-            .menu-social-footer .social-label {
+            .nav-menu-mobile .menu-social-footer .social-label {
                 display: block;
                 font-size: 1.1rem;
                 color: rgba(255,255,255,0.85);
@@ -3759,13 +3697,13 @@
                 font-family: var(--font-autography);
             }
 
-            .menu-social-footer .social-links {
+            .nav-menu-mobile .menu-social-footer .social-links {
                 display: flex;
                 flex-direction: column;
                 gap: 0.5rem;
             }
 
-            .menu-social-footer .social-links a {
+            .nav-menu-mobile .menu-social-footer .social-links a {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -3776,11 +3714,11 @@
                 padding: 0.5rem;
             }
 
-            .menu-social-footer .social-links i.fa-instagram {
+            .nav-menu-mobile .menu-social-footer .social-links i.fa-instagram {
                 color: #E4405F;
             }
 
-            .menu-social-footer .social-links i.fa-facebook {
+            .nav-menu-mobile .menu-social-footer .social-links i.fa-facebook {
                 color: #1877F2;
             }
 
@@ -5305,44 +5243,17 @@
                     <img src="/site_principal_novo_layout/images/assets/rippet_logo_horizontal_fundo_claro_sombra.webp" alt="RIP PET - Crematório de Animais" width="150" height="46">
                 </a>
             </div>
-            <div class="nav-menu-wrapper">
-                <button class="menu-close-btn" aria-label="Fechar menu">
-                    <i class="fas fa-times"></i>
-                </button>
-                <ul class="nav-menu">
-                    <li><a href="#sobre">A R.I.P. PET <span class="separator">|</span></a></li>
-                    <li><a href="#planos">PLANOS <span class="separator">|</span></a></li>
-                    <li><a href="#tecnologia">TRANSPARÊNCIA <span class="separator">|</span></a></li>
-                    <li><a href="#unidades">UNIDADES <span class="separator">|</span></a></li>
-                    <li><a href="#urnas">URNAS <span class="separator">|</span></a></li>
-                    <li><a href="#dedicatorias" class="highlight">DEDICATÓRIAS <span class="separator">|</span></a></li>
-                    <li><a href="#faq" class="highlight">FAQ <span class="separator">|</span></a></li>
-                    <li><a href="#blog" class="highlight">BLOG</a></li>
-                    <li class="menu-contact-icons">
-                        <a href="javascript:void(0)" onclick="closeMobileMenu(); setTimeout(openPhonePopup, 100);" class="menu-icon-btn phone">
-                            <i class="fas fa-phone"></i>
-                            <span>Ligue Agora 24h</span>
-                        </a>
-                        <a href="javascript:void(0)" onclick="closeMobileMenu(); setTimeout(openWhatsAppPopup, 100);" class="menu-icon-btn whatsapp">
-                            <i class="fab fa-whatsapp"></i>
-                            <span>WhatsApp</span>
-                        </a>
-                    </li>
-                    <li class="menu-social-footer">
-                        <span class="social-label">Siga nossas redes sociais:</span>
-                        <div class="social-links">
-                            <a href="https://instagram.com/rippetcrematorio" target="_blank">
-                                <i class="fab fa-instagram"></i>
-                                <span>@rippetcrematorio</span>
-                            </a>
-                            <a href="https://facebook.com/rippetcrematorio" target="_blank">
-                                <i class="fab fa-facebook"></i>
-                                <span>@rippetcrematorio</span>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <!-- Menu Desktop - apenas links -->
+            <ul class="nav-menu-desktop">
+                <li><a href="#sobre">A R.I.P. PET <span class="separator">|</span></a></li>
+                <li><a href="#planos">PLANOS <span class="separator">|</span></a></li>
+                <li><a href="#tecnologia">TRANSPARÊNCIA <span class="separator">|</span></a></li>
+                <li><a href="#unidades">UNIDADES <span class="separator">|</span></a></li>
+                <li><a href="#urnas">URNAS <span class="separator">|</span></a></li>
+                <li><a href="#dedicatorias" class="highlight">DEDICATÓRIAS <span class="separator">|</span></a></li>
+                <li><a href="#faq" class="highlight">FAQ <span class="separator">|</span></a></li>
+                <li><a href="#blog" class="highlight">BLOG</a></li>
+            </ul>
             <button class="mobile-menu-btn" aria-label="Menu" onclick="openMobileMenu()">
                 <i class="fas fa-bars"></i>
             </button>
@@ -5351,6 +5262,46 @@
 
     <!-- Overlay do menu mobile -->
     <div class="menu-overlay"></div>
+
+    <!-- Menu Mobile - FORA do header para evitar conflito de z-index -->
+    <nav class="nav-menu-mobile" aria-hidden="true" aria-label="Menu mobile">
+        <button class="menu-close-btn" aria-label="Fechar menu" onclick="closeMobileMenu()">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="nav-menu-mobile-list">
+            <li><a href="#sobre" onclick="closeMobileMenu()">A R.I.P. PET</a></li>
+            <li><a href="#planos" onclick="closeMobileMenu()">PLANOS</a></li>
+            <li><a href="#tecnologia" onclick="closeMobileMenu()">TRANSPARÊNCIA</a></li>
+            <li><a href="#unidades" onclick="closeMobileMenu()">UNIDADES</a></li>
+            <li><a href="#urnas" onclick="closeMobileMenu()">URNAS</a></li>
+            <li><a href="#dedicatorias" class="highlight" onclick="closeMobileMenu()">DEDICATÓRIAS</a></li>
+            <li><a href="#faq" class="highlight" onclick="closeMobileMenu()">FAQ</a></li>
+            <li><a href="#blog" class="highlight" onclick="closeMobileMenu()">BLOG</a></li>
+        </ul>
+        <div class="menu-contact-icons">
+            <a href="javascript:void(0)" onclick="closeMobileMenu(); setTimeout(openPhonePopup, 100);" class="menu-icon-btn phone">
+                <i class="fas fa-phone"></i>
+                <span>Ligue Agora 24h</span>
+            </a>
+            <a href="javascript:void(0)" onclick="closeMobileMenu(); setTimeout(openWhatsAppPopup, 100);" class="menu-icon-btn whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+        </div>
+        <div class="menu-social-footer">
+            <span class="social-label">Siga nossas redes sociais:</span>
+            <div class="social-links">
+                <a href="https://instagram.com/rippetcrematorio" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    <span>@rippetcrematorio</span>
+                </a>
+                <a href="https://facebook.com/rippetcrematorio" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                    <span>@rippetcrematorio</span>
+                </a>
+            </div>
+        </div>
+    </nav>
 
     <!-- ==========================================
          HERO SECTION
@@ -6199,18 +6150,18 @@
            ============================================ */
         document.addEventListener('DOMContentLoaded', function() {
             const menuBtn = document.querySelector('.mobile-menu-btn');
-            const menuWrapper = document.querySelector('.nav-menu-wrapper');
+            const menuMobile = document.querySelector('.nav-menu-mobile');
             const menuOverlay = document.querySelector('.menu-overlay');
-            const menuCloseBtn = document.querySelector('.menu-close-btn');
+            const menuCloseBtn = document.querySelector('.nav-menu-mobile .menu-close-btn');
 
             function openMenu() {
-                if (menuWrapper) menuWrapper.classList.add('active');
+                if (menuMobile) menuMobile.classList.add('active');
                 if (menuOverlay) menuOverlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
 
             function closeMenu() {
-                if (menuWrapper) menuWrapper.classList.remove('active');
+                if (menuMobile) menuMobile.classList.remove('active');
                 if (menuOverlay) menuOverlay.classList.remove('active');
                 document.body.style.overflow = '';
             }
@@ -6219,10 +6170,6 @@
             if (menuCloseBtn) menuCloseBtn.onclick = closeMenu;
             if (menuOverlay) menuOverlay.onclick = closeMenu;
 
-            document.querySelectorAll('.nav-menu a').forEach(function(link) {
-                link.onclick = closeMenu;
-            });
-
             window.openMobileMenu = openMenu;
             window.closeMobileMenu = closeMenu;
         });
@@ -6230,8 +6177,8 @@
         // Intercepta botão voltar do celular - fecha qualquer popup/menu aberto
         window.addEventListener('popstate', function(event) {
             // Fecha menu mobile
-            const navMenuWrapper = document.querySelector('.nav-menu-wrapper');
-            if (navMenuWrapper && navMenuWrapper.classList.contains('active')) {
+            const navMenuMobile = document.querySelector('.nav-menu-mobile');
+            if (navMenuMobile && navMenuMobile.classList.contains('active')) {
                 closeMobileMenu();
                 return;
             }
