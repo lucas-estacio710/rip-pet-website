@@ -226,6 +226,44 @@
             }
         }
 
+        /* OTIMIZAÇÃO MOBILE - Desativar efeitos pesados */
+        @media (max-width: 768px) {
+            /* Desativar backdrop-filter (muito pesado) */
+            *, *::before, *::after {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+
+            /* Desativar blur nas imagens do hero */
+            .hero-bg, .hero-bg-1, .hero-bg-2, .hero-bg-3 {
+                filter: none !important;
+                animation: none !important;
+                transform: none !important;
+            }
+
+            /* Mostrar só a primeira imagem do hero no mobile */
+            .hero-bg-2, .hero-bg-3 {
+                display: none !important;
+            }
+
+            /* Desativar animações de pulse e float */
+            .whatsapp-pulse, .phone-pulse {
+                animation: none !important;
+                display: none !important;
+            }
+
+            /* Simplificar transições */
+            .scroll-indicator {
+                animation: none !important;
+            }
+
+            /* Reduzir complexidade de transformações */
+            .beneficio-card, .historia-mini-card, .como-card {
+                transform: none !important;
+                transition: opacity 0.2s ease !important;
+            }
+        }
+
         body {
             font-family: 'Nunito', sans-serif;
             line-height: 1.6;
