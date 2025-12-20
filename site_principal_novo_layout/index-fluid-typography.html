@@ -300,12 +300,12 @@
             color: white;
             font-family: var(--font-poppins);
             font-weight: 400;
-            font-size: var(--fs-xs);
+            font-size: 0.55rem;
             transition: color 0.3s ease;
         }
 
         .top-bar-unit:hover {
-            color: var(--verde-principal);
+            color: #10b981;
         }
 
         .top-bar-phone {
@@ -313,6 +313,7 @@
             padding: 0.25rem 0.6rem;
             border-radius: 12px;
             cursor: pointer;
+            font-size: var(--fs-xs);
         }
 
         .top-bar-phone:hover {
@@ -616,7 +617,7 @@
         }
 
         .historia-content {
-            padding: 2.5rem 2rem 2.5rem 3vw;
+            padding: 2rem 2rem 1.7rem 3vw;
             color: white;
             position: relative;
         }
@@ -760,7 +761,7 @@
 
         .planos-header-strip {
             background: linear-gradient(135deg, #6E945A 0%, #A7E189 50%, #6E945A 100%);
-            padding: 1rem 2rem;
+            padding: 2rem 1.3rem 1.8rem 1.3rem;
             margin-left: calc(-50vw + 50%);
             margin-right: calc(-50vw + 50%);
             margin-bottom: 1rem;
@@ -1164,9 +1165,9 @@
             display: flex;
             justify-content: center;
             flex-wrap: nowrap;
-            gap: 0.5rem;
+            gap: 0.3rem;
             margin-bottom: 0;
-            margin-right: 5rem;
+            margin-right: 2rem;
         }
 
         .unidades-header-strip .unidade-tab {
@@ -1181,7 +1182,7 @@
         }
 
         .unidades-header-strip .unidade-tab.active {
-            background: white;
+            background: linear-gradient(135deg, #d0d0d0 0%, white 50%, #d0d0d0 100%);
             color: var(--azul-escuro);
             font-weight: 600;
             border: 1px solid white;
@@ -1273,16 +1274,17 @@
         }
 
         .unidade-tab {
-            padding: 0.4rem 1rem;
+            padding: 0.35rem 0.6rem;
             border: none;
             border-radius: 12px;
             font-family: var(--font-poppins);
             font-weight: 400;
-            font-size: var(--fs-xs);
+            font-size: 0.7rem;
             color: var(--azul-escuro);
             background: rgba(2, 36, 60, 0.08);
             cursor: pointer;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
         .unidade-tab:hover {
@@ -1397,6 +1399,35 @@
         .transparencia-image img {
             width: 100%;
             border-radius: 10px;
+        }
+
+        /* Typewriter effect - palavra por palavra, suave e angelical */
+        .typewriter-text .word {
+            opacity: 0;
+            display: inline-block;
+            transform: scale(1.05) translateY(4px);
+            filter: blur(3px);
+            transition: opacity 1.4s cubic-bezier(0.23, 1, 0.32, 1),
+                        transform 1.6s cubic-bezier(0.23, 1, 0.32, 1),
+                        filter 1.2s ease-out;
+            margin-right: 0.3em;
+        }
+        .typewriter-text .word:last-child {
+            margin-right: 0;
+        }
+        .typewriter-text .word.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            filter: blur(0);
+        }
+        .typewriter-text .word strong {
+            font-weight: 600;
+        }
+        /* Palavras em negrito - transição ainda mais lenta */
+        .typewriter-text .word.bold-word {
+            transition: opacity 2s cubic-bezier(0.23, 1, 0.32, 1),
+                        transform 2.2s cubic-bezier(0.23, 1, 0.32, 1),
+                        filter 1.8s ease-out;
         }
 
         /* ============================================
@@ -1622,6 +1653,26 @@
             flex-wrap: wrap;
         }
 
+        .urna-modal-disclaimer {
+            font-family: var(--font-poppins);
+            font-size: var(--fs-xs);
+            color: #666;
+            text-align: center;
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed #ddd;
+        }
+
+        .urna-modal-disclaimer a {
+            color: #25D366;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .urna-modal-disclaimer a:hover {
+            text-decoration: underline;
+        }
+
         .relacionado-item {
             flex-shrink: 0;
             width: 60px;
@@ -1633,12 +1684,12 @@
         }
 
         .relacionado-item:hover {
-            border-color: var(--verde-principal);
+            border-color: #10b981;
             transform: scale(1.05);
         }
 
         .relacionado-item.active {
-            border-color: var(--verde-principal);
+            border-color: #10b981;
         }
 
         .relacionado-item img {
@@ -1653,7 +1704,7 @@
            ============================================ */
         .section-como-trabalhamos {
             background: transparent;
-            padding: 3rem 0 0 0;
+            padding: 1.5rem 0 0 0;
         }
 
         .como-container {
@@ -1679,6 +1730,7 @@
             display: inline-block;
             text-align: right;
             min-width: 175px;
+            line-height: 1.05;
         }
 
         .como-divider {
@@ -1790,7 +1842,7 @@
            SECTION: FAQ
            ============================================ */
         .section-faq {
-            background: linear-gradient(135deg, #000000 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #052F5F 100%);
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #052F5F 100%);
             padding: 2.5rem 0 80px 0;
         }
 
@@ -1858,6 +1910,9 @@
             transition: max-height 0.3s ease, padding 0.3s ease;
             padding: 0;
         }
+        .faq-answer strong {
+            font-weight: 600;
+        }
 
         .faq-item.active .faq-answer {
             max-height: 500px;
@@ -1878,7 +1933,7 @@
 
         .dedicatorias-header-strip {
             background: linear-gradient(135deg, #6E945A 0%, #A7E189 50%, #6E945A 100%);
-            padding: 1rem 2rem;
+            padding: 2rem 1.3rem 1.8rem 1.3rem;
             margin-bottom: 1.5rem;
             text-align: center;
         }
@@ -1980,7 +2035,16 @@
             border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.8s ease, filter 0.8s ease;
+            opacity: 0;
+            transform: scale(0.92);
+            filter: blur(4px);
+        }
+
+        .dedicatoria-card.visible {
+            opacity: 1;
+            transform: scale(1);
+            filter: blur(0);
         }
 
         .dedicatoria-card:hover {
@@ -2481,13 +2545,13 @@
            SECTION: BLOG
            ============================================ */
         .section-blog {
-            background: linear-gradient(135deg, #F5F4ED 0%, #D5D4CE 50%, #F5F4ED 100%);
+            background: linear-gradient(135deg, #6E945A 0%, #A7E189 50%, #6E945A 100%);
             padding: 0 0 2.5rem 0;
         }
 
         .blog-header-strip {
             background: linear-gradient(135deg, #02243C 0%, #033F69 50%, #02243C 100%);
-            padding: 1rem 2rem;
+            padding: 2rem 2rem 1.7rem 2rem;
             margin-bottom: 1.5rem;
             text-align: center;
         }
@@ -2614,7 +2678,7 @@
            SECTION: CTA / CONTATO
            ============================================ */
         .section-cta {
-            background-color: var(--verde-principal);
+            background: linear-gradient(135deg, #ffffff 0%, #d1d1d1 50%, #ffffff 100%);
             padding: 2rem 0 0;
             overflow: hidden;
         }
@@ -2662,6 +2726,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            white-space: nowrap;
             gap: 0.75rem;
             margin-bottom: 0.75rem;
         }
@@ -2704,12 +2769,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.65rem;
-            padding: 1.15rem 3.4rem;
-            border-radius: 34px;
+            gap: 0.5rem;
+            padding: 0.85rem 2.2rem;
+            border-radius: 30px;
             font-family: var(--font-poppins);
             font-weight: 600;
-            font-size: var(--fs-md);
+            font-size: 0.9rem;
             text-decoration: none;
             transition: transform 0.2s ease;
             cursor: pointer;
@@ -2731,7 +2796,7 @@
         }
 
         .cta-btn i {
-            font-size: var(--fs-md);
+            font-size: 1rem;
         }
 
         .cta-badge {
@@ -2752,20 +2817,23 @@
         .footer-container {
             max-width: 1300px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 2rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        .footer-logo-left {
+            flex-shrink: 0;
         }
 
-        .footer-brand img {
-            height: 90px;
+        .footer-logo-left img {
+            height: 100px;
+        }
+
+        .footer-center {
+            flex: 1;
+            text-align: center;
         }
 
         .footer-tagline {
@@ -2773,6 +2841,9 @@
             font-weight: 300;
             font-size: var(--fs-base);
             color: white;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
         }
 
         .footer-tagline .script {
@@ -2783,10 +2854,6 @@
             line-height: 0.8;
         }
 
-        .footer-info {
-            text-align: center;
-        }
-
         .footer-highlights {
             font-family: var(--font-poppins);
             font-weight: 700;
@@ -2795,7 +2862,7 @@
             text-transform: uppercase;
             white-space: nowrap;
             letter-spacing: 0.5px;
-            margin-bottom: 0.35rem;
+            margin: 0;
         }
 
         .footer-copy {
@@ -2804,13 +2871,17 @@
             font-size: var(--fs-xs);
             color: rgba(255,255,255,0.7);
             text-align: center;
-            padding: 1rem 1.5rem;
+            padding: 1rem 10rem;
             border-top: 1px solid rgba(255,255,255,0.1);
             margin-top: 1rem;
         }
 
-        .footer-badge img {
-            width: 75px;
+        .footer-badge-right {
+            flex-shrink: 0;
+        }
+
+        .footer-badge-right img {
+            width: 100px;
         }
 
         /* ============================================
@@ -2989,12 +3060,14 @@
             }
 
             .unidade-tabs {
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
+                overflow-x: auto;
             }
 
             .unidade-tab {
-                padding: 0.3rem 0.6rem;
-                font-size: var(--fs-xs);
+                padding: 0.3rem 0.5rem;
+                font-size: 0.65rem;
+                white-space: nowrap;
             }
 
             .unidade-content {
@@ -4348,38 +4421,32 @@
             }
 
             .unidade-tabs {
-                display: grid !important;
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 0.3rem !important;
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                gap: 0.2rem !important;
                 padding: 0 0.3rem !important;
                 width: 100% !important;
                 box-sizing: border-box !important;
+                overflow-x: auto !important;
+                justify-content: flex-start !important;
             }
 
-            /* Pinda sozinho na primeira linha - ocupa 3 colunas */
-            .unidade-tab:first-child {
-                grid-column: 1 / -1 !important;
-                font-size: var(--fs-sm) !important;
-                padding: 0.6rem 0.5rem !important;
-                min-height: 44px !important;
-            }
-
-            /* Outros tabs - forçar largura igual */
             .unidade-tab {
-                padding: 0.4rem 0.2rem !important;
-                font-size: var(--fs-xs) !important;
-                min-height: 38px !important;
+                padding: 0.3rem 0.3rem !important;
+                font-size: 0.5rem !important;
+                min-height: 32px !important;
                 text-align: center !important;
-                border-radius: 12px !important;
+                border-radius: 8px !important;
                 white-space: nowrap !important;
-                overflow: hidden !important;
-                text-overflow: ellipsis !important;
-                min-width: 0 !important;
-                width: 100% !important;
+                flex-shrink: 0 !important;
+            }
+
+            .unidade-tab:first-child {
+                font-size: 0.55rem !important;
             }
 
             .unidade-tab.tab-sjc {
-                font-size: clamp(0.625rem, 2.5vw, 0.8rem) !important;
+                font-size: 0.45rem !important;
             }
 
             /* CONTEÚDO DA UNIDADE - linear: nome→foto→endereço→descrição→mapa */
@@ -5445,6 +5512,13 @@
                     </div>
                 </div>
                 <div class="servico-card">
+                    <img src="/images/planos_preventivos_opt.webp" alt="VIP Pet - Plano Preventivo" loading="lazy">
+                    <div class="servico-card-content">
+                        <h3>VIP Pet</h3>
+                        <p>Plano preventivo de longo prazo com clube de benefícios exclusivos para você e seu pet</p>
+                    </div>
+                </div>
+                <div class="servico-card">
                     <img src="/site_principal_novo_layout/images/forno_planta.webp" alt="Tecnologia de Última Geração" loading="lazy">
                     <div class="servico-card-content">
                         <h3>Tecnologia de Última Geração</h3>
@@ -5568,7 +5642,7 @@
         <div class="planos-container">
             <div class="planos-header">
                 <div class="planos-header-strip">
-                    <h2><span class="planos-line1">Aqui, <span class="script">cada história</span> é única e</span><span class="planos-line2">merece ser tratada <span class="script">com carinho</span></span></h2>
+                    <h2><span class="planos-line1">Aqui,<span class="script"> cada história </span>é única e</span><span class="planos-line2">merece ser tratada<span class="script"> com carinho</span></span></h2>
                 </div>
                 <p class="planos-subtitle">Os planos preventivos e emergenciais incluem:</p>
             </div>
@@ -5672,8 +5746,8 @@
                     <span class="transparencia-script">na essência</span>
                 </div>
                 <div class="transparencia-bottom">
-                    <span class="transparencia-proposito">Mais do que um serviço, um propósito</span>
-                    <span class="transparencia-valores">com <strong>ética, empatia e dignidade</strong></span>
+                    <span class="transparencia-proposito typewriter-text" data-text="Mais que um serviço, um propósito"></span>
+                    <span class="transparencia-valores typewriter-text" data-text="com *ética,* *empatia* e *dignidade*"></span>
                 </div>
             </div>
         </div>
@@ -5683,7 +5757,7 @@
                     Transparência
                     <span class="script">na essência</span>
                 </h2>
-                <p>Mais do que um serviço, um propósito com <strong>ética</strong>, <strong>empatia</strong> e <strong>dignidade</strong></p>
+                <p class="typewriter-text" data-text="Mais que um serviço, um propósito com *ética,* *empatia* e *dignidade*"></p>
             </div>
         </div>
     </section>
@@ -5753,28 +5827,28 @@
         </div>
         <div class="urnas-container">
             <div class="urnas-grid">
-                <div class="urna-card" onclick="openUrnaModal('/site_principal_novo_layout/images/biournas.webp', 'Urnas Biodegradáveis', [{img: '/site_principal_novo_layout/images/biournas.webp', title: 'Urnas Biodegradáveis'}, {img: '/images/novo_layout/Camada 20.png', title: 'Modelo 1'}, {img: '/images/novo_layout/Camada 21.png', title: 'Modelo 2'}])">
-                    <img src="/site_principal_novo_layout/images/biournas.webp" alt="Urnas Biodegradáveis" loading="lazy">
-                    <h4>Urnas Biodegradáveis</h4>
-                </div>
-                <div class="urna-card" onclick="openUrnaModal('/site_principal_novo_layout/images/porta_retrato_molde_pata.webp', 'Itens Personalizados', [{img: '/site_principal_novo_layout/images/porta_retrato_molde_pata.webp', title: 'Itens Personalizados'}, {img: '/images/novo_layout/IMG_8143 copiar-Photoroom (2).png', title: 'Porta Retrato'}, {img: '/images/novo_layout/62b4dd6f-08d4-467f-8b90-069b3cb756e7-Photoroom.png', title: 'Personalizado'}, {img: '/images/novo_layout/lpaquinha.png', title: 'Plaquinha'}, {img: '/images/novo_layout/molde.png', title: 'Molde'}, {img: '/images/novo_layout/WhatsApp Image 2024-01-19 at 13.10-Photoroom (3).png', title: 'Personalizado'}, {img: '/images/novo_layout/carimbo.png', title: 'Carimbo'}])">
-                    <img src="/site_principal_novo_layout/images/porta_retrato_molde_pata.webp" alt="Itens Personalizados" loading="lazy">
-                    <h4>Itens Personalizados</h4>
-                </div>
-                <div class="urna-card" onclick="openUrnaModal('/site_principal_novo_layout/images/diamante.webp', 'Diamante')">
-                    <img src="/site_principal_novo_layout/images/diamante.webp" alt="Diamante" loading="lazy">
-                    <h4>Diamante</h4>
-                </div>
-                <div class="urna-card" onclick="openUrnaModal('/site_principal_novo_layout/images/urna_asas.webp', 'Urnas Gerais', [{img: '/site_principal_novo_layout/images/urna_asas.webp', title: 'Urnas Gerais'}, {img: '/images/novo_layout/tower-verde-removebg-preview-Photoroom.png', title: 'Tower Verde'}, {img: '/images/novo_layout/WhatsApp_Image_2024-01-18_at_12.49-Photoroom (1).png', title: 'Urna'}, {img: '/images/novo_layout/WhatsApp_Image_2024-01-18_at_12.49-Photoroom.png', title: 'Urna'}, {img: '/images/novo_layout/Camada 28.png', title: 'Urna'}, {img: '/images/novo_layout/pb marrom.png', title: 'Urna Marrom'}, {img: '/images/novo_layout/bau foto.png', title: 'Baú Foto'}, {img: '/images/novo_layout/dogSleeping-cobre-Photoroom (5).png', title: 'Dog Sleeping'}, {img: '/images/novo_layout/dogSleeping-cobre-Photoroom (6).png', title: 'Dog Sleeping'}, {img: '/images/novo_layout/catsleeping-prata-removebg-preview-Photoroom (9).png', title: 'Cat Sleeping'}])">
+                <div class="urna-card" onclick="openUrnaModal('/site_principal_novo_layout/images/urna_asas.webp', 'Urna Asas do Tempo', [{img: '/site_principal_novo_layout/images/urna_asas.webp', title: 'Urna Asas do Tempo'}, {img: '/images/novo_layout/tower-verde-removebg-preview-Photoroom.png', title: 'Urna Tower'}, {img: '/images/novo_layout/WhatsApp_Image_2024-01-18_at_12.49-Photoroom (1).png', title: 'Urna Dog Heart'}, {img: '/images/novo_layout/WhatsApp_Image_2024-01-18_at_12.49-Photoroom.png', title: 'Urna Cat Heart'}, {img: '/images/novo_layout/Camada 28.png', title: 'Urna Amigos do Coração'}, {img: '/images/novo_layout/pb marrom.png', title: 'Urna Petbox'}, {img: '/images/novo_layout/bau foto.png', title: 'Urna Baú Porta-Objetos'}, {img: '/images/novo_layout/dogSleeping-cobre-Photoroom (5).png', title: 'Urna Dog Sleeping'}, {img: '/images/novo_layout/dogSleeping-cobre-Photoroom (6).png', title: 'Urna Cat Sleeping'}, {img: '/images/novo_layout/catsleeping-prata-removebg-preview-Photoroom (9).png', title: 'Urna Cestinha Gato'}])">
                     <img src="/site_principal_novo_layout/images/urna_asas.webp" alt="Urnas Gerais" loading="lazy">
                     <h4>Urnas Gerais</h4>
                 </div>
-                <div class="urna-card" onclick="openUrnaModal('/site_principal_novo_layout/images/berloque.webp', 'Acessórios', [{img: '/site_principal_novo_layout/images/berloque.webp', title: 'Acessórios'}, {img: '/images/novo_layout/arvore.png', title: 'Árvore'}, {img: '/images/novo_layout/ping.png', title: 'Pingente'}, {img: '/images/novo_layout/gato porta.png', title: 'Gato Porta'}, {img: '/images/novo_layout/cora.png', title: 'Coração'}, {img: '/images/novo_layout/inf.png', title: 'Infinito'}, {img: '/images/novo_layout/cor peg.png', title: 'Coração Pegada'}, {img: '/images/novo_layout/pega.png', title: 'Pegada'}, {img: '/images/novo_layout/PINGENTE FLOR DE LÓTUS PORTA CINZAS.png', title: 'Flor de Lótus'}])">
-                    <img src="/site_principal_novo_layout/images/berloque.webp" alt="Acessórios" loading="lazy">
-                    <h4>Acessórios</h4>
+                <div class="urna-card" onclick="openUrnaModal('/site_principal_novo_layout/images/biournas.webp', 'Urna Biodegradável - Modelo 1', [{img: '/site_principal_novo_layout/images/biournas.webp', title: 'Urna Biodegradável - Modelo 1'}, {img: '/images/novo_layout/Camada 20.png', title: 'Urna Biodegradável - Modelo 2'}, {img: '/images/novo_layout/Camada 21.png', title: 'Urnas Biossolúveis'}])">
+                    <img src="/site_principal_novo_layout/images/biournas.webp" alt="Urnas Biodegradáveis" loading="lazy">
+                    <h4>Urnas Biodegradáveis</h4>
+                </div>
+                <div class="urna-card" onclick="openUrnaModal('/images/novo_layout/IMG_8143 copiar-Photoroom (2).png', 'Porta Retrato Patas Com Molde', [{img: '/images/novo_layout/IMG_8143 copiar-Photoroom (2).png', title: 'Porta Retrato Patas Com Molde'}, {img: '/images/novo_layout/62b4dd6f-08d4-467f-8b90-069b3cb756e7-Photoroom.png', title: 'Porta Retrato Triplo com Molde'}, {img: '/images/novo_layout/lpaquinha.png', title: 'Plaquinha Personalizada'}, {img: '/images/novo_layout/molde.png', title: 'Molde da Patinha Avulso'}, {img: '/images/novo_layout/WhatsApp Image 2024-01-19 at 13.10-Photoroom (3).png', title: 'Urna Porta Retrato com Molde'}, {img: '/images/novo_layout/carimbo.png', title: 'Carimbo da Patinha'}])">
+                    <img src="/images/novo_layout/IMG_8143 copiar-Photoroom (2).png" alt="Itens Personalizados" loading="lazy">
+                    <h4>Itens Personalizados</h4>
+                </div>
+                <div class="urna-card" onclick="openUrnaModal('/site_principal_novo_layout/images/diamante.webp', 'Diamante de Cinzas ou Pêlos', [{img: '/site_principal_novo_layout/images/diamante.webp', title: 'Diamante de Cinzas ou Pêlos'}])">
+                    <img src="/site_principal_novo_layout/images/diamante.webp" alt="Diamante de Cinzas ou Pêlos" loading="lazy">
+                    <h4>Diamante</h4>
+                </div>
+                <div class="urna-card" onclick="openUrnaModal('/site_principal_novo_layout/images/berloque.webp', 'Pingente Visor (Porta-Pêlos)', [{img: '/site_principal_novo_layout/images/berloque.webp', title: 'Pingente Visor (Porta-Pêlos)'}, {img: '/images/novo_layout/arvore.png', title: 'Pingente Árvore da Vida (Porta-Cinzas)'}, {img: '/images/novo_layout/gato porta.png', title: 'Pingente Coração com Gatinho (Porta-Cinzas)'}, {img: '/images/novo_layout/cora.png', title: 'Pingente Coração (Porta-Cinzas)'}, {img: '/images/novo_layout/inf.png', title: 'Pingente Infinito (Porta-Cinzas)'}, {img: '/images/novo_layout/cor peg.png', title: 'Pingente Coração com Pegadas (Porta-Cinzas)'}, {img: '/images/novo_layout/PINGENTE FLOR DE LÓTUS PORTA CINZAS.png', title: 'Pingente Flor de Lótus (Porta-Cinzas)'}])">
+                    <img src="/site_principal_novo_layout/images/berloque.webp" alt="Pingentes" loading="lazy">
+                    <h4>Pingentes</h4>
                 </div>
             </div>
-            <p class="urnas-footer">Catálogo exclusivo para clientes</p>
+            <p class="urnas-footer">Catálogo <strong>exclusivo</strong> para clientes</p>
         </div>
     </section>
 
@@ -5788,6 +5862,7 @@
                 <div class="relacionados-grid" id="urnaModalRelacionadosGrid">
                     <!-- Produtos relacionados serão inseridos via JS -->
                 </div>
+                <p class="urna-modal-disclaimer">Para conhecer todas as Urnas e Recordações disponíveis, entre em contato pelo <a href="javascript:void(0)" onclick="closeUrnaModal(); setTimeout(openWhatsAppPopup, 300);">WhatsApp</a>.</p>
             </div>
         </div>
     </div>
@@ -5934,7 +6009,7 @@
             <div class="faq-content">
                 <div class="faq-header" style="text-align: center; margin-bottom: 2rem;">
                     <h2 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; font-family: 'Autography', 'Dancing Script', 'Brush Script MT', cursive, serif; color: white; margin-bottom: 0.5rem;">Perguntas <span style="background: linear-gradient(135deg, #B9E28C 0%, #10b981 50%, #059669 100%); background-clip: text; -webkit-background-clip: text; color: transparent;">Frequentes</span> <span style="font-family: 'Poppins', sans-serif; font-weight: 300; font-size: 0.4em; color: rgba(255,255,255,0.7);">(FAQ)</span></h2>
-                    <p style="color: rgba(255, 255, 255, 0.8); font-family: 'Poppins', sans-serif; font-size: var(--fs-md);">Esclarecemos suas principais dúvidas sobre nossos serviços de cremação</p>
+                    <p style="color: rgba(255, 255, 255, 0.8); font-family: 'Poppins', sans-serif; font-size: var(--fs-md);">Esclarecemos suas principais dúvidas sobre o processo de cremação e nossos serviços</p>
                 </div>
                 <div class="faq-list">
                     <div class="faq-item">
@@ -5942,63 +6017,63 @@
                             <span>O que é a cremação de pets?</span>
                             <svg class="faq-arrow" viewBox="0 0 512 512"><use href="#icon-chevron-down"></use></svg>
                         </button>
-                        <div class="faq-answer">É o sistema mais moderno e ecologicamente correto utilizado no mundo para a destinação. Durante o processo, atinge a calcinação (cinzas) de qualquer matéria orgânica, reduzindo o volume em 97%. Assim, destrói e elimina todos os agentes patogênicos possíveis. As cinzas são inócuas e ricas em cálcio e fósforo.</div>
+                        <div class="faq-answer">É o sistema <strong style="color: #10b981;">mais moderno e ecologicamente correto</strong> utilizado no mundo para a destinação do corpinho do animal em óbito. Durante o processo, atinge a calcinação (cinzas) de qualquer matéria orgânica, <strong style="color: #10b981;">reduzindo o volume em 97%</strong>. Assim, destrói e elimina todos os agentes patogênicos possíveis. As cinzas são <strong style="color: #10b981;">inócuas e ricas em cálcio e fósforo</strong>.</div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question">
                             <span>Qual a diferença entre Incineração e Cremação?</span>
                             <svg class="faq-arrow" viewBox="0 0 512 512"><use href="#icon-chevron-down"></use></svg>
                         </button>
-                        <div class="faq-answer">São processos completamente distintos. A <strong>incineração</strong> é desinfecção em massa — não atinge altas temperaturas, não gera cinzas e o material vai para aterros. A <strong>cremação</strong> é humanizada, em equipamentos exclusivos e fiscalizados, gerando cinzas 100% puras.<br><br><strong style="color: var(--verde-principal);">Atenção:</strong> algumas empresas realizam a incineração vendendo como cremação, com preços menores. Solicite sempre mais informações para se certificar do procedimento que será realizado. Veja se pode acompanhar o processo (peça a alguém, se não se sentir confortável), verifique documentos e procure fotos do local de cremação em mídias sociais como Instagram. Evite desconfortos desnecessários.</div>
+                        <div class="faq-answer">São processos completamente distintos. A <strong style="color: #10b981;">incineração</strong> é desinfecção em massa — <strong style="color: #10b981;">não atinge altas temperaturas</strong>, não gera cinzas e o material vai para aterros. A <strong style="color: #10b981;">cremação</strong> é humanizada, em <strong style="color: #10b981;">equipamentos exclusivos e fiscalizados</strong>, gerando <strong style="color: #10b981;">cinzas 100% puras</strong>.<br><br><strong style="color: #10b981;">Atenção:</strong> algumas empresas realizam a incineração vendendo como cremação, com preços menores. Solicite sempre mais informações para se certificar do procedimento que será realizado. Veja se pode <strong style="color: #10b981;">acompanhar o processo</strong> (peça a alguém, se não se sentir confortável), <strong style="color: #10b981;">verifique documentos</strong> e procure fotos do local de cremação em mídias sociais como Instagram. Evite desconfortos desnecessários.</div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question">
                             <span>Qual a diferença entre Cremação Individual e Coletiva?</span>
                             <svg class="faq-arrow" viewBox="0 0 512 512"><use href="#icon-chevron-down"></use></svg>
                         </button>
-                        <div class="faq-answer">Na cremação individual, o pet é cremado sozinho, suas cinzas são acomodadas em uma urna cinerária e entregue à família. Na cremação coletiva, três animais são cremados juntos, e as cinzas são espalhadas em nosso jardim, uma área verde de 100 mil m², repleta de natureza. Em ambos, é gerado um certificado de cremação que atesta que o pet foi cremado conosco e teve uma despedida digna e respeitosa.</div>
+                        <div class="faq-answer">Na cremação individual, o pet é <strong style="color: #10b981;">cremado sozinho</strong>, suas cinzas são acomodadas em uma <strong style="color: #10b981;">urna cinerária</strong> e entregue à família. Na cremação coletiva, três animais são cremados juntos, e as cinzas são espalhadas em nosso jardim, uma <strong style="color: #10b981;">área verde de 100 mil m²</strong>, repleta de natureza. Em ambos, é gerado um <strong style="color: #10b981;">certificado de cremação</strong> que atesta que o pet foi cremado conosco e teve uma despedida digna e respeitosa.</div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question">
                             <span>Qual a diferença de Cremação Completa e Incompleta?</span>
                             <svg class="faq-arrow" viewBox="0 0 512 512"><use href="#icon-chevron-down"></use></svg>
                         </button>
-                        <div class="faq-answer">Na Cremação Completa, as cinzas são 100% puras e podem ser guardadas indefinidamente ou espalhadas em qualquer lugar, sem riscos. Em processos incompletos, o tempo é reduzido para economizar custos, gerando cinzas com material orgânico — o que pode causar odores e deterioração. Na R.I.P. PET, usamos equipamentos de última geração e seguimos o tempo necessário para garantir uma cremação completa e digna.</div>
+                        <div class="faq-answer">Na Cremação Completa, as cinzas são <strong style="color: #10b981;">100% puras</strong> e podem ser guardadas indefinidamente ou espalhadas em qualquer lugar, sem riscos. Em processos incompletos, o tempo é reduzido para economizar custos, gerando cinzas com material orgânico — o que pode causar odores e deterioração.<br><br>Na R.I.P. PET, usamos <strong style="color: #10b981;">equipamentos de última geração</strong> e seguimos o tempo necessário para garantir uma <strong style="color: #10b981;">cremação completa e digna</strong>.</div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question">
                             <span>O que é o plano preventivo?</span>
                             <svg class="faq-arrow" viewBox="0 0 512 512"><use href="#icon-chevron-down"></use></svg>
                         </button>
-                        <div class="faq-answer">Para minimizar a dor e trazer tranquilidade num momento difícil, criamos o plano preventivo, onde o tutor escolhe o serviço que melhor atende às suas necessidades e contrata para seu pet ainda em vida, obtendo benefícios como: Parcelar o valor, Tranquilidade de ser atendido a partir de 48h após a contratação, A certeza de que tomou a melhor decisão para dar um destino digno quando chegar a hora da despedida.</div>
+                        <div class="faq-answer">Para <strong style="color: #10b981;">minimizar a dor</strong> e trazer <strong style="color: #10b981;">tranquilidade</strong> num momento difícil, criamos os <strong style="color: #10b981;">planos preventivos</strong>, onde o tutor escolhe o serviço que melhor atende às suas necessidades e contrata para seu <strong style="color: #10b981;">pet em vida</strong>, sem precisar tomar esta decisão em um momento delicado e obtendo benefícios como: <strong style="color: #10b981;">Parcelar o valor</strong> (planejamento financeiro), tranquilidade de ser atendido a partir de <strong style="color: #10b981;">48h após a contratação</strong>, poder utilizar com <strong style="color: #10b981;">qualquer um de seus pets</strong> que precisar primeiro (planos não nominais aos animais) e a certeza de que fez escolha da melhor equipe para oferecer um <strong style="color: #10b981;">destino digno</strong> quando chegar a hora do descanso, sem preocupações adicionais.</div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question">
                             <span>Como funciona a remoção 24 horas?</span>
                             <svg class="faq-arrow" viewBox="0 0 512 512"><use href="#icon-chevron-down"></use></svg>
                         </button>
-                        <div class="faq-answer">Disponibilizamos uma equipe treinada e preparada para lidar com esse momento delicado, indo até o local para realizar o translado do pet em qualquer horário do dia ou da noite.</div>
+                        <div class="faq-answer">Disponibilizamos uma <strong style="color: #10b981;">equipe treinada e preparada</strong> para lidar com esse momento delicado, indo até o local para realizar o translado do pet em <strong style="color: #10b981;">qualquer horário do dia ou da noite</strong>, <strong style="color: #10b981;">todos os dias do ano</strong>.</div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question">
                             <span>Posso acompanhar o processo?</span>
                             <svg class="faq-arrow" viewBox="0 0 512 512"><use href="#icon-chevron-down"></use></svg>
                         </button>
-                        <div class="faq-answer">Estamos sempre de portas abertas para recebê-los. De forma transparente, permitimos que acompanhem todo o procedimento, a fim de se despedir e ter a certeza de que seu pet foi acolhido, respeitado e recebeu todo o carinho que merecia em sua última homenagem. E a maior prova da nossa transparência é que o acompanhamento presencial é gratuito, sem nenhum custo adicional — queremos que você tenha total tranquilidade nesse momento.</div>
+                        <div class="faq-answer">Estamos sempre de <strong style="color: #10b981;">portas abertas</strong> para recebê-los. De forma transparente, permitimos que acompanhem todo o procedimento, a fim de se despedir e ter a certeza de que seu pet foi acolhido, respeitado e recebeu todo o carinho que merecia em sua última homenagem. E a maior prova da nossa transparência é que o <strong style="color: #10b981;">acompanhamento (presencial ou on-line)</strong> não envolve nenhum tipo de custo adicional — queremos que você tenha <strong style="color: #10b981;">total tranquilidade</strong> nesse momento.</div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question">
                             <span>Como funciona o velório pet?</span>
                             <svg class="faq-arrow" viewBox="0 0 512 512"><use href="#icon-chevron-down"></use></svg>
                         </button>
-                        <div class="faq-answer">Independente do plano escolhido, preparamos o pet com respeito e carinho, deixando-o como um anjinho para que os tutores guardem uma lembrança desse último gesto de amor. Respeitosamente, adornamos o pet com flores em um ambiente tranquilo e sereno.</div>
+                        <div class="faq-answer">Independente do plano escolhido, preparamos o pet com <strong style="color: #10b981;">respeito e carinho</strong>, deixando-o como um anjinho para que os tutores guardem uma lembrança desse último gesto de amor. Respeitosamente, adornamos o pet com <strong style="color: #10b981;">flores em um ambiente tranquilo e sereno</strong> na <strong style="color: #10b981;">unidade mais próxima a você</strong>.</div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question">
                             <span>Onde ocorre a Cremação?</span>
                             <svg class="faq-arrow" viewBox="0 0 512 512"><use href="#icon-chevron-down"></use></svg>
                         </button>
-                        <div class="faq-answer">Nossos procedimentos são sempre realizados em nossa Matriz, Pindamonhangaba. Conhecer o local de Cremação e verificar as licenças de operação são fundamentais para evitar qualquer situação indesejada em um momento delicado como a partida do pet. Caso as informações do local e regulamentação (CNPJ, CNAE, alvarás, licenças CETESB, etc) estejam omitidas, desconfie.</div>
+                        <div class="faq-answer">Cremações necessariamente precisam ser realizadas em <strong style="color: #10b981;">Crematórios regularizados e licenciados</strong>. Todos nossos procedimentos são sempre realizados em nossa <strong style="color: #10b981;">Matriz, Pindamonhangaba</strong>, onde dispomos de <strong style="color: #10b981;">3 equipamentos exclusivos</strong> para cremação de pets. Conhecer o local de Cremação e verificar as <strong style="color: #10b981;">licenças de operação</strong> são fundamentais para evitar qualquer situação indesejada em um momento tão delicado como a partida do pet.<br><br>Caso as informações do local e regulamentação (CNPJ, CNAE, alvarás, licenças CETESB, etc) sejam omitidas ou negadas, <strong style="color: #10b981;">desconfie</strong>. Para ampliar sua segurança, busque <strong style="color: #10b981;">avaliações</strong> que falem especificamente sobre o local de cremação e fotos em mídias sociais, como o Instagram.</div>
                     </div>
                 </div>
             </div>
@@ -6119,16 +6194,17 @@
          ========================================== -->
     <footer class="footer">
         <div class="footer-container">
-            <div class="footer-brand">
+            <div class="footer-logo-left">
                 <img src="/site_principal_novo_layout/images/assets/rippet_logo_vertical_fundo_azul.webp" alt="RIP PET" loading="lazy">
-                <div class="footer-tagline">
-                    A <span class="script">maior rede</span> de crematórios pet do Brasil
-                </div>
             </div>
-            <div class="footer-info">
+            <div class="footer-center">
+                <div class="footer-tagline">
+                    A <span class="script">maior rede</span> de crematórios<br>pet do <span class="script">Brasil</span>
+                </div>
+                <br>
                 <p class="footer-highlights">CREMATÓRIO PRÓPRIO | TECNOLOGIA DE ÚLTIMA GERAÇÃO | LICENCIADO E CERTIFICADO</p>
             </div>
-            <div class="footer-badge">
+            <div class="footer-badge-right">
                 <img src="/site_principal_novo_layout/images/medalha_rip_pet_maior_crematorio_brasil.webp" alt="Selo" loading="lazy">
             </div>
         </div>
@@ -6198,7 +6274,91 @@
                     }, 50);
                 });
             });
+
+            // Sincroniza quando a barra de rolagem é arrastada manualmente
+            window.addEventListener('scroll', function() {
+                if (!rafId) {
+                    targetY = window.scrollY;
+                    currentY = window.scrollY;
+                }
+            });
         })();
+
+        /* ============================================
+           TYPEWRITER EFFECT - Palavra por palavra, suave
+           ============================================ */
+        document.addEventListener('DOMContentLoaded', function() {
+            const typewriterElements = document.querySelectorAll('.typewriter-text');
+
+            typewriterElements.forEach(el => {
+                const text = el.getAttribute('data-text');
+                if (!text) return;
+
+                // Divide o texto em palavras, preservando *negrito*
+                const words = text.split(' ');
+                el.innerHTML = words.map(word => {
+                    // Verifica se a palavra está entre asteriscos (negrito)
+                    if (word.startsWith('*') && word.endsWith('*')) {
+                        const cleanWord = word.slice(1, -1);
+                        return `<span class="word bold-word"><strong>${cleanWord}</strong></span>`;
+                    }
+                    return `<span class="word">${word}</span>`;
+                }).join('');
+            });
+
+            // Intersection Observer para trigger na entrada
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const words = entry.target.querySelectorAll('.word');
+                        let delay = 0;
+                        words.forEach((word) => {
+                            setTimeout(() => {
+                                word.classList.add('visible');
+                            }, delay);
+                            // Pausa extra após "serviço,"
+                            const text = word.textContent.toLowerCase();
+                            if (text.includes('serviço')) {
+                                delay += 700;
+                            } else if (word.classList.contains('bold-word')) {
+                                delay += 600;
+                            } else {
+                                delay += 400;
+                            }
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            typewriterElements.forEach(el => observer.observe(el));
+        });
+
+        /* ============================================
+           DEDICATÓRIAS - Efeito aparecimento cards
+           ============================================ */
+        document.addEventListener('DOMContentLoaded', function() {
+            const dedicatoriaCards = document.querySelectorAll('.dedicatoria-card');
+
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Delay baseado na posição do card para efeito cascata
+                        const card = entry.target;
+                        const cards = Array.from(dedicatoriaCards);
+                        const index = cards.indexOf(card);
+
+                        setTimeout(() => {
+                            card.classList.add('visible');
+                        }, (index % 7) * 200); // Cascata por coluna
+
+                        cardObserver.unobserve(card);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            dedicatoriaCards.forEach(card => cardObserver.observe(card));
+        });
 
         /* ============================================
            MOBILE MENU - JavaScript
