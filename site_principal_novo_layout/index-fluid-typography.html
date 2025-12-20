@@ -727,7 +727,7 @@
            ============================================ */
         .section-planos {
             background-color: #02243c;
-            padding: 0 0 2.5rem 0;
+            padding: 4rem 0 2.5rem 0;
             position: relative;
         }
 
@@ -892,6 +892,9 @@
 
         .servicos-header {
             margin-bottom: 1.5rem;
+            padding-left: 3rem;
+            display: flex;
+            align-items: center;
         }
 
         .servicos-header h2 {
@@ -900,7 +903,9 @@
             font-size: var(--fs-2xl);
             color: var(--azul-escuro);
             letter-spacing: -1px;
-            display: inline;
+            display: inline-block;
+            text-align: right;
+            min-width: 140px;
         }
 
         .servicos-divider {
@@ -1132,10 +1137,15 @@
 
         .unidades-header-strip {
             background: linear-gradient(135deg, #02243C 0%, #033F69 50%, #02243C 100%);
-            padding: 1rem 2rem;
+            padding: 2.5rem 3rem;
             margin-left: calc(-50vw + 50%);
             margin-right: calc(-50vw + 50%);
-            margin-bottom: 1.5rem;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
         }
 
         .unidades-header h2 {
@@ -1145,6 +1155,9 @@
             color: white;
             letter-spacing: 1px;
             -webkit-text-stroke: 0.2px white;
+            text-align: left;
+            flex-shrink: 0;
+            margin-left: 5rem;
         }
 
         .unidade-tabs {
@@ -1152,7 +1165,26 @@
             justify-content: center;
             flex-wrap: nowrap;
             gap: 0.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 0;
+            margin-right: 5rem;
+        }
+
+        .unidades-header-strip .unidade-tab {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .unidades-header-strip .unidade-tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .unidades-header-strip .unidade-tab.active {
+            background: white;
+            color: var(--azul-escuro);
+            font-weight: 600;
+            border: 1px solid white;
         }
 
         .unidade-content {
@@ -1188,7 +1220,7 @@
 
         .unidade-text h3 {
             font-family: var(--font-autography);
-            font-size: var(--fs-3xl);
+            font-size: var(--fs-display);
             font-weight: 300;
             color: var(--azul-escuro);
             letter-spacing: 1px;
@@ -1277,6 +1309,13 @@
             height: 100%;
             object-fit: cover;
             object-position: center top;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,1) 30%);
+            mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,1) 30%);
+        }
+
+        .unidade-content.reversed .unidade-image img {
+            -webkit-mask-image: linear-gradient(to left, transparent 0%, rgba(0,0,0,1) 30%);
+            mask-image: linear-gradient(to left, transparent 0%, rgba(0,0,0,1) 30%);
         }
 
         /* ============================================
@@ -1614,19 +1653,21 @@
            ============================================ */
         .section-como-trabalhamos {
             background: transparent;
-            padding: 2.5rem 0;
+            padding: 3rem 0 0 0;
         }
 
         .como-container {
-            width: 100%;
-            max-width: 100%;
-            margin: 0;
-            padding: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
         .como-header {
             margin-bottom: 1.5rem;
-            padding-top: 1.3rem;
+            padding-top: 0;
+            padding-left: 3rem;
+            display: flex;
+            align-items: center;
         }
 
         .como-header h2 {
@@ -1635,7 +1676,9 @@
             font-size: var(--fs-2xl);
             color: var(--azul-escuro);
             letter-spacing: -1px;
-            display: inline;
+            display: inline-block;
+            text-align: right;
+            min-width: 175px;
         }
 
         .como-divider {
@@ -1670,7 +1713,9 @@
         .como-grid {
             display: flex;
             flex-direction: row;
-            width: 100%;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
         }
 
         .como-card {
@@ -1681,8 +1726,8 @@
             z-index: 1;
             box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
             overflow: hidden;
-            pointer-events: none;
-            cursor: default;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .como-card:nth-child(1) { background: #A9CF96; }
@@ -1707,7 +1752,7 @@
         .como-card h3 {
             font-family: var(--font-poppins);
             font-weight: 600;
-            font-size: var(--fs-base);
+            font-size: var(--fs-lg);
             color: var(--azul-escuro);
             letter-spacing: -0.3px;
             margin-bottom: 0.75rem;
@@ -1716,9 +1761,15 @@
         .como-card p {
             font-family: var(--font-poppins);
             font-weight: 300;
-            font-size: var(--fs-sm);
+            font-size: var(--fs-base);
             color: var(--azul-escuro);
             line-height: 1.5;
+        }
+
+        .como-card:hover {
+            transform: scale(1.08) !important;
+            z-index: 10;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15), 0 12px 35px rgba(0, 0, 0, 0.3) !important;
         }
 
         .como-card-number {
@@ -4379,13 +4430,16 @@
                 right: auto !important;
             }
 
-            .unidade-foto {
+            .unidade-foto,
+            .unidade-image img {
                 width: 100% !important;
                 height: auto !important;
                 object-fit: cover !important;
                 border-radius: 0 !important;
                 display: block !important;
                 position: static !important;
+                -webkit-mask-image: none !important;
+                mask-image: none !important;
             }
 
             /* 3. Endereço - full width, cantos retos, texto centralizado */
@@ -5458,7 +5512,7 @@
     <section class="section-como-trabalhamos">
         <div class="como-container">
             <div class="como-header">
-                <h2>COMO<br class="mobile-break"> TRABALHAMOS</h2>
+                <h2>COMO<br> TRABALHAMOS</h2>
                 <span class="como-divider">|</span>
                 <span class="como-subtitle">Respeito e atenção em cada detalhe</span>
             </div>
@@ -5629,7 +5683,7 @@
                     Transparência
                     <span class="script">na essência</span>
                 </h2>
-                <p>Mais do que um serviço, um propósito com ética, empatia e dignidade</p>
+                <p>Mais do que um serviço, um propósito com <strong>ética</strong>, <strong>empatia</strong> e <strong>dignidade</strong></p>
             </div>
         </div>
     </section>
@@ -5642,8 +5696,7 @@
             <div class="unidades-header">
                 <div class="unidades-header-strip">
                     <h2>Nossas Unidades</h2>
-                </div>
-                <div class="unidade-tabs">
+                    <div class="unidade-tabs">
                     <button class="unidade-tab active" data-tab="pinda" data-nome="Matriz Pindamonhangaba" data-img="/site_principal_novo_layout/images/unid_matriz.webp" data-desc="Nossa matriz em Pindamonhangaba ocupa um sítio de &lt;strong&gt;100 mil m²&lt;/strong&gt; cercado por natureza, onde realizamos todos os procedimentos com &lt;strong&gt;estrutura e equipe própria&lt;/strong&gt;. O espaço foi pensado para oferecer paz e acolhimento às famílias do Vale do Paraíba e região. Contamos com &lt;strong&gt;duas salas ecumênicas&lt;/strong&gt; e uma capela dedicada a São Francisco de Assis. Estamos próximos da Dutra, o que permite atender toda a região com agilidade." data-endereco="Estrada Mun. José Benedito Marcondes Vieira, 800 - Goiabal" data-cidade="Pindamonhangaba/SP" data-cep="12412-847" data-tel="(12) 99799-6543" data-mapsq="RIP+Pet+Crematório+Pindamonhangaba">Pindamonhangaba</button>
                     <button class="unidade-tab" data-tab="sp" data-nome="São Paulo" data-img="/site_principal_novo_layout/images/unid_sp.webp" data-desc="Inaugurada em 2018, nossa unidade de São Paulo foi o &lt;strong&gt;primeiro velório pet na região central da capital paulista&lt;/strong&gt;. Localizada no bairro de Higienópolis, garante &lt;strong&gt;atendimento ágil 24h&lt;/strong&gt; para toda a cidade e região metropolitana. A estrutura conta com &lt;strong&gt;estacionamento próprio, acessibilidade e três salas reservadas&lt;/strong&gt;, pensadas para proporcionar conforto e privacidade às famílias." data-endereco="R. Roque Friguglieti - Santa Cecilia" data-cidade="São Paulo/SP" data-cep="" data-tel="(11) 99160-3041" data-mapsq="RIP+Pet+Funeral+Crematório+São+Paulo+Higienópolis">São Paulo</button>
                     <button class="unidade-tab tab-sjc" data-tab="sjc" data-nome="São José dos Campos" data-img="/site_principal_novo_layout/images/unid_sjc.webp" data-desc="Nossa unidade em São José dos Campos fica em &lt;strong&gt;ponto estratégico da capital do Vale do Paraíba&lt;/strong&gt;, na Av. Dr. Ademar de Barros. Com &lt;strong&gt;atendimento 24h&lt;/strong&gt;, atendemos toda a região, incluindo o &lt;strong&gt;Litoral Norte, Campos do Jordão e a Serra da Mantiqueira&lt;/strong&gt;. O espaço conta com estacionamento próprio, acessibilidade e foi projetado para oferecer acolhimento e privacidade às famílias." data-endereco="Av. Dr. Ademar de Barros, 1257 - Vila Ema" data-cidade="São José dos Campos/SP" data-cep="12245-010" data-tel="(12) 99799-6543" data-mapsq="RIP+Pet+Crematório+São+José+dos+Campos">São José dos Campos</button>
@@ -5651,6 +5704,7 @@
                     <button class="unidade-tab" data-tab="camp" data-nome="Campinas" data-img="/site_principal_novo_layout/images/unid_camp.webp" data-desc="Em 2020, inauguramos nossa unidade para atender &lt;strong&gt;Campinas e todas as cidades da região&lt;/strong&gt;. Localizada em bairro tranquilo e estratégico, no &lt;strong&gt;coração do Parque Taquaral&lt;/strong&gt;. Nossa estrutura conta com &lt;strong&gt;duas salas de velório&lt;/strong&gt; e foi totalmente projetada com atenção a cada detalhe, a fim de proporcionar conforto e privacidade aos tutores durante esse momento delicado de despedida." data-endereco="Av. Dr. Heitor Penteado, 841 - Parque Taquaral" data-cidade="Campinas/SP" data-cep="13075-185" data-tel="(19) 99916-1977" data-mapsq="RIP+Pet+Crematório+Animais+Campinas+Parque+Taquaral">Campinas</button>
                     <button class="unidade-tab" data-tab="resende" data-nome="Resende" data-img="/site_principal_novo_layout/images/unid_resende.webp" data-desc="Nossa unidade em Resende é o &lt;strong&gt;primeiro e único crematório pet da região Sul Fluminense&lt;/strong&gt;. Com localização estratégica, atendemos toda a região com agilidade, incluindo cidades do &lt;strong&gt;sul do Rio de Janeiro e divisa com Minas Gerais&lt;/strong&gt;. O espaço conta com estacionamento próprio, acessibilidade e estrutura pensada para oferecer conforto e privacidade às famílias." data-endereco="R. Santa Teresinha, 168 - Paraíso" data-cidade="Resende/RJ" data-cep="27535-200" data-tel="(24) 99837-9825" data-mapsq="RIP+Pet+Crematório+Resende">Resende</button>
                     <button class="unidade-tab" data-tab="pouso" data-nome="Pouso Alegre" data-img="/site_principal_novo_layout/images/unid_pouso.webp" data-desc="Nossa unidade em Pouso Alegre é a &lt;strong&gt;primeira da R.I.P. Pet em Minas Gerais&lt;/strong&gt;. Com &lt;strong&gt;atendimento 24h&lt;/strong&gt;, atendemos todo o &lt;strong&gt;Sul de Minas&lt;/strong&gt; com agilidade. O espaço conta com estacionamento próprio, acessibilidade e uma sala de despedida pensada para oferecer conforto e privacidade às famílias." data-endereco="R. Paulino Pereira da Silva, 69 - Saúde" data-cidade="Pouso Alegre/MG" data-cep="37551-110" data-tel="(35) 99904-2223" data-mapsq="RIP+Pet+Crematório+Pouso+Alegre">Pouso Alegre</button>
+                    </div>
                 </div>
             </div>
             <div class="unidade-content" id="unidade-pinda" data-unidade="pinda">
@@ -6639,8 +6693,8 @@
 
     <!-- Fixed VIP Pet + Google 5 Estrelas - Bottom Left -->
     <div class="fixed-google-stars" style="position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 9998; display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
-        <img src="/images/LOGO VIP PET.png" alt="VIP Pet" class="vip-pet-logo" style="width: 90px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
-        <img src="/site_principal_novo_layout/images/google_5_estrelas.webp" alt="Google 5 estrelas" style="width: 90px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
+        <img src="/images/LOGO VIP PET.png" alt="VIP Pet" class="vip-pet-logo" style="width: 108px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
+        <img src="/site_principal_novo_layout/images/google_5_estrelas.webp" alt="Google 5 estrelas" style="width: 108px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));">
     </div>
 
     <!-- Fixed WhatsApp Button - Bottom Right (Gradiente + Pulse + Notificação) -->
