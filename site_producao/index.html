@@ -570,9 +570,15 @@
             margin-bottom: 0.25rem;
         }
 
+        .hero-title .line-1 {
+            display: block;
+            white-space: nowrap;
+        }
+
         .hero-title .line-2 {
             display: block;
-            margin-top: -1.2rem;
+            white-space: nowrap;
+            margin-top: -0.5rem;
         }
 
         .hero-title .script {
@@ -589,6 +595,7 @@
             font-size: var(--fs-display-lg);
             letter-spacing: 1px;
             display: block;
+            white-space: nowrap;
             margin-top: 0.5rem;
         }
 
@@ -3361,7 +3368,23 @@
 
             /* Hero adjustments */
             .hero-title {
-                line-height: 1.2;
+                line-height: 1.15;
+                font-size: clamp(1.5rem, 6vw, 2.5rem);
+            }
+
+            .hero-title .line-1,
+            .hero-title .line-2,
+            .hero-title .script-block {
+                display: block;
+                white-space: nowrap;
+            }
+
+            .hero-title .line-2 {
+                margin-top: -0.3rem;
+            }
+
+            .hero-title .script-block {
+                margin-top: 0.2rem;
             }
 
             .hero-subtitle {
@@ -5510,8 +5533,8 @@
                 <img src="/site_producao/images/atendimento-24-horas-crematorio-pet.webp" alt="24h" class="icon-24h" width="125" height="83" style="width: 125px; height: auto;">
             </div>
             <h1 class="hero-title">
-                A <span class="script">maior rede</span>
-                <span class="line-2">de crematórios pet</span>
+                <span class="line-1">A <span class="script">maior rede</span> de</span>
+                <span class="line-2">crematórios pet</span>
                 <span class="script-block">do Brasil</span>
             </h1>
             <p class="hero-subtitle">Atendimento <strong>24h</strong> todos os dias</p>
