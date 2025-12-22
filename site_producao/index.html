@@ -4274,6 +4274,8 @@
                 flex-direction: column;
                 opacity: 0;
                 filter: blur(8px);
+                transition: none !important;
+                transform: none !important;
             }
 
             .servico-card.animate-visible {
@@ -6755,6 +6757,14 @@
         }
 
         function updateCarousel() {
+            // Não executar em mobile (usa scroll nativo)
+            if (window.innerWidth < 768) {
+                servicoCards.forEach(card => {
+                    card.style.transform = '';
+                });
+                return;
+            }
+
             const cardsPerPage = getCardsPerPage();
             const cardWidth = servicoCards[0]?.offsetWidth || 250;
             const gap = 20;
