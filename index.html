@@ -6888,13 +6888,19 @@
         });
 
         // Top Bar - mostrar no topo ou ao scrollar para cima (só desktop)
+        // Otimizado com throttle para evitar reflows
         let lastScrollY = window.scrollY;
+        let cachedWidth = window.innerWidth;
+        let ticking = false;
         const topBar = document.querySelector('.top-bar');
         const headerEl = document.querySelector('.header');
 
         function updateTopBar() {
             // Só funciona em desktop (largura > 768px)
-            if (window.innerWidth <= 768) return;
+            if (cachedWidth <= 768) {
+                ticking = false;
+                return;
+            }
 
             const currentScrollY = window.scrollY;
 
@@ -6910,12 +6916,22 @@
             }
 
             lastScrollY = currentScrollY;
+            ticking = false;
         }
 
         // Verificar estado inicial ao carregar
         updateTopBar();
 
-        window.addEventListener('scroll', updateTopBar);
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(updateTopBar);
+                ticking = true;
+            }
+        }, { passive: true });
+
+        window.addEventListener('resize', function() {
+            cachedWidth = window.innerWidth;
+        }, { passive: true });
 
         // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(button => {
@@ -7872,18 +7888,20 @@
 
     // ============================================
     // CARROSSEL SCROLL INDICATOR - Visual hint
+    // Otimizado com requestAnimationFrame
     // ============================================
     (function() {
+        if (window.innerWidth > 768) return; // Cache check uma vez só
+
         const carousels = document.querySelectorAll('.como-grid, .servicos-grid');
 
         carousels.forEach(carousel => {
-            // Add scroll hint on first load
-            if (window.innerWidth <= 768) {
+            requestAnimationFrame(() => {
                 carousel.scrollLeft = 20;
                 setTimeout(() => {
                     carousel.scrollTo({ left: 0, behavior: 'smooth' });
                 }, 500);
-            }
+            });
         });
     })();
 
