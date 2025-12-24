@@ -1,0 +1,21 @@
+# robots.txt - RIP PET
+# https://rippet.com.br
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://rippet.com.br/sitemap.xml
+
+# Bloquear pastas desnecessárias
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+
+# Permitir crawlers de imagens
+User-agent: Googlebot-Image
+Allow: /images/
+
+# Permitir crawlers de vídeo
+User-agent: Googlebot-Video
+Allow: /videos/
