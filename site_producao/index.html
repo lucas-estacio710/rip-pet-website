@@ -49,6 +49,57 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://connect.facebook.net">
+
+    <!-- Meta Pixel Code - Lazy Loaded -->
+    <script>
+    // Inicializa fila do Facebook Pixel sem carregar o script ainda
+    window.fbq = window.fbq || function() {
+        (window.fbq.q = window.fbq.q || []).push(arguments);
+    };
+    window._fbq = window.fbq;
+    window.fbq.push = window.fbq;
+    window.fbq.loaded = true;
+    window.fbq.version = '2.0';
+    window.fbq.queue = [];
+
+    // Adiciona eventos à fila
+    fbq('init', '768259331430020');
+    fbq('track', 'PageView');
+
+    // Função para carregar o Facebook Pixel sob demanda
+    function loadFacebookPixel() {
+        if (window.fbPixelLoaded) return;
+        window.fbPixelLoaded = true;
+
+        // Carrega o script fbevents.js
+        const script = document.createElement('script');
+        script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+        document.head.appendChild(script);
+    }
+
+    // Carrega quando o usuário interage (scroll, mouse, touch) ou após 3s
+    const interactionEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
+    const loadOnInteraction = () => {
+        loadFacebookPixel();
+        interactionEvents.forEach(event =>
+            window.removeEventListener(event, loadOnInteraction)
+        );
+    };
+
+    interactionEvents.forEach(event =>
+        window.addEventListener(event, loadOnInteraction, { passive: true, once: true })
+    );
+
+    // Fallback: carrega após 3 segundos se não houver interação
+    setTimeout(loadFacebookPixel, 3000);
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=768259331430020&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
 
     <!-- Preload Critical Resources -->
     <link rel="preload" href="/site_producao/images/assets/logo-rip-pet-horizontal.webp" as="image">
@@ -5258,53 +5309,376 @@
     </style>
 
     <!-- Schema.org Structured Data -->
+
+    <!-- Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "RIP PET",
+        "url": "https://rippet.com.br",
+        "logo": "https://rippet.com.br/site_producao/images/assets/logo-rip-pet-horizontal.webp",
+        "description": "A maior rede de crematórios pet do Brasil. Cremação de animais com dignidade, atendimento 24h humanizado, com total transparência e confiança. 7 unidades em SP, MG e RJ.",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+55-12-99799-6543",
+            "contactType": "customer service",
+            "areaServed": "BR",
+            "availableLanguage": "Portuguese"
+        },
+        "sameAs": [
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/"
+        ]
+    }
+    </script>
+
+    <!-- LocalBusiness: Pindamonhangaba (Matriz) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        "@id": "https://rippet.com.br/#organization",
-        "name": "RIP PET",
-        "alternateName": "R.I.P. PET Crematório",
-        "description": "A maior rede de crematórios pet do Brasil. Cremação de animais com dignidade, atendimento 24h humanizado, com total transparência e confiança.",
-        "url": "https://rippet.com.br",
-        "logo": "https://rippet.com.br/site_producao/images/assets/logo-rip-pet-horizontal.webp",
+        "@id": "https://rippet.com.br/#pindamonhangaba",
+        "name": "R.I.P PET Crematório de Animais Pindamonhangaba - 24h",
         "image": "https://rippet.com.br/site_producao/images/assets/logo-rip-pet-horizontal.webp",
-        "telephone": "+55-12-3644-1766",
-        "priceRange": "$$",
+        "description": "Serviços funerários para animais de estimação em Pindamonhangaba. Matriz com crematório próprio, atendimento 24h humanizado e total transparência.",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Estrada Municipal José Raimundo de Oliveira, 3500",
+            "streetAddress": "Estrada Municipal Francisco Barros Abreu, Estr. Mun. José Benedito Marcondes Vieira, 800 - Goiabal",
             "addressLocality": "Pindamonhangaba",
             "addressRegion": "SP",
-            "postalCode": "12420-010",
+            "postalCode": "12412-847",
             "addressCountry": "BR"
         },
         "geo": {
             "@type": "GeoCoordinates",
-            "latitude": -22.9239,
-            "longitude": -45.4614
+            "latitude": -22.9760647,
+            "longitude": -45.4157029
         },
+        "telephone": "+55-12-99799-6543",
+        "url": "https://rippet.com.br",
+        "priceRange": "$",
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
             "opens": "00:00",
             "closes": "23:59"
         },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "94",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
         "sameAs": [
-            "https://www.instagram.com/rippetbrasil",
-            "https://www.facebook.com/rippetbrasil"
-        ],
-        "areaServed": ["São Paulo", "Minas Gerais", "Rio de Janeiro"],
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/",
+            "https://www.google.com/maps/place/R.I.P+PET+Cremat%C3%B3rio+de+Animais+Pindamonhangaba+-+24h/@-22.9760647,-45.4157029,17z/"
+        ]
+    }
+    </script>
+
+    <!-- LocalBusiness: São José dos Campos -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://rippet.com.br/#vale-paraiba",
+        "name": "R.I.P. Pet Crematório de Animais São José dos Campos - 24h",
+        "image": "https://rippet.com.br/site_producao/images/assets/logo-rip-pet-horizontal.webp",
+        "description": "Serviços funerários para animais de estimação em São José dos Campos e Vale do Paraíba. Atendimento 24h humanizado com total transparência.",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Av. Dr. Ademar de Barros, 1257 - Vila Ema",
+            "addressLocality": "São José dos Campos",
+            "addressRegion": "SP",
+            "postalCode": "12245-010",
+            "addressCountry": "BR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -23.2034305,
+            "longitude": -45.8933872
+        },
+        "telephone": "+55-12-99799-6543",
+        "url": "https://rippet.com.br",
+        "priceRange": "$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "322",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "sameAs": [
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/",
+            "https://www.google.com/maps/place/R.I.P.+Pet+Cremat%C3%B3rio+de+Animais+S%C3%A3o+Jos%C3%A9+dos+Campos+-+24h/@-23.2034305,-45.8933872,17z/"
+        ]
+    }
+    </script>
+
+    <!-- LocalBusiness: São Paulo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://rippet.com.br/#sao-paulo",
+        "name": "R.I.P. Pet Funeral e Crematório de Animais",
+        "image": "https://rippet.com.br/site_producao/images/assets/logo-rip-pet-horizontal.webp",
+        "description": "Cemitério e crematório de animais de estimação em São Paulo. Atendimento 24h humanizado com total transparência.",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "R. Roque Friguglieti - Santa Cecilia",
+            "addressLocality": "São Paulo",
+            "addressRegion": "SP",
+            "addressCountry": "BR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -23.5341326,
+            "longitude": -46.6577966
+        },
+        "telephone": "+55-11-99160-3041",
+        "url": "https://rippet.com.br",
+        "priceRange": "$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "1628",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "sameAs": [
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/",
+            "https://www.google.com/maps/place/R.I.P.+Pet+Funeral+e+Cremat%C3%B3rio+de+Animais/@-23.5341326,-46.6577966,17z/"
+        ]
+    }
+    </script>
+
+    <!-- LocalBusiness: Santos -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://rippet.com.br/#santos",
+        "name": "RIP Pet - Funeral e Crematório de Animais - Santos",
+        "image": "https://rippet.com.br/site_producao/images/assets/logo-rip-pet-horizontal.webp",
+        "description": "Crematório e serviços funerários para animais de estimação em Santos. Atendimento 24h humanizado com total transparência.",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Av. Cel. Joaquim Montenegro, 334 - Ponta da Praia",
+            "addressLocality": "Santos",
+            "addressRegion": "SP",
+            "postalCode": "11035-002",
+            "addressCountry": "BR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -23.9793001,
+            "longitude": -46.3028134
+        },
+        "telephone": "+55-13-99806-8262",
+        "url": "https://rippet.com.br",
+        "priceRange": "$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "403",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "sameAs": [
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/",
+            "https://www.google.com/maps/place/RIP+Pet+-+Funeral+e+Cremat%C3%B3rio+de+Animais+-+Santos/@-23.9793001,-46.3028134,17z/"
+        ]
+    }
+    </script>
+
+    <!-- LocalBusiness: Campinas -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://rippet.com.br/#campinas",
+        "name": "R.I.P. PET Crematório de Animais Campinas - 24h",
+        "image": "https://rippet.com.br/site_producao/images/assets/logo-rip-pet-horizontal.webp",
+        "description": "Serviços funerários para animais de estimação em Campinas. Atendimento 24h humanizado com total transparência.",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Av. Dr. Heitor Penteado, 841 - Parque Taquaral",
+            "addressLocality": "Campinas",
+            "addressRegion": "SP",
+            "postalCode": "13075-185",
+            "addressCountry": "BR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -22.8743698,
+            "longitude": -47.0610401
+        },
+        "telephone": "+55-19-99916-1977",
+        "url": "https://rippet.com.br",
+        "priceRange": "$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "868",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "sameAs": [
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/",
+            "https://www.google.com/maps/place/R.I.P.+PET+Cremat%C3%B3rio+de+Animais+Campinas+-+24h/@-22.8743698,-47.0610401,17z/"
+        ]
+    }
+    </script>
+
+    <!-- LocalBusiness: Resende (RJ) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://rippet.com.br/#resende",
+        "name": "R.I.P. PET Crematório de animais",
+        "image": "https://rippet.com.br/site_producao/images/assets/logo-rip-pet-horizontal.webp",
+        "description": "Serviços funerários para animais de estimação em Resende (RJ). Atendimento 24h humanizado com total transparência.",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "R. Santa Teresinha, 168 - Paraíso",
+            "addressLocality": "Resende",
+            "addressRegion": "RJ",
+            "postalCode": "27535-200",
+            "addressCountry": "BR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -22.4526892,
+            "longitude": -44.4335443
+        },
+        "telephone": "+55-24-99837-9825",
+        "url": "https://rippet.com.br",
+        "priceRange": "$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "202",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "sameAs": [
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/",
+            "https://www.google.com/maps/place/R.I.P.+PET+Cremat%C3%B3rio+de+animais/@-22.4526892,-44.4335443,17z/"
+        ]
+    }
+    </script>
+
+    <!-- LocalBusiness: Pouso Alegre (MG) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://rippet.com.br/#pouso-alegre",
+        "name": "R.I.P. Pet - Crematório de Animais",
+        "image": "https://rippet.com.br/site_producao/images/assets/logo-rip-pet-horizontal.webp",
+        "description": "Serviços funerários para animais de estimação em Pouso Alegre (MG). Atendimento 24h humanizado com total transparência.",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "R. Paulino Pereira da Silva, 69 - Saude",
+            "addressLocality": "Pouso Alegre",
+            "addressRegion": "MG",
+            "postalCode": "37551-110",
+            "addressCountry": "BR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -22.2250931,
+            "longitude": -45.939912
+        },
+        "telephone": "+55-35-99904-2223",
+        "url": "https://rippet.com.br",
+        "priceRange": "$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "41",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "sameAs": [
+            "https://www.instagram.com/rippetcrematorio/",
+            "https://www.facebook.com/rippetcrematorio/",
+            "https://www.google.com/maps/place/R.I.P.+Pet+-+Cremat%C3%B3rio+de+Animais/@-22.2250931,-45.939912,17z/"
+        ]
+    }
+    </script>
+
+    <!-- Service Catalog -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Cremação de Animais",
+        "provider": {
+            "@type": "Organization",
+            "name": "RIP PET",
+            "url": "https://rippet.com.br"
+        },
+        "areaServed": {
+            "@type": "State",
+            "name": "São Paulo"
+        },
         "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "Serviços de Cremação Pet",
+            "name": "Serviços de Cremação",
             "itemListElement": [
                 {
                     "@type": "Offer",
                     "itemOffered": {
                         "@type": "Service",
                         "name": "Cremação Individual",
-                        "description": "Cremação individual com entrega das cinzas em urna"
+                        "description": "Cremação individual com acompanhamento completo e urna personalizada"
                     }
                 },
                 {
@@ -5312,15 +5686,23 @@
                     "itemOffered": {
                         "@type": "Service",
                         "name": "Cremação Coletiva",
-                        "description": "Cremação coletiva com cinzas espalhadas no jardim"
+                        "description": "Cremação coletiva com dignidade e respeito"
                     }
                 },
                 {
                     "@type": "Offer",
                     "itemOffered": {
                         "@type": "Service",
-                        "name": "Remoção 24h",
-                        "description": "Serviço de remoção disponível 24 horas"
+                        "name": "Velório Pet",
+                        "description": "Espaço dedicado para despedida do seu animal de estimação"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Busca Domiciliar 24h",
+                        "description": "Busca do pet em sua residência a qualquer hora"
                     }
                 }
             ]
@@ -6673,6 +7055,13 @@
         });
         // WhatsApp Popup Functions
         function openWhatsAppPopup() {
+            // Track Meta Pixel Lead event
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: 'WhatsApp Contact',
+                    content_category: 'Contact'
+                });
+            }
             const overlay = document.getElementById('whatsappPopupOverlay');
             overlay.style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -6693,6 +7082,13 @@
 
         // Phone Popup Functions
         function openPhonePopup() {
+            // Track Meta Pixel Lead event
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: 'Phone Contact',
+                    content_category: 'Contact'
+                });
+            }
             const overlay = document.getElementById('phonePopupOverlay');
             overlay.style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -7038,8 +7434,6 @@
         </div>
     </div>
 
-    <!-- Schema.org SEO para Local Business -->
-    <script src="schema-seo.js"></script>
 
     <!-- JavaScript Modal Dedicatórias -->
     <script>
@@ -7593,6 +7987,63 @@
         // Estado inicial
         updateArrows();
     })();
+    </script>
+
+    <!-- Google tag (gtag.js) - Lazy Loaded -->
+    <script>
+        // Inicializa dataLayer e gtag sem carregar o script ainda
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-04KMEL26PC');
+
+        // Função para carregar Google Analytics sob demanda
+        function loadGoogleAnalytics() {
+            if (window.gtagLoaded) return;
+            window.gtagLoaded = true;
+
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-04KMEL26PC';
+            document.head.appendChild(script);
+        }
+
+        // Carrega quando o usuário interage ou após 3s
+        const gtagInteractionEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
+        const loadGtagOnInteraction = () => {
+            loadGoogleAnalytics();
+            gtagInteractionEvents.forEach(event =>
+                window.removeEventListener(event, loadGtagOnInteraction)
+            );
+        };
+
+        gtagInteractionEvents.forEach(event =>
+            window.addEventListener(event, loadGtagOnInteraction, { passive: true, once: true })
+        );
+
+        // Fallback: carrega após 3 segundos
+        setTimeout(loadGoogleAnalytics, 3000);
+    </script>
+
+    <!-- RIP PET - Analytics Avançado -->
+    <script defer src="./analytics-enhanced.js"></script>
+
+    <!-- Meta Pixel - Track WhatsApp Direct Links -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track all direct WhatsApp links (wa.me)
+            const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
+            whatsappLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'Contact', {
+                            content_name: 'WhatsApp Direct Link',
+                            content_category: 'Contact'
+                        });
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>

@@ -1,49 +1,21 @@
-# Permitir bots de redes sociais (Open Graph, compartilhamento)
-User-agent: facebookexternalhit
-Allow: /
+# robots.txt - RIP PET
+# https://rippet.com.br
 
-User-agent: Twitterbot
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
-
-User-agent: WhatsApp
-Allow: /
-
-User-agent: Slackbot
-Allow: /
-
-# Permitir todos os outros bots (Google, Bing, etc)
 User-agent: *
 Allow: /
 
-# Bloquear arquivos sensíveis ou desnecessários
-Disallow: /.git/
-Disallow: /.claude/
-Disallow: /*_backup*.html
-Disallow: /vendas.html
-Disallow: /formulario-vendas.html
-Disallow: /ficha-*.html
-
-# Proteção contra páginas maliciosas comuns (invasões anteriores)
-Disallow: /cassino/
-Disallow: /casino/
-Disallow: /vulkan/
-Disallow: /jogos/
-Disallow: /keno/
-Disallow: /slots/
-Disallow: /wager/
-Disallow: /promocoes/
-Disallow: /bet/
-Disallow: /poker/
-Disallow: /gambling/
-Disallow: /games/
-Disallow: /bonus/
-Disallow: /pharma/
-Disallow: /pills/
-Disallow: /viagra/
-Disallow: /cialis/
-
-# Permitir acesso ao sitemap
+# Sitemap
 Sitemap: https://rippet.com.br/sitemap.xml
+
+# Bloquear pastas desnecessárias
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+
+# Permitir crawlers de imagens
+User-agent: Googlebot-Image
+Allow: /images/
+
+# Permitir crawlers de vídeo
+User-agent: Googlebot-Video
+Allow: /videos/
