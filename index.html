@@ -106,8 +106,9 @@
     <link rel="preload" href="/images/fachada-crematorio-pindamonhangaba.webp" as="image">
     <link rel="preload" href="./fonts/Autography.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Google Fonts - Poppins (todas as variações necessárias) -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Poppins (deferred - não bloqueia renderização) -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300&display=swap" rel="stylesheet"></noscript>
 
     <!-- Font Awesome (deferred - icons are below the fold) -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
