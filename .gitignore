@@ -6,10 +6,13 @@ diff-output.txt
 docs/DIAGNOSTICO-EVENTOS.md
 docs/GUIA-RELATORIO-LEADS-POR-UNIDADE-GA4.md
 
-# Scripts Python de otimização
-optimize_*.py
-fix_logo_transparency.py
-update_popups.py
+# Scripts Python antigos (na raiz)
+/optimize_*.py
+/fix_logo_transparency.py
+/update_popups.py
+
+# Liberar pasta scripts (tem ferramentas úteis)
+!scripts/
 
 # Backups
 backups/
@@ -66,7 +69,6 @@ cachorro-litoral.jpg
 
 # Pastas de desenvolvimento/teste
 docs/
-scripts/
 samples/
 tests/
 site_producao/
@@ -74,3 +76,6 @@ site_santos_novo_layout/
 site_principal_novo_layout/
 site_producao_otimizado/
 .claude/
+
+# Manual interno (não versionar)
+CLAUDE.md
