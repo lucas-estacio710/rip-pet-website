@@ -44,3 +44,33 @@ rip-pet-app/
 # Arquivos do Supabase (configuração local)
 docs/SUPABASE-SETUP.md
 docs/supabase-schema.sql
+
+# Arquivos grandes (catálogos)
+*.pptx
+*.pdf
+NUL
+
+# Backups de HTML
+santos-backup-*.html
+santos_recuperado.html
+santos_vamo_usar.html
+index-antigo.html
+index-novo-layout.html
+
+# Páginas de teste
+santos.html
+catalogo-whatsapp.html
+destinacoes.html
+testemonquei-410.html
+cachorro-litoral.jpg
+
+# Pastas de desenvolvimento/teste
+docs/
+scripts/
+samples/
+tests/
+site_producao/
+site_santos_novo_layout/
+site_principal_novo_layout/
+site_producao_otimizado/
+.claude/
