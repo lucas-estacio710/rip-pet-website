@@ -6984,10 +6984,11 @@
             }
 
             .unidade-tab {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.75rem;
+                padding: 0.5rem 0.6rem;
+                font-size: clamp(0.65rem, 2.8vw, 0.75rem);
                 text-align: center;
                 white-space: nowrap;
+                font-size-adjust: 0.5;
             }
 
             .unidade-tabs-outras {
@@ -8076,8 +8077,8 @@
             }
 
             .unidade-tab {
-                padding: 0.5rem 0.25rem !important;
-                font-size: clamp(0.65rem, 3vw, 0.8rem) !important;
+                padding: 0.5rem 0.2rem !important;
+                font-size: clamp(0.58rem, 2.8vw, 0.75rem) !important;
                 min-height: 36px !important;
                 text-align: center !important;
                 border-radius: 8px !important;
@@ -8092,6 +8093,8 @@
                 pointer-events: auto !important;
                 position: relative !important;
                 z-index: 10 !important;
+                /* Previne layout shift quando fonte carrega */
+                font-size-adjust: 0.5;
             }
 
             /* Veja outras ocupa a linha inteira */
