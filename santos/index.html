@@ -496,9 +496,18 @@
             }
 
             /* Reduzir complexidade de transformações */
-            .beneficio-card, .historia-mini-card, .como-card {
+            .historia-mini-card, .como-card {
                 transform: none !important;
                 transition: opacity 0.2s ease !important;
+            }
+
+            /* Beneficio cards - manter animação stagger no mobile */
+            .beneficio-card {
+                transform: translateY(10px);
+                transition-property: opacity, transform !important;
+                transition-duration: 0.6s !important;
+                transition-timing-function: ease !important;
+                /* transition-delay mantido dos estilos individuais */
             }
         }
 
