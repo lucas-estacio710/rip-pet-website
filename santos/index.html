@@ -2308,9 +2308,23 @@
                 line-height: 1.5;
                 letter-spacing: -0.3px;
             }
+            .servico-preco-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.15rem;
+                margin-top: 0.75rem;
+            }
+            .servico-preco-label {
+                font-family: 'Poppins', sans-serif;
+                font-size: 0.7rem;
+                color: #666;
+                font-weight: 400;
+                text-transform: lowercase;
+                margin-left: 0.4rem;
+            }
             .servico-preco {
                 display: inline-block;
-                margin-top: 0.75rem;
                 padding: 0.4rem 0.8rem;
                 background: linear-gradient(135deg, #a7e189 0%, #98cf81 100%);
                 border-radius: 20px;
@@ -2321,6 +2335,7 @@
             }
             .servico-preco strong {
                 font-weight: 700;
+                font-size: 1.05rem;
             }
             @media (max-width: 768px) {
                 .servicos-header {
@@ -2438,7 +2453,10 @@
                         <div class="servico-card-content">
                             <h3>Cremação Individual</h3>
                             <p>O pet é cremado de forma individual e as cinzas são acomodadas e devolvidas em uma urna cinerária</p>
-                            <span class="servico-preco">a partir de: 12x de <strong>R$ 115,83</strong></span>
+                            <div class="servico-preco-wrapper">
+                                <span class="servico-preco-label">a partir de:</span>
+                                <span class="servico-preco">12x de <strong>R$ 115,83</strong></span>
+                            </div>
                         </div>
                     </div>
                     <div class="servico-card">
@@ -2446,7 +2464,10 @@
                         <div class="servico-card-content">
                             <h3>Cremação Coletiva</h3>
                             <p>A cremação acontece com três animais no mesmo equipamento e as cinzas são espalhadas em nosso jardim</p>
-                            <span class="servico-preco">a partir de: 12x de <strong>R$ 82,50</strong></span>
+                            <div class="servico-preco-wrapper">
+                                <span class="servico-preco-label">a partir de:</span>
+                                <span class="servico-preco">12x de <strong>R$ 82,50</strong></span>
+                            </div>
                         </div>
                     </div>
                     <div class="servico-card">
