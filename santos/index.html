@@ -680,8 +680,7 @@
                 flex: 1;
                 text-align: center;
                 order: 2;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
             .mobile-menu-btn {
@@ -689,6 +688,39 @@
                 flex-shrink: 0;
                 min-width: 44px;
                 min-height: 44px;
+            }
+        }
+
+        /* Telas intermediárias - Galaxy A51, Pixel, iPhone 11+ (380-480px) */
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0.5rem 0.75rem;
+                gap: 0.25rem;
+            }
+
+            .logo img {
+                height: 34px;
+                max-width: 110px;
+            }
+
+            .unidade-label-nav {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Telas pequenas - iPhone SE e similares (até 375px) */
+        @media (max-width: 375px) {
+            .nav-container {
+                padding: 0.5rem 0.5rem;
+            }
+
+            .logo img {
+                height: 32px;
+                max-width: 100px;
+            }
+
+            .unidade-label-nav {
+                font-size: 0.95rem;
             }
         }
 
@@ -1145,9 +1177,9 @@
                 transform: none !important;
                 width: 100%;
                 max-width: 100%;
-                font-size: clamp(1.05rem, 3.2vw, 1.25rem);
-                line-height: 1.45;
-                padding: 1.2rem 1rem 0.8rem;
+                font-size: clamp(0.9rem, 3.5vw, 1.15rem);
+                line-height: 1.4;
+                padding: 1rem 0.8rem 0.7rem;
                 margin: 0;
                 background: linear-gradient(135deg, rgba(255,255,255,0.94) 0%, rgba(220,220,220,0.9) 50%, rgba(255,255,255,0.94) 100%);
                 border-radius: 14px;
@@ -1156,7 +1188,7 @@
             }
 
             .hero-subtitle span[style*="Autography"] {
-                font-size: 1.7em !important;
+                font-size: clamp(1.4em, 5vw, 1.7em) !important;
             }
 
             /* Frase de efeito mobile - abaixo do box */
@@ -2056,12 +2088,17 @@
                 }
 
                 .historia-title-strip {
-                    padding: 1.8rem 1.2rem !important;
+                    padding: 1.8rem 1rem !important;
                 }
 
                 .historia-title-strip h2 {
-                    font-size: 1rem;
-                    white-space: normal;
+                    font-size: clamp(0.85rem, 3.8vw, 1.1rem);
+                    white-space: nowrap;
+                    line-height: 1.3;
+                }
+
+                .historia-title-strip h2 .script {
+                    font-size: clamp(1.4rem, 5.5vw, 2rem);
                 }
 
                 .historia-text {
@@ -2071,6 +2108,19 @@
                 .historia-images {
                     order: 1;
                     height: 250px;
+                }
+            }
+
+            /* Telas muito pequenas - forçar quebra controlada */
+            @media (max-width: 380px) {
+                .historia-title-strip h2 {
+                    font-size: 0.75rem;
+                    white-space: normal;
+                    line-height: 1.5;
+                }
+
+                .historia-title-strip h2 .script {
+                    font-size: 1.3rem;
                 }
             }
         </style>
@@ -7184,10 +7234,11 @@
             .unidade-label-nav {
                 flex: 1 !important;
                 text-align: center !important;
-                font-size: 1.5rem !important;
+                font-size: clamp(0.95rem, 4vw, 1.3rem) !important;
                 order: 2 !important;
                 margin: 0 !important;
-                padding: 0 0.5rem !important;
+                padding: 0 0.25rem !important;
+                white-space: nowrap !important;
             }
 
             /* ============================================
