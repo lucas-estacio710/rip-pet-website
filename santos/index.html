@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <base href="/site_santos_novo_layout/">
+    <base href="/santos/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
     <!-- Primary Meta Tags - OTIMIZADO PARA SANTOS -->
@@ -26,9 +26,9 @@
     <meta name="googlebot" content="index, follow">
 
     <!-- Preload Critical Resources -->
-    <link rel="preload" href="images/header-santos-linhas.webp" as="image" type="image/webp" fetchpriority="high">
+    <link rel="preload" href="/images/header-santos-linhas.webp" as="image" type="image/webp" fetchpriority="high">
     <link rel="preload" href="/fonts/Autography.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="assets/rippet_logo_horizontal_fundo_claro_opt.webp" as="image" type="image/webp">
+    <link rel="preload" href="/assets/rippet_logo_horizontal_fundo_claro_opt.webp" as="image" type="image/webp">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
 
     <!-- Preconnect to External Domains -->
@@ -36,11 +36,60 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://connect.facebook.net">
+
+    <!-- Meta Pixel Code - Lazy Loaded -->
+    <script>
+    // Inicializa fila do Facebook Pixel sem carregar o script ainda
+    window.fbq = window.fbq || function() {
+        (window.fbq.q = window.fbq.q || []).push(arguments);
+    };
+    window._fbq = window.fbq;
+    window.fbq.push = window.fbq;
+    window.fbq.loaded = true;
+    window.fbq.version = '2.0';
+    window.fbq.queue = [];
+
+    // Adiciona eventos à fila
+    fbq('init', '768259331430020');
+    fbq('track', 'PageView');
+
+    // Função para carregar o Facebook Pixel sob demanda
+    function loadFacebookPixel() {
+        if (window.fbPixelLoaded) return;
+        window.fbPixelLoaded = true;
+
+        const script = document.createElement('script');
+        script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+        script.async = true;
+        document.head.appendChild(script);
+    }
+
+    // Carrega quando o usuário interage ou após 3s
+    const fbInteractionEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
+    const loadFbOnInteraction = () => {
+        loadFacebookPixel();
+        fbInteractionEvents.forEach(event =>
+            window.removeEventListener(event, loadFbOnInteraction)
+        );
+    };
+
+    fbInteractionEvents.forEach(event =>
+        window.addEventListener(event, loadFbOnInteraction, { passive: true, once: true })
+    );
+
+    // Fallback: carrega após 3 segundos
+    setTimeout(loadFacebookPixel, 3000);
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=768259331430020&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_rounded.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/logo_rounded.png">
-    <link rel="shortcut icon" href="assets/logo_rounded.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo_rounded.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo_rounded.png">
+    <link rel="shortcut icon" href="/assets/logo_rounded.png">
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#052F5F">
@@ -10704,7 +10753,7 @@
     </script>
 
     <!-- RIP PET - Analytics Avançado -->
-    <script defer src="./analytics-enhanced.js"></script>
+    <script defer src="/analytics-enhanced.js"></script>
 
     <!-- Meta Pixel - Track WhatsApp Direct Links -->
     <script>
