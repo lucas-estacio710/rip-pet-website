@@ -9750,7 +9750,7 @@
         }, { passive: true });
 
         // Envolver todo o código que depende do DOM
-        document.addEventListener('DOMContentLoaded', function() {
+        function initInteractiveElements() {
             // FAQ Accordion
             document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
@@ -10066,7 +10066,15 @@
                 updateCarousel();
             });
         }
-        }); // Fim do DOMContentLoaded
+        } // Fim da função initInteractiveElements
+
+        // Garantir que rode mesmo se DOMContentLoaded já disparou
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initInteractiveElements);
+        } else {
+            // DOM já está pronto, executa imediatamente
+            initInteractiveElements();
+        }
     </script>
 
     <!-- WhatsApp Popup -->
