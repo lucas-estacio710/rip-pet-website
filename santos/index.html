@@ -9749,8 +9749,10 @@
             cachedWidth = window.innerWidth;
         }, { passive: true });
 
-        // FAQ Accordion
-        document.querySelectorAll('.faq-question').forEach(button => {
+        // Envolver todo o código que depende do DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Accordion
+            document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const faqItem = button.parentElement;
                 const isActive = faqItem.classList.contains('active');
@@ -10064,6 +10066,7 @@
                 updateCarousel();
             });
         }
+        }); // Fim do DOMContentLoaded
     </script>
 
     <!-- WhatsApp Popup -->
