@@ -9712,8 +9712,8 @@
         const headerEl = document.querySelector('.header');
 
         function updateTopBar() {
-            // Só funciona em desktop (largura > 768px)
-            if (cachedWidth <= 768) {
+            // Só funciona se topBar existir e em desktop (largura > 768px)
+            if (!topBar || cachedWidth <= 768) {
                 ticking = false;
                 return;
             }
@@ -9723,20 +9723,20 @@
             // Mostrar no topo (scroll = 0) ou scrollando para cima
             if (currentScrollY === 0 || (currentScrollY < lastScrollY && currentScrollY > 50)) {
                 topBar.classList.add('visible');
-                headerEl.classList.add('topbar-visible');
+                if (headerEl) headerEl.classList.add('topbar-visible');
             }
             // Scrollando para baixo
             else if (currentScrollY > lastScrollY) {
                 topBar.classList.remove('visible');
-                headerEl.classList.remove('topbar-visible');
+                if (headerEl) headerEl.classList.remove('topbar-visible');
             }
 
             lastScrollY = currentScrollY;
             ticking = false;
         }
 
-        // Verificar estado inicial ao carregar
-        updateTopBar();
+        // Verificar estado inicial ao carregar (só se topBar existir)
+        if (topBar) updateTopBar();
 
         window.addEventListener('scroll', function() {
             if (!ticking) {
