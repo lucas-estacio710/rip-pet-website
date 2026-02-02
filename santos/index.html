@@ -9481,12 +9481,8 @@
     <script>
         // ============================================
         // SMOOTH SCROLL COM INÉRCIA (momentum)
-        // TEMPORARIAMENTE DESABILITADO PARA DEBUG
         // ============================================
         (function() {
-            // DEBUG: Desabilitando para testar se é o culpado
-            return;
-
             const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
             // Não aplicar em touch devices (já têm scroll nativo suave)
@@ -9753,10 +9749,8 @@
             cachedWidth = window.innerWidth;
         }, { passive: true });
 
-        // Envolver todo o código que depende do DOM
-        function initInteractiveElements() {
-            // FAQ Accordion
-            document.querySelectorAll('.faq-question').forEach(button => {
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const faqItem = button.parentElement;
                 const isActive = faqItem.classList.contains('active');
@@ -10069,15 +10063,6 @@
                 currentPage = 0;
                 updateCarousel();
             });
-        }
-        } // Fim da função initInteractiveElements
-
-        // Garantir que rode mesmo se DOMContentLoaded já disparou
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initInteractiveElements);
-        } else {
-            // DOM já está pronto, executa imediatamente
-            initInteractiveElements();
         }
     </script>
 
