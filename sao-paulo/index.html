@@ -9483,8 +9483,12 @@
     <script>
         // ============================================
         // SMOOTH SCROLL COM INÉRCIA (momentum)
+        // TEMPORARIAMENTE DESABILITADO PARA DEBUG
         // ============================================
         (function() {
+            // DEBUG: Desabilitando para testar se é o culpado
+            return;
+
             const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
             // Não aplicar em touch devices (já têm scroll nativo suave)
