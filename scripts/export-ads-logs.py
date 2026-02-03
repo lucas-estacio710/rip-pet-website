@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Exportador de Logs do Google Ads Tracker - RIP PET
 Exporta os logs de cliques do Vercel para CSV
@@ -14,6 +15,14 @@ Configuração:
   2. Defina a variável de ambiente: VERCEL_TOKEN=seu_token
   3. Ou passe como argumento: python export-ads-logs.py --token=seu_token
 """
+
+import sys
+import io
+
+# Forçar UTF-8 no stdout (Windows)
+if sys.platform == "win32":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 import json
 import csv
@@ -64,45 +73,103 @@ def get_logs(token, project_id=None, hours=24):
         print("❌ Nenhum projeto encontrado")
         return []
 
-    # Buscar deployments recentes
-    print("🔍 Buscando deployments...")
-    req = Request(f"{VERCEL_API}/v6/deployments?projectId={project_id}&limit=5")
+    # Buscar logs de runtime (funções serverless)
+    print("🔍 Buscando logs de runtime...")
+
+    # Calcular timestamps
+    end_time = int(datetime.now().timestamp() * 1000)
+    start_time = int((datetime.now() - timedelta(hours=hours)).timestamp() * 1000)
+
+    # Endpoint correto para logs de runtime
+    logs_url = f"{VERCEL_API}/v2/projects/{project_id}/logs?since={start_time}&until={end_time}&source=lambda"
+    req = Request(logs_url)
     req.add_header("Authorization", f"Bearer {token}")
 
-    deployments = []
+    all_logs = []
+    try:
+        with urlopen(req) as response:
+            data = json.loads(response.read().decode())
+            logs = data if isinstance(data, list) else data.get("logs", [])
+            print(f"✅ {len(logs)} logs de runtime encontrados")
+
+            for log in logs:
+                # Filtrar apenas logs do tracker
+                message = log.get("message", "") or log.get("text", "")
+                if "CLICK TRACKED" in message:
+                    all_logs.append({"text": message, "timestamp": log.get("timestamp")})
+
+    except HTTPError as e:
+        error_body = e.read().decode() if e.fp else ""
+        print(f"❌ Erro ao buscar logs: {e.code} - {e.reason}")
+        if error_body:
+            print(f"   Detalhes: {error_body[:200]}")
+
+        # Tentar endpoint alternativo (v3)
+        print("🔄 Tentando endpoint alternativo...")
+        try:
+            logs_url = f"{VERCEL_API}/v3/projects/{project_id}/logs?startDate={start_time}&endDate={end_time}"
+            req = Request(logs_url)
+            req.add_header("Authorization", f"Bearer {token}")
+
+            with urlopen(req) as response:
+                data = json.loads(response.read().decode())
+                logs = data if isinstance(data, list) else data.get("logs", [])
+                print(f"✅ {len(logs)} logs encontrados (v3)")
+
+                for log in logs:
+                    message = log.get("message", "") or log.get("text", "")
+                    if "CLICK TRACKED" in message:
+                        all_logs.append({"text": message, "timestamp": log.get("timestamp")})
+
+        except HTTPError as e2:
+            print(f"❌ Endpoint v3 também falhou: {e2.code}")
+
+            # Última tentativa: buscar via deployments
+            print("🔄 Tentando via deployments...")
+            return get_logs_via_deployments(token, project_id, hours)
+
+    return all_logs
+
+
+def get_logs_via_deployments(token, project_id, hours):
+    """Fallback: busca logs via endpoint de deployments"""
+
+    req = Request(f"{VERCEL_API}/v6/deployments?projectId={project_id}&limit=5&state=READY")
+    req.add_header("Authorization", f"Bearer {token}")
+
+    all_logs = []
     try:
         with urlopen(req) as response:
             data = json.loads(response.read().decode())
             deployments = data.get("deployments", [])
             print(f"✅ {len(deployments)} deployments encontrados")
+
+            since = int((datetime.now() - timedelta(hours=hours)).timestamp() * 1000)
+
+            for dep in deployments[:3]:
+                dep_id = dep.get("uid")
+                dep_url = dep.get("url", "")
+                print(f"📋 Buscando logs do deployment {dep_id[:8]}...")
+
+                # Tentar endpoint de logs do deployment
+                try:
+                    log_url = f"{VERCEL_API}/v2/deployments/{dep_id}/events?since={since}&limit=500&types=stdout,stderr,log"
+                    req2 = Request(log_url)
+                    req2.add_header("Authorization", f"Bearer {token}")
+
+                    with urlopen(req2) as resp2:
+                        events = json.loads(resp2.read().decode())
+                        if isinstance(events, list):
+                            for event in events:
+                                text = event.get("text", "") or event.get("message", "")
+                                if "CLICK TRACKED" in text:
+                                    all_logs.append(event)
+                        print(f"   → {len(events)} eventos")
+                except HTTPError as e:
+                    print(f"   ⚠️ Erro: {e.code}")
+
     except HTTPError as e:
         print(f"❌ Erro ao buscar deployments: {e.code}")
-        return []
-
-    # Buscar logs de cada deployment
-    all_logs = []
-    since = int((datetime.now() - timedelta(hours=hours)).timestamp() * 1000)
-
-    for dep in deployments[:3]:  # Últimos 3 deployments
-        dep_id = dep.get("uid")
-        print(f"📋 Buscando logs do deployment {dep_id[:8]}...")
-
-        req = Request(f"{VERCEL_API}/v2/deployments/{dep_id}/events?since={since}&limit=1000")
-        req.add_header("Authorization", f"Bearer {token}")
-
-        try:
-            with urlopen(req) as response:
-                events = json.loads(response.read().decode())
-
-                for event in events:
-                    # Filtrar apenas logs da função de tracking
-                    text = event.get("text", "")
-                    if "CLICK TRACKED" in text or "track.js" in text:
-                        all_logs.append(event)
-
-        except HTTPError as e:
-            print(f"⚠️  Erro no deployment {dep_id[:8]}: {e.code}")
-            continue
 
     return all_logs
 

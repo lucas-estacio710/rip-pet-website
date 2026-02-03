@@ -79,3 +79,7 @@ site_producao_otimizado/
 
 # Manual interno (não versionar)
 CLAUDE.md
+
+# Scripts locais com tokens (NUNCA subir!)
+*.bat
+rodar-ads-logs.bat
