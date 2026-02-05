@@ -15,6 +15,214 @@
     {
       "source": "/novo-fluido",
       "destination": "/site_principal_novo_layout/index-fluid-typography.html"
+    },
+    {
+      "source": "/cremacao-pet-santos",
+      "destination": "/organic-base/cremacao-pet-santos/index.html"
+    },
+    {
+      "source": "/crematorio-pet-santos",
+      "destination": "/organic-base/crematorio-pet-santos/index.html"
+    },
+    {
+      "source": "/cremacao-pet-guaruja",
+      "destination": "/organic-base/cremacao-pet-guaruja/index.html"
+    },
+    {
+      "source": "/crematorio-pet-guaruja",
+      "destination": "/organic-base/crematorio-pet-guaruja/index.html"
+    },
+    {
+      "source": "/cremacao-pet-praia-grande",
+      "destination": "/organic-base/cremacao-pet-praia-grande/index.html"
+    },
+    {
+      "source": "/crematorio-pet-praia-grande",
+      "destination": "/organic-base/crematorio-pet-praia-grande/index.html"
+    },
+    {
+      "source": "/cremacao-pet-sao-vicente",
+      "destination": "/organic-base/cremacao-pet-sao-vicente/index.html"
+    },
+    {
+      "source": "/crematorio-pet-sao-vicente",
+      "destination": "/organic-base/crematorio-pet-sao-vicente/index.html"
+    },
+    {
+      "source": "/cremacao-cachorro-santos",
+      "destination": "/organic-base/cremacao-cachorro-santos/index.html"
+    },
+    {
+      "source": "/crematorio-cachorro-santos",
+      "destination": "/organic-base/crematorio-cachorro-santos/index.html"
+    },
+    {
+      "source": "/cremacao-gato-santos",
+      "destination": "/organic-base/cremacao-gato-santos/index.html"
+    },
+    {
+      "source": "/crematorio-gato-santos",
+      "destination": "/organic-base/crematorio-gato-santos/index.html"
+    },
+    {
+      "source": "/cremacao-cachorro-guaruja",
+      "destination": "/organic-base/cremacao-cachorro-guaruja/index.html"
+    },
+    {
+      "source": "/crematorio-cachorro-guaruja",
+      "destination": "/organic-base/crematorio-cachorro-guaruja/index.html"
+    },
+    {
+      "source": "/cremacao-gato-guaruja",
+      "destination": "/organic-base/cremacao-gato-guaruja/index.html"
+    },
+    {
+      "source": "/crematorio-gato-guaruja",
+      "destination": "/organic-base/crematorio-gato-guaruja/index.html"
+    },
+    {
+      "source": "/cremacao-cachorro-praia-grande",
+      "destination": "/organic-base/cremacao-cachorro-praia-grande/index.html"
+    },
+    {
+      "source": "/crematorio-cachorro-praia-grande",
+      "destination": "/organic-base/crematorio-cachorro-praia-grande/index.html"
+    },
+    {
+      "source": "/cremacao-gato-praia-grande",
+      "destination": "/organic-base/cremacao-gato-praia-grande/index.html"
+    },
+    {
+      "source": "/crematorio-gato-praia-grande",
+      "destination": "/organic-base/crematorio-gato-praia-grande/index.html"
+    },
+    {
+      "source": "/cremacao-cachorro-sao-vicente",
+      "destination": "/organic-base/cremacao-cachorro-sao-vicente/index.html"
+    },
+    {
+      "source": "/crematorio-cachorro-sao-vicente",
+      "destination": "/organic-base/crematorio-cachorro-sao-vicente/index.html"
+    },
+    {
+      "source": "/cremacao-gato-sao-vicente",
+      "destination": "/organic-base/cremacao-gato-sao-vicente/index.html"
+    },
+    {
+      "source": "/crematorio-gato-sao-vicente",
+      "destination": "/organic-base/crematorio-gato-sao-vicente/index.html"
+    },
+    {
+      "source": "/funeral-cachorro-guaruja",
+      "destination": "/organic-base/funeral-cachorro-guaruja/index.html"
+    },
+    {
+      "source": "/funeral-gato-guaruja",
+      "destination": "/organic-base/funeral-gato-guaruja/index.html"
+    },
+    {
+      "source": "/funeral-cachorro-praia-grande",
+      "destination": "/organic-base/funeral-cachorro-praia-grande/index.html"
+    },
+    {
+      "source": "/funeral-gato-praia-grande",
+      "destination": "/organic-base/funeral-gato-praia-grande/index.html"
+    },
+    {
+      "source": "/funeral-cachorro-sao-vicente",
+      "destination": "/organic-base/funeral-cachorro-sao-vicente/index.html"
+    },
+    {
+      "source": "/funeral-gato-sao-vicente",
+      "destination": "/organic-base/funeral-gato-sao-vicente/index.html"
+    },
+    {
+      "source": "/funeral-cachorro-santos",
+      "destination": "/organic-base/funeral-cachorro-santos/index.html"
+    },
+    {
+      "source": "/funeral-gato-santos",
+      "destination": "/organic-base/funeral-gato-santos/index.html"
+    },
+    {
+      "source": "/crematorio-de-cachorro-guaruja",
+      "destination": "/organic-base/crematorio-de-cachorro-guaruja/index.html"
+    },
+    {
+      "source": "/crematorio-de-gato-guaruja",
+      "destination": "/organic-base/crematorio-de-gato-guaruja/index.html"
+    },
+    {
+      "source": "/crematorio-de-cachorro-praia-grande",
+      "destination": "/organic-base/crematorio-de-cachorro-praia-grande/index.html"
+    },
+    {
+      "source": "/crematorio-de-gato-praia-grande",
+      "destination": "/organic-base/crematorio-de-gato-praia-grande/index.html"
+    },
+    {
+      "source": "/crematorio-de-cachorro-sao-vicente",
+      "destination": "/organic-base/crematorio-de-cachorro-sao-vicente/index.html"
+    },
+    {
+      "source": "/crematorio-de-gato-sao-vicente",
+      "destination": "/organic-base/crematorio-de-gato-sao-vicente/index.html"
+    },
+    {
+      "source": "/crematorio-de-cachorro-santos",
+      "destination": "/organic-base/crematorio-de-cachorro-santos/index.html"
+    },
+    {
+      "source": "/crematorio-de-gato-santos",
+      "destination": "/organic-base/crematorio-de-gato-santos/index.html"
+    },
+    {
+      "source": "/meu-pet-morreu-guaruja",
+      "destination": "/organic-base/meu-pet-morreu-guaruja/index.html"
+    },
+    {
+      "source": "/meu-cachorro-morreu-guaruja",
+      "destination": "/organic-base/meu-cachorro-morreu-guaruja/index.html"
+    },
+    {
+      "source": "/meu-gato-morreu-guaruja",
+      "destination": "/organic-base/meu-gato-morreu-guaruja/index.html"
+    },
+    {
+      "source": "/meu-pet-morreu-praia-grande",
+      "destination": "/organic-base/meu-pet-morreu-praia-grande/index.html"
+    },
+    {
+      "source": "/meu-cachorro-morreu-praia-grande",
+      "destination": "/organic-base/meu-cachorro-morreu-praia-grande/index.html"
+    },
+    {
+      "source": "/meu-gato-morreu-praia-grande",
+      "destination": "/organic-base/meu-gato-morreu-praia-grande/index.html"
+    },
+    {
+      "source": "/meu-pet-morreu-sao-vicente",
+      "destination": "/organic-base/meu-pet-morreu-sao-vicente/index.html"
+    },
+    {
+      "source": "/meu-cachorro-morreu-sao-vicente",
+      "destination": "/organic-base/meu-cachorro-morreu-sao-vicente/index.html"
+    },
+    {
+      "source": "/meu-gato-morreu-sao-vicente",
+      "destination": "/organic-base/meu-gato-morreu-sao-vicente/index.html"
+    },
+    {
+      "source": "/meu-pet-morreu-santos",
+      "destination": "/organic-base/meu-pet-morreu-santos/index.html"
+    },
+    {
+      "source": "/meu-cachorro-morreu-santos",
+      "destination": "/organic-base/meu-cachorro-morreu-santos/index.html"
+    },
+    {
+      "source": "/meu-gato-morreu-santos",
+      "destination": "/organic-base/meu-gato-morreu-santos/index.html"
     }
   ],
   "redirects": [
