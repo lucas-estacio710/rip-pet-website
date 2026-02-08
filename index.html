@@ -8052,22 +8052,5 @@
     <!-- RIP PET - Analytics Avançado -->
     <script defer src="./analytics-enhanced.js"></script>
 
-    <!-- Meta Pixel - Track WhatsApp Direct Links -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Track all direct WhatsApp links (wa.me)
-            const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
-            whatsappLinks.forEach(function(link) {
-                link.addEventListener('click', function() {
-                    if (typeof fbq !== 'undefined') {
-                        fbq('track', 'Contact', {
-                            content_name: 'WhatsApp Direct Link',
-                            content_category: 'Contact'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

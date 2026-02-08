@@ -1814,13 +1814,12 @@
 
         <!-- CTAs Desktop -->
         <div class="hero-ctas">
-            <a href="tel:+5511991603041" class="cta-primary" onclick="gtag('event', 'click_phone', {'event_label': 'hero_sao_paulo'});">
+            <a href="tel:+5511991603041" class="cta-primary">
                 <svg class="icon-inline" aria-hidden="true"><use href="#icon-phone"></use></svg> Ligar Agora 24h
             </a>
             <a href="https://wa.me/5511991603041?text=Olá,%20estava%20no%20site%20da%20R.I.P.%20Pet%20São%20Paulo%20e%20preciso%20de%20mais%20informações."
                class="cta-secondary"
-               target="_blank"
-               onclick="gtag('event', 'click_whatsapp', {'event_label': 'hero_sao_paulo'});">
+               target="_blank">
                 <svg class="icon-inline" aria-hidden="true"><use href="#icon-whatsapp"></use></svg> WhatsApp 24h
             </a>
         </div>
@@ -9496,11 +9495,11 @@
                 </h2>
                 <p>Equipe disponível 24h para esclarecer suas dúvidas e oferecer todo o suporte e segurança com a <strong>transparência e o cuidado que só a RIP PET proporciona.</strong></p>
                 <div class="cta-buttons">
-                    <a href="tel:+5511991603041" class="cta-btn phone" onclick="gtag('event', 'click_phone', {'event_label': 'fale_conosco_sao_paulo'});">
+                    <a href="tel:+5511991603041" class="cta-btn phone">
                         <i class="fas fa-phone"></i>
                         <span>Ligue Agora 24h</span>
                     </a>
-                    <a href="https://wa.me/5511991603041?text=Olá,%20estava%20no%20site%20da%20R.I.P.%20Pet%20São%20Paulo%20e%20preciso%20de%20mais%20informações." target="_blank" rel="noopener noreferrer" class="cta-btn whatsapp" onclick="gtag('event', 'click_whatsapp', {'event_label': 'fale_conosco_sao_paulo'});">
+                    <a href="https://wa.me/5511991603041?text=Olá,%20estava%20no%20site%20da%20R.I.P.%20Pet%20São%20Paulo%20e%20preciso%20de%20mais%20informações." target="_blank" rel="noopener noreferrer" class="cta-btn whatsapp">
                         <i class="fab fa-whatsapp"></i>
                         <span>WhatsApp</span>
                     </a>
@@ -10081,13 +10080,13 @@
     </div>
 
     <!-- Botão Flutuante Telefone -->
-    <a href="tel:+5511991603041" class="fixed-phone" title="Ligar Agora (11) 99160-3041" aria-label="Ligar para R.I.P. Pet São Paulo" onclick="gtag('event', 'click_phone', {'event_label': 'floating_button_sao_paulo'});">
+    <a href="tel:+5511991603041" class="fixed-phone" title="Ligar Agora (11) 99160-3041" aria-label="Ligar para R.I.P. Pet São Paulo">
         <span class="phone-pulse"></span>
         <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
     </a>
 
     <!-- Botão Flutuante WhatsApp -->
-    <a href="https://wa.me/5511991603041?text=Olá,%20estava%20no%20site%20da%20R.I.P.%20Pet%20São%20Paulo%20e%20preciso%20de%20mais%20informações." target="_blank" rel="noopener noreferrer" class="fixed-whatsapp" title="WhatsApp 24h (11) 99160-3041" aria-label="Falar no WhatsApp São Paulo" onclick="gtag('event', 'click_whatsapp', {'event_label': 'floating_button_sao_paulo'});">
+    <a href="https://wa.me/5511991603041?text=Olá,%20estava%20no%20site%20da%20R.I.P.%20Pet%20São%20Paulo%20e%20preciso%20de%20mais%20informações." target="_blank" rel="noopener noreferrer" class="fixed-whatsapp" title="WhatsApp 24h (11) 99160-3041" aria-label="Falar no WhatsApp São Paulo">
         <span class="whatsapp-pulse"></span>
         <svg viewBox="0 0 448 512"><use href="#icon-whatsapp"></use></svg>
         <span class="whatsapp-notification">1</span>
@@ -10723,24 +10722,6 @@
 
     <!-- RIP PET - Analytics Avançado -->
     <script defer src="/analytics-enhanced.js"></script>
-
-    <!-- Meta Pixel - Track WhatsApp Direct Links -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Track all direct WhatsApp links (wa.me)
-            const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
-            whatsappLinks.forEach(function(link) {
-                link.addEventListener('click', function() {
-                    if (typeof fbq !== 'undefined') {
-                        fbq('track', 'Contact', {
-                            content_name: 'WhatsApp Direct Link',
-                            content_category: 'Contact'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
 
     <!-- Mostrar/Esconder botões flutuantes baseado nos CTAs da hero -->
     <script>
