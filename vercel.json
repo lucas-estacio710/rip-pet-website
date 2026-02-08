@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/santos",
-      "destination": "/site_santos_novo_layout/index.html"
+      "destination": "/santos/index.html"
     },
     {
       "source": "/novo",
@@ -228,12 +228,12 @@
   "redirects": [
     {
       "source": "/lp-campinas-a",
-      "destination": "/",
+      "destination": "/campinas",
       "permanent": true
     },
     {
       "source": "/lp-campinas-a/",
-      "destination": "/",
+      "destination": "/campinas",
       "permanent": true
     },
     {
@@ -248,12 +248,12 @@
     },
     {
       "source": "/crematorio-de-animais-lp-campinas",
-      "destination": "/",
+      "destination": "/campinas",
       "permanent": true
     },
     {
       "source": "/crematorio-de-animais-lp-campinas/",
-      "destination": "/",
+      "destination": "/campinas",
       "permanent": true
     },
     {

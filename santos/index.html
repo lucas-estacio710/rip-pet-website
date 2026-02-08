@@ -229,7 +229,7 @@
       "url": "https://rippet.com.br/santos",
       "telephone": "+5513998068262",
       "priceRange": "$$",
-      "foundingDate": "2012",
+      "foundingDate": "2023",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Av. Cel. Joaquim Montenegro, 334 - Ponta da Praia",
@@ -1862,7 +1862,7 @@
                 <div class="historia-text">
                     <p>Fundada em <strong>2013</strong> pelos veterinários <em>Adriele e Carlos Eduardo</em><span class="desktop-only"> (1ª foto ao lado)</span>, a R.I.P. Pet nasceu para transformar despedidas em homenagens com <strong>amor e gratidão</strong>. Hoje, nos orgulhamos de ser <strong>a maior organização de Cremação Pet do Brasil</strong> e de fazer parte da história de <strong>milhares de famílias</strong>.</p>
                     <br>
-                    <p>Atendemos à <strong>Baixada Santista</strong> desde 2018. Nossa unidade <strong>R.I.P. Pet Santos</strong> foi inaugurada em 2023, para trazer mais proximidade e agilidade do <strong>melhor Serviço Funerário Pet do Brasil</strong>, presente nas nossas 9 cidades com <strong>Carinho, Respeito e Transparência</strong>, sendo o único instalado na região que possui <strong>equipamentos crematórios próprios</strong>.</p>
+                    <p>Atendemos à <strong>Baixada Santista</strong> desde 2018. Nossa unidade <strong>R.I.P. Pet Santos</strong> foi inaugurada em 2023, para trazer mais proximidade e agilidade do <strong>melhor Serviço Funerário Pet do Brasil</strong>, presente nas nossas 9 cidades (Santos, São Vicente, Praia Grande, Guarujá, Cubatão, Itanhaém, Peruíbe, Bertioga e Mongaguá) com <strong>Carinho, Respeito e Transparência</strong>, sendo o único instalado na região que possui <strong>equipamentos crematórios próprios</strong>.</p>
                     <img src="/images/LP_Santos/carro-praia-grande.webp" alt="Carro RIP Pet na orla da praia" class="mobile-only historia-foto-carro">
                     <div class="historia-mini-cards">
                         <div class="historia-mini-card">
@@ -9698,14 +9698,30 @@
             const menuMobile = document.querySelector('.nav-menu-mobile');
             const menuOverlay = document.querySelector('.menu-overlay');
             const menuCloseBtn = document.querySelector('.nav-menu-mobile .menu-close-btn');
+            var menuHistoryPushed = false;
 
             function openMenu() {
                 if (menuMobile) menuMobile.classList.add('active');
                 if (menuOverlay) menuOverlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
+                if (!menuHistoryPushed) {
+                    history.pushState({menuOpen: true}, '');
+                    menuHistoryPushed = true;
+                }
             }
 
             function closeMenu() {
+                if (menuMobile) menuMobile.classList.remove('active');
+                if (menuOverlay) menuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+                if (menuHistoryPushed) {
+                    menuHistoryPushed = false;
+                    history.back();
+                }
+            }
+
+            function closeMenuFromBack() {
+                menuHistoryPushed = false;
                 if (menuMobile) menuMobile.classList.remove('active');
                 if (menuOverlay) menuOverlay.classList.remove('active');
                 document.body.style.overflow = '';
@@ -9717,26 +9733,15 @@
 
             window.openMobileMenu = openMenu;
             window.closeMobileMenu = closeMenu;
+            window.closeMobileMenuFromBack = closeMenuFromBack;
         });
 
         // Intercepta botão voltar do celular - fecha qualquer popup/menu aberto
         window.addEventListener('popstate', function(event) {
-            // Fecha menu mobile
+            // Fecha menu mobile (sem history.back, o estado já foi consumido)
             const navMenuMobile = document.querySelector('.nav-menu-mobile');
             if (navMenuMobile && navMenuMobile.classList.contains('active')) {
-                closeMobileMenu();
-                return;
-            }
-            // Fecha popup WhatsApp
-            const whatsappOverlay = document.getElementById('whatsappPopupOverlay');
-            if (whatsappOverlay && whatsappOverlay.style.display !== 'none') {
-                closeWhatsAppPopup(true);
-                return;
-            }
-            // Fecha popup Phone
-            const phoneOverlay = document.getElementById('phonePopupOverlay');
-            if (phoneOverlay && phoneOverlay.style.display !== 'none') {
-                closePhonePopup(true);
+                closeMobileMenuFromBack();
                 return;
             }
             // Fecha modal Dedicatória
@@ -9953,60 +9958,6 @@
                 }
             });
         });
-        // WhatsApp Popup Functions
-        function openWhatsAppPopup() {
-            // Track Meta Pixel Lead event
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'Lead', {
-                    content_name: 'WhatsApp Contact',
-                    content_category: 'Contact'
-                });
-            }
-            const overlay = document.getElementById('whatsappPopupOverlay');
-            overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => overlay.classList.add('active'), 10);
-            history.pushState({ popup: 'whatsapp' }, '');
-        }
-
-        function closeWhatsAppPopup(fromHistory) {
-            const overlay = document.getElementById('whatsappPopupOverlay');
-            if (!overlay || overlay.style.display === 'none') return;
-            overlay.classList.remove('active');
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                document.body.style.overflow = '';
-            }, 300);
-            if (!fromHistory) history.back();
-        }
-
-        // Phone Popup Functions
-        function openPhonePopup() {
-            // Track Meta Pixel Lead event
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'Lead', {
-                    content_name: 'Phone Contact',
-                    content_category: 'Contact'
-                });
-            }
-            const overlay = document.getElementById('phonePopupOverlay');
-            overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => overlay.classList.add('active'), 10);
-            history.pushState({ popup: 'phone' }, '');
-        }
-
-        function closePhonePopup(fromHistory) {
-            const overlay = document.getElementById('phonePopupOverlay');
-            if (!overlay || overlay.style.display === 'none') return;
-            overlay.classList.remove('active');
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                document.body.style.overflow = '';
-            }, 300);
-            if (!fromHistory) history.back();
-        }
-
         // Historia Slider - Auto rotate images with dots
         const historiaSlides = document.querySelectorAll('.historia-slide');
         const historiaDots = document.querySelectorAll('.historia-dot');
@@ -10122,121 +10073,7 @@
         }
     </script>
 
-    <!-- WhatsApp Popup -->
-    <div class="whatsapp-popup-overlay" id="whatsappPopupOverlay" onclick="if(event.target === this) closeWhatsAppPopup()" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
-        <div class="whatsapp-popup" style="background: linear-gradient(135deg, #128C7E 0%, #075E54 50%, #25D366 100%); border-radius: 20px; padding: 2rem; max-width: 680px; width: 90%; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative;">
-            <button onclick="closeWhatsAppPopup()" style="position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); border: none; font-size: var(--fs-md); color: white; cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-                <i class="fas fa-times"></i>
-            </button>
-
-            <h3 style="text-align: center; color: white; margin-bottom: 0.5rem; font-size: var(--fs-md); font-weight: 600; font-family: 'Poppins', sans-serif;">Atendimento WhatsApp 24h</h3>
-            <p style="text-align: center; color: #ccc; margin-bottom: 1.5rem; font-size: var(--fs-sm); font-family: 'Poppins', sans-serif;">Nossa equipe está sempre pronta para esclarecer suas dúvidas e prestar todo suporte que necessitar, com carinho e respeito</p>
-
-            <div class="popup-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem;">
-                <a href="https://wa.me/5512997996543?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." target="_blank" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #25D366;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
-                    <div>
-                        <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Matriz e Vale do Paraíba</h4>
-                        <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(12) 99799-6543</p>
-                    </div>
-                    <i class="fab fa-whatsapp" style="font-size: var(--fs-icon);"></i>
-                </a>
-                <a href="https://wa.me/5511991603041?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." target="_blank" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #25D366;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
-                    <div>
-                        <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">São Paulo e Região</h4>
-                        <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(11) 99160-3041</p>
-                    </div>
-                    <i class="fab fa-whatsapp" style="font-size: var(--fs-icon);"></i>
-                </a>
-                <a href="https://wa.me/5513998068262?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." target="_blank" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #25D366;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
-                    <div>
-                        <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Santos e Região</h4>
-                        <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(13) 99806-8262</p>
-                    </div>
-                    <i class="fab fa-whatsapp" style="font-size: var(--fs-icon);"></i>
-                </a>
-                <a href="https://wa.me/5519999161977?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." target="_blank" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #25D366;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
-                    <div>
-                        <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Campinas e Região</h4>
-                        <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(19) 99916-1977</p>
-                    </div>
-                    <i class="fab fa-whatsapp" style="font-size: var(--fs-icon);"></i>
-                </a>
-                <a href="https://wa.me/5524998379825?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." target="_blank" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #25D366;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
-                    <div>
-                        <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Resende e Região</h4>
-                        <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(24) 99837-9825</p>
-                    </div>
-                    <i class="fab fa-whatsapp" style="font-size: var(--fs-icon);"></i>
-                </a>
-                <a href="https://wa.me/553599042223?text=Olá, estava no site da R.I.P. Pet e preciso de mais informações." target="_blank" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #25D366;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
-                    <div>
-                        <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Pouso Alegre e Região</h4>
-                        <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(35) 99904-2223</p>
-                    </div>
-                    <i class="fab fa-whatsapp" style="font-size: var(--fs-icon);"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Phone Popup -->
-    <div class="phone-popup-overlay" id="phonePopupOverlay" onclick="if(event.target === this) closePhonePopup()" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
-        <div class="phone-popup" style="background: linear-gradient(135deg, #02243C 0%, #0a3a5c 50%, #02243C 100%); border-radius: 20px; padding: 2rem; max-width: 680px; width: 90%; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative;">
-            <button onclick="closePhonePopup()" style="position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); border: none; font-size: var(--fs-md); color: white; cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-                <i class="fas fa-times"></i>
-            </button>
-
-            <h3 style="text-align: center; color: white; margin-bottom: 0.5rem; font-size: var(--fs-md); font-weight: 600; font-family: 'Poppins', sans-serif;">Atendimento 24h</h3>
-            <p style="text-align: center; color: #ccc; margin-bottom: 1.5rem; font-size: var(--fs-sm); font-family: 'Poppins', sans-serif;">Nossa equipe está sempre pronta para esclarecer suas dúvidas e prestar todo suporte que necessitar, com carinho e respeito</p>
-
-            <div class="popup-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem;">
-                <a href="tel:+5512997996543" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #4CAF50;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
-                    <div>
-                        <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Matriz e Vale do Paraíba</h4>
-                        <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(12) 99799-6543</p>
-                    </div>
-                    <i class="fas fa-phone-alt" style="font-size: var(--fs-md);"></i>
-                </a>
-                <a href="tel:+5511991603041" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #4CAF50;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
-                    <div>
-                        <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">São Paulo e Região</h4>
-                        <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(11) 99160-3041</p>
-                    </div>
-                    <i class="fas fa-phone-alt" style="font-size: var(--fs-md);"></i>
-                </a>
-                <a href="tel:+5513998068262" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #4CAF50;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
-                    <div>
-                        <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Santos e Região</h4>
-                        <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(13) 99806-8262</p>
-                    </div>
-                    <i class="fas fa-phone-alt" style="font-size: var(--fs-md);"></i>
-                </a>
-                <a href="tel:+5519999161977" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #4CAF50;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
-                    <div>
-                        <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Campinas e Região</h4>
-                        <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(19) 99916-1977</p>
-                    </div>
-                    <i class="fas fa-phone-alt" style="font-size: var(--fs-md);"></i>
-                </a>
-                <a href="tel:+5524998379825" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #4CAF50;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
-                    <div>
-                        <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Resende e Região</h4>
-                        <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(24) 99837-9825</p>
-                    </div>
-                    <i class="fas fa-phone-alt" style="font-size: var(--fs-md);"></i>
-                </a>
-                <a href="tel:+553599042223" style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 0.9rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: white; transition: all 0.3s ease; border-left: 4px solid #4CAF50;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
-                    <div>
-                        <h4 style="margin: 0; font-size: var(--fs-base); font-weight: 500;">Pouso Alegre e Região</h4>
-                        <p style="margin: 0; color: #ccc; font-size: var(--fs-sm);">(35) 99904-2223</p>
-                    </div>
-                    <i class="fas fa-phone-alt" style="font-size: var(--fs-md);"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Fixed Google 5 Estrelas - Bottom Left -->
+            <!-- Fixed Google 5 Estrelas - Bottom Left -->
     <div class="fixed-google-stars" style="position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 9998; display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
         <img src="/images/avaliacao-google-5-estrelas.webp" alt="Google 5 estrelas" style="width: 108px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.8)) drop-shadow(0 2px 4px rgba(0,0,0,0.6));">
     </div>
@@ -10257,7 +10094,7 @@
     <!-- Mobile Thumb-Zone CTAs (2025 Best Practice) -->
     <div class="mobile-thumb-ctas">
         <div class="mobile-thumb-ctas-inner">
-            <a href="tel:+551236441766" class="mobile-thumb-cta cta-phone">
+            <a href="tel:+5513998068262" class="mobile-thumb-cta cta-phone">
                 <i class="fas fa-phone-alt"></i>
                 <span>Ligar 24h</span>
             </a>
