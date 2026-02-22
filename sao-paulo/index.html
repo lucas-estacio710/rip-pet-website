@@ -2303,6 +2303,11 @@
                 opacity: 0.7;
                 animation: bounce-down 2s infinite;
             }
+            @media (max-width: 768px) {
+                .historia-saiba-mais {
+                    flex-direction: column;
+                }
+            }
             @keyframes bounce-down {
                 0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
                 40% { transform: translateY(3px); }
@@ -8729,6 +8734,7 @@
             .section-dedicatorias {
                 padding: 0 0 2rem 0;
                 overflow: hidden;
+                background-color: var(--cinza-fundo) !important;
             }
 
             /* DEDICATÓRIAS - Título centralizado em tamanho máximo */
