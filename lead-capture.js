@@ -212,9 +212,7 @@
       url = originalHref;
     }
 
-    setTimeout(function () {
-      window.open(url, '_blank');
-    }, 200);
+    window.location.href = url;
   }
 
   // ===== POPUP HTML =====
