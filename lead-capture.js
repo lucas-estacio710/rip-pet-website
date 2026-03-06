@@ -204,9 +204,6 @@
     if (currentChannel === 'whatsapp') {
       var phone = extractPhone(originalHref) || '5513998068262';
       var msg = buildWhatsAppMessage(protocolo);
-      if (capturedParams.gclid) {
-        msg += ' [ref:' + capturedParams.gclid + ']';
-      }
       url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(msg);
     } else {
       url = originalHref;
