@@ -1,4 +1,5 @@
 {
+  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/santos",
@@ -226,6 +227,17 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/:path(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.rippet.com.br"
+        }
+      ],
+      "destination": "https://rippet.com.br/:path",
+      "permanent": true
+    },
     {
       "source": "/lp-campinas-a",
       "destination": "/campinas",

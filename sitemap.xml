@@ -7,386 +7,338 @@
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/santos/</loc>
+        <loc>https://rippet.com.br/santos</loc>
         <lastmod>2025-01-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/sao-paulo/</loc>
+        <loc>https://rippet.com.br/sao-paulo</loc>
         <lastmod>2026-02-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/campinas/</loc>
+        <loc>https://rippet.com.br/campinas</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/cremacao-pet-santos/</loc>
+        <loc>https://rippet.com.br/cremacao-pet-santos</loc>
         <lastmod>2026-02-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-pet-santos/</loc>
+        <loc>https://rippet.com.br/crematorio-pet-santos</loc>
         <lastmod>2026-02-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/cremacao-pet-guaruja/</loc>
+        <loc>https://rippet.com.br/cremacao-pet-guaruja</loc>
         <lastmod>2026-02-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-pet-guaruja/</loc>
+        <loc>https://rippet.com.br/crematorio-pet-guaruja</loc>
         <lastmod>2026-02-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/cremacao-pet-praia-grande/</loc>
+        <loc>https://rippet.com.br/cremacao-pet-praia-grande</loc>
         <lastmod>2026-02-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-pet-praia-grande/</loc>
+        <loc>https://rippet.com.br/crematorio-pet-praia-grande</loc>
         <lastmod>2026-02-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/cremacao-pet-sao-vicente/</loc>
+        <loc>https://rippet.com.br/cremacao-pet-sao-vicente</loc>
         <lastmod>2026-02-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-pet-sao-vicente/</loc>
+        <loc>https://rippet.com.br/crematorio-pet-sao-vicente</loc>
         <lastmod>2026-02-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <!-- Páginas Cachorro -->
     <url>
-        <loc>https://rippet.com.br/cremacao-cachorro-santos/</loc>
+        <loc>https://rippet.com.br/cremacao-cachorro-santos</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-cachorro-santos/</loc>
+        <loc>https://rippet.com.br/crematorio-cachorro-santos</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/cremacao-cachorro-guaruja/</loc>
+        <loc>https://rippet.com.br/cremacao-cachorro-guaruja</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-cachorro-guaruja/</loc>
+        <loc>https://rippet.com.br/crematorio-cachorro-guaruja</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/cremacao-cachorro-praia-grande/</loc>
+        <loc>https://rippet.com.br/cremacao-cachorro-praia-grande</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-cachorro-praia-grande/</loc>
+        <loc>https://rippet.com.br/crematorio-cachorro-praia-grande</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/cremacao-cachorro-sao-vicente/</loc>
+        <loc>https://rippet.com.br/cremacao-cachorro-sao-vicente</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-cachorro-sao-vicente/</loc>
+        <loc>https://rippet.com.br/crematorio-cachorro-sao-vicente</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <!-- Páginas Gato -->
     <url>
-        <loc>https://rippet.com.br/cremacao-gato-santos/</loc>
+        <loc>https://rippet.com.br/cremacao-gato-santos</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-gato-santos/</loc>
+        <loc>https://rippet.com.br/crematorio-gato-santos</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/cremacao-gato-guaruja/</loc>
+        <loc>https://rippet.com.br/cremacao-gato-guaruja</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-gato-guaruja/</loc>
+        <loc>https://rippet.com.br/crematorio-gato-guaruja</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/cremacao-gato-praia-grande/</loc>
+        <loc>https://rippet.com.br/cremacao-gato-praia-grande</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-gato-praia-grande/</loc>
+        <loc>https://rippet.com.br/crematorio-gato-praia-grande</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/cremacao-gato-sao-vicente/</loc>
+        <loc>https://rippet.com.br/cremacao-gato-sao-vicente</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-gato-sao-vicente/</loc>
+        <loc>https://rippet.com.br/crematorio-gato-sao-vicente</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <!-- Páginas Funeral (texto focado no processo) -->
     <url>
-        <loc>https://rippet.com.br/funeral-cachorro-guaruja/</loc>
+        <loc>https://rippet.com.br/funeral-cachorro-guaruja</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/funeral-gato-guaruja/</loc>
+        <loc>https://rippet.com.br/funeral-gato-guaruja</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/funeral-cachorro-praia-grande/</loc>
+        <loc>https://rippet.com.br/funeral-cachorro-praia-grande</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/funeral-gato-praia-grande/</loc>
+        <loc>https://rippet.com.br/funeral-gato-praia-grande</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/funeral-cachorro-sao-vicente/</loc>
+        <loc>https://rippet.com.br/funeral-cachorro-sao-vicente</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/funeral-gato-sao-vicente/</loc>
+        <loc>https://rippet.com.br/funeral-gato-sao-vicente</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/funeral-cachorro-santos/</loc>
+        <loc>https://rippet.com.br/funeral-cachorro-santos</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/funeral-gato-santos/</loc>
+        <loc>https://rippet.com.br/funeral-gato-santos</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <!-- Páginas Crematório de (texto focado no processo) -->
     <url>
-        <loc>https://rippet.com.br/crematorio-de-cachorro-guaruja/</loc>
+        <loc>https://rippet.com.br/crematorio-de-cachorro-guaruja</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-de-gato-guaruja/</loc>
+        <loc>https://rippet.com.br/crematorio-de-gato-guaruja</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-de-cachorro-praia-grande/</loc>
+        <loc>https://rippet.com.br/crematorio-de-cachorro-praia-grande</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-de-gato-praia-grande/</loc>
+        <loc>https://rippet.com.br/crematorio-de-gato-praia-grande</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-de-cachorro-sao-vicente/</loc>
+        <loc>https://rippet.com.br/crematorio-de-cachorro-sao-vicente</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-de-gato-sao-vicente/</loc>
+        <loc>https://rippet.com.br/crematorio-de-gato-sao-vicente</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-de-cachorro-santos/</loc>
+        <loc>https://rippet.com.br/crematorio-de-cachorro-santos</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/crematorio-de-gato-santos/</loc>
+        <loc>https://rippet.com.br/crematorio-de-gato-santos</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <!-- Páginas Meu Pet Morreu -->
     <url>
-        <loc>https://rippet.com.br/meu-pet-morreu-guaruja/</loc>
+        <loc>https://rippet.com.br/meu-pet-morreu-guaruja</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/meu-cachorro-morreu-guaruja/</loc>
+        <loc>https://rippet.com.br/meu-cachorro-morreu-guaruja</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/meu-gato-morreu-guaruja/</loc>
+        <loc>https://rippet.com.br/meu-gato-morreu-guaruja</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/meu-pet-morreu-praia-grande/</loc>
+        <loc>https://rippet.com.br/meu-pet-morreu-praia-grande</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/meu-cachorro-morreu-praia-grande/</loc>
+        <loc>https://rippet.com.br/meu-cachorro-morreu-praia-grande</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/meu-gato-morreu-praia-grande/</loc>
+        <loc>https://rippet.com.br/meu-gato-morreu-praia-grande</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/meu-pet-morreu-sao-vicente/</loc>
+        <loc>https://rippet.com.br/meu-pet-morreu-sao-vicente</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/meu-cachorro-morreu-sao-vicente/</loc>
+        <loc>https://rippet.com.br/meu-cachorro-morreu-sao-vicente</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/meu-gato-morreu-sao-vicente/</loc>
+        <loc>https://rippet.com.br/meu-gato-morreu-sao-vicente</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/meu-pet-morreu-santos/</loc>
+        <loc>https://rippet.com.br/meu-pet-morreu-santos</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/meu-cachorro-morreu-santos/</loc>
+        <loc>https://rippet.com.br/meu-cachorro-morreu-santos</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://rippet.com.br/meu-gato-morreu-santos/</loc>
+        <loc>https://rippet.com.br/meu-gato-morreu-santos</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://rippet.com.br/#sobre</loc>
-        <lastmod>2025-01-21</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://rippet.com.br/#servicos</loc>
-        <lastmod>2025-01-21</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://rippet.com.br/#planos</loc>
-        <lastmod>2025-01-21</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://rippet.com.br/#tecnologia</loc>
-        <lastmod>2025-01-21</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://rippet.com.br/#unidades</loc>
-        <lastmod>2025-01-21</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://rippet.com.br/#urnas</loc>
-        <lastmod>2025-01-21</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://rippet.com.br/#dedicatorias</loc>
-        <lastmod>2025-01-21</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://rippet.com.br/#faq</loc>
-        <lastmod>2025-01-21</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
     </url>
 </urlset>
