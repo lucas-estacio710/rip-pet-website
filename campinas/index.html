@@ -5526,6 +5526,29 @@
             display: none;
         }
 
+        .unidade-crosslink {
+            display: none;
+            margin-top: 1rem;
+        }
+        .unidade-crosslink.visible {
+            display: block;
+        }
+        .unidade-crosslink a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--verde-principal, #a7e189);
+            font-family: var(--font-poppins);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.4rem 0;
+        }
+        .unidade-crosslink a:hover {
+            text-decoration: underline;
+        }
+
         .unidade-tab {
             padding: 0.35rem 0.6rem;
             border: none;
@@ -9134,8 +9157,8 @@
                     </div>
                     <!-- Tabs secundárias (outras unidades) - ocultas por padrão -->
                     <div class="unidade-tabs-outras" id="outras-unidades">
-                        <button class="unidade-tab" data-tab="sp" data-nome="São Paulo" data-img="/images/unidade-crematorio-sao-paulo.webp" data-desc="Inaugurada em 2018, nossa unidade de São Paulo foi o &lt;strong&gt;primeiro velório pet na região central da capital paulista&lt;/strong&gt;. Localizada no bairro de Higienópolis, garante &lt;strong&gt;atendimento ágil 24h&lt;/strong&gt; para toda a cidade e região metropolitana." data-endereco="Rua Rosa e Silva, 150 - Santa Cecília" data-cidade="São Paulo/SP" data-tel="(11) 99160-3041" data-mapsq="RIP+Pet+Funeral+Crematório+São+Paulo+Higienópolis">São Paulo</button>
-                        <button class="unidade-tab" data-tab="santos" data-nome="Santos" data-img="/images/unidade-crematorio-santos.webp" data-desc="Inaugurada em 2023, nossa unidade em Santos atende &lt;strong&gt;toda a Baixada Santista&lt;/strong&gt; com &lt;strong&gt;atendimento 24h&lt;/strong&gt;. Com fácil acesso à balsa e à perimetral, atendemos a região com agilidade." data-endereco="Av. Cel. Joaquim Montenegro, 334 - Ponta da Praia" data-cidade="Santos/SP" data-tel="(13) 99806-8262" data-mapsq="RIP+Pet+Funeral+Crematório+Santos">Santos</button>
+                        <button class="unidade-tab" data-tab="sp" data-lp="../sao-paulo/" data-nome="São Paulo" data-img="/images/unidade-crematorio-sao-paulo.webp" data-desc="Inaugurada em 2018, nossa unidade de São Paulo foi o &lt;strong&gt;primeiro velório pet na região central da capital paulista&lt;/strong&gt;. Localizada no bairro de Higienópolis, garante &lt;strong&gt;atendimento ágil 24h&lt;/strong&gt; para toda a cidade e região metropolitana." data-endereco="Rua Rosa e Silva, 150 - Santa Cecília" data-cidade="São Paulo/SP" data-tel="(11) 99160-3041" data-mapsq="RIP+Pet+Funeral+Crematório+São+Paulo+Higienópolis">São Paulo</button>
+                        <button class="unidade-tab" data-tab="santos" data-lp="../santos/" data-nome="Santos" data-img="/images/unidade-crematorio-santos.webp" data-desc="Inaugurada em 2023, nossa unidade em Santos atende &lt;strong&gt;toda a Baixada Santista&lt;/strong&gt; com &lt;strong&gt;atendimento 24h&lt;/strong&gt;. Com fácil acesso à balsa e à perimetral, atendemos a região com agilidade." data-endereco="Av. Cel. Joaquim Montenegro, 334 - Ponta da Praia" data-cidade="Santos/SP" data-tel="(13) 99806-8262" data-mapsq="RIP+Pet+Funeral+Crematório+Santos">Santos</button>
                         <button class="unidade-tab" data-tab="sjc" data-nome="São José dos Campos" data-img="/images/unidade-crematorio-sao-jose-campos.webp" data-desc="Nossa unidade em São José dos Campos fica em &lt;strong&gt;ponto estratégico da capital do Vale do Paraíba&lt;/strong&gt;. Com &lt;strong&gt;atendimento 24h&lt;/strong&gt;, atendemos toda a região, incluindo o &lt;strong&gt;Litoral Norte, Campos do Jordão e a Serra da Mantiqueira&lt;/strong&gt;." data-endereco="Av. Dr. Ademar de Barros, 1257 - Vila Ema" data-mapsq="RIP+Pet+Crematório+São+José+dos+Campos">São José dos Campos</button>
                         <button class="unidade-tab" data-tab="resende" data-nome="Resende" data-img="/images/unidade-crematorio-resende.webp" data-desc="Nossa unidade em Resende é o &lt;strong&gt;primeiro e único crematório pet da região Sul Fluminense&lt;/strong&gt;. Com localização estratégica, atendemos toda a região com agilidade." data-endereco="R. Santa Teresinha, 168 - Paraíso" data-mapsq="RIP+Pet+Crematório+Resende">Resende</button>
                         <button class="unidade-tab" data-tab="pouso" data-nome="Pouso Alegre" data-img="/images/unidade-crematorio-pouso-alegre.webp" data-desc="Nossa unidade em Pouso Alegre é a &lt;strong&gt;primeira da R.I.P. Pet em Minas Gerais&lt;/strong&gt;. Com &lt;strong&gt;atendimento 24h&lt;/strong&gt;, atendemos todo o &lt;strong&gt;Sul de Minas&lt;/strong&gt; com agilidade." data-endereco="R. Paulino Pereira da Silva, 69 - Saúde" data-mapsq="RIP+Pet+Crematório+Pouso+Alegre">Pouso Alegre</button>
@@ -9159,6 +9182,9 @@
                         <button class="btn-acao-mobile btn-compartilhar">
                             <i class="fas fa-share-alt"></i> Compartilhar
                         </button>
+                    </div>
+                    <div class="unidade-crosslink" id="unidade-crosslink">
+                        <a href="" rel="noopener">Conheça a página dessa unidade <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i></a>
                     </div>
                 </div>
                 <div class="unidade-image">
@@ -9899,6 +9925,20 @@
                         btnNavegar.dataset.mapsq = mapsq;
                         btnNavegar.dataset.nome = nome;
                         btnNavegar.dataset.endereco = endereco;
+                    }
+
+                    // Atualiza cross-link para unidades com LP própria
+                    const crosslink = document.getElementById('unidade-crosslink');
+                    if (crosslink) {
+                        const lp = this.dataset.lp;
+                        const crosslinkA = crosslink.querySelector('a');
+                        if (lp) {
+                            crosslinkA.href = lp;
+                            crosslinkA.innerHTML = 'Conheça a unidade ' + nome + ' <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>';
+                            crosslink.classList.add('visible');
+                        } else {
+                            crosslink.classList.remove('visible');
+                        }
                     }
 
                     // Alterna posição: índices ímpares (SP, Campinas, Pouso) ficam invertidos
