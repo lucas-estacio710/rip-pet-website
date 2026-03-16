@@ -3,11 +3,14 @@
  * RIP PET - LEAD CAPTURE POPUP (v2)
  * =====================================================
  *
- * Árvore de conversa:
- *   1. Saudação → pedir nome
- *   2. Tipo: Emergência ou Planos Preventivos
- *   3a. EMERGÊNCIA: cidade → espécie → (se cachorro: grande porte?) → redirect
- *   3b. PREVENTIVO: cidade → redirect
+ * Árvore de conversa (WhatsApp):
+ *   1. Saudação → tipo (botões)
+ *   2a. EMERGÊNCIA: cidade → espécie → (se cachorro: grande porte?) → nome → redirect
+ *   2b. PREVENTIVO: cidade → nome → redirect
+ *
+ * Árvore de conversa (Telefone — simplificado):
+ *   1. Saudação → tipo (botões)
+ *   2. Cidade → nome → redirect (sem espécie/porte)
  *
  * Salva no Supabase via REST (fire-and-forget).
  * Se fechar popup → redireciona direto sem salvar.
@@ -268,7 +271,7 @@
       // Input area (visível apenas no step do nome)
       + '<div id="leadCaptureInput" style="background:#F0F0F0;padding:10px 12px;display:flex;flex-direction:column;gap:6px">'
       + '  <div style="display:flex;gap:8px;align-items:center">'
-      + '    <input id="leadNameInput" type="text" placeholder="Seu nome..." maxlength="60" '
+      + '    <input id="leadNameInput" type="text" placeholder="Ex: Maria" maxlength="60" '
       + '      style="flex:1;padding:10px 16px;border-radius:24px;border:none;font-size:15px;font-family:Poppins,sans-serif;outline:none;background:#fff" '
       + '      autocomplete="given-name">'
       + '    <button id="leadNameSend" style="width:44px;height:44px;border-radius:50%;background:#075E54;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">'
@@ -418,70 +421,61 @@
   // FLUXO DA CONVERSA
   // ===========================================================
 
-  // STEP 1: Saudação + pedir nome
+  // STEP 1: Saudação + tipo de atendimento (botões)
   function stepSaudacao() {
-    var nameInput = document.getElementById('leadNameInput');
-    if (nameInput) {
-      nameInput.value = '';
-    }
-
     var saudacao = currentChannel === 'telefone'
-      ? 'Olá, aqui é da R.I.P. Pet Santos! Já vamos te conectar com nossa linha direta. Só precisamos de algumas informações rápidas.'
-      : 'Olá, aqui é da R.I.P. Pet Santos! Estamos aqui para oferecer todo suporte que precisar.';
+      ? 'Olá, aqui é da R.I.P. Pet Santos. Já vamos te conectar com nossa linha direta. Só precisamos de algumas informações rápidas.'
+      : 'Olá, aqui é da R.I.P. Pet Santos. Estamos aqui para oferecer todo suporte que precisar.';
 
     addBubble(saudacao, true, function () {
-      addBubble('Como você se chama?', true, function () {
-        var inputArea = document.getElementById('leadCaptureInput');
-        if (inputArea) inputArea.style.display = 'flex';
-        if (nameInput) nameInput.focus();
+      addBubble('Como podemos te ajudar?', true, function () {
+        showOptionButtons([
+          { label: 'Emergência / Falecimento', value: 'emergencial' },
+          { label: 'Planos Preventivos', value: 'preventivo' }
+        ], function (tipo) {
+          leadTipo = tipo;
+          addBubble(tipo === 'emergencial' ? 'Emergência / Falecimento' : 'Planos Preventivos', false);
+
+          if (tipo === 'emergencial') {
+            setTimeout(stepCidadeEmergencial, 500);
+          } else {
+            setTimeout(stepCidadePreventivo, 500);
+          }
+        });
       });
     });
   }
 
-  // STEP 2: Tipo de atendimento
-  function stepTipoAtendimento() {
-    addBubble(leadNome + ', como podemos te ajudar?', true, function () {
-      showOptionButtons([
-        { label: 'Emergência / Falecimento', value: 'emergencial' },
-        { label: 'Planos Preventivos', value: 'preventivo' }
-      ], function (tipo) {
-        leadTipo = tipo;
-        addBubble(tipo === 'emergencial' ? 'Emergência / Falecimento' : 'Planos Preventivos', false);
-
-        if (tipo === 'emergencial') {
-          setTimeout(stepCidadeEmergencial, 500);
+  // STEP 2a: Sentimentos + Cidade (emergencial)
+  function stepCidadeEmergencial() {
+    addBubble('Meus sentimentos pelo momento \uD83D\uDE4F\uD83C\uDFFB\uD83E\uDE75', true, function () {
+    addBubble('Em qual cidade precisa do atendimento?', true, function () {
+      showCityGrid(function (cidade) {
+        leadCidade = cidade;
+        addBubble(cidade, false);
+        // Telefone: pula espécie/porte (info não chega na ligação)
+        if (currentChannel === 'telefone') {
+          setTimeout(stepNome, 500);
         } else {
-          setTimeout(stepCidadePreventivo, 500);
+          setTimeout(stepEspecie, 500);
         }
       });
     });
-  }
-
-  // STEP 3a: Sentimentos + Cidade (emergencial)
-  function stepCidadeEmergencial() {
-    addBubble('Meus sentimentos pelo momento \uD83D\uDE4F\uD83C\uDFFB\uD83E\uDE75', true, function () {
-    addBubble(leadNome + ', em qual cidade seria o atendimento?', true, function () {
-      showCityGrid(function (cidade) {
-        leadCidade = cidade;
-        addBubble(cidade, false);
-        setTimeout(stepEspecie, 500);
-      });
-    });
     });
   }
 
-  // STEP 3b: Cidade (preventivo) → finaliza
+  // STEP 2b: Cidade (preventivo) → nome
   function stepCidadePreventivo() {
-    addBubble(leadNome + ', qual sua cidade?', true, function () {
+    addBubble('Qual sua cidade?', true, function () {
       showCityGrid(function (cidade) {
         leadCidade = cidade;
         addBubble(cidade, false);
-        setTimeout(stepFinalizar, 500);
+        setTimeout(stepNome, 500);
       });
     });
   }
 
-  // STEP 4: Espécie do pet (só emergencial)
+  // STEP 3: Espécie do pet (só emergencial)
   function stepEspecie() {
     addBubble('O petzinho é um:', true, function () {
       showOptionButtons([
@@ -497,13 +491,13 @@
           setTimeout(stepGrandePorte, 500);
         } else {
           leadGrandePorte = null;
-          setTimeout(stepFinalizar, 500);
+          setTimeout(stepNome, 500);
         }
       });
     });
   }
 
-  // STEP 5: Grande porte (só cachorro)
+  // STEP 4: Grande porte (só cachorro)
   function stepGrandePorte() {
     addBubble('Possui grande porte? Acima de 45kg?', true, function () {
       showOptionButtons([
@@ -512,8 +506,20 @@
       ], function (resposta) {
         leadGrandePorte = resposta === 'sim';
         addBubble(resposta === 'sim' ? 'Sim' : 'Não', false);
-        setTimeout(stepFinalizar, 500);
+        setTimeout(stepNome, 500);
       });
+    });
+  }
+
+  // STEP 5: Nome (campo de texto — por último)
+  function stepNome() {
+    var nameInput = document.getElementById('leadNameInput');
+    if (nameInput) nameInput.value = '';
+
+    addBubble('Para finalizar, qual seu nome?', true, function () {
+      var inputArea = document.getElementById('leadCaptureInput');
+      if (inputArea) inputArea.style.display = 'flex';
+      if (nameInput) nameInput.focus();
     });
   }
 
@@ -572,7 +578,7 @@
           clearInterval(interval);
           if (protocolo) {
             var protocoloDisplay = protocolo + (capturedParams.gclid ? '*' : '');
-            bubble.innerHTML = '<strong>Protocolo: ' + protocoloDisplay + '</strong>';
+            bubble.textContent = 'Protocolo: ' + protocoloDisplay;
             chat.scrollTop = chat.scrollHeight;
             setTimeout(function () {
               closePopup();
@@ -680,7 +686,7 @@
         window.gtag('event', 'popup_lead_abandoned', {
           event_category: 'lead_capture',
           canal: currentChannel,
-          step_abandonado: leadTipo ? (leadCidade ? 'especie' : 'cidade') : (leadNome ? 'tipo' : 'nome')
+          step_abandonado: !leadTipo ? 'tipo' : !leadCidade ? 'cidade' : !leadNome ? 'nome' : 'especie'
         });
       }
     } catch (e) { }
@@ -709,8 +715,8 @@
     // Mostrar resposta do user
     addBubble(nome, false);
 
-    // Próximo passo
-    setTimeout(stepTipoAtendimento, 500);
+    // Próximo passo — nome é o último step antes de finalizar
+    setTimeout(stepFinalizar, 500);
   }
 
   // ===== SETUP EVENTOS =====
