@@ -1,7 +1,13 @@
 /**
  * =====================================================
- * RIP PET - LEAD CAPTURE POPUP (v2)
+ * RIP PET - LEAD CAPTURE POPUP (v3 — FUNIL COMPLETO)
  * =====================================================
+ *
+ * Tracking completo:
+ *   - Session: toda visita registrada (geo, device, UTM, engajamento)
+ *   - Funnel events: cada step do popup logado com duração
+ *   - Abandonos: salvos no Supabase (não só GA4)
+ *   - Leads parciais: criados ao abrir popup, atualizados a cada step
  *
  * Árvore de conversa (WhatsApp):
  *   1. Saudação → tipo (botões)
@@ -11,9 +17,6 @@
  * Árvore de conversa (Telefone — simplificado):
  *   1. Saudação → tipo (botões)
  *   2. Cidade → nome → redirect (sem espécie/porte)
- *
- * Salva no Supabase via REST (fire-and-forget).
- * Se fechar popup → redireciona direto sem salvar.
  *
  * =====================================================
  */
@@ -38,6 +41,12 @@
   var originalElement = null;
   var pageLoadTime = Date.now();
   var popupOpenCount = 0;
+  var popupOpenTime = 0;         // timestamp de quando abriu o popup
+  var lastStepTime = 0;          // timestamp do último step (para calcular duração)
+  var stepsCompleted = 0;
+  var lastStepName = '';
+  var funnelEvents = [];         // buffer de eventos para batch insert
+  var popupCompleted = false;    // flag para evitar salvar abandono após completar
 
   // Dados do lead (preenchidos durante a conversa)
   var leadNome = '';
@@ -46,9 +55,91 @@
   var leadEspecie = '';          // 'cachorro' | 'gato' | 'exotico'
   var leadGrandePorte = null;    // true | false | null
 
+  // ===== SESSION & VISITOR IDs =====
+  var visitorId = '';
+  var sessionId = '';
+
+  function initIds() {
+    try {
+      visitorId = localStorage.getItem('rp_visitor_id');
+      if (!visitorId) {
+        visitorId = generateUUID();
+        localStorage.setItem('rp_visitor_id', visitorId);
+      }
+      sessionId = sessionStorage.getItem('rp_session_id');
+      if (!sessionId) {
+        sessionId = generateUUID();
+        sessionStorage.setItem('rp_session_id', sessionId);
+      }
+    } catch (e) {
+      visitorId = generateUUID();
+      sessionId = generateUUID();
+    }
+  }
+
+  function generateUUID() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+      return crypto.randomUUID();
+    }
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0;
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+  }
+
+  // ===== GEOLOCALIZAÇÃO POR IP =====
+  var geoData = { city: null, state: null, timezone: null };
+
+  function detectGeo() {
+    try {
+      var cached = sessionStorage.getItem('rp_geo');
+      if (cached) { geoData = JSON.parse(cached); return; }
+    } catch (e) { }
+
+    fetch('https://ipwho.is/?fields=city,region,timezone.id&lang=pt-BR')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.success !== false) {
+          geoData.city = data.city || null;
+          geoData.state = data.region || null;
+          geoData.timezone = (data.timezone && data.timezone.id) || null;
+          try { sessionStorage.setItem('rp_geo', JSON.stringify(geoData)); } catch (e) { }
+        }
+      })
+      .catch(function () { });
+  }
+
+  // ===== DEVICE INFO =====
+  function getDeviceType() {
+    var w = window.innerWidth;
+    if (w < 768) return 'mobile';
+    if (w < 1024) return 'tablet';
+    return 'desktop';
+  }
+
+  function getBrowser() {
+    var ua = navigator.userAgent;
+    if (ua.indexOf('Chrome') > -1 && ua.indexOf('Edg') === -1) return 'Chrome';
+    if (ua.indexOf('Safari') > -1 && ua.indexOf('Chrome') === -1) return 'Safari';
+    if (ua.indexOf('Firefox') > -1) return 'Firefox';
+    if (ua.indexOf('Edg') > -1) return 'Edge';
+    return 'Outro';
+  }
+
+  function getOS() {
+    var ua = navigator.userAgent;
+    if (ua.indexOf('Android') > -1) return 'Android';
+    if (/iPhone|iPad|iPod/.test(ua)) return 'iOS';
+    if (ua.indexOf('Windows') > -1) return 'Windows';
+    if (ua.indexOf('Mac') > -1) return 'macOS';
+    if (ua.indexOf('Linux') > -1) return 'Linux';
+    return 'Outro';
+  }
+
   // ===== MÉTRICAS DE ENGAJAMENTO =====
   var maxScrollDepth = 0;
   var pageViews = 1;
+  var sectionsViewed = [];
 
   // Scroll depth tracker
   function trackScroll() {
@@ -68,11 +159,31 @@
     sessionStorage.setItem('rp_page_views', pageViews.toString());
   } catch (e) { }
 
+  // Seções vistas (IntersectionObserver)
+  function trackSections() {
+    if (!('IntersectionObserver' in window)) return;
+    var sections = document.querySelectorAll('section[id], div[id].section, [id$="-section"]');
+    if (!sections.length) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
+          var id = entry.target.id;
+          if (id && sectionsViewed.indexOf(id) === -1) {
+            sectionsViewed.push(id);
+          }
+        }
+      });
+    }, { threshold: 0.3 });
+
+    sections.forEach(function (s) { observer.observe(s); });
+  }
+
   // Detectar seção do CTA clicado
   function detectSection(el) {
+    if (!el) return null;
     var section = el.closest('section[id], div[id]');
     if (section && section.id) return section.id;
-    // Fallback: posição na página
     var rect = el.getBoundingClientRect();
     var y = rect.top + window.pageYOffset;
     var totalH = document.body.scrollHeight;
@@ -112,7 +223,144 @@
     return match ? match[1] : null;
   }
 
-  // ===== SALVAR NO SUPABASE (RPC — retorna protocolo) =====
+  // ===== SUPABASE HELPERS =====
+  function supabaseRPC(fnName, payload) {
+    try {
+      return fetch(SUPABASE_URL + '/rest/v1/rpc/' + fnName, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(function (res) { return res.json(); })
+      .catch(function () { return null; });
+    } catch (e) {
+      return Promise.resolve(null);
+    }
+  }
+
+  // sendBeacon para garantir envio mesmo ao sair da página
+  function supabaseBeacon(fnName, payload) {
+    try {
+      var url = SUPABASE_URL + '/rest/v1/rpc/' + fnName;
+      var body = JSON.stringify(payload);
+      if (navigator.sendBeacon) {
+        var blob = new Blob([body], { type: 'application/json' });
+        // sendBeacon não suporta headers custom, usar fetch com keepalive
+        fetch(url, {
+          method: 'POST',
+          headers: { 'apikey': SUPABASE_KEY, 'Content-Type': 'application/json' },
+          body: body,
+          keepalive: true
+        }).catch(function () { });
+      } else {
+        fetch(url, {
+          method: 'POST',
+          headers: { 'apikey': SUPABASE_KEY, 'Content-Type': 'application/json' },
+          body: body
+        }).catch(function () { });
+      }
+    } catch (e) { }
+  }
+
+  // ===== SESSION TRACKING =====
+  function saveSession(ctaData) {
+    var data = {
+      visitor_id: visitorId,
+      session_id: sessionId,
+      landing_page: window.location.pathname + window.location.search,
+      referrer: document.referrer || null,
+      utm_source: capturedParams.utm_source || null,
+      utm_medium: capturedParams.utm_medium || null,
+      utm_campaign: capturedParams.utm_campaign || null,
+      utm_term: capturedParams.utm_term || null,
+      gclid: capturedParams.gclid || null,
+      device_type: getDeviceType(),
+      browser: getBrowser(),
+      os: getOS(),
+      screen_resolution: screen.width + 'x' + screen.height,
+      viewport: window.innerWidth + 'x' + window.innerHeight,
+      user_language: navigator.language || null,
+      geo_city: geoData.city,
+      geo_state: geoData.state,
+      geo_timezone: geoData.timezone,
+      max_scroll_depth: maxScrollDepth,
+      time_on_page_sec: Math.round((Date.now() - pageLoadTime) / 1000),
+      page_views: pageViews,
+      sections_viewed: sectionsViewed
+    };
+
+    // Adicionar dados de CTA se passou
+    if (ctaData) {
+      data.cta_clicked = true;
+      data.cta_channel = ctaData.channel;
+      data.cta_section = ctaData.section;
+      data.cta_clicked_at = new Date().toISOString();
+      data.popup_opened_count = popupOpenCount;
+    }
+
+    return supabaseRPC('upsert_session', { session_data: data });
+  }
+
+  // Salvar session periodicamente e ao sair
+  var sessionSaveInterval = null;
+
+  function startSessionTracking() {
+    // Salvar session inicial (sem CTA)
+    setTimeout(function () { saveSession(null); }, 2000);
+
+    // Atualizar engajamento a cada 30s
+    sessionSaveInterval = setInterval(function () {
+      saveSession(null);
+    }, 30000);
+
+    // Salvar ao sair da página
+    window.addEventListener('beforeunload', function () {
+      supabaseBeacon('upsert_session', {
+        session_data: {
+          visitor_id: visitorId,
+          session_id: sessionId,
+          max_scroll_depth: maxScrollDepth,
+          time_on_page_sec: Math.round((Date.now() - pageLoadTime) / 1000),
+          page_views: pageViews,
+          sections_viewed: sectionsViewed
+        }
+      });
+    });
+  }
+
+  // ===== FUNNEL EVENTS =====
+  function logFunnelEvent(eventType, eventValue, metadata) {
+    var now = Date.now();
+    var duration = lastStepTime ? now - lastStepTime : 0;
+    lastStepTime = now;
+
+    var event = {
+      session_id: sessionId,
+      event_type: eventType,
+      event_value: eventValue || null,
+      step_duration_ms: duration > 0 ? duration : null,
+      metadata: metadata || null
+    };
+
+    funnelEvents.push(event);
+
+    // Flush imediatamente para eventos importantes
+    if (eventType === 'popup_abandoned' || eventType === 'popup_completed') {
+      flushFunnelEvents();
+    }
+  }
+
+  function flushFunnelEvents() {
+    if (!funnelEvents.length) return;
+    var batch = funnelEvents.slice();
+    funnelEvents = [];
+    supabaseBeacon('insert_funnel_events', { events: batch });
+  }
+
+  // ===== SALVAR LEAD COMPLETO (RPC — retorna protocolo) =====
   function saveLead() {
     var body = {
       nome: leadNome,
@@ -128,30 +376,63 @@
       utm_campaign: capturedParams.utm_campaign || null,
       utm_term: capturedParams.utm_term || null,
       pagina_origem: window.location.pathname,
-      dispositivo: window.innerWidth < 768 ? 'mobile' : 'desktop',
+      dispositivo: getDeviceType(),
       tempo_pagina_seg: Math.round((Date.now() - pageLoadTime) / 1000),
       scroll_depth: maxScrollDepth,
       page_views: pageViews,
-      secao_clique: detectSection(originalElement)
+      secao_clique: detectSection(originalElement),
+      // Novos campos v3
+      status: 'completo',
+      session_id: sessionId,
+      visitor_id: visitorId,
+      geo_city: geoData.city,
+      geo_state: geoData.state,
+      steps_completed: stepsCompleted,
+      last_step: 'nome',
+      popup_duration_sec: Math.round((Date.now() - popupOpenTime) / 1000),
+      funnel_duration_sec: Math.round((Date.now() - pageLoadTime) / 1000)
     };
 
-    try {
-      return fetch(SUPABASE_URL + '/rest/v1/rpc/insert_lead', {
-        method: 'POST',
-        headers: {
-          'apikey': SUPABASE_KEY,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ lead_data: body })
-      })
-      .then(function (res) { return res.json(); })
+    return supabaseRPC('insert_lead', { lead_data: body })
       .then(function (protocolo) {
         return (typeof protocolo === 'string') ? protocolo : null;
-      })
-      .catch(function () { return null; });
-    } catch (e) {
-      return Promise.resolve(null);
-    }
+      });
+  }
+
+  // ===== SALVAR LEAD PARCIAL (abandono) =====
+  function savePartialLead(abandonedAtStep) {
+    var body = {
+      canal: currentChannel,
+      telefone_destino: extractPhone(originalHref),
+      tipo_atendimento: leadTipo || null,
+      especie_pet: leadEspecie || null,
+      grande_porte: leadGrandePorte,
+      nome: leadNome || null,
+      cidade: leadCidade || null,
+      gclid: capturedParams.gclid || null,
+      utm_source: capturedParams.utm_source || null,
+      utm_medium: capturedParams.utm_medium || null,
+      utm_campaign: capturedParams.utm_campaign || null,
+      utm_term: capturedParams.utm_term || null,
+      pagina_origem: window.location.pathname,
+      dispositivo: getDeviceType(),
+      tempo_pagina_seg: Math.round((Date.now() - pageLoadTime) / 1000),
+      scroll_depth: maxScrollDepth,
+      page_views: pageViews,
+      secao_clique: detectSection(originalElement),
+      status: 'abandonado',
+      session_id: sessionId,
+      visitor_id: visitorId,
+      geo_city: geoData.city,
+      geo_state: geoData.state,
+      steps_completed: stepsCompleted,
+      last_step: lastStepName || null,
+      abandoned_at_step: abandonedAtStep,
+      popup_duration_sec: Math.round((Date.now() - popupOpenTime) / 1000),
+      funnel_duration_sec: Math.round((Date.now() - pageLoadTime) / 1000)
+    };
+
+    supabaseBeacon('save_partial_lead', { lead_data: body });
   }
 
   // ===== MONTAR MENSAGEM WHATSAPP =====
@@ -337,13 +618,11 @@
         this.style.color = '#075E54';
       });
       btn.addEventListener('click', function () {
-        // Desabilitar todos os botões
         wrapper.querySelectorAll('button').forEach(function (b) {
           b.disabled = true;
           b.style.opacity = '0.5';
           b.style.cursor = 'default';
         });
-        // Destacar o selecionado
         this.style.background = '#075E54';
         this.style.color = '#fff';
         this.style.opacity = '1';
@@ -353,7 +632,6 @@
       wrapper.appendChild(btn);
     });
 
-    // Animação
     wrapper.style.opacity = '0';
     wrapper.style.transform = 'translateY(10px)';
     wrapper.style.transition = 'opacity 0.3s, transform 0.3s';
@@ -389,7 +667,6 @@
         this.style.color = '#075E54';
       });
       btn.addEventListener('click', function () {
-        // Desabilitar todos
         grid.querySelectorAll('button').forEach(function (b) {
           b.disabled = true;
           b.style.opacity = '0.5';
@@ -404,7 +681,6 @@
       grid.appendChild(btn);
     });
 
-    // Animação
     grid.style.opacity = '0';
     grid.style.transform = 'translateY(10px)';
     grid.style.transition = 'opacity 0.3s, transform 0.3s';
@@ -429,11 +705,15 @@
 
     addBubble(saudacao, true, function () {
       addBubble('Como podemos te ajudar?', true, function () {
+        lastStepTime = Date.now();
         showOptionButtons([
           { label: 'Emergência / Falecimento', value: 'emergencial' },
           { label: 'Planos Preventivos', value: 'preventivo' }
         ], function (tipo) {
           leadTipo = tipo;
+          stepsCompleted++;
+          lastStepName = 'tipo';
+          logFunnelEvent('step_tipo', tipo);
           addBubble(tipo === 'emergencial' ? 'Emergência / Falecimento' : 'Planos Preventivos', false);
 
           if (tipo === 'emergencial') {
@@ -450,8 +730,12 @@
   function stepCidadeEmergencial() {
     addBubble('Meus sentimentos pelo momento \uD83D\uDE4F\uD83C\uDFFB\uD83E\uDE75', true, function () {
     addBubble('Em qual cidade precisa do atendimento?', true, function () {
+      lastStepTime = Date.now();
       showCityGrid(function (cidade) {
         leadCidade = cidade;
+        stepsCompleted++;
+        lastStepName = 'cidade';
+        logFunnelEvent('step_cidade', cidade);
         addBubble(cidade, false);
         // Telefone: pula espécie/porte (info não chega na ligação)
         if (currentChannel === 'telefone') {
@@ -467,23 +751,31 @@
   // STEP 2b: Cidade (preventivo) → nome
   function stepCidadePreventivo() {
     addBubble('Qual sua cidade?', true, function () {
+      lastStepTime = Date.now();
       showCityGrid(function (cidade) {
         leadCidade = cidade;
+        stepsCompleted++;
+        lastStepName = 'cidade';
+        logFunnelEvent('step_cidade', cidade);
         addBubble(cidade, false);
         setTimeout(stepNome, 500);
       });
     });
   }
 
-  // STEP 3: Espécie do pet (só emergencial)
+  // STEP 3: Espécie do pet (só emergencial WhatsApp)
   function stepEspecie() {
     addBubble('O petzinho é um:', true, function () {
+      lastStepTime = Date.now();
       showOptionButtons([
         { label: 'Cachorro', value: 'cachorro' },
         { label: 'Gato', value: 'gato' },
         { label: 'Exótico', value: 'exotico' }
       ], function (especie) {
         leadEspecie = especie;
+        stepsCompleted++;
+        lastStepName = 'especie';
+        logFunnelEvent('step_especie', especie);
         var label = especie === 'cachorro' ? 'Cachorro' : especie === 'gato' ? 'Gato' : 'Exótico';
         addBubble(label, false);
 
@@ -500,11 +792,15 @@
   // STEP 4: Grande porte (só cachorro)
   function stepGrandePorte() {
     addBubble('Possui grande porte? Acima de 45kg?', true, function () {
+      lastStepTime = Date.now();
       showOptionButtons([
         { label: 'Sim', value: 'sim' },
         { label: 'Não', value: 'nao' }
       ], function (resposta) {
         leadGrandePorte = resposta === 'sim';
+        stepsCompleted++;
+        lastStepName = 'grande_porte';
+        logFunnelEvent('step_grande_porte', resposta);
         addBubble(resposta === 'sim' ? 'Sim' : 'Não', false);
         setTimeout(stepNome, 500);
       });
@@ -517,6 +813,7 @@
     if (nameInput) nameInput.value = '';
 
     addBubble('Para finalizar, qual seu nome?', true, function () {
+      lastStepTime = Date.now();
       var inputArea = document.getElementById('leadCaptureInput');
       if (inputArea) inputArea.style.display = 'flex';
       if (nameInput) nameInput.focus();
@@ -525,7 +822,12 @@
 
   // STEP FINAL: Salvar + countdown + protocolo + redirect
   function stepFinalizar() {
-    // Track lead completo
+    popupCompleted = true;
+
+    // Log funnel event
+    logFunnelEvent('popup_completed', currentChannel);
+
+    // Track lead completo (GA4 + Meta Pixel)
     try {
       if (window.gtag) {
         window.gtag('event', 'popup_lead_completed', {
@@ -602,6 +904,12 @@
     originalHref = href;
     originalElement = element;
     popupOpenCount++;
+    popupOpenTime = Date.now();
+    lastStepTime = Date.now();
+    stepsCompleted = 0;
+    lastStepName = '';
+    popupCompleted = false;
+    funnelEvents = [];
 
     // Reset estado
     leadNome = '';
@@ -609,6 +917,18 @@
     leadCidade = '';
     leadEspecie = '';
     leadGrandePorte = null;
+
+    // Atualizar session com dados de CTA
+    saveSession({
+      channel: channel,
+      section: detectSection(element)
+    });
+
+    // Log funnel event
+    logFunnelEvent('popup_opened', channel, {
+      popup_number: popupOpenCount,
+      cta_section: detectSection(element)
+    });
 
     // Criar popup se não existe
     if (!document.getElementById('leadCaptureOverlay')) {
@@ -680,16 +1000,29 @@
   }
 
   function closeAndRedirect() {
-    // Track abandono
+    // Determinar step de abandono
+    var abandonStep = !leadTipo ? 'tipo' : !leadCidade ? 'cidade' : !leadNome ? 'nome' : 'especie';
+
+    // Salvar abandono no Supabase (se não completou)
+    if (!popupCompleted && currentChannel) {
+      logFunnelEvent('popup_abandoned', abandonStep, {
+        method: 'close_button',
+        steps_completed: stepsCompleted
+      });
+      savePartialLead(abandonStep);
+    }
+
+    // Track abandono (GA4)
     try {
       if (window.gtag) {
         window.gtag('event', 'popup_lead_abandoned', {
           event_category: 'lead_capture',
           canal: currentChannel,
-          step_abandonado: !leadTipo ? 'tipo' : !leadCidade ? 'cidade' : !leadNome ? 'nome' : 'especie'
+          step_abandonado: abandonStep
         });
       }
     } catch (e) { }
+
     closePopup();
   }
 
@@ -707,6 +1040,9 @@
     }
 
     leadNome = nome;
+    stepsCompleted++;
+    lastStepName = 'nome';
+    logFunnelEvent('step_nome', nome);
 
     // Esconder input
     var inputArea = document.getElementById('leadCaptureInput');
@@ -744,9 +1080,13 @@
     var directLink = document.getElementById('leadDirectLink');
     if (directLink) {
       directLink.addEventListener('click', function () {
+        logFunnelEvent('direct_link_clicked', currentChannel);
+
         // Preencher com placeholders o que não foi respondido
         leadNome = leadNome || '-';
         leadCidade = leadCidade || '-';
+
+        popupCompleted = true; // evitar duplo save de abandono
 
         // Salvar e esperar protocolo
         var savePromise = saveLead();
@@ -789,16 +1129,25 @@
 
   // ===== INIT =====
   function init() {
+    initIds();
     captureUrlParams();
+    detectGeo();
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', interceptClicks);
+      document.addEventListener('DOMContentLoaded', function () {
+        interceptClicks();
+        trackSections();
+      });
     } else {
       interceptClicks();
+      trackSections();
     }
 
     var observer = new MutationObserver(interceptClicks);
     observer.observe(document.body || document.documentElement, { childList: true, subtree: true });
+
+    // Iniciar session tracking
+    startSessionTracking();
   }
 
   init();
