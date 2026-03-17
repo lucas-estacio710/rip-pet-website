@@ -54,6 +54,7 @@
   var leadCidade = '';
   var leadEspecie = '';          // 'cachorro' | 'gato' | 'exotico'
   var leadGrandePorte = null;    // true | false | null
+  var leadTelefone = '';          // telefone do lead (fluxo telefone)
 
   // ===== SESSION & VISITOR IDs =====
   var visitorId = '';
@@ -363,13 +364,14 @@
   // ===== SALVAR LEAD COMPLETO (RPC — retorna protocolo) =====
   function saveLead() {
     var body = {
-      nome: leadNome,
+      nome: leadNome || null,
       cidade: leadCidade,
       canal: currentChannel,
       telefone_destino: extractPhone(originalHref),
       tipo_atendimento: leadTipo || null,
       especie_pet: leadEspecie || null,
       grande_porte: leadGrandePorte,
+      telefone_lead: leadTelefone || null,
       gclid: capturedParams.gclid || null,
       utm_source: capturedParams.utm_source || null,
       utm_medium: capturedParams.utm_medium || null,
@@ -388,7 +390,7 @@
       geo_city: geoData.city,
       geo_state: geoData.state,
       steps_completed: stepsCompleted,
-      last_step: 'nome',
+      last_step: currentChannel === 'telefone' ? 'telefone' : 'nome',
       popup_duration_sec: Math.round((Date.now() - popupOpenTime) / 1000),
       funnel_duration_sec: Math.round((Date.now() - pageLoadTime) / 1000)
     };
@@ -407,6 +409,7 @@
       tipo_atendimento: leadTipo || null,
       especie_pet: leadEspecie || null,
       grande_porte: leadGrandePorte,
+      telefone_lead: leadTelefone || null,
       nome: leadNome || null,
       cidade: leadCidade || null,
       gclid: capturedParams.gclid || null,
@@ -549,8 +552,8 @@
       // Chat area
       + '<div id="leadCaptureChat" style="background:#ECE5DD;padding:16px 16px 12px;overflow-y:auto;display:flex;flex-direction:column;gap:8px">'
       + '</div>'
-      // Input area (visível apenas no step do nome)
-      + '<div id="leadCaptureInput" style="background:#F0F0F0;padding:10px 12px;display:flex;flex-direction:column;gap:6px">'
+      // Input area — nome (WhatsApp)
+      + '<div id="leadCaptureInput" style="background:#F0F0F0;padding:10px 12px;display:none;flex-direction:column;gap:6px">'
       + '  <div style="display:flex;gap:8px;align-items:center">'
       + '    <input id="leadNameInput" type="text" placeholder="Ex: Maria" maxlength="60" '
       + '      style="flex:1;padding:10px 16px;border-radius:24px;border:none;font-size:15px;font-family:Poppins,sans-serif;outline:none;background:#fff" '
@@ -561,6 +564,19 @@
       + '  </div>'
       + '  <a id="leadDirectLink" style="display:none;text-align:center;font-size:12px;color:#075E54;text-decoration:underline;cursor:pointer;padding:2px 0;font-family:Poppins,sans-serif">Fale diretamente</a>'
       + '  <p id="leadLgpdNotice" style="text-align:center;font-size:10px;color:#999;margin:0;padding:2px 0;font-family:Poppins,sans-serif">Ao prosseguir, você concorda com nossa <a href="/politica-de-privacidade" target="_blank" style="color:#075E54;text-decoration:underline">Política de Privacidade</a></p>'
+      + '</div>'
+      // Input area — telefone (fluxo telefone)
+      + '<div id="leadCapturePhoneInput" style="background:#F0F0F0;padding:10px 12px;display:none;flex-direction:column;gap:6px">'
+      + '  <div style="display:flex;gap:8px;align-items:center">'
+      + '    <input id="leadPhoneInput" type="tel" placeholder="Ex: (13) 99999-0000" maxlength="20" '
+      + '      style="flex:1;padding:10px 16px;border-radius:24px;border:none;font-size:15px;font-family:Poppins,sans-serif;outline:none;background:#fff" '
+      + '      autocomplete="tel">'
+      + '    <button id="leadPhoneSend" style="width:44px;height:44px;border-radius:50%;background:#075E54;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">'
+      + '      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M2 21L23 12L2 3V10L17 12L2 14V21Z" fill="#fff"/></svg>'
+      + '    </button>'
+      + '  </div>'
+      + '  <a id="leadPhoneSkip" style="text-align:center;font-size:12px;color:#075E54;text-decoration:underline;cursor:pointer;padding:2px 0;font-family:Poppins,sans-serif">Pular e ligar direto</a>'
+      + '  <p style="text-align:center;font-size:10px;color:#999;margin:0;padding:2px 0;font-family:Poppins,sans-serif">Ao prosseguir, você concorda com nossa <a href="/politica-de-privacidade" target="_blank" style="color:#075E54;text-decoration:underline">Política de Privacidade</a></p>'
       + '</div>'
       + '</div>';
 
@@ -737,9 +753,9 @@
         lastStepName = 'cidade';
         logFunnelEvent('step_cidade', cidade);
         addBubble(cidade, false);
-        // Telefone: pula espécie/porte (info não chega na ligação)
+        // Telefone: pula espécie/porte, pede telefone em vez de nome
         if (currentChannel === 'telefone') {
-          setTimeout(stepNome, 500);
+          setTimeout(stepTelefone, 500);
         } else {
           setTimeout(stepEspecie, 500);
         }
@@ -748,7 +764,7 @@
     });
   }
 
-  // STEP 2b: Cidade (preventivo) → nome
+  // STEP 2b: Cidade (preventivo) → nome ou telefone
   function stepCidadePreventivo() {
     addBubble('Qual sua cidade?', true, function () {
       lastStepTime = Date.now();
@@ -758,7 +774,7 @@
         lastStepName = 'cidade';
         logFunnelEvent('step_cidade', cidade);
         addBubble(cidade, false);
-        setTimeout(stepNome, 500);
+        setTimeout(currentChannel === 'telefone' ? stepTelefone : stepNome, 500);
       });
     });
   }
@@ -820,6 +836,19 @@
     });
   }
 
+  // STEP 5b: Telefone (fluxo telefone — em vez de nome)
+  function stepTelefone() {
+    var phoneInput = document.getElementById('leadPhoneInput');
+    if (phoneInput) phoneInput.value = '';
+
+    addBubble('Uma última informação: Se por algum motivo não conseguir completar a ligação, deixe seu telefone e ligaremos o mais breve possível.', true, function () {
+      lastStepTime = Date.now();
+      var phoneArea = document.getElementById('leadCapturePhoneInput');
+      if (phoneArea) phoneArea.style.display = 'flex';
+      if (phoneInput) phoneInput.focus();
+    });
+  }
+
   // STEP FINAL: Salvar + countdown + protocolo + redirect
   function stepFinalizar() {
     popupCompleted = true;
@@ -850,8 +879,8 @@
     var msgFinal;
     if (currentChannel === 'telefone') {
       msgFinal = leadTipo === 'emergencial'
-        ? 'Vamos te conectar direto com nossa equipe, ' + leadNome + '.'
-        : '\u00D3timo, ' + leadNome + '! Conectando sua ligação.';
+        ? 'Vamos te conectar direto com nossa equipe.'
+        : '\u00D3timo! Conectando sua ligação.';
     } else {
       msgFinal = leadTipo === 'emergencial'
         ? 'Vamos te conectar com nossa equipe, ' + leadNome + '.'
@@ -917,6 +946,7 @@
     leadCidade = '';
     leadEspecie = '';
     leadGrandePorte = null;
+    leadTelefone = '';
 
     // Atualizar session com dados de CTA
     saveSession({
@@ -940,9 +970,11 @@
     var chat = document.getElementById('leadCaptureChat');
     if (chat) chat.innerHTML = '';
 
-    // Esconder input até a hora certa
+    // Esconder inputs até a hora certa
     var inputArea = document.getElementById('leadCaptureInput');
     if (inputArea) inputArea.style.display = 'none';
+    var phoneArea = document.getElementById('leadCapturePhoneInput');
+    if (phoneArea) phoneArea.style.display = 'none';
 
     // "Fale diretamente" — só a partir da 2a abertura
     var directLink = document.getElementById('leadDirectLink');
@@ -1055,6 +1087,35 @@
     setTimeout(stepFinalizar, 500);
   }
 
+  // ===== HANDLER: TELEFONE ENVIADO =====
+  function onPhoneSubmit() {
+    var input = document.getElementById('leadPhoneInput');
+    if (!input) return;
+
+    var tel = input.value.trim().replace(/\D/g, '');
+    if (tel.length < 10) {
+      input.focus();
+      input.style.boxShadow = '0 0 0 2px #e74c3c';
+      setTimeout(function () { input.style.boxShadow = 'none'; }, 1500);
+      return;
+    }
+
+    leadTelefone = input.value.trim();
+    stepsCompleted++;
+    lastStepName = 'telefone';
+    logFunnelEvent('step_telefone', leadTelefone);
+
+    // Esconder input
+    var phoneArea = document.getElementById('leadCapturePhoneInput');
+    if (phoneArea) phoneArea.style.display = 'none';
+
+    // Mostrar resposta do user
+    addBubble(leadTelefone, false);
+
+    // Finalizar
+    setTimeout(stepFinalizar, 500);
+  }
+
   // ===== SETUP EVENTOS =====
   function setupPopupEvents() {
     var closeBtn = document.getElementById('leadCaptureClose');
@@ -1073,6 +1134,33 @@
           e.preventDefault();
           onNameSubmit();
         }
+      });
+    }
+
+    // Telefone input events
+    var phoneSendBtn = document.getElementById('leadPhoneSend');
+    if (phoneSendBtn) phoneSendBtn.addEventListener('click', onPhoneSubmit);
+
+    var phoneInput = document.getElementById('leadPhoneInput');
+    if (phoneInput) {
+      phoneInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          onPhoneSubmit();
+        }
+      });
+    }
+
+    // "Pular e ligar direto" — vai pro redirect sem salvar telefone
+    var phoneSkip = document.getElementById('leadPhoneSkip');
+    if (phoneSkip) {
+      phoneSkip.addEventListener('click', function () {
+        logFunnelEvent('phone_skip_clicked', currentChannel);
+        var phoneArea = document.getElementById('leadCapturePhoneInput');
+        if (phoneArea) phoneArea.style.display = 'none';
+        stepsCompleted++;
+        lastStepName = 'telefone_skip';
+        setTimeout(stepFinalizar, 300);
       });
     }
 
