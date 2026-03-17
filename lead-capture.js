@@ -575,7 +575,7 @@
       + '      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M2 21L23 12L2 3V10L17 12L2 14V21Z" fill="#fff"/></svg>'
       + '    </button>'
       + '  </div>'
-      + '  <a id="leadPhoneSkip" style="text-align:center;font-size:12px;color:#075E54;text-decoration:underline;cursor:pointer;padding:2px 0;font-family:Poppins,sans-serif">Pular e ligar direto</a>'
+      + '  <a id="leadPhoneSkip" style="display:none;text-align:center;font-size:12px;color:#075E54;text-decoration:underline;cursor:pointer;padding:2px 0;font-family:Poppins,sans-serif">Pular e ligar direto</a>'
       + '  <p style="text-align:center;font-size:10px;color:#999;margin:0;padding:2px 0;font-family:Poppins,sans-serif">Ao prosseguir, você concorda com nossa <a href="/politica-de-privacidade" target="_blank" style="color:#075E54;text-decoration:underline">Política de Privacidade</a></p>'
       + '</div>'
       + '</div>';
@@ -976,10 +976,14 @@
     var phoneArea = document.getElementById('leadCapturePhoneInput');
     if (phoneArea) phoneArea.style.display = 'none';
 
-    // "Fale diretamente" — só a partir da 2a abertura
+    // "Fale diretamente" / "Pular e ligar direto" — só a partir da 2a abertura
     var directLink = document.getElementById('leadDirectLink');
     if (directLink) {
       directLink.style.display = popupOpenCount >= 2 ? 'block' : 'none';
+    }
+    var phoneSkip = document.getElementById('leadPhoneSkip');
+    if (phoneSkip) {
+      phoneSkip.style.display = popupOpenCount >= 2 ? 'block' : 'none';
     }
 
     // Mostrar overlay
