@@ -28,11 +28,19 @@
   var SUPABASE_URL = 'https://eniplfcuwvhovxybyuey.supabase.co';
   var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVuaXBsZmN1d3Zob3Z4eWJ5dWV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5MDM1MjIsImV4cCI6MjA3NTQ3OTUyMn0.VFftjEVtd4_Vwa2KnrY0YizC_9xBATpe0z14X-7I6Is';
 
-  var CIDADES = [
+  // Config por unidade (definida antes do script via window.LEAD_CAPTURE_CONFIG)
+  var cfg = window.LEAD_CAPTURE_CONFIG || {};
+  var UNIDADE = cfg.unidade || 'Santos';
+  var CIDADES = cfg.cidades || [
     'Santos', 'Praia Grande', 'Guarujá',
     'São Vicente', 'Cubatão', 'Itanhaém',
     'Mongaguá', 'Bertioga', 'Peruíbe'
   ];
+  var PHONE_FALLBACK = cfg.phoneFallback || '5513998068262';
+  var PHONE_PLACEHOLDER = cfg.phonePlaceholder || '(13) 99999-0000';
+  var UNIDADE_CODE = cfg.unidadeCode || 'ST';  // 2 chars: ST=Santos, SP=São Paulo
+  var ASK_CIDADE = cfg.askCidade !== undefined ? cfg.askCidade : true;
+  var ASK_GRANDE_PORTE = cfg.askGrandePorte !== undefined ? cfg.askGrandePorte : true;
 
   // ===== ESTADO =====
   var capturedParams = {};
@@ -384,6 +392,7 @@
       page_views: pageViews,
       secao_clique: detectSection(originalElement),
       // Novos campos v3
+      unidade_code: UNIDADE_CODE,
       status: 'completo',
       session_id: sessionId,
       visitor_id: visitorId,
@@ -423,6 +432,7 @@
       scroll_depth: maxScrollDepth,
       page_views: pageViews,
       secao_clique: detectSection(originalElement),
+      unidade_code: UNIDADE_CODE,
       status: 'abandonado',
       session_id: sessionId,
       visitor_id: visitorId,
@@ -444,7 +454,7 @@
 
     // Lead direto (pulou o popup)
     if (!leadTipo) {
-      msg = 'Olá, vim pelo site da R.I.P. Pet Santos e preciso de atendimento.';
+      msg = 'Olá, vim pelo site da R.I.P. Pet ' + UNIDADE + ' e preciso de atendimento.';
 
     // Emergencial completo
     } else if (leadTipo === 'emergencial') {
@@ -453,20 +463,24 @@
         : 'pet exótico';
 
       msg = 'Olá, meu nome é ' + leadNome
-        + ', estava no site da R.I.P. Pet Santos e preciso de atendimento emergencial para meu '
+        + ', estava no site da R.I.P. Pet ' + UNIDADE + ' e preciso de atendimento emergencial para meu '
         + especieLabel + '.';
 
       if (leadGrandePorte === true) {
         msg += ' Ele é de grande porte.';
       }
 
-      msg += ' Estou em ' + leadCidade + '.';
+      if (leadCidade && leadCidade !== '-') {
+        msg += ' Estou em ' + leadCidade + '.';
+      }
 
     // Preventivo completo
     } else {
       msg = 'Olá, meu nome é ' + leadNome
-        + ', estava no site da R.I.P. Pet Santos e preciso de informações sobre os planos preventivos que oferecem. Sou de '
-        + leadCidade + '.';
+        + ', estava no site da R.I.P. Pet ' + UNIDADE + ' e preciso de informações sobre os planos preventivos que oferecem.';
+      if (leadCidade && leadCidade !== '-') {
+        msg += ' Sou de ' + leadCidade + '.';
+      }
     }
 
     if (protocolo) {
@@ -489,7 +503,7 @@
 
     var url;
     if (currentChannel === 'whatsapp') {
-      var phone = extractPhone(originalHref) || '5513998068262';
+      var phone = extractPhone(originalHref) || PHONE_FALLBACK;
       var msg = buildWhatsAppMessage(protocolo);
       url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(msg);
     } else {
@@ -544,7 +558,7 @@
       + '<div style="background:#075E54;padding:16px 20px;display:flex;align-items:center;gap:12px">'
       + '  <img src="/assets/logo_rounded.png" alt="R.I.P. Pet" style="width:40px;height:40px;border-radius:50%;object-fit:cover">'
       + '  <div style="flex:1">'
-      + '    <div style="color:#fff;font-weight:600;font-size:15px">R.I.P. Pet Santos</div>'
+      + '    <div style="color:#fff;font-weight:600;font-size:15px">R.I.P. Pet ' + UNIDADE + '</div>'
       + '    <div style="color:#8ABBB0;font-size:12px">Atendimento 24h</div>'
       + '  </div>'
       + '  <button id="leadCaptureClose" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer;padding:4px 8px;line-height:1" aria-label="Fechar">&times;</button>'
@@ -568,7 +582,7 @@
       // Input area — telefone (fluxo telefone)
       + '<div id="leadCapturePhoneInput" style="background:#F0F0F0;padding:10px 12px;display:none;flex-direction:column;gap:6px">'
       + '  <div style="display:flex;gap:8px;align-items:center">'
-      + '    <input id="leadPhoneInput" type="tel" placeholder="Ex: (13) 99999-0000" maxlength="20" '
+      + '    <input id="leadPhoneInput" type="tel" placeholder="Ex: ' + PHONE_PLACEHOLDER + '" maxlength="20" '
       + '      style="flex:1;padding:10px 16px;border-radius:24px;border:none;font-size:15px;font-family:Poppins,sans-serif;outline:none;background:#fff" '
       + '      autocomplete="tel">'
       + '    <button id="leadPhoneSend" style="width:44px;height:44px;border-radius:50%;background:#075E54;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">'
@@ -577,6 +591,10 @@
       + '  </div>'
       + '  <a id="leadPhoneSkip" style="display:none;text-align:center;font-size:12px;color:#075E54;text-decoration:underline;cursor:pointer;padding:2px 0;font-family:Poppins,sans-serif">Pular e ligar direto</a>'
       + '  <p style="text-align:center;font-size:10px;color:#999;margin:0;padding:2px 0;font-family:Poppins,sans-serif">Ao prosseguir, você concorda com nossa <a href="/politica-de-privacidade" target="_blank" style="color:#075E54;text-decoration:underline">Política de Privacidade</a></p>'
+      + '</div>'
+      // Skip link persistente (aparece desde o 1o step na 2a+ abertura)
+      + '<div id="leadCaptureSkip" style="background:#F0F0F0;padding:6px 12px;display:none;text-align:center">'
+      + '  <a id="leadSkipLink" style="font-size:12px;color:#075E54;text-decoration:underline;cursor:pointer;padding:2px 0;font-family:Poppins,sans-serif">Pular e falar direto</a>'
       + '</div>'
       + '</div>';
 
@@ -716,8 +734,8 @@
   // STEP 1: Saudação + tipo de atendimento (botões)
   function stepSaudacao() {
     var saudacao = currentChannel === 'telefone'
-      ? 'Olá, aqui é da R.I.P. Pet Santos. Já vamos te conectar com nossa linha direta. Só precisamos de algumas informações rápidas.'
-      : 'Olá, aqui é da R.I.P. Pet Santos. Estamos aqui para oferecer todo suporte que precisar.';
+      ? 'Olá, aqui é da R.I.P. Pet ' + UNIDADE + '. Já vamos te conectar com nossa linha direta. Só precisamos de algumas informações rápidas.'
+      : 'Olá, aqui é da R.I.P. Pet ' + UNIDADE + '. Estamos aqui para oferecer todo suporte que precisar.';
 
     addBubble(saudacao, true, function () {
       addBubble('Como podemos te ajudar?', true, function () {
@@ -732,19 +750,37 @@
           logFunnelEvent('step_tipo', tipo);
           addBubble(tipo === 'emergencial' ? 'Emergência / Falecimento' : 'Planos Preventivos', false);
 
-          if (tipo === 'emergencial') {
-            setTimeout(stepCidadeEmergencial, 500);
+          if (currentChannel === 'telefone' && tipo === 'emergencial') {
+            setTimeout(stepSentimentosTelefone, 500);
+          } else if (currentChannel === 'telefone') {
+            setTimeout(stepTelefone, 500);
+          } else if (tipo === 'emergencial') {
+            setTimeout(stepSentimentosEmergencial, 500);
           } else {
-            setTimeout(stepCidadePreventivo, 500);
+            if (ASK_CIDADE) {
+              setTimeout(stepCidadePreventivo, 500);
+            } else {
+              setTimeout(stepNome, 500);
+            }
           }
         });
       });
     });
   }
 
-  // STEP 2a: Sentimentos + Cidade (emergencial)
+  // STEP: Sentimentos (emergencial WhatsApp) → cidade ou espécie
+  function stepSentimentosEmergencial() {
+    addBubble('Nossos sentimentos pelo momento \uD83D\uDE4F\uD83C\uDFFB\uD83E\uDE75', true, function () {
+      if (ASK_CIDADE) {
+        setTimeout(stepCidadeEmergencial, 500);
+      } else {
+        setTimeout(stepEspecie, 500);
+      }
+    });
+  }
+
+  // STEP 2a: Cidade (emergencial)
   function stepCidadeEmergencial() {
-    addBubble('Meus sentimentos pelo momento \uD83D\uDE4F\uD83C\uDFFB\uD83E\uDE75', true, function () {
     addBubble('Em qual cidade precisa do atendimento?', true, function () {
       lastStepTime = Date.now();
       showCityGrid(function (cidade) {
@@ -753,14 +789,8 @@
         lastStepName = 'cidade';
         logFunnelEvent('step_cidade', cidade);
         addBubble(cidade, false);
-        // Telefone: pula espécie/porte, pede telefone em vez de nome
-        if (currentChannel === 'telefone') {
-          setTimeout(stepTelefone, 500);
-        } else {
-          setTimeout(stepEspecie, 500);
-        }
+        setTimeout(stepEspecie, 500);
       });
-    });
     });
   }
 
@@ -795,7 +825,7 @@
         var label = especie === 'cachorro' ? 'Cachorro' : especie === 'gato' ? 'Gato' : 'Exótico';
         addBubble(label, false);
 
-        if (especie === 'cachorro') {
+        if (especie === 'cachorro' && ASK_GRANDE_PORTE) {
           setTimeout(stepGrandePorte, 500);
         } else {
           leadGrandePorte = null;
@@ -823,13 +853,25 @@
     });
   }
 
+  // STEP: Sentimentos + telefone (emergencial telefone — sem cidade)
+  function stepSentimentosTelefone() {
+    addBubble('Nossos sentimentos pelo momento \uD83D\uDE4F\uD83C\uDFFB\uD83E\uDE75', true, function () {
+      addBubble('Vamos te conectar com nossa equipe o mais rápido possível.', true, function () {
+        setTimeout(stepTelefone, 500);
+      });
+    });
+  }
+
   // STEP 5: Nome (campo de texto — por último)
   function stepNome() {
     var nameInput = document.getElementById('leadNameInput');
     if (nameInput) nameInput.value = '';
 
-    addBubble('Para finalizar, qual seu nome?', true, function () {
+    addBubble('Para iniciarmos seu atendimento, qual seu nome?', true, function () {
       lastStepTime = Date.now();
+      // Esconder skip persistente (o input de nome tem seu próprio "Fale diretamente")
+      var skipArea = document.getElementById('leadCaptureSkip');
+      if (skipArea) skipArea.style.display = 'none';
       var inputArea = document.getElementById('leadCaptureInput');
       if (inputArea) inputArea.style.display = 'flex';
       if (nameInput) nameInput.focus();
@@ -843,6 +885,9 @@
 
     addBubble('Uma última informação: Se por algum motivo não conseguir completar a ligação, deixe seu telefone e ligaremos o mais breve possível.', true, function () {
       lastStepTime = Date.now();
+      // Esconder skip persistente (o input de telefone tem seu próprio "Pular e ligar direto")
+      var skipArea = document.getElementById('leadCaptureSkip');
+      if (skipArea) skipArea.style.display = 'none';
       var phoneArea = document.getElementById('leadCapturePhoneInput');
       if (phoneArea) phoneArea.style.display = 'flex';
       if (phoneInput) phoneInput.focus();
@@ -984,6 +1029,15 @@
     var phoneSkip = document.getElementById('leadPhoneSkip');
     if (phoneSkip) {
       phoneSkip.style.display = popupOpenCount >= 2 ? 'block' : 'none';
+    }
+    // Skip link persistente — visível desde o 1o step na 2a+ abertura
+    var skipArea = document.getElementById('leadCaptureSkip');
+    if (skipArea) {
+      skipArea.style.display = popupOpenCount >= 2 ? 'block' : 'none';
+      var skipLinkEl = document.getElementById('leadSkipLink');
+      if (skipLinkEl) {
+        skipLinkEl.textContent = channel === 'telefone' ? 'Pular e ligar direto' : 'Pular e falar direto no WhatsApp';
+      }
     }
 
     // Mostrar overlay
@@ -1165,6 +1219,33 @@
         stepsCompleted++;
         lastStepName = 'telefone_skip';
         setTimeout(stepFinalizar, 300);
+      });
+    }
+
+    // Skip link persistente (visível desde o início na 2a+ abertura)
+    var skipLink = document.getElementById('leadSkipLink');
+    if (skipLink) {
+      skipLink.addEventListener('click', function () {
+        logFunnelEvent('skip_link_clicked', currentChannel, { from: 'persistent' });
+
+        // Preencher placeholders
+        leadNome = leadNome || '-';
+        leadCidade = leadCidade || '-';
+
+        popupCompleted = true;
+
+        if (currentChannel === 'telefone') {
+          // Telefone: redireciona direto
+          closePopup();
+          doRedirect(null);
+        } else {
+          // WhatsApp: salva lead parcial e redireciona com protocolo
+          var savePromise = saveLead();
+          savePromise.then(function (protocolo) {
+            closePopup();
+            doRedirect(protocolo);
+          });
+        }
       });
     }
 

@@ -10769,6 +10769,20 @@
     <!-- RIP PET - Analytics Avançado -->
     <script defer src="/analytics-enhanced.js"></script>
 
+    <!-- Lead Capture Popup - captura nome/cidade/gclid antes de redirecionar pro WhatsApp/Telefone -->
+    <script>
+    window.LEAD_CAPTURE_CONFIG = {
+      unidade: 'São Paulo',
+      unidadeCode: 'SP',
+      cidades: [],
+      phoneFallback: '5511991603041',
+      phonePlaceholder: '(11) 99999-0000',
+      askCidade: false,
+      askGrandePorte: false
+    };
+    </script>
+    <script src="/lead-capture.js"></script>
+
     <!-- Mostrar/Esconder botões flutuantes baseado nos CTAs da hero -->
     <script>
     (function() {
