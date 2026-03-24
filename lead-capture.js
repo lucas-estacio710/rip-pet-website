@@ -1090,8 +1090,24 @@
   }
 
   function closeAndRedirect() {
-    // Determinar step de abandono
-    var abandonStep = !leadTipo ? 'tipo' : !leadCidade ? 'cidade' : !leadNome ? 'nome' : 'especie';
+    // Determinar step de abandono baseado no próximo step esperado
+    var abandonStep;
+    if (!leadTipo) {
+      abandonStep = 'tipo';
+    } else if (currentChannel === 'telefone') {
+      // Telefone: tipo → (sentimentos se emergencial) → telefone
+      abandonStep = !leadTelefone ? 'telefone' : 'finalizar';
+    } else if (ASK_CIDADE && !leadCidade) {
+      abandonStep = 'cidade';
+    } else if (leadTipo === 'emergencial' && !leadEspecie) {
+      abandonStep = 'especie';
+    } else if (leadTipo === 'emergencial' && leadEspecie === 'cachorro' && ASK_GRANDE_PORTE && leadGrandePorte === null) {
+      abandonStep = 'grande_porte';
+    } else if (!leadNome) {
+      abandonStep = 'nome';
+    } else {
+      abandonStep = 'finalizar';
+    }
 
     // Salvar abandono no Supabase (se não completou)
     if (!popupCompleted && currentChannel) {
