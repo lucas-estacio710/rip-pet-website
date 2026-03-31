@@ -904,11 +904,24 @@
     // Track lead completo (GA4 + Meta Pixel)
     try {
       if (window.gtag) {
-        window.gtag('event', 'popup_lead_completed', {
+        // Evento específico por unidade (Golden Conversion p/ Google Ads)
+        var unitSlug = {
+          'ST': 'santos',
+          'SP': 'saopaulo',
+          'CA': 'campinas',
+          'RE': 'resende',
+          'PA': 'pouso_alegre',
+          'PI': 'pindamonhangaba',
+          'SJ': 'sjc'
+        }[UNIDADE_CODE] || UNIDADE_CODE.toLowerCase();
+
+        window.gtag('event', 'popup_lead_completed_' + unitSlug, {
           event_category: 'lead_capture',
           canal: currentChannel,
           tipo: leadTipo,
-          cidade: leadCidade
+          cidade: leadCidade,
+          unidade: UNIDADE,
+          unidade_code: UNIDADE_CODE
         });
       }
       if (window.fbq) {

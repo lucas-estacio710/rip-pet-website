@@ -10730,6 +10730,17 @@
     <script src="/scripts/ads-tracker.js" defer></script>
 
     <!-- Lead Capture Popup - captura nome/cidade/gclid antes de redirecionar pro WhatsApp/Telefone -->
+    <script>
+    window.LEAD_CAPTURE_CONFIG = {
+      unidade: 'Santos',
+      unidadeCode: 'ST',
+      cidades: ['Santos', 'Praia Grande', 'Guarujá', 'São Vicente', 'Cubatão', 'Itanhaém', 'Mongaguá', 'Bertioga', 'Peruíbe'],
+      phoneFallback: '5513998068262',
+      phonePlaceholder: '(13) 99999-0000',
+      askCidade: true,
+      askGrandePorte: true
+    };
+    </script>
     <script src="/lead-capture.js"></script>
 
 </body>
