@@ -1,8 +1,11 @@
-// Vercel Serverless Function - Rastreia cliques de Google Ads
-// Os logs ficam disponíveis em: Vercel Dashboard → Logs → Functions
+// Vercel Serverless Function - RIP Shield (v2)
+// Rastreia cliques de Google Ads e persiste IP + fingerprint no Supabase
 
-export default function handler(req, res) {
-  // Permitir CORS
+const SUPABASE_URL = 'https://eniplfcuwvhovxybyuey.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVuaXBsZmN1d3Zob3Z4eWJ5dWV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5MDM1MjIsImV4cCI6MjA3NTQ3OTUyMn0.VFftjEVtd4_Vwa2KnrY0YizC_9xBATpe0z14X-7I6Is';
+
+export default async function handler(req, res) {
+  // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -11,35 +14,52 @@ export default function handler(req, res) {
     return res.status(200).end();
   }
 
-  // Captura IP (Vercel fornece via headers)
+  // Captura IP
   const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim()
     || req.headers['x-real-ip']
     || req.connection?.remoteAddress
     || 'unknown';
 
-  // Dados do request
-  const data = {
+  const body = req.body || {};
+
+  // Log (mantém compatibilidade com monitoramento via Vercel logs)
+  console.log('🎯 CLICK TRACKED:', JSON.stringify({
     timestamp: new Date().toISOString(),
-    ip: ip,
-    userAgent: req.headers['user-agent'] || 'unknown',
-    referer: req.headers['referer'] || 'direct',
-    // Dados enviados pelo frontend
-    page: req.body?.page || '/',
-    utmSource: req.body?.utm_source || '',
-    utmMedium: req.body?.utm_medium || '',
-    utmCampaign: req.body?.utm_campaign || '',
-    utmContent: req.body?.utm_content || '',
-    utmTerm: req.body?.utm_term || '',
-    gclid: req.body?.gclid || '', // Google Click ID
-  };
+    ip,
+    page: body.page,
+    gclid: body.gclid,
+    fingerprint: body.fingerprint,
+    visitor_id: body.visitor_id,
+    session_id: body.session_id,
+    unidade_code: body.unidade_code
+  }));
 
-  // Log no console da Vercel (aparece em Functions logs)
-  console.log('🎯 CLICK TRACKED:', JSON.stringify(data, null, 2));
+  // Persistir no Supabase via RPC patch_session_ip
+  if (body.session_id && body.visitor_id) {
+    try {
+      await fetch(`${SUPABASE_URL}/rest/v1/rpc/patch_session_ip`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`
+        },
+        body: JSON.stringify({
+          p_session_id: body.session_id,
+          p_visitor_id: body.visitor_id,
+          p_ip: ip,
+          p_fingerprint: body.fingerprint || null,
+          p_unidade_code: body.unidade_code || null
+        })
+      });
+    } catch (e) {
+      console.error('Supabase patch_session_ip error:', e.message);
+    }
+  }
 
-  // Resposta
   return res.status(200).json({
     success: true,
     tracked: true,
-    ip: ip // Retorna o IP para debug
+    ip: ip
   });
 }

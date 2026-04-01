@@ -298,7 +298,8 @@
       max_scroll_depth: maxScrollDepth,
       time_on_page_sec: Math.round((Date.now() - pageLoadTime) / 1000),
       page_views: pageViews,
-      sections_viewed: sectionsViewed
+      sections_viewed: sectionsViewed,
+      unidade_code: UNIDADE_CODE
     };
 
     // Adicionar dados de CTA se passou
