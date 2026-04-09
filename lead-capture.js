@@ -41,6 +41,7 @@
   var UNIDADE_CODE = cfg.unidadeCode || 'ST';  // 2 chars: ST=Santos, SP=São Paulo
   var ASK_CIDADE = cfg.askCidade !== undefined ? cfg.askCidade : true;
   var ASK_GRANDE_PORTE = cfg.askGrandePorte !== undefined ? cfg.askGrandePorte : true;
+  var ALLOW_OTHER_CITY = cfg.allowOtherCity === true;  // opt-in: só renderiza botão "Outra" se true
 
   // ===== ESTADO =====
   var capturedParams = {};
@@ -730,13 +731,15 @@
       grid.appendChild(btn);
     });
 
-    // Botão "Outro" — abre input livre
-    var outroBtn = makeBtn('Outro');
-    outroBtn.addEventListener('click', function () {
-      lockGrid(this);
-      showCityFreeInput(onSelect);
-    });
-    grid.appendChild(outroBtn);
+    // Botão "Outra" — abre input livre (opt-in via config.allowOtherCity)
+    if (ALLOW_OTHER_CITY) {
+      var outroBtn = makeBtn('Outra');
+      outroBtn.addEventListener('click', function () {
+        lockGrid(this);
+        showCityFreeInput(onSelect);
+      });
+      grid.appendChild(outroBtn);
+    }
 
     grid.style.opacity = '0';
     grid.style.transform = 'translateY(10px)';
