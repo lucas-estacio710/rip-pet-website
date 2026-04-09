@@ -689,32 +689,54 @@
     var grid = document.createElement('div');
     grid.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:4px 0;width:100%';
 
-    CIDADES.forEach(function (cidade) {
+    // Helper para "lockar" o grid após qualquer escolha
+    function lockGrid(selectedBtn) {
+      grid.querySelectorAll('button').forEach(function (b) {
+        b.disabled = true;
+        b.style.opacity = '0.5';
+        b.style.cursor = 'default';
+      });
+      if (selectedBtn) {
+        selectedBtn.style.background = '#075E54';
+        selectedBtn.style.color = '#fff';
+        selectedBtn.style.opacity = '1';
+      }
+    }
+
+    // Cria botão estilizado padrão
+    function makeBtn(label) {
       var btn = document.createElement('button');
-      btn.textContent = cidade;
+      btn.textContent = label;
       btn.style.cssText = 'padding:10px 6px;border-radius:10px;border:2px solid #075E54;background:#fff;color:#075E54;font-size:13px;font-weight:600;cursor:pointer;font-family:Poppins,sans-serif;transition:all 0.2s;line-height:1.2';
       btn.addEventListener('mouseenter', function () {
+        if (this.disabled) return;
         this.style.background = '#075E54';
         this.style.color = '#fff';
       });
       btn.addEventListener('mouseleave', function () {
+        if (this.disabled) return;
         this.style.background = '#fff';
         this.style.color = '#075E54';
       });
-      btn.addEventListener('click', function () {
-        grid.querySelectorAll('button').forEach(function (b) {
-          b.disabled = true;
-          b.style.opacity = '0.5';
-          b.style.cursor = 'default';
-        });
-        this.style.background = '#075E54';
-        this.style.color = '#fff';
-        this.style.opacity = '1';
+      return btn;
+    }
 
+    CIDADES.forEach(function (cidade) {
+      var btn = makeBtn(cidade);
+      btn.addEventListener('click', function () {
+        lockGrid(this);
         onSelect(cidade);
       });
       grid.appendChild(btn);
     });
+
+    // Botão "Outro" — abre input livre
+    var outroBtn = makeBtn('Outro');
+    outroBtn.addEventListener('click', function () {
+      lockGrid(this);
+      showCityFreeInput(onSelect);
+    });
+    grid.appendChild(outroBtn);
 
     grid.style.opacity = '0';
     grid.style.transform = 'translateY(10px)';
@@ -726,6 +748,50 @@
       grid.style.opacity = '1';
       grid.style.transform = 'translateY(0)';
     });
+  }
+
+  // ===== INPUT LIVRE DE CIDADE (após clicar em "Outro") =====
+  function showCityFreeInput(onSelect) {
+    var chat = document.getElementById('leadCaptureChat');
+    if (!chat) return;
+
+    var wrapper = document.createElement('div');
+    wrapper.style.cssText = 'display:flex;gap:8px;align-items:center;padding:4px 0;width:100%';
+
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'Digite sua cidade';
+    input.maxLength = 60;
+    input.style.cssText = 'flex:1;padding:10px 16px;border-radius:24px;border:2px solid #075E54;font-size:14px;font-family:Poppins,sans-serif;outline:none;background:#fff';
+
+    var sendBtn = document.createElement('button');
+    sendBtn.style.cssText = 'width:40px;height:40px;border-radius:50%;background:#075E54;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0';
+    sendBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 21L23 12L2 3V10L17 12L2 14V21Z" fill="#fff"/></svg>';
+
+    function submit() {
+      var val = (input.value || '').trim();
+      if (val.length < 2) {
+        input.style.borderColor = '#d9534f';
+        input.focus();
+        return;
+      }
+      input.disabled = true;
+      sendBtn.disabled = true;
+      sendBtn.style.opacity = '0.5';
+      onSelect(val);
+    }
+
+    sendBtn.addEventListener('click', submit);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); submit(); }
+    });
+
+    wrapper.appendChild(input);
+    wrapper.appendChild(sendBtn);
+    chat.appendChild(wrapper);
+    chat.scrollTop = chat.scrollHeight;
+
+    setTimeout(function () { try { input.focus(); } catch (e) { } }, 100);
   }
 
   // ===========================================================
