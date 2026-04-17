@@ -26,7 +26,7 @@
 
   // ===== CONFIG =====
   var SUPABASE_URL = 'https://eniplfcuwvhovxybyuey.supabase.co';
-  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVuaXBsZmN1d3Zob3Z4eWJ5dWV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5MDM1MjIsImV4cCI6MjA3NTQ3OTUyMn0.VFftjEVtd4_Vwa2KnrY0YizC_9xBATpe0z14X-7I6Is';
+  var SUPABASE_KEY = 'sb_publishable_G1KKmfdmtgssnvQa_e7KQQ_p-klSYY0';
 
   // Config por unidade (definida antes do script via window.LEAD_CAPTURE_CONFIG)
   var cfg = window.LEAD_CAPTURE_CONFIG || {};
