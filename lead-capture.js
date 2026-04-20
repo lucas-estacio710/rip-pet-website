@@ -993,6 +993,21 @@
           unidade: UNIDADE,
           unidade_code: UNIDADE_CODE
         });
+
+        // Google Ads Conversion — Campinas (Lead Completo)
+        if (UNIDADE_CODE === 'CA') {
+          if (leadTelefone) {
+            var digits = leadTelefone.replace(/\D/g, '');
+            if (digits.length >= 10) {
+              window.gtag('set', 'user_data', { phone_number: '+55' + digits });
+            }
+          }
+          window.gtag('event', 'conversion', {
+            send_to: 'AW-11258375156/MPDRCIuk3J8cEPTXtPgp',
+            value: 100.0,
+            currency: 'BRL'
+          });
+        }
       }
       if (window.fbq) {
         window.fbq('track', 'Lead', { content_name: 'popup_' + leadTipo });
