@@ -82,7 +82,7 @@ function trackWhatsAppClick(element, context = {}) {
             event_label: `whatsapp_${info.unit_name}`,
             unit_name: info.unit_name,
             unit_label: info.unit_label,
-            phone_number: info.phone,
+            destination_phone: info.phone,
             page_section: section,
             button_location: context.location || 'popup',
             value: 10 // Valor estimado do lead
@@ -122,7 +122,7 @@ function trackPhoneClick(element, context = {}) {
             event_label: `phone_${unit.name}`,
             unit_name: unit.name,
             unit_label: unit.label,
-            phone_number: phoneNumber,
+            destination_phone: phoneNumber,
             page_section: section,
             value: 15 // Telefone tem valor maior que WhatsApp (mais comprometido)
         });
