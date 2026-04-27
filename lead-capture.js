@@ -1008,6 +1008,21 @@
             currency: 'BRL'
           });
         }
+
+        // Google Ads Conversion — Santos (Lead Completo)
+        if (UNIDADE_CODE === 'ST') {
+          if (leadTelefone) {
+            var digits = leadTelefone.replace(/\D/g, '');
+            if (digits.length >= 10) {
+              window.gtag('set', 'user_data', { phone_number: '+55' + digits });
+            }
+          }
+          window.gtag('event', 'conversion', {
+            send_to: 'AW-11267032942/pn1yCMqvy6McEO6Oxfwp',
+            value: 100.0,
+            currency: 'BRL'
+          });
+        }
       }
       if (window.fbq) {
         window.fbq('track', 'Lead', { content_name: 'popup_' + leadTipo });
