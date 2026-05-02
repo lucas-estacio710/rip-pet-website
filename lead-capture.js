@@ -1005,7 +1005,8 @@
           window.gtag('event', 'conversion', {
             send_to: 'AW-11258375156/MPDRCIuk3J8cEPTXtPgp',
             value: 100.0,
-            currency: 'BRL'
+            currency: 'BRL',
+            transaction_id: sessionId + '_' + Date.now()
           });
         }
 
@@ -1020,7 +1021,8 @@
           window.gtag('event', 'conversion', {
             send_to: 'AW-11267032942/pn1yCMqvy6McEO6Oxfwp',
             value: 100.0,
-            currency: 'BRL'
+            currency: 'BRL',
+            transaction_id: sessionId + '_' + Date.now()
           });
         }
       }
