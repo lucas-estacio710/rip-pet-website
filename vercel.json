@@ -6,6 +6,10 @@
       "destination": "/santos/index.html"
     },
     {
+      "source": "/vale-do-paraiba",
+      "destination": "/vale-do-paraiba/index.html"
+    },
+    {
       "source": "/novo",
       "destination": "/index-novo-layout.html"
     },

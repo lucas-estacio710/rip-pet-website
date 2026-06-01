@@ -982,7 +982,8 @@
           'RE': 'resende',
           'PA': 'pouso_alegre',
           'PI': 'pindamonhangaba',
-          'SJ': 'sjc'
+          'SJ': 'sjc',
+          'VP': 'vale_do_paraiba'
         }[UNIDADE_CODE] || UNIDADE_CODE.toLowerCase();
 
         window.gtag('event', 'popup_lead_completed_' + unitSlug, {
@@ -1020,6 +1021,22 @@
           }
           window.gtag('event', 'conversion', {
             send_to: 'AW-11267032942/pn1yCMqvy6McEO6Oxfwp',
+            value: 100.0,
+            currency: 'BRL',
+            transaction_id: sessionId + '_' + Date.now()
+          });
+        }
+
+        // Google Ads Conversion — Vale do Paraíba / SJC (Lead Completo)
+        if (UNIDADE_CODE === 'VP') {
+          if (leadTelefone) {
+            var digits = leadTelefone.replace(/\D/g, '');
+            if (digits.length >= 10) {
+              window.gtag('set', 'user_data', { phone_number: '+55' + digits });
+            }
+          }
+          window.gtag('event', 'conversion', {
+            send_to: 'AW-11117665288/uqBxCK_jp7gcEIi4qLUp',
             value: 100.0,
             currency: 'BRL',
             transaction_id: sessionId + '_' + Date.now()
