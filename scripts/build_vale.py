@@ -273,7 +273,8 @@ REPLACEMENTS = [
             }''',
      '''            .hero-bg-2 {
                 display: block !important;
-                background-position: 100% 25% !important;
+                background-position: 88% 85% !important;
+                background-size: auto 140% !important;
                 animation: crossfade3-2 18s linear infinite !important;
             }''', 1),
     # bg-1 (cachorro) no mobile: +20% p/ direita (30% -> 50%).
@@ -295,7 +296,7 @@ REPLACEMENTS = [
             }''',
      '''            .hero-bg-3 {
                 display: block !important;
-                background-position: 100% 25% !important;
+                background-position: 80% 82% !important;
                 animation: crossfade3-3 18s linear infinite !important;
             }''', 1),
     ('hero bg-3 litoral',
