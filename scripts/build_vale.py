@@ -273,7 +273,7 @@ REPLACEMENTS = [
             }''',
      '''            .hero-bg-2 {
                 display: block !important;
-                background-position: 90% bottom !important;
+                background-position: 100% 25% !important;
                 animation: crossfade3-2 18s linear infinite !important;
             }''', 1),
     # bg-1 (cachorro) no mobile: +20% p/ direita (30% -> 50%).
@@ -286,7 +286,7 @@ REPLACEMENTS = [
                 background-position: 50% 50% !important;
                 animation: crossfade3-1 18s linear infinite !important;
             }''', 1),
-    # bg-3 (shihtzu) no mobile: +40% p/ direita (center=50% -> 90%).
+    # bg-3 (shihtzu) no mobile: ancorada 100% bottom (borda direita + embaixo).
     ('hero bg-3 position mobile',
      '''            .hero-bg-3 {
                 display: block !important;
@@ -295,7 +295,7 @@ REPLACEMENTS = [
             }''',
      '''            .hero-bg-3 {
                 display: block !important;
-                background-position: 90% 50% !important;
+                background-position: 100% 25% !important;
                 animation: crossfade3-3 18s linear infinite !important;
             }''', 1),
     ('hero bg-3 litoral',
