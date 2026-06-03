@@ -60,7 +60,7 @@ REPLACEMENTS = [
      '<meta name="title" content="Cremação Pet Vale do Paraíba 24h | Transparência Total | RIP PET">', 1),
     ('meta description',
      'Cremação pet 24h com amor e respeito. Único em Santos com crematório próprio. Urnas e Recordações inclusas, parcele em 12x. ⭐5/5 (+480 na Baixada Santista)',
-     'Cremação pet 24h com amor e respeito. Crematório próprio no Vale do Paraíba, atendendo SJC, Taubaté, Jacareí, Pinda e região. Urnas e Recordações inclusas, em até 12x.', 1),
+     'Cremação pet 24h com amor e respeito. Crematório próprio no Vale do Paraíba, atendendo SJC, Taubaté, Jacareí, Pinda e região. Urnas e Recordações inclusas, em até 8x.', 1),
     ('meta keywords',
      'cremação pet santos, cremar pet santos, funerária pet santos, cremação animal santos 24h, cremação cachorro santos, cremação gato santos',
      'cremação pet vale do paraíba, cremação pet são josé dos campos, cremação pet taubaté, cremação pet jacareí, cremação pet pindamonhangaba, funerária pet vale do paraíba, cremação cachorro vale do paraíba, cremação gato sjc', 1),
@@ -82,7 +82,7 @@ REPLACEMENTS = [
      '<meta property="og:title" content="Cremação Pet Vale do Paraíba 24h | Transparência Total">', 1),
     ('og description',
      '<meta property="og:description" content="Cremação com amor e respeito. Único em Santos com crematório próprio. Urnas e Recordações inclusas, parcele em até 12x sem juros.">',
-     '<meta property="og:description" content="Cremação com amor e respeito. Crematório próprio no Vale do Paraíba. Urnas e Recordações inclusas, parcele em até 12x sem juros.">', 1),
+     '<meta property="og:description" content="Cremação com amor e respeito. Crematório próprio no Vale do Paraíba. Urnas e Recordações inclusas, parcele em até 8x sem juros.">', 1),
     ('twitter title',
      '<meta name="twitter:title" content="Cremação Pet Santos 24h">',
      '<meta name="twitter:title" content="Cremação Pet Vale do Paraíba 24h">', 1),
@@ -99,10 +99,42 @@ REPLACEMENTS = [
      '<h1 class="hero-h1-desktop">Cremação Pet no <span class="script">Vale do Paraíba</span><span class="hero-h1-sub">Funerária e Crematório de animais de estimação</span></h1>', 1),
     ('hero frase secundaria',
      'A <strong>RIP Pet</strong> é especialista em <strong>cremação pet em Santos</strong>, atendendo toda a <strong>Baixada Santista 24h</strong>, com <strong>estrutura completa de verdade</strong>, <strong>urnas e recordações inclusas</strong> em até <strong>12x sem juros</strong>.',
-     'A <strong>RIP Pet</strong> é especialista em <strong>cremação pet no Vale do Paraíba</strong>, atendendo <strong>São José dos Campos, Taubaté, Jacareí, Pinda e região 24h</strong>, com <strong>estrutura completa de verdade</strong>, <strong>urnas e recordações inclusas</strong> em até <strong>12x sem juros</strong>.', 1),
+     'A <strong>RIP Pet</strong> é especialista em <strong>cremação pet no Vale do Paraíba</strong>, atendendo <strong>São José dos Campos, Taubaté, Jacareí, Pinda e região 24h</strong>, com <strong>estrutura completa de verdade</strong>, <strong>urnas e recordações inclusas</strong> em até <strong>8x sem juros</strong>.', 1),
     ('hero subtitle',
      '<span style="display: block; text-align: center;">1º <strong>Cerimonial Pet</strong> na <strong>Baixada Santista</strong></span>',
-     '<span style="display: block; text-align: center;"><strong>Cerimonial Pet</strong> no <strong>Vale do Paraíba</strong></span>', 1),
+     '<span style="display: block; text-align: center;">1º <strong>Cerimonial Pet</strong> do <strong>Vale do Paraíba</strong></span>', 1),
+
+    # ---- H1: alargar a coluna do hero (desktop) ----------------------------
+    # "Vale do Paraíba" é mais largo que "Santos"; a .hero-coluna tinha
+    # max-width 55% e o H1 quebrava ao bater nesse limite, mesmo com espaço
+    # livre à direita. Sobe p/ 65% (texto SEO e fonte mantidos intactos).
+    ('hero coluna max-width',
+     '''        .hero-coluna {
+            position: absolute;
+            top: calc(var(--navbar-height, 80px) + 1.5rem);
+            left: 5%;
+            transform: none;
+            max-width: 55%;''',
+     '''        .hero-coluna {
+            position: absolute;
+            top: calc(var(--navbar-height, 80px) + 1.5rem);
+            left: 5%;
+            transform: none;
+            max-width: 65%;''', 1),
+
+    # ---- Frase secundária do hero: justificada e ocupando a coluna toda ----
+    ('hero frase secundaria largura',
+     '''        .hero-coluna .hero-frase-secundaria {
+            max-width: 560px;
+            margin: 0;
+            font-size: clamp(0.95rem, 1vw + 0.3rem, 1.15rem);
+        }''',
+     '''        .hero-coluna .hero-frase-secundaria {
+            max-width: 100%;
+            margin: 0;
+            font-size: clamp(0.95rem, 1vw + 0.3rem, 1.15rem);
+            text-align: justify;
+        }''', 1),
 
     # ---- LEAD CAPTURE CONFIG ----------------------------------------------
     ("lead config unidade", "unidade: 'Santos',", "unidade: 'Vale do Paraíba',", 1),
@@ -132,7 +164,7 @@ REPLACEMENTS = [
      '"name": "RIP PET Vale do Paraíba - Cremação Pet 24h",', 1),
     ('schema description',
      '"description": "Crematório pet em Santos cuidando da sua família com amor e respeito. Único em Santos com crematório próprio, atendendo a Baixada Santista 24h. Cremação individual ou coletiva, com Urnas e Recordações inclusas, em até 12x sem juros.",',
-     '"description": "Crematório pet no Vale do Paraíba cuidando da sua família com amor e respeito. Crematório próprio atendendo São José dos Campos, Taubaté, Jacareí, Pindamonhangaba e região 24h. Cremação individual ou coletiva, com Urnas e Recordações inclusas, em até 12x sem juros.",', 1),
+     '"description": "Crematório pet no Vale do Paraíba cuidando da sua família com amor e respeito. Crematório próprio atendendo São José dos Campos, Taubaté, Jacareí, Pindamonhangaba e região 24h. Cremação individual ou coletiva, com Urnas e Recordações inclusas, em até 8x sem juros.",', 1),
     ('schema image fachada',
      '"https://rippet.com.br/images/fachada-santos.jpg",\n        "https://rippet.com.br/images/velorio-pet-santos.webp",',
      '"https://rippet.com.br/images/unidade-crematorio-sao-jose-campos.webp",\n        "https://rippet.com.br/images/unidade-crematorio-pindamonhangaba.webp",', 1),
@@ -212,15 +244,63 @@ REPLACEMENTS = [
      'Atendemos o <strong>Vale do Paraíba</strong> há mais de 10 anos. Com nossa <strong>matriz em Pindamonhangaba</strong> e a unidade <strong>R.I.P. Pet São José dos Campos</strong>, levamos o <strong>melhor Serviço Funerário Pet do Brasil</strong> a toda a região (São José dos Campos, Taubaté, Jacareí, Pindamonhangaba, Caçapava, Lorena, Guaratinguetá e cidades vizinhas) com <strong>Carinho, Respeito e Transparência</strong>, sendo a única rede da região com <strong>equipamentos crematórios próprios</strong>.', 1),
 
     # ---- Imagens do HERO (atmosféricas de Santos -> Vale) -------------------
+    # Preload aponta p/ a imagem de ABERTURA do hero (bg-1 = LCP) = imagem nova.
     ('preload header linhas',
      '<link rel="preload" href="/images/header-santos-linhas.webp" as="image" type="image/webp" fetchpriority="high">',
-     '<link rel="preload" href="/images/matriz_pinda_opt.webp" as="image" type="image/webp" fetchpriority="high">', 1),
+     '<link rel="preload" href="/images/LP_Vale/carrossel_vale_cachorro_cremacao_opt.webp" as="image" type="image/webp" fetchpriority="high">', 1),
+    # Imagem 1 do carrossel (abertura/LCP): aparece 2x (critical CSS + bg-1).
+    ('hero bg-1 abertura',
+     "url('/images/homem-cachorro-atual.webp')",
+     "url('/images/LP_Vale/carrossel_vale_cachorro_cremacao_opt.webp')", "all"),
     ('hero bg-2 header',
      "url('/images/header-santos.webp');",
-     "url('/images/matriz_pinda2_opt.webp');", 1),
+     "url('/images/LP_Vale/carrossel_vale_campos_cachorro_cremacao_opt.webp');", 1),
+    # Ancora a 2ª imagem (campos) no bottom — desktop (sobrescreve o center 25%
+    # herdado de .hero-bg) e mobile (sobrescreve o center 50%).
+    ('hero bg-2 position desktop',
+     '''                url('/images/LP_Vale/carrossel_vale_campos_cachorro_cremacao_opt.webp');
+            animation: crossfade3-2 18s linear infinite;
+        }''',
+     '''                url('/images/LP_Vale/carrossel_vale_campos_cachorro_cremacao_opt.webp');
+            background-position: center bottom;
+            animation: crossfade3-2 18s linear infinite;
+        }''', 1),
+    ('hero bg-2 position mobile',
+     '''            .hero-bg-2 {
+                display: block !important;
+                background-position: center 50% !important;
+                animation: crossfade3-2 18s linear infinite !important;
+            }''',
+     '''            .hero-bg-2 {
+                display: block !important;
+                background-position: 90% bottom !important;
+                animation: crossfade3-2 18s linear infinite !important;
+            }''', 1),
+    # bg-1 (cachorro) no mobile: +20% p/ direita (30% -> 50%).
+    ('hero bg-1 position mobile',
+     '''            .hero-bg-1 {
+                background-position: 30% 50% !important;
+                animation: crossfade3-1 18s linear infinite !important;
+            }''',
+     '''            .hero-bg-1 {
+                background-position: 50% 50% !important;
+                animation: crossfade3-1 18s linear infinite !important;
+            }''', 1),
+    # bg-3 (shihtzu) no mobile: +40% p/ direita (center=50% -> 90%).
+    ('hero bg-3 position mobile',
+     '''            .hero-bg-3 {
+                display: block !important;
+                background-position: center 50% !important;
+                animation: crossfade3-3 18s linear infinite !important;
+            }''',
+     '''            .hero-bg-3 {
+                display: block !important;
+                background-position: 90% 50% !important;
+                animation: crossfade3-3 18s linear infinite !important;
+            }''', 1),
     ('hero bg-3 litoral',
      "url('/images/cachorro-litoral-noite.webp');",
-     "url('/images/matriz_pinda3_opt.webp');", 1),
+     "url('/images/LP_Vale/menina_shihtzu_cremacao_praia_opt.webp');", 1),
 
     # ========================================================================
     # PEDAÇO 3 — SEÇÃO UNIDADES: SJC vira a aba ativa + conteúdo padrão.
@@ -309,6 +389,53 @@ REPLACEMENTS = [
      '<img src="/images/velorio-pet-santos.webp" alt="Salas de velório"',
      '<img src="/images/capela-crematorio-pet.webp" alt="Sala de velório"',
      1),
+
+    # ========================================================================
+    # PEDAÇO 5 — PARCELAMENTO: SJC parcela em até 8x (template Santos = 12x).
+    # As 3 frases de copy (meta/og/hero/schema desc) já saem com 8x acima.
+    # Aqui tratamos as menções que vêm 12x direto do template:
+    # FAQ pagamento (schema + visível), mini-card e os 2 cards de preço.
+    # Cards de preço: total mantido (12×107,50=1290 -> 8×161,25;
+    # 12×74,17≈890 -> 8×111,25).
+    # ========================================================================
+    ('faq schema pagamento 12x',
+     'O pagamento pode ser parcelado em até 12x no cartão.',
+     'O pagamento pode ser parcelado em até 8x no cartão.', 1),
+    ('faq visivel pagamento 12x',
+     'parcelado em até 12x</strong> no cartão.',
+     'parcelado em até 8x</strong> no cartão.', 1),
+    ('mini-card 12x',
+     '<span>Até <strong>12x</strong><br>sem juros</span>',
+     '<span>Até <strong>8x</strong><br>sem juros</span>', 1),
+    ('card preco individual',
+     '<span class="servico-preco">12x de <strong>R$ 107,50</strong></span>',
+     '<span class="servico-preco">8x de <strong>R$ 161,25</strong></span>', 1),
+    ('card preco coletiva',
+     '<span class="servico-preco">12x de <strong>R$ 74,17</strong></span>',
+     '<span class="servico-preco">8x de <strong>R$ 111,25</strong></span>', 1),
+
+    # ---- Card "Sala de velório" -> plural ----------------------------------
+    # São várias salas nas duas unidades (SJC + matriz Pinda) — plural honesto.
+    ('card velorio titulo',
+     '<h3>Sala de velório</h3>',
+     '<h3>Salas de velório</h3>', 1),
+    ('card velorio texto',
+     '<p>Nossa unidade possui sala de velório privativa, planejada em cada detalhe para um momento reservado e único com seu pet</p>',
+     '<p>Nossas unidades possuem salas de velório privativas, planejadas em cada detalhe para um momento reservado e único com seu pet</p>', 1),
+
+    # ---- Carrossel "Nossa História": slides 2 e 3 (eram de Santos) ----------
+    # Slide 0 (fundadores) e 3 (matriz) mantidos; troca slide 1 (fachada-santos)
+    # e slide 2 (carro-praia-grande) por fotos do Vale.
+    ('historia slide 1 -> recepcao sjc',
+     '<img src="/images/fachada-santos.jpg" alt="Unidade RIP Pet Santos" class="historia-slide">',
+     '<img src="/images/LP_Vale/recepcao_crematorio_animais_sjc_opt.webp" alt="Recepção RIP Pet São José dos Campos" class="historia-slide">', 1),
+    ('historia slide 2 -> matriz pinda2',
+     '<img src="/images/LP_Santos/carro-praia-grande.webp" alt="Carro RIP Pet na orla" class="historia-slide">',
+     '<img src="/images/matriz_pinda2_opt.webp" alt="Matriz RIP Pet Pindamonhangaba" class="historia-slide">', 1),
+    # Foto extra do mobile (historia-foto-carro): carro na orla de Santos -> recepção SJC.
+    ('historia foto mobile -> recepcao sjc',
+     '<img src="/images/LP_Santos/carro-praia-grande.webp" alt="Carro RIP Pet na orla da praia" class="mobile-only historia-foto-carro">',
+     '<img src="/images/LP_Vale/recepcao_crematorio_animais_sjc_opt.webp" alt="Recepção RIP Pet São José dos Campos" class="mobile-only historia-foto-carro">', 1),
 ]
 
 
