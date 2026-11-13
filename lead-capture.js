@@ -1,22 +1,23 @@
 /**
  * =====================================================
- * RIP PET - LEAD CAPTURE POPUP (v3 — FUNIL COMPLETO)
+ * RIP PET - LEAD CAPTURE POPUP (v4 — POPUP LEVE)
  * =====================================================
  *
  * Tracking completo:
  *   - Session: toda visita registrada (geo, device, UTM, engajamento)
  *   - Funnel events: cada step do popup logado com duração
- *   - Abandonos: salvos no Supabase (não só GA4)
- *   - Leads parciais: criados ao abrir popup, atualizados a cada step
+ *   - Lead com protocolo salvo em TODO caminho que abre o WhatsApp
  *
- * Árvore de conversa (WhatsApp):
- *   1. Saudação → tipo (botões)
- *   2a. EMERGÊNCIA: cidade → espécie → (se cachorro: grande porte?) → nome → redirect
- *   2b. PREVENTIVO: cidade → nome → redirect
+ * Qualificação opcional (1 toque por pergunta, "Ir direto" sempre visível):
+ *   WhatsApp: cidade → tipo → (emergência) espécie → abre WhatsApp c/ protocolo
+ *   Telefone: cidade → tipo → disca (nunca pede o número da pessoa)
  *
- * Árvore de conversa (Telefone — simplificado):
- *   1. Saudação → tipo (botões)
- *   2. Cidade → nome → redirect (sem espécie/porte)
+ * Fechar (X, fora, ESC, voltar) = seguir em frente:
+ *   WhatsApp → salva lead e abre o WhatsApp com protocolo
+ *   Telefone → salva parcial e disca
+ *
+ * Google Ads "Lead Completo": dispara sempre que o lead é registrado com
+ * protocolo (qualquer caminho), 1x por sessão (transaction_id = sessionId).
  *
  * =====================================================
  */
@@ -192,6 +193,9 @@
   // Detectar seção do CTA clicado
   function detectSection(el) {
     if (!el) return null;
+    // Seção explícita no HTML (ex.: botão do topo mobile → 'hero_mobile')
+    var tagged = el.closest('[data-lead-section]');
+    if (tagged) return tagged.getAttribute('data-lead-section');
     var section = el.closest('section[id], div[id]');
     if (section && section.id) return section.id;
     var rect = el.getBoundingClientRect();
@@ -242,7 +246,8 @@
           'apikey': SUPABASE_KEY,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        keepalive: true  // não perde o envio se a página navegar (WhatsApp/ligação)
       })
       .then(function (res) { return res.json(); })
       .catch(function () { return null; });
@@ -371,11 +376,13 @@
     supabaseBeacon('insert_funnel_events', { events: batch });
   }
 
-  // ===== SALVAR LEAD COMPLETO (RPC — retorna protocolo) =====
+  // ===== SALVAR LEAD (RPC — retorna protocolo) =====
+  // Usado em todo caminho que leva ao WhatsApp: completou, pulou ou fechou.
+  // Campos não respondidos vão como '-' (mesmo padrão do antigo "Pular").
   function saveLead() {
     var body = {
-      nome: leadNome || null,
-      cidade: leadCidade,
+      nome: leadNome || '-',
+      cidade: leadCidade || '-',
       canal: currentChannel,
       telefone_destino: extractPhone(originalHref),
       tipo_atendimento: leadTipo || null,
@@ -393,7 +400,6 @@
       scroll_depth: maxScrollDepth,
       page_views: pageViews,
       secao_clique: detectSection(originalElement),
-      // Novos campos v3
       unidade_code: UNIDADE_CODE,
       status: 'completo',
       session_id: sessionId,
@@ -401,7 +407,7 @@
       geo_city: geoData.city,
       geo_state: geoData.state,
       steps_completed: stepsCompleted,
-      last_step: currentChannel === 'telefone' ? 'telefone' : 'nome',
+      last_step: lastStepName || null,
       popup_duration_sec: Math.round((Date.now() - popupOpenTime) / 1000),
       funnel_duration_sec: Math.round((Date.now() - pageLoadTime) / 1000)
     };
@@ -412,7 +418,7 @@
       });
   }
 
-  // ===== SALVAR LEAD PARCIAL (abandono) =====
+  // ===== SALVAR LEAD PARCIAL (abandono — usado só no canal telefone) =====
   function savePartialLead(abandonedAtStep) {
     var body = {
       canal: currentChannel,
@@ -451,38 +457,24 @@
   }
 
   // ===== MONTAR MENSAGEM WHATSAPP =====
+  // Monta com o que foi respondido (tudo opcional) + protocolo.
   function buildWhatsAppMessage(protocolo) {
-    var msg;
+    var msg = 'Olá, vim pelo site da R.I.P. Pet ' + UNIDADE;
 
-    // Lead direto (pulou o popup)
-    if (!leadTipo) {
-      msg = 'Olá, vim pelo site da R.I.P. Pet ' + UNIDADE + ' e preciso de atendimento.';
-
-    // Emergencial completo
-    } else if (leadTipo === 'emergencial') {
-      var especieLabel = leadEspecie === 'cachorro' ? 'cachorro'
-        : leadEspecie === 'gato' ? 'gato'
-        : 'pet exótico';
-
-      msg = 'Olá, meu nome é ' + leadNome
-        + ', estava no site da R.I.P. Pet ' + UNIDADE + ' e preciso de atendimento emergencial para meu '
-        + especieLabel + '.';
-
-      if (leadGrandePorte === true) {
-        msg += ' Ele é de grande porte.';
-      }
-
-      if (leadCidade && leadCidade !== '-') {
-        msg += ' Estou em ' + leadCidade + '.';
-      }
-
-    // Preventivo completo
+    if (leadTipo === 'emergencial') {
+      var especieLabel = leadEspecie === 'cachorro' ? 'meu cachorro'
+        : leadEspecie === 'gato' ? 'meu gato'
+        : leadEspecie === 'exotico' ? 'meu pet'
+        : '';
+      msg += ' e preciso de atendimento emergencial' + (especieLabel ? ' para ' + especieLabel : '') + '.';
+    } else if (leadTipo === 'preventivo') {
+      msg += ' e gostaria de informações sobre os planos preventivos.';
     } else {
-      msg = 'Olá, meu nome é ' + leadNome
-        + ', estava no site da R.I.P. Pet ' + UNIDADE + ' e preciso de informações sobre os planos preventivos que oferecem.';
-      if (leadCidade && leadCidade !== '-') {
-        msg += ' Sou de ' + leadCidade + '.';
-      }
+      msg += ' e preciso de atendimento.';
+    }
+
+    if (leadCidade && leadCidade !== '-') {
+      msg += ' Estou em ' + leadCidade + '.';
     }
 
     if (protocolo) {
@@ -490,6 +482,66 @@
     }
 
     return msg;
+  }
+
+  // ===== TRACKING =====
+  // GA4 + Meta: só quando a pessoa respondeu as perguntas (comportamento antigo)
+  function trackCompleted() {
+    try {
+      if (window.gtag) {
+        var unitSlug = {
+          'ST': 'santos',
+          'SP': 'saopaulo',
+          'CA': 'campinas',
+          'RE': 'resende',
+          'PA': 'pouso_alegre',
+          'PI': 'pindamonhangaba',
+          'SJ': 'sjc',
+          'VP': 'vale_do_paraiba'
+        }[UNIDADE_CODE] || UNIDADE_CODE.toLowerCase();
+
+        window.gtag('event', 'popup_lead_completed_' + unitSlug, {
+          event_category: 'lead_capture',
+          canal: currentChannel,
+          tipo: leadTipo,
+          cidade: leadCidade,
+          unidade: UNIDADE,
+          unidade_code: UNIDADE_CODE
+        });
+      }
+      if (window.fbq) {
+        window.fbq('track', 'Lead', { content_name: 'popup_' + leadTipo });
+      }
+    } catch (e) { }
+  }
+
+  // Google Ads "Lead Completo" por unidade.
+  // Dispara SEMPRE que o lead é registrado com protocolo (completou, pulou ou fechou),
+  // no máximo 1x por sessão. transaction_id = sessionId → o Google deduplica repetições.
+  var AW_LEAD_COMPLETO = {
+    'CA': 'AW-11258375156/MPDRCIuk3J8cEPTXtPgp',
+    'ST': 'AW-11267032942/pn1yCMqvy6McEO6Oxfwp',
+    'VP': 'AW-11117665288/uqBxCK_jp7gcEIi4qLUp'
+  };
+  var leadConversionFired = false;
+
+  function fireLeadConversion() {
+    var sendTo = AW_LEAD_COMPLETO[UNIDADE_CODE];
+    if (!sendTo || !window.gtag || leadConversionFired) return;
+    try {
+      if (sessionStorage.getItem('rp_lead_conv_fired')) return;
+      sessionStorage.setItem('rp_lead_conv_fired', '1');
+    } catch (e) { }
+    leadConversionFired = true;
+    try {
+      window.gtag('event', 'conversion', {
+        send_to: sendTo,
+        value: 100.0,
+        currency: 'BRL',
+        transaction_id: sessionId,
+        transport_type: 'beacon'
+      });
+    } catch (e) { }
   }
 
   // ===== REDIRECT FINAL =====
@@ -515,6 +567,55 @@
     window.location.href = url;
   }
 
+  var redirecting = false;  // evita duplo redirect (ex.: fechar durante a finalização)
+
+  // WhatsApp: salva o lead (protocolo) e abre o WhatsApp. Usado por TODOS os caminhos.
+  // showProtocol=true (completou): mostra o protocolo por ~0,7s antes de abrir.
+  function finishWhatsApp(showProtocol) {
+    if (redirecting) return;
+    redirecting = true;
+    popupCompleted = true;
+    flushFunnelEvents();
+
+    var done = false;
+    function go(protocolo) {
+      if (done) return;
+      done = true;
+      if (protocolo) fireLeadConversion();
+      closePopup();
+      doRedirect(protocolo);
+    }
+
+    saveLead().then(function (protocolo) {
+      if (done) return;
+      if (protocolo && showProtocol) {
+        addBubble('Protocolo: ' + protocolo + (capturedParams.gclid ? '*' : ''), true);
+        setTimeout(function () { go(protocolo); }, 700);
+      } else {
+        go(protocolo);
+      }
+    });
+
+    // Rede lenta: não prender a pessoa — abre o WhatsApp mesmo sem protocolo
+    setTimeout(function () { go(null); }, 4000);
+  }
+
+  // Telefone: disca na hora. saveFull=true quando respondeu as perguntas.
+  function finishTelefone(saveFull) {
+    if (redirecting) return;
+    redirecting = true;
+    popupCompleted = true;
+    flushFunnelEvents();
+
+    if (saveFull) {
+      saveLead().then(function (protocolo) {
+        if (protocolo) fireLeadConversion();
+      });
+    }
+    closePopup();
+    doRedirect(null);
+  }
+
   // ===== POPUP HTML =====
   function injectPopupStyles() {
     if (document.getElementById('leadCaptureStyles')) return;
@@ -524,9 +625,10 @@
       + '#leadCaptureCard{'
       + '  position:fixed;z-index:99999;overflow:hidden;width:100%;'
       + '  box-shadow:0 4px 30px rgba(0,0,0,0.3);'
-      + '  transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);'
+      + '  transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);'
       + '  font-family:Poppins,sans-serif;'
       + '}'
+      + '#leadDirectBtn:active{transform:scale(0.98)}'
       + '@media(max-width:767px){'
       + '  #leadCaptureCard{'
       + '    top:0;left:0;right:0;'
@@ -534,7 +636,7 @@
       + '    transform:translateY(-100%);'
       + '  }'
       + '  #leadCaptureCard.lc-open{transform:translateY(0)}'
-      + '  #leadCaptureChat{min-height:180px;max-height:55vh}'
+      + '  #leadCaptureChat{min-height:160px;max-height:60vh}'
       + '}'
       + '@media(min-width:768px){'
       + '  #leadCaptureCard{'
@@ -543,7 +645,7 @@
       + '    transform:translateX(-50%) translateY(-120%);'
       + '  }'
       + '  #leadCaptureCard.lc-open{transform:translateX(-50%) translateY(0)}'
-      + '  #leadCaptureChat{min-height:280px;max-height:60vh}'
+      + '  #leadCaptureChat{min-height:240px;max-height:60vh}'
       + '}';
     document.head.appendChild(style);
   }
@@ -555,9 +657,9 @@
     el.id = 'leadCaptureOverlay';
     el.innerHTML = ''
       + '<div id="leadCaptureOverlay-bg" style="position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99998;opacity:0;transition:opacity 0.3s"></div>'
-      + '<div id="leadCaptureCard">'
+      + '<div id="leadCaptureCard" role="dialog" aria-modal="true" aria-label="Atendimento R.I.P. Pet">'
       // Header
-      + '<div style="background:#075E54;padding:16px 20px;display:flex;align-items:center;gap:12px">'
+      + '<div style="background:#075E54;padding:14px 20px;display:flex;align-items:center;gap:12px">'
       + '  <img src="/assets/logo_rounded.png" alt="R.I.P. Pet" style="width:40px;height:40px;border-radius:50%;object-fit:cover">'
       + '  <div style="flex:1">'
       + '    <div style="color:#fff;font-weight:600;font-size:15px">R.I.P. Pet ' + UNIDADE + '</div>'
@@ -566,37 +668,12 @@
       + '  <button id="leadCaptureClose" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer;padding:4px 8px;line-height:1" aria-label="Fechar">&times;</button>'
       + '</div>'
       // Chat area
-      + '<div id="leadCaptureChat" style="background:#ECE5DD;padding:16px 16px 12px;overflow-y:auto;display:flex;flex-direction:column;gap:8px">'
+      + '<div id="leadCaptureChat" style="background:#ECE5DD;padding:14px 16px 12px;overflow-y:auto;display:flex;flex-direction:column;gap:8px">'
       + '</div>'
-      // Input area — nome (WhatsApp)
-      + '<div id="leadCaptureInput" style="background:#F0F0F0;padding:10px 12px;display:none;flex-direction:column;gap:6px">'
-      + '  <div style="display:flex;gap:8px;align-items:center">'
-      + '    <input id="leadNameInput" type="text" placeholder="Ex: Maria" maxlength="60" '
-      + '      style="flex:1;padding:10px 16px;border-radius:24px;border:none;font-size:15px;font-family:Poppins,sans-serif;outline:none;background:#fff" '
-      + '      autocomplete="given-name">'
-      + '    <button id="leadNameSend" style="width:44px;height:44px;border-radius:50%;background:#075E54;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">'
-      + '      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M2 21L23 12L2 3V10L17 12L2 14V21Z" fill="#fff"/></svg>'
-      + '    </button>'
-      + '  </div>'
-      + '  <a id="leadDirectLink" style="display:none;text-align:center;font-size:12px;color:#075E54;text-decoration:underline;cursor:pointer;padding:2px 0;font-family:Poppins,sans-serif">Fale diretamente</a>'
-      + '  <p id="leadLgpdNotice" style="text-align:center;font-size:10px;color:#999;margin:0;padding:2px 0;font-family:Poppins,sans-serif">Ao prosseguir, você concorda com nossa <a href="/politica-de-privacidade" target="_blank" style="color:#075E54;text-decoration:underline">Política de Privacidade</a></p>'
-      + '</div>'
-      // Input area — telefone (fluxo telefone)
-      + '<div id="leadCapturePhoneInput" style="background:#F0F0F0;padding:10px 12px;display:none;flex-direction:column;gap:6px">'
-      + '  <div style="display:flex;gap:8px;align-items:center">'
-      + '    <input id="leadPhoneInput" type="tel" placeholder="Ex: ' + PHONE_PLACEHOLDER + '" maxlength="20" '
-      + '      style="flex:1;padding:10px 16px;border-radius:24px;border:none;font-size:15px;font-family:Poppins,sans-serif;outline:none;background:#fff" '
-      + '      autocomplete="tel">'
-      + '    <button id="leadPhoneSend" style="width:44px;height:44px;border-radius:50%;background:#075E54;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">'
-      + '      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M2 21L23 12L2 3V10L17 12L2 14V21Z" fill="#fff"/></svg>'
-      + '    </button>'
-      + '  </div>'
-      + '  <a id="leadPhoneSkip" style="display:none;text-align:center;font-size:12px;color:#075E54;text-decoration:underline;cursor:pointer;padding:2px 0;font-family:Poppins,sans-serif">Pular e ligar direto</a>'
+      // Botão "Ir direto" — visível desde a 1a abertura
+      + '<div id="leadCaptureDirect" style="background:#F0F0F0;padding:10px 12px 6px;display:flex;flex-direction:column;gap:6px">'
+      + '  <button id="leadDirectBtn" type="button" style="width:100%;min-height:48px;border-radius:24px;border:none;background:#25D366;color:#fff;font-size:15px;font-weight:600;font-family:Poppins,sans-serif;cursor:pointer;transition:transform 0.15s">Ir direto para o WhatsApp</button>'
       + '  <p style="text-align:center;font-size:10px;color:#999;margin:0;padding:2px 0;font-family:Poppins,sans-serif">Ao prosseguir, você concorda com nossa <a href="/politica-de-privacidade" target="_blank" style="color:#075E54;text-decoration:underline">Política de Privacidade</a></p>'
-      + '</div>'
-      // Skip link persistente (aparece desde o 1o step na 2a+ abertura)
-      + '<div id="leadCaptureSkip" style="background:#F0F0F0;padding:6px 12px;display:none;text-align:center">'
-      + '  <a id="leadSkipLink" style="font-size:12px;color:#075E54;text-decoration:underline;cursor:pointer;padding:2px 0;font-family:Poppins,sans-serif">Pular e falar direto</a>'
       + '</div>'
       + '</div>';
 
@@ -617,7 +694,7 @@
 
     bubble.style.opacity = '0';
     bubble.style.transform = 'translateY(10px)';
-    bubble.style.transition = 'opacity 0.3s, transform 0.3s';
+    bubble.style.transition = 'opacity 0.2s, transform 0.2s';
     chat.appendChild(bubble);
     chat.scrollTop = chat.scrollHeight;
 
@@ -627,7 +704,7 @@
     });
 
     if (callback) {
-      setTimeout(callback, 400);
+      setTimeout(callback, STEP_DELAY);
     }
   }
 
@@ -798,312 +875,116 @@
   }
 
   // ===========================================================
-  // FLUXO DA CONVERSA
+  // FLUXO DA CONVERSA — tudo opcional, 1 toque por pergunta
+  //   cidade → tipo → (emergência + WhatsApp) espécie → abre WhatsApp
   // ===========================================================
 
-  // STEP 1: Saudação + tipo de atendimento (botões)
+  var STEP_DELAY = 150;
+
+  // STEP 1: Saudação + cidade (ou direto pro tipo se a unidade não pergunta cidade)
   function stepSaudacao() {
     var saudacao = currentChannel === 'telefone'
-      ? 'Olá, aqui é da R.I.P. Pet ' + UNIDADE + '. Já vamos te conectar com nossa linha direta. Só precisamos de algumas informações rápidas.'
-      : 'Olá, aqui é da R.I.P. Pet ' + UNIDADE + '. Estamos aqui para oferecer todo suporte que precisar.';
+      ? 'Olá, aqui é da R.I.P. Pet ' + UNIDADE + '. Se puder, responda rapidinho antes da ligação, ou toque em "Ligar agora".'
+      : 'Olá, aqui é da R.I.P. Pet ' + UNIDADE + '. Se puder, responda rapidinho para agilizar seu atendimento.';
 
     addBubble(saudacao, true, function () {
-      addBubble('Como podemos te ajudar?', true, function () {
+      if (ASK_CIDADE) {
+        stepCidade();
+      } else {
+        stepTipo();
+      }
+    });
+  }
+
+  // STEP: Cidade (grid de 1 toque)
+  function stepCidade() {
+    addBubble('Em qual cidade você está?', true, function () {
+      lastStepTime = Date.now();
+      showCityGrid(function (cidade) {
+        leadCidade = cidade;
+        stepsCompleted++;
+        lastStepName = 'cidade';
+        logFunnelEvent('step_cidade', cidade);
+        addBubble(cidade, false);
+        setTimeout(stepTipo, STEP_DELAY);
+      });
+    });
+  }
+
+  // STEP: Tipo de atendimento
+  function stepTipo() {
+    var transicao = leadCidade
+      ? 'Antes de passar para o nosso atendimento, só mais uma pergunta:'
+      : 'Antes de passar para o nosso atendimento, uma pergunta rápida:';
+    addBubble(transicao, true, function () {
+      addBubble('É uma emergência ou quer conhecer os planos preventivos?', true, stepTipoBotoes);
+    });
+  }
+
+  function stepTipoBotoes() {
+    lastStepTime = Date.now();
+    showOptionButtons([
+      { label: 'Emergência / Falecimento', value: 'emergencial' },
+      { label: 'Planos Preventivos', value: 'preventivo' }
+    ], function (tipo) {
+      leadTipo = tipo;
+      stepsCompleted++;
+      lastStepName = 'tipo';
+      logFunnelEvent('step_tipo', tipo);
+      addBubble(tipo === 'emergencial' ? 'Emergência / Falecimento' : 'Planos Preventivos', false);
+
+      if (currentChannel === 'whatsapp' && tipo === 'emergencial') {
+        setTimeout(stepEspecie, STEP_DELAY);
+      } else {
+        setTimeout(stepFinalizar, STEP_DELAY);
+      }
+    });
+  }
+
+  // STEP: Espécie (só emergência no WhatsApp)
+  function stepEspecie() {
+    addBubble('Nossos sentimentos pelo momento 🙏🏻🩵', true, function () {
+      addBubble('Cachorro, gato ou outro?', true, function () {
         lastStepTime = Date.now();
         showOptionButtons([
-          { label: 'Emergência / Falecimento', value: 'emergencial' },
-          { label: 'Planos Preventivos', value: 'preventivo' }
-        ], function (tipo) {
-          leadTipo = tipo;
+          { label: 'Cachorro', value: 'cachorro' },
+          { label: 'Gato', value: 'gato' },
+          { label: 'Outro', value: 'exotico' }
+        ], function (especie) {
+          leadEspecie = especie;
           stepsCompleted++;
-          lastStepName = 'tipo';
-          logFunnelEvent('step_tipo', tipo);
-          addBubble(tipo === 'emergencial' ? 'Emergência / Falecimento' : 'Planos Preventivos', false);
-
-          if (currentChannel === 'telefone' && tipo === 'emergencial') {
-            setTimeout(stepSentimentosTelefone, 500);
-          } else if (currentChannel === 'telefone') {
-            setTimeout(stepTelefone, 500);
-          } else if (tipo === 'emergencial') {
-            setTimeout(stepSentimentosEmergencial, 500);
-          } else {
-            if (ASK_CIDADE) {
-              setTimeout(stepCidadePreventivo, 500);
-            } else {
-              setTimeout(stepNome, 500);
-            }
-          }
+          lastStepName = 'especie';
+          logFunnelEvent('step_especie', especie);
+          addBubble(especie === 'cachorro' ? 'Cachorro' : especie === 'gato' ? 'Gato' : 'Outro', false);
+          setTimeout(stepFinalizar, STEP_DELAY);
         });
       });
     });
   }
 
-  // STEP: Sentimentos (emergencial WhatsApp) → cidade ou espécie
-  function stepSentimentosEmergencial() {
-    addBubble('Nossos sentimentos pelo momento \uD83D\uDE4F\uD83C\uDFFB\uD83E\uDE75', true, function () {
-      if (ASK_CIDADE) {
-        setTimeout(stepCidadeEmergencial, 500);
-      } else {
-        setTimeout(stepEspecie, 500);
-      }
-    });
-  }
-
-  // STEP 2a: Cidade (emergencial)
-  function stepCidadeEmergencial() {
-    addBubble('Em qual cidade precisa do atendimento?', true, function () {
-      lastStepTime = Date.now();
-      showCityGrid(function (cidade) {
-        leadCidade = cidade;
-        stepsCompleted++;
-        lastStepName = 'cidade';
-        logFunnelEvent('step_cidade', cidade);
-        addBubble(cidade, false);
-        setTimeout(stepEspecie, 500);
-      });
-    });
-  }
-
-  // STEP 2b: Cidade (preventivo) → nome ou telefone
-  function stepCidadePreventivo() {
-    addBubble('Qual sua cidade?', true, function () {
-      lastStepTime = Date.now();
-      showCityGrid(function (cidade) {
-        leadCidade = cidade;
-        stepsCompleted++;
-        lastStepName = 'cidade';
-        logFunnelEvent('step_cidade', cidade);
-        addBubble(cidade, false);
-        setTimeout(currentChannel === 'telefone' ? stepTelefone : stepNome, 500);
-      });
-    });
-  }
-
-  // STEP 3: Espécie do pet (só emergencial WhatsApp)
-  function stepEspecie() {
-    addBubble('O petzinho é um:', true, function () {
-      lastStepTime = Date.now();
-      showOptionButtons([
-        { label: 'Cachorro', value: 'cachorro' },
-        { label: 'Gato', value: 'gato' },
-        { label: 'Exótico', value: 'exotico' }
-      ], function (especie) {
-        leadEspecie = especie;
-        stepsCompleted++;
-        lastStepName = 'especie';
-        logFunnelEvent('step_especie', especie);
-        var label = especie === 'cachorro' ? 'Cachorro' : especie === 'gato' ? 'Gato' : 'Exótico';
-        addBubble(label, false);
-
-        if (especie === 'cachorro' && ASK_GRANDE_PORTE) {
-          setTimeout(stepGrandePorte, 500);
-        } else {
-          leadGrandePorte = null;
-          setTimeout(stepNome, 500);
-        }
-      });
-    });
-  }
-
-  // STEP 4: Grande porte (só cachorro)
-  function stepGrandePorte() {
-    addBubble('Possui grande porte? Acima de 45kg?', true, function () {
-      lastStepTime = Date.now();
-      showOptionButtons([
-        { label: 'Sim', value: 'sim' },
-        { label: 'Não', value: 'nao' }
-      ], function (resposta) {
-        leadGrandePorte = resposta === 'sim';
-        stepsCompleted++;
-        lastStepName = 'grande_porte';
-        logFunnelEvent('step_grande_porte', resposta);
-        addBubble(resposta === 'sim' ? 'Sim' : 'Não', false);
-        setTimeout(stepNome, 500);
-      });
-    });
-  }
-
-  // STEP: Sentimentos + telefone (emergencial telefone — sem cidade)
-  function stepSentimentosTelefone() {
-    addBubble('Nossos sentimentos pelo momento \uD83D\uDE4F\uD83C\uDFFB\uD83E\uDE75', true, function () {
-      addBubble('Vamos te conectar com nossa equipe o mais rápido possível.', true, function () {
-        setTimeout(stepTelefone, 500);
-      });
-    });
-  }
-
-  // STEP 5: Nome (campo de texto — por último)
-  function stepNome() {
-    var nameInput = document.getElementById('leadNameInput');
-    if (nameInput) nameInput.value = '';
-
-    addBubble('Para iniciarmos seu atendimento, qual seu nome?', true, function () {
-      lastStepTime = Date.now();
-      // Esconder skip persistente (o input de nome tem seu próprio "Fale diretamente")
-      var skipArea = document.getElementById('leadCaptureSkip');
-      if (skipArea) skipArea.style.display = 'none';
-      var inputArea = document.getElementById('leadCaptureInput');
-      if (inputArea) inputArea.style.display = 'flex';
-      if (nameInput) nameInput.focus();
-    });
-  }
-
-  // STEP 5b: Telefone (fluxo telefone — em vez de nome)
-  function stepTelefone() {
-    var phoneInput = document.getElementById('leadPhoneInput');
-    if (phoneInput) phoneInput.value = '';
-
-    addBubble('Uma última informação: Se por algum motivo não conseguir completar a ligação, deixe seu telefone e ligaremos o mais breve possível.', true, function () {
-      lastStepTime = Date.now();
-      // Esconder skip persistente (o input de telefone tem seu próprio "Pular e ligar direto")
-      var skipArea = document.getElementById('leadCaptureSkip');
-      if (skipArea) skipArea.style.display = 'none';
-      var phoneArea = document.getElementById('leadCapturePhoneInput');
-      if (phoneArea) phoneArea.style.display = 'flex';
-      if (phoneInput) phoneInput.focus();
-    });
-  }
-
-  // STEP FINAL: Salvar + countdown + protocolo + redirect
+  // STEP FINAL: respondeu tudo → salva, mostra protocolo rapidinho e abre
   function stepFinalizar() {
-    popupCompleted = true;
-
-    // Log funnel event
     logFunnelEvent('popup_completed', currentChannel);
+    trackCompleted();
 
-    // Track lead completo (GA4 + Meta Pixel)
-    try {
-      if (window.gtag) {
-        // Evento específico por unidade (Golden Conversion p/ Google Ads)
-        var unitSlug = {
-          'ST': 'santos',
-          'SP': 'saopaulo',
-          'CA': 'campinas',
-          'RE': 'resende',
-          'PA': 'pouso_alegre',
-          'PI': 'pindamonhangaba',
-          'SJ': 'sjc',
-          'VP': 'vale_do_paraiba'
-        }[UNIDADE_CODE] || UNIDADE_CODE.toLowerCase();
-
-        window.gtag('event', 'popup_lead_completed_' + unitSlug, {
-          event_category: 'lead_capture',
-          canal: currentChannel,
-          tipo: leadTipo,
-          cidade: leadCidade,
-          unidade: UNIDADE,
-          unidade_code: UNIDADE_CODE
-        });
-
-        // Google Ads Conversion — Campinas (Lead Completo)
-        if (UNIDADE_CODE === 'CA') {
-          if (leadTelefone) {
-            var digits = leadTelefone.replace(/\D/g, '');
-            if (digits.length >= 10) {
-              window.gtag('set', 'user_data', { phone_number: '+55' + digits });
-            }
-          }
-          window.gtag('event', 'conversion', {
-            send_to: 'AW-11258375156/MPDRCIuk3J8cEPTXtPgp',
-            value: 100.0,
-            currency: 'BRL',
-            transaction_id: sessionId + '_' + Date.now()
-          });
-        }
-
-        // Google Ads Conversion — Santos (Lead Completo)
-        if (UNIDADE_CODE === 'ST') {
-          if (leadTelefone) {
-            var digits = leadTelefone.replace(/\D/g, '');
-            if (digits.length >= 10) {
-              window.gtag('set', 'user_data', { phone_number: '+55' + digits });
-            }
-          }
-          window.gtag('event', 'conversion', {
-            send_to: 'AW-11267032942/pn1yCMqvy6McEO6Oxfwp',
-            value: 100.0,
-            currency: 'BRL',
-            transaction_id: sessionId + '_' + Date.now()
-          });
-        }
-
-        // Google Ads Conversion — Vale do Paraíba / SJC (Lead Completo)
-        if (UNIDADE_CODE === 'VP') {
-          if (leadTelefone) {
-            var digits = leadTelefone.replace(/\D/g, '');
-            if (digits.length >= 10) {
-              window.gtag('set', 'user_data', { phone_number: '+55' + digits });
-            }
-          }
-          window.gtag('event', 'conversion', {
-            send_to: 'AW-11117665288/uqBxCK_jp7gcEIi4qLUp',
-            value: 100.0,
-            currency: 'BRL',
-            transaction_id: sessionId + '_' + Date.now()
-          });
-        }
-      }
-      if (window.fbq) {
-        window.fbq('track', 'Lead', { content_name: 'popup_' + leadTipo });
-      }
-    } catch (e) { }
-
-    // Dispara save imediatamente — 3s do countdown mascaram a latência
-    var protocolo = null;
-    var savePromise = saveLead();
-    savePromise.then(function (p) { protocolo = p; });
-
-    var msgFinal;
     if (currentChannel === 'telefone') {
-      msgFinal = leadTipo === 'emergencial'
-        ? 'Vamos te conectar direto com nossa equipe.'
-        : '\u00D3timo! Conectando sua ligação.';
-    } else {
-      msgFinal = leadTipo === 'emergencial'
-        ? 'Vamos te conectar com nossa equipe, ' + leadNome + '.'
-        : '\u00D3timo, ' + leadNome + '! Vamos te conectar com nossa equipe.';
+      addBubble('Ligando para nossa equipe...', true);
+      setTimeout(function () { finishTelefone(true); }, 300);
+      return;
     }
 
-    addBubble(msgFinal, true, function () {
-      var chat = document.getElementById('leadCaptureChat');
-      if (!chat) { closePopup(); doRedirect(null); return; }
-
-      var bubble = document.createElement('div');
-      bubble.style.cssText = 'background:#fff;color:#303030;padding:10px 14px;border-radius:0 12px 12px 12px;max-width:85%;align-self:flex-start;font-size:14px;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,0.1)';
-      chat.appendChild(bubble);
-      chat.scrollTop = chat.scrollHeight;
-
-      var count = 3;
-      var countdownPrefix = currentChannel === 'telefone'
-        ? 'Discando em ' : 'Conectando com nosso atendimento em ';
-      bubble.textContent = countdownPrefix + count + '...';
-
-      var interval = setInterval(function () {
-        count--;
-        if (count > 0) {
-          bubble.textContent = countdownPrefix + count + '...';
-        } else {
-          clearInterval(interval);
-          if (protocolo) {
-            var protocoloDisplay = protocolo + (capturedParams.gclid ? '*' : '');
-            bubble.textContent = 'Protocolo: ' + protocoloDisplay;
-            chat.scrollTop = chat.scrollHeight;
-            setTimeout(function () {
-              closePopup();
-              doRedirect(protocolo);
-            }, 1000);
-          } else {
-            closePopup();
-            doRedirect(null);
-          }
-        }
-      }, 1000);
-    });
+    addBubble('Abrindo o WhatsApp da nossa equipe...', true);
+    finishWhatsApp(true);
   }
 
   // ===========================================================
   // POPUP CONTROLS
   // ===========================================================
+
+  function isPopupOpen() {
+    var card = document.getElementById('leadCaptureCard');
+    return !!(card && card.classList.contains('lc-open'));
+  }
 
   function openPopup(channel, href, element) {
     currentChannel = channel;
@@ -1115,6 +996,7 @@
     stepsCompleted = 0;
     lastStepName = '';
     popupCompleted = false;
+    redirecting = false;
     funnelEvents = [];
 
     // Reset estado
@@ -1147,34 +1029,18 @@
     var chat = document.getElementById('leadCaptureChat');
     if (chat) chat.innerHTML = '';
 
-    // Esconder inputs até a hora certa
-    var inputArea = document.getElementById('leadCaptureInput');
-    if (inputArea) inputArea.style.display = 'none';
-    var phoneArea = document.getElementById('leadCapturePhoneInput');
-    if (phoneArea) phoneArea.style.display = 'none';
-
-    // "Fale diretamente" / "Pular e ligar direto" — só a partir da 2a abertura
-    var directLink = document.getElementById('leadDirectLink');
-    if (directLink) {
-      directLink.style.display = popupOpenCount >= 2 ? 'block' : 'none';
-    }
-    var phoneSkip = document.getElementById('leadPhoneSkip');
-    if (phoneSkip) {
-      phoneSkip.style.display = popupOpenCount >= 2 ? 'block' : 'none';
-    }
-    // Skip link persistente — visível desde o 1o step na 2a+ abertura
-    var skipArea = document.getElementById('leadCaptureSkip');
-    if (skipArea) {
-      skipArea.style.display = popupOpenCount >= 2 ? 'block' : 'none';
-      var skipLinkEl = document.getElementById('leadSkipLink');
-      if (skipLinkEl) {
-        skipLinkEl.textContent = channel === 'telefone' ? 'Pular e ligar direto' : 'Pular e falar direto no WhatsApp';
-      }
+    // Botão "Ir direto" — sempre visível, texto conforme o canal
+    var directBtn = document.getElementById('leadDirectBtn');
+    if (directBtn) {
+      directBtn.textContent = channel === 'telefone' ? 'Ligar agora' : 'Ir direto para o WhatsApp';
     }
 
     // Mostrar overlay
     var overlay = document.getElementById('leadCaptureOverlay');
     if (overlay) overlay.style.display = 'block';
+
+    // Botão "voltar" do celular fecha o popup (e segue em frente)
+    try { history.pushState({ lcPopup: true }, ''); } catch (e) { }
 
     // Track popup aberto (GA4 + Meta Pixel)
     try {
@@ -1201,7 +1067,7 @@
       if (card) card.classList.add('lc-open');
 
       // Iniciar conversa
-      setTimeout(stepSaudacao, 400);
+      setTimeout(stepSaudacao, 250);
     });
 
     document.body.style.overflow = 'hidden';
@@ -1216,41 +1082,34 @@
     setTimeout(function () {
       var overlay = document.getElementById('leadCaptureOverlay');
       if (overlay) overlay.style.display = 'none';
-    }, 400);
+    }, 300);
 
     document.body.style.overflow = '';
   }
 
-  function closeAndRedirect() {
-    // Determinar step de abandono baseado no próximo step esperado
+  // Fechar = seguir em frente.
+  //   WhatsApp: salva o lead com o que já respondeu e abre o WhatsApp com protocolo.
+  //   Telefone: salva o parcial e disca na hora.
+  function closeAndRedirect(method) {
+    if (redirecting || !currentChannel || popupCompleted) return;
+
     var abandonStep;
-    if (!leadTipo) {
-      abandonStep = 'tipo';
-    } else if (currentChannel === 'telefone') {
-      // Telefone: tipo → (sentimentos se emergencial) → telefone
-      abandonStep = !leadTelefone ? 'telefone' : 'finalizar';
-    } else if (ASK_CIDADE && !leadCidade) {
+    if (ASK_CIDADE && !leadCidade) {
       abandonStep = 'cidade';
-    } else if (leadTipo === 'emergencial' && !leadEspecie) {
+    } else if (!leadTipo) {
+      abandonStep = 'tipo';
+    } else if (currentChannel === 'whatsapp' && leadTipo === 'emergencial' && !leadEspecie) {
       abandonStep = 'especie';
-    } else if (leadTipo === 'emergencial' && leadEspecie === 'cachorro' && ASK_GRANDE_PORTE && leadGrandePorte === null) {
-      abandonStep = 'grande_porte';
-    } else if (!leadNome) {
-      abandonStep = 'nome';
     } else {
       abandonStep = 'finalizar';
     }
 
-    // Salvar abandono no Supabase (se não completou)
-    if (!popupCompleted && currentChannel) {
-      logFunnelEvent('popup_abandoned', abandonStep, {
-        method: 'close_button',
-        steps_completed: stepsCompleted
-      });
-      savePartialLead(abandonStep);
-    }
+    logFunnelEvent('popup_abandoned', abandonStep, {
+      method: method || 'close_button',
+      steps_completed: stepsCompleted,
+      redirected: true
+    });
 
-    // Track abandono (GA4)
     try {
       if (window.gtag) {
         window.gtag('event', 'popup_lead_abandoned', {
@@ -1261,160 +1120,41 @@
       }
     } catch (e) { }
 
-    closePopup();
-  }
-
-  // ===== HANDLER: NOME ENVIADO =====
-  function onNameSubmit() {
-    var input = document.getElementById('leadNameInput');
-    if (!input) return;
-
-    var nome = input.value.trim();
-    if (!nome) {
-      input.focus();
-      input.style.boxShadow = '0 0 0 2px #e74c3c';
-      setTimeout(function () { input.style.boxShadow = 'none'; }, 1500);
-      return;
+    if (currentChannel === 'telefone') {
+      savePartialLead(abandonStep);
+      finishTelefone(false);
+    } else {
+      finishWhatsApp(false);
     }
-
-    leadNome = nome;
-    stepsCompleted++;
-    lastStepName = 'nome';
-    logFunnelEvent('step_nome', nome);
-
-    // Esconder input
-    var inputArea = document.getElementById('leadCaptureInput');
-    if (inputArea) inputArea.style.display = 'none';
-
-    // Mostrar resposta do user
-    addBubble(nome, false);
-
-    // Próximo passo — nome é o último step antes de finalizar
-    setTimeout(stepFinalizar, 500);
-  }
-
-  // ===== HANDLER: TELEFONE ENVIADO =====
-  function onPhoneSubmit() {
-    var input = document.getElementById('leadPhoneInput');
-    if (!input) return;
-
-    var tel = input.value.trim().replace(/\D/g, '');
-    if (tel.length < 10) {
-      input.focus();
-      input.style.boxShadow = '0 0 0 2px #e74c3c';
-      setTimeout(function () { input.style.boxShadow = 'none'; }, 1500);
-      return;
-    }
-
-    leadTelefone = input.value.trim();
-    stepsCompleted++;
-    lastStepName = 'telefone';
-    logFunnelEvent('step_telefone', leadTelefone);
-
-    // Esconder input
-    var phoneArea = document.getElementById('leadCapturePhoneInput');
-    if (phoneArea) phoneArea.style.display = 'none';
-
-    // Mostrar resposta do user
-    addBubble(leadTelefone, false);
-
-    // Finalizar
-    setTimeout(stepFinalizar, 500);
   }
 
   // ===== SETUP EVENTOS =====
   function setupPopupEvents() {
     var closeBtn = document.getElementById('leadCaptureClose');
-    if (closeBtn) closeBtn.addEventListener('click', closeAndRedirect);
+    if (closeBtn) closeBtn.addEventListener('click', function () { closeAndRedirect('close_button'); });
 
     var bg = document.getElementById('leadCaptureOverlay-bg');
-    if (bg) bg.addEventListener('click', closeAndRedirect);
+    if (bg) bg.addEventListener('click', function () { closeAndRedirect('overlay'); });
 
-    var sendBtn = document.getElementById('leadNameSend');
-    if (sendBtn) sendBtn.addEventListener('click', onNameSubmit);
+    document.addEventListener('keydown', function (e) {
+      if ((e.key === 'Escape' || e.key === 'Esc') && isPopupOpen()) closeAndRedirect('esc');
+    });
 
-    var nameInput = document.getElementById('leadNameInput');
-    if (nameInput) {
-      nameInput.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          onNameSubmit();
-        }
-      });
-    }
+    window.addEventListener('popstate', function () {
+      if (isPopupOpen()) closeAndRedirect('back_button');
+    });
 
-    // Telefone input events
-    var phoneSendBtn = document.getElementById('leadPhoneSend');
-    if (phoneSendBtn) phoneSendBtn.addEventListener('click', onPhoneSubmit);
-
-    var phoneInput = document.getElementById('leadPhoneInput');
-    if (phoneInput) {
-      phoneInput.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          onPhoneSubmit();
-        }
-      });
-    }
-
-    // "Pular e ligar direto" — vai pro redirect sem salvar telefone
-    var phoneSkip = document.getElementById('leadPhoneSkip');
-    if (phoneSkip) {
-      phoneSkip.addEventListener('click', function () {
-        logFunnelEvent('phone_skip_clicked', currentChannel);
-        var phoneArea = document.getElementById('leadCapturePhoneInput');
-        if (phoneArea) phoneArea.style.display = 'none';
-        stepsCompleted++;
-        lastStepName = 'telefone_skip';
-        setTimeout(stepFinalizar, 300);
-      });
-    }
-
-    // Skip link persistente (visível desde o início na 2a+ abertura)
-    var skipLink = document.getElementById('leadSkipLink');
-    if (skipLink) {
-      skipLink.addEventListener('click', function () {
-        logFunnelEvent('skip_link_clicked', currentChannel, { from: 'persistent' });
-
-        // Preencher placeholders
-        leadNome = leadNome || '-';
-        leadCidade = leadCidade || '-';
-
-        popupCompleted = true;
-
+    // "Ir direto para o WhatsApp" / "Ligar agora"
+    var directBtn = document.getElementById('leadDirectBtn');
+    if (directBtn) {
+      directBtn.addEventListener('click', function () {
+        if (redirecting) return;
+        logFunnelEvent('skip_link_clicked', currentChannel, { from: 'persistent', steps_completed: stepsCompleted });
         if (currentChannel === 'telefone') {
-          // Telefone: redireciona direto
-          closePopup();
-          doRedirect(null);
+          finishTelefone(false);
         } else {
-          // WhatsApp: salva lead parcial e redireciona com protocolo
-          var savePromise = saveLead();
-          savePromise.then(function (protocolo) {
-            closePopup();
-            doRedirect(protocolo);
-          });
+          finishWhatsApp(false);
         }
-      });
-    }
-
-    // "Fale diretamente" — salva lead parcial com tracking + protocolo, redireciona
-    var directLink = document.getElementById('leadDirectLink');
-    if (directLink) {
-      directLink.addEventListener('click', function () {
-        logFunnelEvent('direct_link_clicked', currentChannel);
-
-        // Preencher com placeholders o que não foi respondido
-        leadNome = leadNome || '-';
-        leadCidade = leadCidade || '-';
-
-        popupCompleted = true; // evitar duplo save de abandono
-
-        // Salvar e esperar protocolo
-        var savePromise = saveLead();
-        savePromise.then(function (protocolo) {
-          closePopup();
-          doRedirect(protocolo);
-        });
       });
     }
   }

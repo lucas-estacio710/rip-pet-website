@@ -1239,6 +1239,10 @@
             50% { transform: translateY(4px); }
         }
 
+        .hero-ctas-mobile {
+            display: none;
+        }
+
         .hero-ctas {
             position: absolute;
             top: 50%;
@@ -1574,6 +1578,51 @@
             /* Esconder CTAs do hero no mobile */
             .hero-ctas {
                 display: none !important;
+            }
+
+            /* CTA do topo no mobile: WhatsApp principal + Ligar secundário */
+            .hero-ctas-mobile {
+                display: flex;
+                gap: 0.6rem;
+                margin: 0.2rem 1.25rem 0;
+                position: relative;
+                z-index: 2;
+            }
+            .hero-mcta {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                min-height: 52px;
+                border-radius: 50px;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 600;
+                text-decoration: none;
+                -webkit-tap-highlight-color: transparent;
+                transition: transform 0.15s ease;
+            }
+            .hero-mcta:active { transform: scale(0.98); }
+            .hero-mcta .icon-inline { width: 1.15em; height: 1.15em; }
+            .hero-mcta-wa {
+                flex: 1;
+                min-width: 0;
+                white-space: nowrap;
+                font-size: clamp(0.88rem, 4vw, 1rem);
+                padding: 0 0.9rem;
+                background: #25D366;
+                color: #fff;
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+            }
+            .hero-mcta-tel {
+                flex: 0 0 auto;
+                white-space: nowrap;
+                font-size: 0.92rem;
+                padding: 0 1rem;
+                background: rgba(255, 255, 255, 0.12);
+                color: #fff;
+                border: 1px solid rgba(255, 255, 255, 0.55);
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
             }
 
             /* Bottom bar mobile - background full-width com fade horizontal */
@@ -2111,6 +2160,17 @@
             </div>
         </div>
 
+        <!-- CTA do topo (só mobile) — mesmos hrefs dos botões atuais, o lead-capture.js intercepta -->
+        <div class="hero-ctas-mobile" data-lead-section="hero_mobile">
+            <a href="https://wa.me/5513998068262?text=Olá,%20estava%20no%20site%20da%20R.I.P.%20Pet%20Santos%20e%20preciso%20de%20mais%20informações."
+               class="hero-mcta hero-mcta-wa" target="_blank">
+                <svg class="icon-inline" aria-hidden="true"><use href="#icon-whatsapp"></use></svg> Falar no WhatsApp 24h
+            </a>
+            <a href="tel:+5513998068262" class="hero-mcta hero-mcta-tel" aria-label="Ligar agora 24h">
+                <svg class="icon-inline" aria-hidden="true"><use href="#icon-phone"></use></svg> Ligar
+            </a>
+        </div>
+
         <!-- CTA Secundário - Conhecer serviços -->
         <a href="#servicos" class="hero-cta-secundario">
             <span class="hero-cta-secundario-text">Conheça os planos, etapas, urnas e recordações da <strong>RIP Pet</strong></span>
@@ -2428,7 +2488,7 @@
                         <img src="/images/equipamento-forno-cremacao-pet.webp" alt="Tecnologia de Última Geração" loading="lazy" style="object-position: right;">
                         <div class="servico-card-content">
                             <h3>Tecnologia de Última Geração</h3>
-                            <p>Contamos com equipamentos próprios com tecnologia de última geração, o que garante toda rastrabilidade e cuidado com o meio-ambiente</p>
+                            <p>Contamos com equipamentos próprios com tecnologia de última geração, o que garante toda rastreabilidade e cuidado com o meio-ambiente</p>
                         </div>
                     </div>
                     <div class="servico-card">
@@ -8761,7 +8821,7 @@
                     <p>Fundada em <strong>2013</strong> pelos veterinários <em>Adriele e Carlos Eduardo</em><span class="desktop-only"> (1ª foto ao lado)</span>, a R.I.P. Pet nasceu para transformar despedidas em homenagens com <strong>amor e gratidão</strong>. Hoje, nos orgulhamos de ser <strong>a maior organização de Cremação Pet do Brasil</strong> e de fazer parte da história de <strong>milhares de famílias</strong>.</p>
                     <br>
                     <p>Atendemos à <strong>Baixada Santista</strong> desde 2018. Nossa unidade <strong>R.I.P. Pet Santos</strong> foi inaugurada em 2023, para trazer mais proximidade e agilidade do <strong>melhor Serviço Funerário Pet do Brasil</strong>, presente nas nossas 9 cidades (Santos, São Vicente, Praia Grande, Guarujá, Cubatão, Itanhaém, Peruíbe, Bertioga e Mongaguá) com <strong>Carinho, Respeito e Transparência</strong>, sendo o único instalado na região que possui <strong>equipamentos crematórios próprios</strong>.</p>
-                    <img src="/images/LP_Santos/carro-praia-grande.webp" alt="Carro RIP Pet na orla da praia" class="mobile-only historia-foto-carro">
+                    <img src="/images/LP_Santos/carro-remocao-pet-santos-orla.webp" alt="Carro de remoção pet da RIP Pet na orla de Santos" class="mobile-only historia-foto-carro">
                     <div class="historia-mini-cards">
                         <div class="historia-mini-card">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
@@ -8800,7 +8860,7 @@
                 <div class="historia-slider">
                     <img src="/images/LP_Santos/fundadores.webp" alt="Fundadores RIP PET - Adriele e Carlos Eduardo" class="historia-slide active">
                     <img src="/images/fachada-santos.jpg" alt="Unidade RIP Pet Santos" class="historia-slide">
-                    <img src="/images/LP_Santos/carro-praia-grande.webp" alt="Carro RIP Pet na orla" class="historia-slide">
+                    <img src="/images/LP_Santos/carro-remocao-pet-santos-orla.webp" alt="Carro de remoção pet da RIP Pet na orla de Santos" class="historia-slide">
                     <img src="/images/LP_Santos/matriz-horizontal.webp" alt="Matriz Pindamonhangaba" class="historia-slide">
                 </div>
                 <div class="historia-dots">
@@ -10756,27 +10816,25 @@
     <!-- Mostrar/Esconder botões flutuantes baseado nos CTAs da hero -->
     <script>
     (function() {
-        const heroCtas = document.querySelector('.hero-ctas');
+        // Desktop: .hero-ctas | Mobile: .hero-ctas-mobile (só um dos dois fica visível)
+        const heroCtasList = document.querySelectorAll('.hero-ctas, .hero-ctas-mobile');
         const fixedWhatsapp = document.querySelector('.fixed-whatsapp');
         const fixedPhone = document.querySelector('.fixed-phone');
 
-        if (!heroCtas || !fixedWhatsapp || !fixedPhone) return;
+        if (!heroCtasList.length || !fixedWhatsapp || !fixedPhone) return;
 
+        const visiveis = new Set();
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Hero CTAs visíveis - esconde botões flutuantes
-                    fixedWhatsapp.classList.remove('visible');
-                    fixedPhone.classList.remove('visible');
-                } else {
-                    // Hero CTAs fora da tela - mostra botões flutuantes
-                    fixedWhatsapp.classList.add('visible');
-                    fixedPhone.classList.add('visible');
-                }
+                if (entry.isIntersecting) visiveis.add(entry.target);
+                else visiveis.delete(entry.target);
             });
+            // CTAs do hero visíveis - esconde flutuantes; fora da tela - mostra
+            fixedWhatsapp.classList.toggle('visible', visiveis.size === 0);
+            fixedPhone.classList.toggle('visible', visiveis.size === 0);
         }, { threshold: 0, rootMargin: '-300px 0px 0px 0px' });
 
-        observer.observe(heroCtas);
+        heroCtasList.forEach(el => observer.observe(el));
     })();
     </script>
 
