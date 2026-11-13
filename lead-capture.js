@@ -884,8 +884,8 @@
   // STEP 1: Saudação + cidade (ou direto pro tipo se a unidade não pergunta cidade)
   function stepSaudacao() {
     var saudacao = currentChannel === 'telefone'
-      ? 'Olá, aqui é da R.I.P. Pet ' + UNIDADE + '. Se puder, responda rapidinho antes da ligação, ou toque em "Ligar agora".'
-      : 'Olá, aqui é da R.I.P. Pet ' + UNIDADE + '. Se puder, responda rapidinho para agilizar seu atendimento.';
+      ? 'Olá, aqui é da R.I.P. Pet ' + UNIDADE + '. Se puder, responda algumas perguntas rápidas antes da ligação, ou toque em "Ligar agora".'
+      : 'Olá, aqui é da R.I.P. Pet ' + UNIDADE + '. Se puder, responda algumas perguntas rápidas para agilizar seu atendimento.';
 
     addBubble(saudacao, true, function () {
       if (ASK_CIDADE) {
@@ -913,12 +913,7 @@
 
   // STEP: Tipo de atendimento
   function stepTipo() {
-    var transicao = leadCidade
-      ? 'Antes de passar para o nosso atendimento, só mais uma pergunta:'
-      : 'Antes de passar para o nosso atendimento, uma pergunta rápida:';
-    addBubble(transicao, true, function () {
-      addBubble('É uma emergência ou quer conhecer os planos preventivos?', true, stepTipoBotoes);
-    });
+    addBubble('Antes de passar para o nosso atendimento: é uma emergência ou quer conhecer os planos preventivos?', true, stepTipoBotoes);
   }
 
   function stepTipoBotoes() {
@@ -962,7 +957,7 @@
     });
   }
 
-  // STEP FINAL: respondeu tudo → salva, mostra protocolo rapidinho e abre
+  // STEP FINAL: respondeu tudo → salva, mostra o protocolo e abre
   function stepFinalizar() {
     logFunnelEvent('popup_completed', currentChannel);
     trackCompleted();
