@@ -489,30 +489,59 @@
   function trackCompleted() {
     try {
       if (window.gtag) {
-        var unitSlug = {
-          'ST': 'santos',
-          'SP': 'saopaulo',
-          'CA': 'campinas',
-          'RE': 'resende',
-          'PA': 'pouso_alegre',
-          'PI': 'pindamonhangaba',
-          'SJ': 'sjc',
-          'VP': 'vale_do_paraiba'
-        }[UNIDADE_CODE] || UNIDADE_CODE.toLowerCase();
-
-        window.gtag('event', 'popup_lead_completed_' + unitSlug, {
-          event_category: 'lead_capture',
-          canal: currentChannel,
-          tipo: leadTipo,
-          cidade: leadCidade,
-          unidade: UNIDADE,
-          unidade_code: UNIDADE_CODE
-        });
+        if (usesGA4LeadConversion()) {
+          // Unidade sem tag AW (ex.: SP): o GA4 é a conversão → 1x por sessão
+          fireGA4LeadOnce('completo');
+        } else {
+          sendGA4Lead(null);
+        }
       }
       if (window.fbq) {
         window.fbq('track', 'Lead', { content_name: 'popup_' + leadTipo });
       }
     } catch (e) { }
+  }
+
+  // Evento GA4 popup_lead_completed_<slug>. fluxo: 'completo' | 'direto' (null = sem o parâmetro)
+  function sendGA4Lead(fluxo) {
+    var unitSlug = {
+      'ST': 'santos',
+      'SP': 'saopaulo',
+      'CA': 'campinas',
+      'RE': 'resende',
+      'PA': 'pouso_alegre',
+      'PI': 'pindamonhangaba',
+      'SJ': 'sjc',
+      'VP': 'vale_do_paraiba'
+    }[UNIDADE_CODE] || UNIDADE_CODE.toLowerCase();
+
+    var params = {
+      event_category: 'lead_capture',
+      canal: currentChannel,
+      tipo: leadTipo,
+      cidade: leadCidade,
+      unidade: UNIDADE,
+      unidade_code: UNIDADE_CODE
+    };
+    if (fluxo) params.fluxo = fluxo;
+    window.gtag('event', 'popup_lead_completed_' + unitSlug, params);
+  }
+
+  // Unidades SEM tag AW direta (hoje só SP) usam o evento GA4 importado como conversão no Ads.
+  function usesGA4LeadConversion() {
+    return !AW_LEAD_COMPLETO[UNIDADE_CODE];
+  }
+
+  // GA4 "lead" no máximo 1x por sessão (completou OU direto/pulou/fechou com protocolo)
+  var ga4LeadFired = false;
+  function fireGA4LeadOnce(fluxo) {
+    if (!window.gtag || ga4LeadFired) return;
+    try {
+      if (sessionStorage.getItem('rp_ga4_lead_fired')) return;
+      sessionStorage.setItem('rp_ga4_lead_fired', '1');
+    } catch (e) { }
+    ga4LeadFired = true;
+    try { sendGA4Lead(fluxo); } catch (e) { }
   }
 
   // Google Ads "Lead Completo" por unidade.
@@ -581,7 +610,11 @@
     function go(protocolo) {
       if (done) return;
       done = true;
-      if (protocolo) fireLeadConversion();
+      if (protocolo) {
+        fireLeadConversion();
+        // SP: "Ir direto", pular e fechar também contam (se o fluxo completo já contou, não repete)
+        if (!showProtocol && usesGA4LeadConversion()) fireGA4LeadOnce('direto');
+      }
       closePopup();
       doRedirect(protocolo);
     }
