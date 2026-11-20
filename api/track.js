@@ -28,6 +28,8 @@ export default async function handler(req, res) {
     ip,
     page: body.page,
     gclid: body.gclid,
+    gbraid: body.gbraid,
+    wbraid: body.wbraid,
     fingerprint: body.fingerprint,
     visitor_id: body.visitor_id,
     session_id: body.session_id,

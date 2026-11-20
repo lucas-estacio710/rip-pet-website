@@ -83,13 +83,17 @@
       utm_campaign: params.get('utm_campaign') || '',
       utm_content: params.get('utm_content') || '',
       utm_term: params.get('utm_term') || '',
-      gclid: params.get('gclid') || ''
+      gclid: params.get('gclid') || '',
+      gbraid: params.get('gbraid') || '',
+      wbraid: params.get('wbraid') || ''
     };
   }
 
   function isGoogleAds(params) {
     return !!(
       params.gclid ||
+      params.gbraid ||
+      params.wbraid ||
       (params.utm_source && params.utm_source.toLowerCase() === 'google') ||
       (params.utm_medium && (params.utm_medium.toLowerCase() === 'cpc' || params.utm_medium.toLowerCase() === 'ppc'))
     );
@@ -113,7 +117,9 @@
           utm_campaign: params.utm_campaign,
           utm_content: params.utm_content,
           utm_term: params.utm_term,
-          gclid: params.gclid
+          gclid: params.gclid,
+          gbraid: params.gbraid,
+          wbraid: params.wbraid
         })
       });
     } catch (e) {}

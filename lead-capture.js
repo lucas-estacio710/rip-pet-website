@@ -209,7 +209,7 @@
   // ===== CAPTURA DE GCLID/UTM =====
   function captureUrlParams() {
     var params = new URLSearchParams(window.location.search);
-    var keys = ['gclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term'];
+    var keys = ['gclid', 'gbraid', 'wbraid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term'];
 
     keys.forEach(function (key) {
       var val = params.get(key);
@@ -219,8 +219,8 @@
       }
     });
 
-    // Fallback: sessionStorage
-    if (!capturedParams.gclid) {
+    // Fallback: sessionStorage (só se a URL não trouxe nenhum id de clique do Google)
+    if (!capturedParams.gclid && !capturedParams.gbraid && !capturedParams.wbraid) {
       keys.forEach(function (key) {
         try {
           var stored = sessionStorage.getItem('rp_' + key);
@@ -228,6 +228,11 @@
         } catch (e) { }
       });
     }
+  }
+
+  // Veio de clique de anúncio Google (gclid, ou gbraid/wbraid de iPhone/app) → "*" no protocolo
+  function hasAdClickId() {
+    return !!(capturedParams.gclid || capturedParams.gbraid || capturedParams.wbraid);
   }
 
   // ===== EXTRAIR TELEFONE =====
@@ -292,6 +297,8 @@
       utm_campaign: capturedParams.utm_campaign || null,
       utm_term: capturedParams.utm_term || null,
       gclid: capturedParams.gclid || null,
+      gbraid: capturedParams.gbraid || null,
+      wbraid: capturedParams.wbraid || null,
       device_type: getDeviceType(),
       browser: getBrowser(),
       os: getOS(),
@@ -390,6 +397,8 @@
       grande_porte: leadGrandePorte,
       telefone_lead: leadTelefone || null,
       gclid: capturedParams.gclid || null,
+      gbraid: capturedParams.gbraid || null,
+      wbraid: capturedParams.wbraid || null,
       utm_source: capturedParams.utm_source || null,
       utm_medium: capturedParams.utm_medium || null,
       utm_campaign: capturedParams.utm_campaign || null,
@@ -430,6 +439,8 @@
       nome: leadNome || null,
       cidade: leadCidade || null,
       gclid: capturedParams.gclid || null,
+      gbraid: capturedParams.gbraid || null,
+      wbraid: capturedParams.wbraid || null,
       utm_source: capturedParams.utm_source || null,
       utm_medium: capturedParams.utm_medium || null,
       utm_campaign: capturedParams.utm_campaign || null,
@@ -478,7 +489,7 @@
     }
 
     if (protocolo) {
-      msg += ' [Protocolo: ' + protocolo + (capturedParams.gclid ? '*' : '') + ']';
+      msg += ' [Protocolo: ' + protocolo + (hasAdClickId() ? '*' : '') + ']';
     }
 
     return msg;
@@ -622,7 +633,7 @@
     saveLead().then(function (protocolo) {
       if (done) return;
       if (protocolo && showProtocol) {
-        addBubble('Protocolo: ' + protocolo + (capturedParams.gclid ? '*' : ''), true);
+        addBubble('Protocolo: ' + protocolo + (hasAdClickId() ? '*' : ''), true);
         setTimeout(function () { go(protocolo); }, 700);
       } else {
         go(protocolo);
