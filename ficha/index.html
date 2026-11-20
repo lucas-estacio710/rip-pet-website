@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Abrindo a ficha… | R.I.P. Pet</title>
+<script>
+  // Repasse rippet.com.br/ficha/<slug> e /preventivo/<slug> → mesma rota no CRM, levando o
+  // rp_visitor_id (?vid=) para ligar o clique do anúncio ao contrato.
+  // Sem tracking/conversão aqui (não é lead). Servida pelos rewrites do vercel.json.
+  (function () {
+    var CRM_BASE = 'https://rip-pet-system.vercel.app/';
+    var ROTAS = ['ficha', 'preventivo'];
+    var SLUGS = ['santos', 'sao-paulo', 'campinas', 'sjc', 'pinda', 'pouso-alegre', 'resende'];
+
+    var partes = location.pathname.split('/');
+    var rota = (partes[1] || '').toLowerCase();
+    var slug = (partes[2] || '').toLowerCase();
+    if (ROTAS.indexOf(rota) === -1 || SLUGS.indexOf(slug) === -1) { location.replace('/'); return; }
+    var FICHA_BASE = CRM_BASE + rota + '/';
+
+    var vid = null;
+    try { vid = localStorage.getItem('rp_visitor_id'); } catch (e) { }
+
+    var params = new URLSearchParams(location.search);
+    if (vid) params.set('vid', vid);
+    var qs = params.toString();
+
+    var url = FICHA_BASE + slug + (qs ? '?' + qs : '');
+    window.__fichaUrl = url;
+    location.replace(url);
+  })();
+</script>
+<style>
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+         font-family: system-ui, -apple-system, sans-serif; background: #fff; color: #02243c; }
+  a { color: #02243c; }
+</style>
+</head>
+<body>
+  <p>Abrindo a ficha… <a id="fichaLink" href="#">toque aqui se não abrir</a></p>
+  <script>
+    if (window.__fichaUrl) document.getElementById('fichaLink').href = window.__fichaUrl;
+  </script>
+</body>
+</html>

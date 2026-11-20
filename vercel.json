@@ -2,6 +2,14 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/ficha/:slug(santos|sao-paulo|campinas|sjc|pinda|pouso-alegre|resende)",
+      "destination": "/ficha/index.html"
+    },
+    {
+      "source": "/preventivo/:slug(santos|sao-paulo|campinas|sjc|pinda|pouso-alegre|resende)",
+      "destination": "/ficha/index.html"
+    },
+    {
       "source": "/santos",
       "destination": "/santos/index.html"
     },
@@ -209,6 +217,13 @@
     }
   ],
   "headers": [
+    {
+      "source": "/(ficha|preventivo)/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    },
     {
       "source": "/410.html",
       "headers": [
